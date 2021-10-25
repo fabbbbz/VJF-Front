@@ -1,8 +1,78 @@
-import React from 'react'
-import { View } from 'react-native'
+import React, { useState } from 'react'
+import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { Text, Button } from 'react-native-elements'
+import SmallButton from './SmallButton'
 
 const Allergies = props => {
-	return <View></View>
+	const [allergies, setAllergies] = useState([])
+
+	return (
+		<View style={styles.container}>
+			<Text h4 style={styles.sectionTitle}>
+				J'ai des allergies :
+			</Text>
+			<View
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					justifyContent: 'center',
+				}}
+			>
+				<Button
+					title="Oui"
+					buttonStyle={{
+						backgroundColor: '#F2A902',
+						borderRadius: 5,
+					}}
+					containerStyle={{
+						width: 50,
+						marginRight: 20,
+					}}
+				/>
+				<Button
+					title="Non"
+					buttonStyle={{
+						backgroundColor: '#27292D',
+						borderRadius: 5,
+					}}
+					containerStyle={{
+						width: 50,
+					}}
+				/>
+			</View>
+		</View>
+	)
 }
+
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: '#FFFFFF',
+		paddingVertical: 10,
+		paddingHorizontal: 12,
+		borderRadius: 10,
+		margin: 15,
+		borderColor: '#F2A902',
+	},
+	sectionTitle: {
+		marginBottom: 10,
+		marginTop: 10,
+		textAlign: 'center',
+	},
+	button: {
+		backgroundColor: '#F2A902',
+		borderRadius: 5,
+		color: '#fff',
+	},
+	ingredients: {
+		marginLeft: 10,
+		display: 'flex',
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+	},
+	tinyLogo: {
+		width: 50,
+		height: 50,
+	},
+})
 
 export default Allergies
