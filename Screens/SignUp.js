@@ -14,7 +14,7 @@ export default function SignUp(props) {
     return (
         <View >
             <TopBar />
-            <View >
+            <View style={{ alignItems: 'center' }}>
                 <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}>Dites-nous en plus sur vous</Text>
                 <Input
                     containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
@@ -41,18 +41,21 @@ export default function SignUp(props) {
                 // onChangeText={(val) => set(val)}
                 />
                 <Input
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     placeholder='Password'
                 // onChangeText={(val) => set(val)}
                 />
-
-                <Text style={{ color: '#000000' }}>
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#C4C4C4', alignSelf: 'center', marginLeft: 15, fontSize: 20 }}>
                     Skip
                 </Text>
 
                 <NextButton title="NEXT" />
             </View>
+
+
         </View>
     );
 }
@@ -67,9 +70,3 @@ const styles = StyleSheet.create({
 
 
 });
-
-// input: {
-//     alignContent: 'center',
-//     marginLeft: 10,
-//     marginBottom: 25, width: '70%'
-// },
