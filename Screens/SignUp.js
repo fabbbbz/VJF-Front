@@ -29,7 +29,7 @@ function SignUp(props) {
         if (body.result == true) {
             AsyncStorage.setItem('pseudo', pseudo);
             props.addToken(body.token)
-            props.navigation.navigate('BottomNavigator', { screen: 'Home' })
+            props.navigation.navigate('BottomNavigator', { screen: 'Mood' })
             setUserExists(true)
         } else {
             setErrorsSignup(body.error)
@@ -73,10 +73,11 @@ function SignUp(props) {
                     placeholder='Password'
                     onChangeText={text => setSignUpPassword(text)}
                 />
-                <View>
-                    <Text>{ErrorsSignup}</Text>
-                </View>
-                <Text style={{ color: '#000000' }}>
+
+
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#C4C4C4', alignSelf: 'center', marginLeft: 15, fontSize: 20 }}>
                     Skip
                 </Text>
 
@@ -84,8 +85,9 @@ function SignUp(props) {
                     onPress={() => handleSubmitSignup()}
                 />
             </View>
-
-
+            <View>
+                <Text>{ErrorsSignup}</Text>
+            </View>
         </View>
     );
 }
