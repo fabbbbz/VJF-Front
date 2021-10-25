@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { Text, Input } from 'react-native-elements'
+import { connect } from 'react-redux'
 import SmallButton from './SmallButton'
 
 const Donts = props => {
@@ -17,7 +18,7 @@ const Donts = props => {
 				Ce que je n'aime pas du tout :
 			</Text>
 			<View style={styles.ingredients}>
-				<SmallButton title="oignons" />
+				<SmallButton title="oignons" value="oignons" />
 				<SmallButton title="coriandre" />
 				<SmallButton title="champignons" />
 				<SmallButton title="chou fleur" />

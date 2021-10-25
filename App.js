@@ -5,11 +5,12 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import diet from './reducers/diet' /*importe la fonction exportée par notre reduceur*/
 import token from './reducers/token' /*import token from reducer*/
+import donts from './reducers/donts'
 import { Provider } from 'react-redux'
 
 import { createStore, combineReducers } from 'redux'
 
-const store = createStore(combineReducers({ diet, token }))
+const store = createStore(combineReducers({ diet, token, donts }))
 
 import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
