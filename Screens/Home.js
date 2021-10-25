@@ -1,20 +1,20 @@
-import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-// import Allergies from '../Components/Allergies';
-// import Diet from '../Components/Diet';
-// import Donts from '../component/Donts';
-// import TopBar from '../Components/TopBar';
-
+import React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import TopBar from '../Components/TopBar'
+import Diet from '../Components/Diet'
+import Donts from '../Components/Donts'
+import Allergies from '../Components/Allergies'
+import NextButton from '../Components/NextButton'
 
 const Home = props => {
     return (
-        <View>
-            {/* <TopBar /> */}
-            <View style={styles.container}>
-                {/* <Diet />
+        <View style={styles.container}>
+            <TopBar />
+            <View>
+                <Diet />
                 <Donts />
-                <Allergies /> */}
-                {/* <NextButton title="NEXT" /> */}
+                <Allergies />
+                <NextButton title="NEXT" />
             </View>
         </View>
     )

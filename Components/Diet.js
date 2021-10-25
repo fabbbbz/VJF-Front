@@ -1,38 +1,21 @@
 import React, { useState } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { CheckBox } from 'react-native-elements'
+import { View, StyleSheet } from 'react-native'
+import { CheckBox, Text } from 'react-native-elements'
+import MyCheckbox from './Checkbox'
 
 const Diet = props => {
-	const [check, setCheck] = useState(unchecked)
+	const [check, setCheck] = useState('unchecked')
 	return (
 		<View style={styles.container}>
-			<Text>Renseignez-nous</Text>
+			<Text h4 style={styles.sectionTitle}>
+				Renseignez-nous
+			</Text>
 			<View style={{ marginLeft: 10 }}>
-				<CheckBox
-					title="Je mange de tout"
-					checkedColor="yellow"
-					checked={check}
-				/>
-				<CheckBox
-					title="Je suis végétarien"
-					checkedColor="yellow"
-					checked={check}
-				/>
-				<CheckBox
-					title="Je suis végétalien"
-					checkedColor="yellow"
-					checked={check}
-				/>
-				<CheckBox
-					title="Je mange hallal"
-					checkedColor="yellow"
-					checked={check}
-				/>
-				<CheckBox
-					title="Je mange casher"
-					checkedColor="yellow"
-					checked={check}
-				/>
+				<MyCheckbox title="Je mange de tout" checkStatus="checked" />
+				<MyCheckbox title="Je suis végétarien" />
+				<MyCheckbox title="Je suis végétalien" />
+				<MyCheckbox title="Je mange halal" />
+				<MyCheckbox title="Je mange casher" />
 			</View>
 		</View>
 	)
@@ -44,6 +27,12 @@ const styles = StyleSheet.create({
 		paddingVertical: 10,
 		paddingHorizontal: 12,
 		borderRadius: 10,
+		margin: 15,
+		borderColor: '#F2A902',
+	},
+	sectionTitle: {
+		marginBottom: 10,
+		marginTop: 10,
 	},
 })
 
