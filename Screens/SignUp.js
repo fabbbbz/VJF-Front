@@ -12,29 +12,30 @@ export default function SignUp(props) {
 
 
     return (
-        <View style={styles.container}>
+        <View >
             <TopBar />
-            <View>
+            <View >
+                <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}>Dites-nous en plus sur vous</Text>
                 <Input
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     placeholder='Nom'
                 // onChangeText={(val) => set(val)}
                 />
                 <Input
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     placeholder='Prénom'
                 // onChangeText={(val) => set(val)}
                 />
                 <Input
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     placeholder='Téléphone'
                 // onChangeText={(val) => set(val)}
                 />
                 <Input
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     placeholder='Email'
                 // onChangeText={(val) => set(val)}
@@ -46,34 +47,29 @@ export default function SignUp(props) {
                 // onChangeText={(val) => set(val)}
                 />
 
+                <Text style={{ color: '#000000' }}>
+                    Skip
+                </Text>
+
                 <NextButton title="NEXT" />
             </View>
-
-
-            {/* <Image
-                source={require('../assets/VJF-logo.png')}
-                style={{ width: 200, height: 200, marginTop: 100 }}
-            />
-
-            <Text h1 style={{ textAlign: 'center', color: '#000000', marginTop: 50 }}>
-                Vite j'ai faim!
-            </Text>
-
-            <Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50, marginBottom: 50 }}>
-                Vous nous renseignez, on choisit pour vous!
-            </Text>
-
-            <NextButton title="HOME"
-                onPress={() => { props.navigation.navigate('Home', { screen: 'Home' }) }} /> */}
-
-
         </View>
     );
 }
 
+// style={styles.container}
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center'
+        backgroundColor: '#F4F4F4',
     },
+
+
 });
+
+// input: {
+//     alignContent: 'center',
+//     marginLeft: 10,
+//     marginBottom: 25, width: '70%'
+// },

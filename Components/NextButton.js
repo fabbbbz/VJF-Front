@@ -6,7 +6,6 @@ import { AntDesign } from '@expo/vector-icons'
 
 const NextButton = ({ title, onPress }) => {
 	return (
-<<<<<<< HEAD
 		<LinearGradient
 			colors={['#F2A902', '#FFC901']}
 			start={{ x: 0.1, y: 0 }}
@@ -19,26 +18,12 @@ const NextButton = ({ title, onPress }) => {
 					flexDirection: 'row',
 					justifyContent: 'space-between',
 				}}
+				onPress={onPress}
 			>
 				<Text style={styles.text}>{title}</Text>
 				<AntDesign name="arrowright" size={24} color="white" />
 			</TouchableOpacity>
 		</LinearGradient>
-=======
-		<Button
-			title={title}
-			onPress={onPress}
-			buttonStyle={{
-				backgroundColor: '#F2A902',
-				borderRadius: 3,
-			}}
-			containerStyle={{
-				width: 200,
-				marginHorizontal: 50,
-				marginVertical: 10,
-			}}
-		/>
->>>>>>> 864bfc96f18b992a7de6969ef8b1754427391825
 	)
 }
 
