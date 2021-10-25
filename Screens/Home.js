@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet, ScrollView } from 'react-native'
 import TopBar from '../Components/TopBar'
 import Diet from '../Components/Diet'
 import Donts from '../Components/Donts'
@@ -10,12 +10,12 @@ const Home = props => {
 	return (
 		<View style={styles.container}>
 			<TopBar />
-			<View>
+			<ScrollView>
 				<Diet />
 				<Donts />
 				<Allergies />
-				<NextButton title="NEXT" />
-			</View>
+				<NextButton title="NEXT" color="#F2A902" width="200" />
+			</ScrollView>
 		</View>
 	)
 }
