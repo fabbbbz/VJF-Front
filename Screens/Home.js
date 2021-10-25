@@ -6,6 +6,8 @@ import Donts from '../Components/Donts'
 import Allergies from '../Components/Allergies'
 import NextButton from '../Components/NextButton'
 
+import { connect } from 'react-redux';
+
 const Home = props => {
     return (
         <View style={styles.container}>
@@ -27,4 +29,16 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Home
+
+function mapDispatchToProps(dispatch) {
+    return {
+        onClick: function (diet) {
+            dispatch({ type: '', diet })
+        }
+    }
+}
+
+export default connect(
+    null,
+    mapDispatchToProps
+)(Home);

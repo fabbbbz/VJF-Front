@@ -5,6 +5,8 @@ import { StyleSheet, View } from 'react-native';
 import { Button, Image, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
+import NextButton from '../Components/NextButton'
+
 
 
 export default function FirstScreen(props) {
@@ -30,14 +32,15 @@ export default function FirstScreen(props) {
                 Définissez vos exigeances
             </Text>
 
+            <NextButton title="HOME"
+                onPress={() => { props.navigation.navigate('Home', { screen: 'Home' }) }} />
 
-
-            <Button
+            {/* <Button
                 title="Home"
                 type="solid"
                 buttonStyle={{ backgroundColor: "#F2A902" }}
                 onPress={() => { props.navigation.navigate('Home', { screen: 'Home' }) }}
-            />
+            /> */}
 
 
         </View>

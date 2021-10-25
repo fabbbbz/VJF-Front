@@ -2,10 +2,11 @@ import React from 'react'
 import { StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { Button } from 'react-native-elements'
 
-const NextButton = ({ title }) => {
+const NextButton = ({ title, onPress }) => {
 	return (
 		<Button
 			title={title}
+			onPress={onPress}
 			buttonStyle={{
 				backgroundColor: '#F2A902',
 				borderRadius: 3,
