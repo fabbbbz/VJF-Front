@@ -5,11 +5,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import dietReducer from './reducers/diet';  /*importe la fonction exportée par notre reduceur*/
+import token from './reducers/token';  /*import token from reducer*/
 import { Provider } from 'react-redux';
 
 import { createStore, combineReducers } from 'redux';
 
-const store = createStore(combineReducers({ dietReducer }));
+const store = createStore(combineReducers({ dietReducer, token }));
 
 import FirstScreen from './Screens/FirstScreen';
 import Home from './Screens/Home';
