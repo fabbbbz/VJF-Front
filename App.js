@@ -15,6 +15,7 @@ const store = createStore(combineReducers({ dietReducer, token }));
 import FirstScreen from './Screens/FirstScreen';
 import Home from './Screens/Home';
 import SignUp from './Screens/SignUp';
+import Mood from './Screens/Mood';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ export default function App() {
           <Stack.Screen name="First" component={FirstScreen} />
           <Stack.Screen name="Home" component={Home} />
           <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Mood" component={Mood} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

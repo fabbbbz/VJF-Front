@@ -40,7 +40,7 @@ function SignUp(props) {
     return (
         <View >
             <TopBar />
-            <View >
+            <View style={{ alignItems: 'center' }}>
                 <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}>Dites-nous en plus sur vous</Text>
                 <Input
                     containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
@@ -67,7 +67,7 @@ function SignUp(props) {
                     onChangeText={text => setSignUpEmail(text)}
                 />
                 <Input
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     secureTextEntry
                     placeholder='Password'
@@ -84,6 +84,8 @@ function SignUp(props) {
                     onPress={() => handleSubmitSignup()}
                 />
             </View>
+
+
         </View>
     );
 }

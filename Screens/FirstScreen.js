@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { StyleSheet, View, Image } from 'react-native';
+import { StyleSheet, View, Image, ScrollView } from 'react-native';
 
 import { Button, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -27,11 +27,15 @@ export default function FirstScreen(props) {
             <Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50 }}>
                 Vous nous renseignez, on choisit pour vous!
             </Text>
+            <ScrollView>
+                <NextButton title="HOME"
+                    onPress={() => { props.navigation.navigate('Home', { screen: 'Home' }) }} />
+                <NextButton title="SIGNUP"
+                    onPress={() => { props.navigation.navigate('SignUp', { screen: 'SignUp' }) }} />
+                <NextButton title="MOOD"
+                    onPress={() => { props.navigation.navigate('Mood', { screen: 'Mood' }) }} />
+            </ScrollView>
 
-            <NextButton title="HOME"
-                onPress={() => { props.navigation.navigate('Home', { screen: 'Home' }) }} />
-            <NextButton title="SIGNUP"
-                onPress={() => { props.navigation.navigate('SignUp', { screen: 'SignUp' }) }} />
 
 
         </View>
