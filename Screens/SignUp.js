@@ -14,13 +14,14 @@ function SignUp(props) {
     const [signUpEmail, setSignUpEmail] = useState('')
     const [signUpPassword, setSignUpPassword] = useState('')
     const [signUpTel, setSignUpTel] = useState('')
-    const [userExists, setUserExists] = useState(false)
-    const [listErrorsSignin, setErrorsSignin] = useState([])
+    //const [userExists, setUserExists] = useState(false)
     const [ErrorsSignup, setErrorsSignup] = useState('')
+    const [pseudo, setPseudo] = useState('');
 
     var handleSubmitSignup = async () => {
         console.log(signUpLastname)
-        const data = await fetch(`http://${MY_IP}/users/sign-up`, {
+        console.log(MY_IP)
+        const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `lastnameFromFront=${signUpLastname}&firstnameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&telFromFront=${signUpTel}`
@@ -29,8 +30,8 @@ function SignUp(props) {
         if (body.result == true) {
             AsyncStorage.setItem('pseudo', pseudo);
             props.addToken(body.token)
-            props.navigation.navigate('BottomNavigator', { screen: 'Mood' })
-            setUserExists(true)
+            props.navigation.navigate('Mood', { screen: 'Mood' })
+            //setUserExists(true)
         } else {
             setErrorsSignup(body.error)
             console.log(ErrorsSignup)
