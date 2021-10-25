@@ -1,12 +1,16 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import TopBar from '../Components/TopBar'
+import Diet from '../Components/Diet'
+import Donts from '../Components/Donts'
+import Allergies from '../Components/Allergies'
+import NextButton from '../Components/NextButton'
 
 const Home = props => {
 	return (
-		<View>
+		<View style={styles.container}>
 			<TopBar />
-			<View style={styles.container}>
+			<View>
 				<Diet />
 				<Donts />
 				<Allergies />
