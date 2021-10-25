@@ -4,7 +4,6 @@ import { CheckBox, Text } from 'react-native-elements'
 import MyCheckbox from './Checkbox'
 
 const Diet = props => {
-	const [check, setCheck] = useState('unchecked')
 	return (
 		<View style={styles.container}>
 			<Text h4 style={styles.sectionTitle}>
@@ -12,10 +11,10 @@ const Diet = props => {
 			</Text>
 			<View style={{ marginLeft: 10 }}>
 				<MyCheckbox title="Je mange de tout" checkStatus="checked" />
-				<MyCheckbox title="Je suis végétarien" />
-				<MyCheckbox title="Je suis végétalien" />
-				<MyCheckbox title="Je mange halal" />
-				<MyCheckbox title="Je mange casher" />
+				<MyCheckbox title="Je suis végétarien" checkStatus="unchecked" />
+				<MyCheckbox title="Je suis végétalien" checkStatus="unchecked" />
+				<MyCheckbox title="Je mange halal" checkStatus="unchecked" />
+				<MyCheckbox title="Je mange casher" checkStatus="unchecked" />
 			</View>
 		</View>
 	)
