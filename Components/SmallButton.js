@@ -1,18 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 
-const SmallButton = ({ title, addDont, donts }) => {
+const SmallButton = ({ title, addDont, removeDont, donts }) => {
+	const ingredient = title
+	const [disabled, setDisabled] = useState(false)
+
 	const handleDont = ingredient => {
-		addDont(ingredient)
+		if (!donts.includes(ingredient)) {
+			addDont(ingredient)
+		}
+		if (disabled) {
+			removeDont(ingredient)
+		}
+		setDisabled(!disabled)
 	}
 
+	console.log(donts)
 	return (
 		<Button
 			title={title}
 			buttonStyle={{
-				backgroundColor: '#F2A902',
+				backgroundColor: disabled ? '#F2A902' : '#000',
 				borderRadius: 25,
 				size: 10,
 				margin: 5,
@@ -27,6 +37,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		addDont: function (dont) {
 			dispatch({ type: 'ADD_DONT', newDont: dont })
+		},
+		removeDont: function (dont) {
+			dispatch({ type: 'REMOVE_DONT', dont: dont })
 		},
 	}
 }

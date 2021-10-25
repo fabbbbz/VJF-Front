@@ -5,7 +5,8 @@ export default function (donts = [], action) {
 			const newDonts = [...donts, action.newDont]
 			return newDonts
 		case 'REMOVE_DONT':
-			return donts
+			const filteredDonts = donts.filter(el => el !== action.dont)
+			return filteredDonts
 		default:
 			return donts
 	}

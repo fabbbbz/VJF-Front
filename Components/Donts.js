@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import SmallButton from './SmallButton'
 
 const Donts = props => {
-	const [donts, setDonts] = useState([])
+	// const [donts, setDonts] = useState([])
 	const [showInput, setShowInput] = useState(false)
 
 	const displayField = () => {
@@ -32,9 +32,9 @@ const Donts = props => {
 			</View>
 			{showInput && (
 				<Input
-					onChangeText={value => setDonts(value)}
+					// onChangeText={value => setDonts(value)}
 					value={donts}
-					placeholder="Entrez un ingrédient"
+					placeholder="Séparez les ingrédients par une virgule"
 					style={{ marginTop: 10, marginHorizontal: 10 }}
 				/>
 			)}
