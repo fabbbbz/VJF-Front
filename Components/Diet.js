@@ -6,9 +6,7 @@ import { connect } from 'react-redux'
 import MyCheckbox from './Checkbox'
 
 const Diet = props => {
-	const [userdiet, setUserdiet] = useState('omni')
-
-	console.log(userdiet)
+	// const [userdiet, setUserdiet] = useState('omni')
 
 	const diet = [
 		{
@@ -47,7 +45,7 @@ const Diet = props => {
 				<RadioButtonRN
 					data={diet}
 					activeColor="#F2A902"
-					selectedBtn={e => setUserdiet(e.short)}
+					selectedBtn={e => props.addDiet(e.short)}
 				/>
 			</View>
 		</View>
@@ -70,4 +68,18 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default Diet
+function mapDispatchToProps(dispatch) {
+	return {
+		addDiet: function (diet) {
+			dispatch({ type: 'ADD_DIET', diet: diet })
+		},
+	}
+}
+
+function mapStateToProps(state) {
+	return { diet: state.diet }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Diet)
+
+//export default Diet
