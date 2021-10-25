@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, Text, Input } from 'react-native-elements'
+import { Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import NextButton from '../Components/NextButton';
 import { connect } from 'react-redux';
 import { MY_IP } from "@env"
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignUp(props) {
     const [signUpFirstname, setignUpFirstname] = useState('')
@@ -19,19 +20,18 @@ function SignUp(props) {
 
     var handleSubmitSignup = async () => {
         console.log(signUpLastname)
-        const data = await fetch("http://172.17.1.105:3000/users/sign-up", {
+        const data = await fetch(`http://${MY_IP}/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `lastnameFromFront=${signUpLastname}&firstnameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&telFromFront=${signUpTel}`
         })
         const body = await data.json()
         if (body.result == true) {
-            console.log(MY_IP)
+            AsyncStorage.setItem('pseudo', pseudo);
             props.addToken(body.token)
-            props.navigation.navigate('BottomNavigator', { screen: 'Home' })
+            props.navigation.navigate('BottomNavigator', { screen: 'Mood' })
             setUserExists(true)
         } else {
-            console.log(MY_IP)
             setErrorsSignup(body.error)
             console.log(ErrorsSignup)
         }
@@ -40,7 +40,7 @@ function SignUp(props) {
     return (
         <View >
             <TopBar />
-            <View >
+            <View style={{ alignItems: 'center' }}>
                 <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}>Dites-nous en plus sur vous</Text>
                 <Input
                     containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
@@ -67,22 +67,26 @@ function SignUp(props) {
                     onChangeText={text => setSignUpEmail(text)}
                 />
                 <Input
-                    containerStyle={{ marginBottom: 25, width: '70%' }}
+                    containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     secureTextEntry
                     placeholder='Password'
                     onChangeText={text => setSignUpPassword(text)}
                 />
-                <View>
-                    <Text>{ErrorsSignup}</Text>
-                </View>
-                <Text style={{ color: '#000000' }}>
+
+
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#C4C4C4', alignSelf: 'center', marginLeft: 15, fontSize: 20 }}>
                     Skip
                 </Text>
 
                 <NextButton title="NEXT"
                     onPress={() => handleSubmitSignup()}
                 />
+            </View>
+            <View>
+                <Text>{ErrorsSignup}</Text>
             </View>
         </View>
     );
