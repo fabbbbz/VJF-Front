@@ -38,7 +38,7 @@ const Allergies = props => {
 				<Button
 					title="Non"
 					buttonStyle={{
-						backgroundColor: '#27292D',
+						backgroundColor: '#B5B0AA',
 						borderRadius: 5,
 					}}
 					containerStyle={{
