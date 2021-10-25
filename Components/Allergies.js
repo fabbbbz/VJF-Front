@@ -5,6 +5,11 @@ import SmallButton from './SmallButton'
 
 const Allergies = props => {
 	const [allergies, setAllergies] = useState([])
+	// props.overlay props.setOverlay dispo
+
+	const handleAllergies = () => {
+		props.setOverlay(true)
+	}
 
 	return (
 		<View style={styles.container}>
@@ -28,6 +33,7 @@ const Allergies = props => {
 						width: 50,
 						marginRight: 20,
 					}}
+					onPress={() => handleAllergies()}
 				/>
 				<Button
 					title="Non"

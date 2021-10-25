@@ -32,7 +32,7 @@ const Donts = props => {
 			{showInput && (
 				<Input
 					onChangeText={value => setDonts(value)}
-					value={donts[0]}
+					value={donts}
 					placeholder="Entrez un ingrédient"
 					style={{ marginTop: 10, marginHorizontal: 10 }}
 				/>

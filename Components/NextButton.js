@@ -18,7 +18,6 @@ const NextButton = ({ title, onPress }) => {
 					flexDirection: 'row',
 					justifyContent: 'space-between',
 				}}
-				onPress={onPress}
 			>
 				<Text style={styles.text}>{title}</Text>
 				<AntDesign name="arrowright" size={24} color="white" />
