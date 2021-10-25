@@ -15,8 +15,7 @@ const Home = props => {
 	// const token = props.token
 	const token = 'fv8PkF_c9Y3iCiVXOKugoJjQinZB6zn4' // HARD CODED FOR TEST
 
-	console.log('my diet : ' + props.diet)
-	console.log('my token : ' + props.token)
+	console.log('my donts: ' + props.donts)
 
 	const handleAllergies = () => {
 		// TODO push selected allergies to store
@@ -25,10 +24,11 @@ const Home = props => {
 
 	const handleSubmitFoodProfile = async () => {
 		console.log('submiiiit')
+		const dataToUpdate = { diet: props.diet, dont: props.donts }
 		const requestOptions = {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ diet: props.diet }),
+			body: JSON.stringify(dataToUpdate),
 		}
 		const data = await fetch(
 			`http://${MY_IP}:3000/users/update-me/${token}`,
@@ -100,7 +100,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 function mapStateToProps(state) {
-	return { diet: state.diet, token: state.token }
+	return { diet: state.diet, token: state.token, donts: state.donts }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
