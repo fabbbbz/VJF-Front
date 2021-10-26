@@ -1,16 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
+import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons'
+import DrawerNav from './Drawer'
+
+import { Home } from '../Screens/Home'
+import { Mood } from '../Screens/Mood'
 
 const TopBar = props => {
+	const navigation = useNavigation()
+	const [navActive, setNavActive] = useState(false)
+	console.log('top bar props: ', props.navigation)
 	const showDrawer = () => {
-		console.log('menu will show')
+		//props.navigation.navigate('Drawer')
+		setNavActive(true)
+		if (navActive) navigation.toggleDrawer()
 	}
+
+	useEffect(() => {
+		props.navigation.navigate('Drawer')
+	}, [])
 
 	return (
 		<View style={styles.topbar}>
 			{props.showArrow ? (
-				<AntDesign name="arrowleft" size={24} color="#FFC901" />
+				<AntDesign
+					name="arrowleft"
+					size={24}
+					color="#FFC901"
+					onPress={() => props.navigation.goBack()}
+				/>
 			) : (
 				<AntDesign name="arrowleft" size={24} color="#27292D" />
 			)}

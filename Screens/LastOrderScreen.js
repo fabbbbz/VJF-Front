@@ -37,7 +37,7 @@ const LastOrderScreen = props => {
 
 	return (
 		<View style={styles.container}>
-			<TopBar />
+			<TopBar navigation={props.navigation} />
 			<Text h3 style={styles.text}>
 				Votre dernière commande
 			</Text>
