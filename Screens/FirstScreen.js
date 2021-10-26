@@ -34,6 +34,8 @@ export default function FirstScreen(props) {
                     onPress={() => { props.navigation.navigate('SignUp', { screen: 'SignUp' }) }} />
                 <NextButton title="MOOD"
                     onPress={() => { props.navigation.navigate('Mood', { screen: 'Mood' }) }} />
+                <NextButton title="Favorites"
+                    onPress={() => { props.navigation.navigate('Favorites', { screen: 'Favorites' }) }} />
             </ScrollView>
 
 

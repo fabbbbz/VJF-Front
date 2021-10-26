@@ -20,10 +20,7 @@ function SignUp(props) {
 
     var handleSubmitSignup = async () => {
         console.log(signUpLastname)
-<<<<<<< HEAD
-=======
         console.log(MY_IP)
->>>>>>> 0c2719c56bb1d1a123bf5c8835066ee55e9fb530
         const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

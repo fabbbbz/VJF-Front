@@ -16,6 +16,7 @@ import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
 import SignUp from './Screens/SignUp'
 import Mood from './Screens/Mood'
+import Favorites from './Screens/Favorites'
 
 const Stack = createStackNavigator()
 
@@ -28,6 +29,7 @@ export default function App() {
 					<Stack.Screen name="Home" component={Home} />
 					<Stack.Screen name="SignUp" component={SignUp} />
 					<Stack.Screen name="Mood" component={Mood} />
+					<Stack.Screen name="Favorites" component={Favorites} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
