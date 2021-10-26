@@ -22,6 +22,7 @@ import LastOrderScreen from './Screens/LastOrderScreen'
 const Stack = createStackNavigator()
 
 export default function App() {
+<<<<<<< HEAD
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
@@ -35,4 +36,19 @@ export default function App() {
 			</NavigationContainer>
 		</Provider>
 	)
+=======
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="First" component={FirstScreen} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Mood" component={Mood} />
+          <Stack.Screen name="Login" component={Mood} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
+>>>>>>> ec1820af3b8aba9495f1978ae037b74b16219ee8
 }
