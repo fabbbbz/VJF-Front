@@ -1,19 +1,36 @@
-import React, { useState } from 'react'
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import {
+	View,
+	StyleSheet,
+	Image,
+	TouchableOpacity,
+	KeyboardAvoidingView,
+	SafeAreaView,
+} from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import { connect } from 'react-redux'
 import SmallButton from './SmallButton'
+import { AntDesign } from '@expo/vector-icons'
 
 const Donts = props => {
-	// const [donts, setDonts] = useState([])
+	const [manualDonts, setManualDonts] = useState([])
 	const [showInput, setShowInput] = useState(false)
+	const [manualIngredient, setManualIngredient] = useState('')
+	const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
 	const displayField = () => {
 		setShowInput(true)
 	}
 
+	const handleManualAdd = () => {
+		console.log(manualIngredient)
+		setManualIngredient('')
+		setManualDonts(prevDonts => [...prevDonts, manualIngredient])
+	}
+	console.log(manualDonts)
+
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<Text h4 style={styles.sectionTitle}>
 				Ce que je n'aime pas du tout :
 			</Text>
@@ -23,6 +40,10 @@ const Donts = props => {
 				<SmallButton title="champignons" />
 				<SmallButton title="chou fleur" />
 				<SmallButton title="fruits de mer" />
+				{manualDonts &&
+					manualDonts.map((dont, idx) => (
+						<SmallButton title={dont} key={idx} />
+					))}
 				<TouchableOpacity onPress={() => displayField()}>
 					<Image
 						style={styles.tinyLogo}
@@ -31,14 +52,27 @@ const Donts = props => {
 				</TouchableOpacity>
 			</View>
 			{showInput && (
-				<Input
-					// onChangeText={value => setDonts(value)}
-					value={donts}
-					placeholder="Séparez les ingrédients par une virgule"
-					style={{ marginTop: 10, marginHorizontal: 10 }}
-				/>
+				<KeyboardAvoidingView
+					behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+					keyboardVerticalOffset={keyboardVerticalOffset}
+				>
+					<Input
+						onChangeText={value => setManualIngredient(value)}
+						value={manualIngredient}
+						rightIcon={
+							<AntDesign
+								name="pluscircleo"
+								size={24}
+								color="black"
+								onPress={handleManualAdd}
+							/>
+						}
+						placeholder="Ajoutez un ingrédient"
+						style={{ marginTop: 10, marginHorizontal: 10 }}
+					/>
+				</KeyboardAvoidingView>
 			)}
-		</View>
+		</SafeAreaView>
 	)
 }
 

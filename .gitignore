@@ -9,9 +9,13 @@ npm-debug.*
 *.mobileprovision
 *.orig.*
 web-build/
-
+.env
 # macOS
 .DS_Store
 
 #MY_IP
+<<<<<<< HEAD
 .env
+=======
+.env
+>>>>>>> fc497d5ca885b5639f24e9e63955575814742039

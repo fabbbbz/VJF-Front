@@ -13,18 +13,20 @@ import MyCheckbox from '../Components/Checkbox'
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
 	// const token = props.token
-	const token = 'fv8PkF_c9Y3iCiVXOKugoJjQinZB6zn4' // HARD CODED FOR TEST
+	const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
 
-	console.log('my donts: ' + props.donts)
+	console.log('allergies : ' + props.allergies)
 
-	const handleAllergies = () => {
-		// TODO push selected allergies to store
+	const handleAllergies = allergy => {
 		setOverlay(false)
 	}
 
 	const handleSubmitFoodProfile = async () => {
-		console.log('submiiiit')
-		const dataToUpdate = { diet: props.diet, dont: props.donts }
+		const dataToUpdate = {
+			diet: props.diet,
+			dont: props.donts,
+			allergies: props.allergies,
+		}
 		const requestOptions = {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
@@ -62,20 +64,20 @@ const Home = props => {
 					}}
 				>
 					<ScrollView>
-						<MyCheckbox title="Gluten" />
-						<MyCheckbox title="Sesame" />
-						<MyCheckbox title="Fruits à coque" />
-						<MyCheckbox title="Crustacés" />
-						<MyCheckbox title="Oeuf" />
-						<MyCheckbox title="Poisson" />
-						<MyCheckbox title="Moutarde" />
-						<MyCheckbox title="Lait" />
-						<MyCheckbox title="Celeri" />
-						<MyCheckbox title="Arachides" />
-						<MyCheckbox title="Soja" />
-						<MyCheckbox title="Mollusques" />
-						<MyCheckbox title="Lupin" />
-						<MyCheckbox title="Sulfites" />
+						<MyCheckbox title="Gluten" isAllergy={true} />
+						<MyCheckbox title="Sesame" isAllergy={true} />
+						<MyCheckbox title="Fruits à coque" isAllergy={true} />
+						<MyCheckbox title="Crustacés" isAllergy={true} />
+						<MyCheckbox title="Oeuf" isAllergy={true} />
+						<MyCheckbox title="Poisson" isAllergy={true} />
+						<MyCheckbox title="Moutarde" isAllergy={true} />
+						<MyCheckbox title="Lait" isAllergy={true} />
+						<MyCheckbox title="Celeri" isAllergy={true} />
+						<MyCheckbox title="Arachides" isAllergy={true} />
+						<MyCheckbox title="Soja" isAllergy={true} />
+						<MyCheckbox title="Mollusques" isAllergy={true} />
+						<MyCheckbox title="Lupin" isAllergy={true} />
+						<MyCheckbox title="Sulfites" isAllergy={true} />
 					</ScrollView>
 					<NextButton title="VALIDER" onPress={() => handleAllergies()} />
 				</Overlay>
@@ -91,16 +93,13 @@ const styles = StyleSheet.create({
 	},
 })
 
-function mapDispatchToProps(dispatch) {
+function mapStateToProps(state) {
 	return {
-		onClick: function (diet) {
-			dispatch({ type: '', diet })
-		},
+		diet: state.diet,
+		token: state.token,
+		donts: state.donts,
+		allergies: state.allergies,
 	}
 }
 
-function mapStateToProps(state) {
-	return { diet: state.diet, token: state.token, donts: state.donts }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, null)(Home)

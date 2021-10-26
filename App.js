@@ -6,11 +6,12 @@ import { createStackNavigator } from '@react-navigation/stack'
 import diet from './reducers/diet' /*importe la fonction exportée par notre reduceur*/
 import token from './reducers/token' /*import token from reducer*/
 import donts from './reducers/donts'
+import allergies from './reducers/allergies'
 import { Provider } from 'react-redux'
 
 import { createStore, combineReducers } from 'redux'
 
-const store = createStore(combineReducers({ diet, token, donts }))
+const store = createStore(combineReducers({ diet, token, donts, allergies }))
 
 import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
@@ -20,16 +21,17 @@ import Mood from './Screens/Mood'
 const Stack = createStackNavigator()
 
 export default function App() {
-	return (
-		<Provider store={store}>
-			<NavigationContainer>
-				<Stack.Navigator screenOptions={{ headerShown: false }}>
-					<Stack.Screen name="First" component={FirstScreen} />
-					<Stack.Screen name="Home" component={Home} />
-					<Stack.Screen name="SignUp" component={SignUp} />
-					<Stack.Screen name="Mood" component={Mood} />
-				</Stack.Navigator>
-			</NavigationContainer>
-		</Provider>
-	)
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="First" component={FirstScreen} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Mood" component={Mood} />
+          <Stack.Screen name="Login" component={Mood} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
 }

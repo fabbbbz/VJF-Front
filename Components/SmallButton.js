@@ -17,7 +17,6 @@ const SmallButton = ({ title, addDont, removeDont, donts }) => {
 		setDisabled(!disabled)
 	}
 
-	console.log(donts)
 	return (
 		<Button
 			title={title}
