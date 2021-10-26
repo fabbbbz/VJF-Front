@@ -38,7 +38,6 @@ function SignIn(props) {
 
     return (
         <ScrollView>
-            <TopBar />
             <View style={{ alignItems: 'center' }}>
                 <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15, marginBottom: 30 }}>Login Page</Text>
                 <Input
