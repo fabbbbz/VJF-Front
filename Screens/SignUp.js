@@ -45,67 +45,6 @@ function SignUp(props) {
 		}
 	}
 
-<<<<<<< HEAD
-	return (
-		<View>
-			<View style={{ alignItems: 'center' }}>
-				<Text
-					h3
-					style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
-				>
-					Dites-nous en plus sur vous
-				</Text>
-				<Input
-					containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
-					inputStyle={{ marginLeft: 10 }}
-					placeholder="Nom"
-					onChangeText={text => setsignUpLastname(text)}
-				/>
-				<Input
-					containerStyle={{ marginBottom: 15, width: '70%' }}
-					inputStyle={{ marginLeft: 10 }}
-					placeholder="Prénom"
-					onChangeText={text => setignUpFirstname(text)}
-				/>
-				<Input
-					containerStyle={{ marginBottom: 15, width: '70%' }}
-					inputStyle={{ marginLeft: 10 }}
-					placeholder="Téléphone"
-					onChangeText={text => setSignUpPhone(text)}
-				/>
-				<Input
-					containerStyle={{ marginBottom: 15, width: '70%' }}
-					inputStyle={{ marginLeft: 10 }}
-					placeholder="Email"
-					onChangeText={text => setSignUpEmail(text)}
-				/>
-				<Input
-					containerStyle={{ marginBottom: 15, width: '70%' }}
-					inputStyle={{ marginLeft: 10 }}
-					secureTextEntry
-					placeholder="Password"
-					onChangeText={text => setSignUpPassword(text)}
-				/>
-			</View>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-				<Text
-					style={{
-						color: '#C4C4C4',
-						alignSelf: 'center',
-						marginLeft: 15,
-						fontSize: 20,
-					}}
-				>
-					Skip
-				</Text>
-				<NextButton title="NEXT" onPress={() => handleSubmitSignup()} />
-			</View>
-			<View>
-				<Text style={styles.errormesssage}>{ErrorsSignup}</Text>
-			</View>
-		</View>
-	)
-=======
     return (
         <KeyboardAvoidingView enabled behavior={Platform.OS === 'ios' ? 'padding' : null}
             style={styles.FlexGrowOne}>
@@ -164,7 +103,6 @@ function SignUp(props) {
             </View>
         </KeyboardAvoidingView>
     );
->>>>>>> 4e4a381777330945882c40ffebe3bf013b73b53a
 }
 
 const styles = StyleSheet.create({
