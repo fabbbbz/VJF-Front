@@ -18,11 +18,7 @@ function SignUp(props) {
     const [token, setToken] = useState('');
 
     var handleSubmitSignup = async () => {
-<<<<<<< HEAD
-        console.log(signUpLastname)
-=======
         // send user's infos to back 
->>>>>>> fc497d5ca885b5639f24e9e63955575814742039
         const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

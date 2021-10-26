@@ -4,11 +4,6 @@ import { Button, Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import Moods from '../Components/Moods';
 import NextButton from '../Components/NextButton';
-<<<<<<< HEAD
-
-
-=======
->>>>>>> fc497d5ca885b5639f24e9e63955575814742039
 import { connect } from 'react-redux';
 
 
