@@ -8,7 +8,6 @@ import { useState, useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function FirstScreen(props) {
-<<<<<<< HEAD
 	useEffect(() => {
 		AsyncStorage.getItem('token', (error, value) => {
 			if (value) {
@@ -61,40 +60,6 @@ function FirstScreen(props) {
 			</ScrollView>
 		</View>
 	)
-=======
-    // If token in local storage redirect to mood 
-    // useEffect(() => {
-    //     AsyncStorage.getItem('token', (error, value) => {
-    //         if (value) {
-    //             props.navigation.navigate('Mood', { screen: 'Mood' })
-    //         }
-    //     });
-    // }, []);
-
-    return (
-        <View style={styles.container}>
-            <Image
-                source={require('../assets/VJF-logo.png')}
-                style={{ width: 200, height: 200, marginTop: 100 }}
-            />
-            <Text h1 style={{ textAlign: 'center', color: '#000000', marginTop: 50 }}>
-                Vite j'ai faim!
-            </Text>
-
-            <Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50 }}>
-                Vous nous renseignez, on choisit pour vous!
-            </Text>
-            <ScrollView>
-                <NextButton title="HOME"
-                    onPress={() => { props.navigation.navigate('Home', { screen: 'Home' }) }} />
-                <NextButton title="SIGNUP"
-                    onPress={() => { props.navigation.navigate('SignUp', { screen: 'SignUp' }) }} />
-                <NextButton title="MOOD"
-                    onPress={() => { props.navigation.navigate('Mood', { screen: 'Mood' }) }} />
-            </ScrollView>
-        </View>
-    );
->>>>>>> ec1820af3b8aba9495f1978ae037b74b16219ee8
 }
 
 const styles = StyleSheet.create({
