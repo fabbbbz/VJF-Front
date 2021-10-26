@@ -1,37 +1,37 @@
-import React, { useEffect } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { useState, useEffect } from 'react'
+import { Text } from 'react-native'
 
-import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 
-const Geoloc = props => {
+export default function Geoloc() {
+
+    const [displayCurrentAddress, setDisplayCurrentAddress] = useState('')
 
     useEffect(() => {
         async function askPermissions() {
             var { status } = await Permissions.askAsync(Permissions.LOCATION);
             if (status === 'granted') {
-                var location = await Location.getCurrentPositionAsync({});
+                let { coords } = await Location.getCurrentPositionAsync();
+                if (coords) {
+                    const { latitude, longitude } = coords;
+                    let response = await Location.reverseGeocodeAsync({
+                        latitude,
+                        longitude
+                    });
+                    for (let item of response) {
+                        let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
+                        setDisplayCurrentAddress(address);
+                    }
+                } console.log('coords', coords)
             }
         }
         askPermissions();
     }, []);
 
+
+
     return (
-
-        <View>
-            <MapView style={{ flex: 1 }}
-                initialRegion={{
-                    latitude: 48.866667,
-                    longitude: 2.333333,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-            />
-        </View>
-
-
+        <Text >{displayCurrentAddress}</Text>
     )
 }
-
-export default Geoloc

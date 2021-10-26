@@ -4,7 +4,7 @@ import { Button, Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import Moods from '../Components/Moods';
 import NextButton from '../Components/NextButton';
-import Geoloc from '../Components/Geoloc';
+
 
 import { connect } from 'react-redux';
 
@@ -21,8 +21,6 @@ function Mood(props) {
             </View>
 
             {/* <Moods /> */}
-
-            <Geoloc />
 
 
             <NextButton title="VITE J'AI FAIM" />
