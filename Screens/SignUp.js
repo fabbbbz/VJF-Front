@@ -13,25 +13,23 @@ function SignUp(props) {
 	const [signUpLastname, setsignUpLastname] = useState('')
 	const [signUpEmail, setSignUpEmail] = useState('')
 	const [signUpPassword, setSignUpPassword] = useState('')
-	const [signUpTel, setSignUpTel] = useState('')
-	//const [userExists, setUserExists] = useState(false)
+	const [signUpPhone, setSignUpPhone] = useState('')
 	const [ErrorsSignup, setErrorsSignup] = useState('')
 	const [pseudo, setPseudo] = useState('')
 
 	var handleSubmitSignup = async () => {
 		console.log(signUpLastname)
-		console.log('my ip : ' + MY_IP)
 		const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: `lastnameFromFront=${signUpLastname}&firstnameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&telFromFront=${signUpTel}`,
+			body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`,
 		})
 		const body = await data.json()
 		if (body.result == true) {
 			AsyncStorage.setItem('pseudo', pseudo)
+			console.log(body.token)
 			props.addToken(body.token)
 			props.navigation.navigate('Mood', { screen: 'Mood' })
-			//setUserExists(true)
 		} else {
 			setErrorsSignup(body.error)
 			console.log(ErrorsSignup)
@@ -64,7 +62,7 @@ function SignUp(props) {
 					containerStyle={{ marginBottom: 15, width: '70%' }}
 					inputStyle={{ marginLeft: 10 }}
 					placeholder="Téléphone"
-					onChangeText={text => setSignUpTel(text)}
+					onChangeText={text => setSignUpPhone(text)}
 				/>
 				<Input
 					containerStyle={{ marginBottom: 15, width: '70%' }}
@@ -79,18 +77,6 @@ function SignUp(props) {
 					placeholder="Password"
 					onChangeText={text => setSignUpPassword(text)}
 				/>
-			</View>
-			<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-				<Text
-					style={{
-						color: '#C4C4C4',
-						alignSelf: 'center',
-						marginLeft: 15,
-						fontSize: 20,
-					}}
-				>
-					Skip
-				</Text>
 
 				<NextButton title="NEXT" onPress={() => handleSubmitSignup()} />
 			</View>

@@ -1,15 +1,21 @@
 import React from 'react';
-
 import { StyleSheet, View, Image, ScrollView } from 'react-native';
-
 import { Button, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import NextButton from '../Components/NextButton'
+import { connect } from 'react-redux';
+import { useState, useEffect } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
+function FirstScreen(props) {
 
-export default function FirstScreen(props) {
-
+    useEffect(() => {
+        AsyncStorage.getItem('token', (error, value) => {
+            if (value) {
+                console.log(value)
+            }
+        });
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -50,3 +56,12 @@ const styles = StyleSheet.create({
     },
 });
 
+//get token from store 
+function mapStateToProps(state) {
+    return { token: state.token }
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(FirstScreen)
