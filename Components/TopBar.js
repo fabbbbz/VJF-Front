@@ -2,10 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons'
-import DrawerNav from './Drawer'
-
-import { Home } from '../Screens/Home'
-import { Mood } from '../Screens/Mood'
 
 const TopBar = props => {
 	const navigation = useNavigation()
