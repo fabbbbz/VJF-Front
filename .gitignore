@@ -12,3 +12,6 @@ web-build/
 .env
 # macOS
 .DS_Store
+
+#MY_IP
+.env
