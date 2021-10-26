@@ -13,7 +13,7 @@ import MyCheckbox from '../Components/Checkbox'
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
 	// const token = props.token
-	const token = 'fv8PkF_c9Y3iCiVXOKugoJjQinZB6zn4' // HARD CODED FOR TEST
+	const token = 'cDno1yn9TpIWOLMMnmBp0laBcY2099ZB' // HARD CODED FOR TEST
 
 	console.log('my donts: ' + props.donts)
 
@@ -23,7 +23,6 @@ const Home = props => {
 	}
 
 	const handleSubmitFoodProfile = async () => {
-		console.log('submiiiit')
 		const dataToUpdate = { diet: props.diet, dont: props.donts }
 		const requestOptions = {
 			method: 'PUT',
