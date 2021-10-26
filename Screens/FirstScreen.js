@@ -77,10 +77,8 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F4F4F4',
 	},
 })
-
 //get token from store
 function mapStateToProps(state) {
 	return { token: state.token }
 }
-
 export default connect(mapStateToProps, null)(FirstScreen)
