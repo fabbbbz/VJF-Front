@@ -1,7 +1,7 @@
-export default function (diet = [], action) {
-    if (action.type == '') {
-        return;
-    } else {
-        return diet;
-    }
+export default function (diet = 'omni', action) {
+	if (action.type == 'ADD_DIET') {
+		return action.diet
+	} else {
+		return diet
+	}
 }
