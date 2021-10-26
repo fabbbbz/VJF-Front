@@ -8,8 +8,15 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import NextButton from '../Components/NextButton'
 
 
-export default function FirstScreen(props) {
+function FirstScreen(props) {
 
+    useEffect(() => {
+        AsyncStorage.getItem('token', (error, value) => {
+            if (value) {
+                console.log(value)
+            }
+        });
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -50,3 +57,12 @@ const styles = StyleSheet.create({
     },
 });
 
+//get token from store 
+function mapStateToProps(state) {
+    return { token: state.token }
+}
+
+export default connect(
+    mapStateToProps,
+    null
+)(FirstScreen)
