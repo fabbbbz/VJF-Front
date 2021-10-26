@@ -23,7 +23,9 @@ export default function Geoloc() {
                         let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`;
                         setDisplayCurrentAddress(address);
                     }
-                } console.log('coords', coords)
+                }
+                console.log('coords', coords)
+                console.log('address', displayCurrentAddress)
             }
         }
         askPermissions();

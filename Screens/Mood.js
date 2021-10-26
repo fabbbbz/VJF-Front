@@ -5,10 +5,18 @@ import TopBar from '../Components/TopBar';
 import Moods from '../Components/Moods';
 import NextButton from '../Components/NextButton';
 import { connect } from 'react-redux';
+import Geoloc from '../Components/Geoloc';
+import { Ionicons } from '@expo/vector-icons';
 
 
 
 function Mood(props) {
+
+    const updateAdress = () => {
+        console.log('')
+
+    }
+    console.log()
 
 
     return (
@@ -54,9 +62,15 @@ function Mood(props) {
                         }} />
                     </View>
                 </View>
-                <View style={{ backgroundColor: '#FFFFFF', marginTop: 15, flexDirection: "row", width: "90%", height: 40, alignItems: "center", borderRadius: 5, }}>
-                    <Text style={{ color: '#000000', fontWeight: 'bold' }}> (Icon) Livré à: </Text>
-                    <Text style={{ color: '#000000' }}> 56 boulevard Perreire, Paris (Icon) </Text>
+                <View style={{ backgroundColor: '#FFFFFF', marginTop: 15, flexDirection: "row", width: "90%", height: 40, alignItems: "center", justifyContent: 'center' }}>
+                    <Ionicons name="location-outline" size={24} color="#F2A902" />
+                    <Text style={{ color: '#000000', fontWeight: 'bold' }}>Livré à:</Text>
+                    <Text style={{ color: '#000000' }}> <Geoloc /> </Text>
+                    <Ionicons
+                        name="ellipsis-vertical"
+                        size={24} color="#F2A902"
+                        onPress={updateAdress}
+                    />
 
                 </View>
                 <View style={{ marginTop: 15, width: "100%", alignItems: "center" }}>
