@@ -19,7 +19,7 @@ function SignUp(props) {
 
     var handleSubmitSignup = async () => {
         console.log(signUpLastname)
-        const data = await fetch("http://172.17.1.105:3000/users/sign-up", {
+        const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `lastnameFromFront=${signUpLastname}&firstnameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&telFromFront=${signUpTel}`
