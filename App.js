@@ -17,7 +17,9 @@ import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
 import SignUp from './Screens/SignUp'
 import Mood from './Screens/Mood'
-import SignIn from './Screens/SignIn'
+import SignIn from './Screens/Mood'
+import LastOrderScreen from './Screens/LastOrderScreen'
+
 const Stack = createStackNavigator()
 
 export default function App() {
@@ -30,6 +32,7 @@ export default function App() {
           <Stack.Screen name="SignUp" component={SignUp} />
           <Stack.Screen name="Mood" component={Mood} />
           <Stack.Screen name="SignIn" component={SignIn} />
+          <Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

@@ -1,21 +1,20 @@
-import React from 'react';
-import { StyleSheet, View, Image, ScrollView } from 'react-native';
+import React from 'react'
+import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { Button, Text } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome'
 import NextButton from '../Components/NextButton'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import { useState, useEffect } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function FirstScreen(props) {
-    // If token in local storage redirect to mood 
-    // useEffect(() => {
-    //     AsyncStorage.getItem('token', (error, value) => {
-    //         if (value) {
-    //             props.navigation.navigate('Mood', { screen: 'Mood' })
-    //         }
-    //     });
-    // }, []);
+    useEffect(() => {
+        AsyncStorage.getItem('token', (error, value) => {
+            if (value) {
+                console.log(value)
+            }
+        })
+    }, [])
 
     return (
         <View style={styles.container}>
@@ -23,6 +22,7 @@ function FirstScreen(props) {
                 source={require('../assets/VJF-logo.png')}
                 style={{ width: 200, height: 200, marginTop: 100 }}
             />
+
             <Text h1 style={{ textAlign: 'center', color: '#000000', marginTop: 50 }}>
                 Vite j'ai faim!
             </Text>
@@ -31,17 +31,43 @@ function FirstScreen(props) {
                 Vous nous renseignez, on choisit pour vous!
             </Text>
             <ScrollView>
-                <NextButton title="HOME"
-                    onPress={() => { props.navigation.navigate('Home', { screen: 'Home' }) }} />
-                <NextButton title="SIGNUP"
-                    onPress={() => { props.navigation.navigate('SignUp', { screen: 'SignUp' }) }} />
-                <NextButton title="MOOD"
-                    onPress={() => { props.navigation.navigate('Mood', { screen: 'Mood' }) }} />
-                <NextButton title="SignIn"
-                    onPress={() => { props.navigation.navigate('SignIn', { screen: 'SignIn' }) }} />
+                <NextButton
+                    title="HOME"
+                    onPress={() => {
+                        props.navigation.navigate('Home', { screen: 'Home' })
+                    }}
+                />
+                <NextButton
+                    title="SIGNUP"
+                    onPress={() => {
+                        props.navigation.navigate('SignUp', { screen: 'SignUp' })
+                    }}
+                />
+                <NextButton
+                    title="MOOD"
+                    onPress={() => {
+                        props.navigation.navigate('Mood', { screen: 'Mood' })
+                    }}
+                />
+                <NextButton
+                    title="LAST ORDER"
+                    onPress={() => {
+                        props.navigation.navigate('LastOrderScreen', {
+                            screen: 'LastOrderScreen',
+                        })
+                    }}
+                />
+                <NextButton
+                    title="SIGN IN"
+                    onPress={() => {
+                        props.navigation.navigate('LastOrderScreen', {
+                            screen: 'LastOrderScreen',
+                        })
+                    }}
+                />
             </ScrollView>
         </View>
-    );
+    )
 }
 
 const styles = StyleSheet.create({
@@ -50,14 +76,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#F4F4F4',
     },
-});
+})
 
-//get token from store 
+//get token from store
 function mapStateToProps(state) {
     return { token: state.token }
 }
 
-export default connect(
-    mapStateToProps,
-    null
-)(FirstScreen)
+export default connect(mapStateToProps, null)(FirstScreen)
