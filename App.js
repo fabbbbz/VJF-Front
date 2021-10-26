@@ -21,16 +21,17 @@ import Mood from './Screens/Mood'
 const Stack = createStackNavigator()
 
 export default function App() {
-	return (
-		<Provider store={store}>
-			<NavigationContainer>
-				<Stack.Navigator screenOptions={{ headerShown: false }}>
-					<Stack.Screen name="First" component={FirstScreen} />
-					<Stack.Screen name="Home" component={Home} />
-					<Stack.Screen name="SignUp" component={SignUp} />
-					<Stack.Screen name="Mood" component={Mood} />
-				</Stack.Navigator>
-			</NavigationContainer>
-		</Provider>
-	)
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <Stack.Navigator screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="First" component={FirstScreen} />
+          <Stack.Screen name="Home" component={Home} />
+          <Stack.Screen name="SignUp" component={SignUp} />
+          <Stack.Screen name="Mood" component={Mood} />
+          <Stack.Screen name="Login" component={Mood} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
+  )
 }
