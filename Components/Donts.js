@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { Text, Input } from 'react-native-elements'
+import { connect } from 'react-redux'
 import SmallButton from './SmallButton'
 
 const Donts = props => {
-	const [donts, setDonts] = useState([])
+	// const [donts, setDonts] = useState([])
 	const [showInput, setShowInput] = useState(false)
 
 	const displayField = () => {
@@ -17,7 +18,7 @@ const Donts = props => {
 				Ce que je n'aime pas du tout :
 			</Text>
 			<View style={styles.ingredients}>
-				<SmallButton title="oignons" />
+				<SmallButton title="oignons" value="oignons" />
 				<SmallButton title="coriandre" />
 				<SmallButton title="champignons" />
 				<SmallButton title="chou fleur" />
@@ -31,9 +32,9 @@ const Donts = props => {
 			</View>
 			{showInput && (
 				<Input
-					onChangeText={value => setDonts(value)}
+					// onChangeText={value => setDonts(value)}
 					value={donts}
-					placeholder="Entrez un ingrédient"
+					placeholder="Séparez les ingrédients par une virgule"
 					style={{ marginTop: 10, marginHorizontal: 10 }}
 				/>
 			)}

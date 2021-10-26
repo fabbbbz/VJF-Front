@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
-import { Button, Text, Input } from 'react-native-elements'
+import { Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import NextButton from '../Components/NextButton';
 import { connect } from 'react-redux';
 import { MY_IP } from "@env"
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function SignUp(props) {
     const [signUpFirstname, setignUpFirstname] = useState('')
@@ -13,12 +14,16 @@ function SignUp(props) {
     const [signUpEmail, setSignUpEmail] = useState('')
     const [signUpPassword, setSignUpPassword] = useState('')
     const [signUpTel, setSignUpTel] = useState('')
-    const [userExists, setUserExists] = useState(false)
-    const [listErrorsSignin, setErrorsSignin] = useState([])
+    //const [userExists, setUserExists] = useState(false)
     const [ErrorsSignup, setErrorsSignup] = useState('')
+    const [pseudo, setPseudo] = useState('');
 
     var handleSubmitSignup = async () => {
         console.log(signUpLastname)
+<<<<<<< HEAD
+=======
+        console.log(MY_IP)
+>>>>>>> 0c2719c56bb1d1a123bf5c8835066ee55e9fb530
         const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -26,12 +31,11 @@ function SignUp(props) {
         })
         const body = await data.json()
         if (body.result == true) {
-            console.log(MY_IP)
+            AsyncStorage.setItem('pseudo', pseudo);
             props.addToken(body.token)
-            props.navigation.navigate('BottomNavigator', { screen: 'Home' })
-            setUserExists(true)
+            props.navigation.navigate('Mood', { screen: 'Mood' })
+            //setUserExists(true)
         } else {
-            console.log(MY_IP)
             setErrorsSignup(body.error)
             console.log(ErrorsSignup)
         }
@@ -73,10 +77,11 @@ function SignUp(props) {
                     placeholder='Password'
                     onChangeText={text => setSignUpPassword(text)}
                 />
-                <View>
-                    <Text>{ErrorsSignup}</Text>
-                </View>
-                <Text style={{ color: '#000000' }}>
+
+
+            </View>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                <Text style={{ color: '#C4C4C4', alignSelf: 'center', marginLeft: 15, fontSize: 20 }}>
                     Skip
                 </Text>
 
@@ -84,8 +89,9 @@ function SignUp(props) {
                     onPress={() => handleSubmitSignup()}
                 />
             </View>
-
-
+            <View>
+                <Text>{ErrorsSignup}</Text>
+            </View>
         </View>
     );
 }

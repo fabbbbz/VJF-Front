@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
@@ -6,16 +6,36 @@ import Diet from '../Components/Diet'
 import Donts from '../Components/Donts'
 import Allergies from '../Components/Allergies'
 import NextButton from '../Components/NextButton'
-
+import { MY_IP } from '@env'
 import { connect } from 'react-redux'
 import MyCheckbox from '../Components/Checkbox'
 
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
+	// const token = props.token
+	const token = 'fv8PkF_c9Y3iCiVXOKugoJjQinZB6zn4' // HARD CODED FOR TEST
+
+	console.log('my donts: ' + props.donts)
 
 	const handleAllergies = () => {
 		// TODO push selected allergies to store
 		setOverlay(false)
+	}
+
+	const handleSubmitFoodProfile = async () => {
+		console.log('submiiiit')
+		const dataToUpdate = { diet: props.diet, dont: props.donts }
+		const requestOptions = {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(dataToUpdate),
+		}
+		const data = await fetch(
+			`http://${MY_IP}:3000/users/update-me/${token}`,
+			requestOptions
+		)
+		const result = await data.json()
+		console.log(result)
 	}
 
 	return (
@@ -25,7 +45,12 @@ const Home = props => {
 				<Diet />
 				<Donts />
 				<Allergies overlay={overlay} setOverlay={setOverlay} />
-				<NextButton title="NEXT" color="#F2A902" width="200" />
+				<NextButton
+					title="NEXT"
+					color="#F2A902"
+					width="200"
+					onPress={handleSubmitFoodProfile}
+				/>
 				<Overlay
 					isVisible={overlay}
 					onBackdropPress={() => setOverlay(false)}
@@ -74,4 +99,8 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Home)
+function mapStateToProps(state) {
+	return { diet: state.diet, token: state.token, donts: state.donts }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
