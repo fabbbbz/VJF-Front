@@ -8,13 +8,10 @@ import { MY_IP } from "@env"
 import { useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-function SignUp(props) {
-    const [signUpFirstname, setignUpFirstname] = useState('')
-    const [signUpLastname, setsignUpLastname] = useState('')
+function SignIn(props) {
     const [signUpEmail, setSignUpEmail] = useState('')
     const [signUpPassword, setSignUpPassword] = useState('')
-    const [signUpPhone, setSignUpPhone] = useState('')
-    const [ErrorsSignup, setErrorsSignup] = useState('')
+    const [ErrorsSignin, setErrorsSignin] = useState('')
     const [token, setToken] = useState('');
 
     var handleSubmitSignup = async () => {
@@ -45,24 +42,6 @@ function SignUp(props) {
             <View style={{ alignItems: 'center' }}>
                 <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}>Dites-nous en plus sur vous</Text>
                 <Input
-                    containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
-                    inputStyle={{ marginLeft: 10 }}
-                    placeholder='Nom'
-                    onChangeText={text => setsignUpLastname(text)}
-                />
-                <Input
-                    containerStyle={{ marginBottom: 15, width: '70%' }}
-                    inputStyle={{ marginLeft: 10 }}
-                    placeholder='Prénom'
-                    onChangeText={text => setignUpFirstname(text)}
-                />
-                <Input
-                    containerStyle={{ marginBottom: 15, width: '70%' }}
-                    inputStyle={{ marginLeft: 10 }}
-                    placeholder='Téléphone'
-                    onChangeText={text => setSignUpPhone(text)}
-                />
-                <Input
                     containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
                     placeholder='Email'
@@ -75,8 +54,6 @@ function SignUp(props) {
                     placeholder='Password'
                     onChangeText={text => setSignUpPassword(text)}
                 />
-
-
             </View>
             <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                 <Text style={{ color: '#C4C4C4', alignSelf: 'center', marginLeft: 15, fontSize: 20 }}>
@@ -87,7 +64,7 @@ function SignUp(props) {
                 />
             </View>
             <View>
-                <Text style={styles.errormesssage}>{ErrorsSignup}</Text>
+                <Text style={styles.errormesssage}>{ErrorsSignin}</Text>
             </View>
         </View>
     );
