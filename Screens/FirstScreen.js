@@ -1,12 +1,11 @@
 import React from 'react';
-
 import { StyleSheet, View, Image, ScrollView } from 'react-native';
-
 import { Button, Text } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
-
 import NextButton from '../Components/NextButton'
-
+import { connect } from 'react-redux';
+import { useState, useEffect } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function FirstScreen(props) {
 
