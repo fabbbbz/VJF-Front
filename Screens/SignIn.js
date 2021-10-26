@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, View, Alert } from 'react-native';
-import { Text, Input } from 'react-native-elements'
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Text, Input, Button } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import NextButton from '../Components/NextButton';
 import { connect } from 'react-redux';
@@ -16,7 +16,7 @@ function SignIn(props) {
 
     var handleSubmitSignup = async () => {
         // send user's infos to back 
-        const data = await fetch(`http://${MY_IP}:3000/users/sign-in`, {
+        const data = await fetch(`http://172.17.1.105:3000/users/sign-in`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`
@@ -32,15 +32,15 @@ function SignIn(props) {
             props.addToken(token)
             props.navigation.navigate('Mood', { screen: 'Mood' })
         } else {
-            setErrorsSignup(body.error)
+            setErrorsSignin(body.error)
         }
     }
 
     return (
-        <View >
+        <ScrollView>
             <TopBar />
             <View style={{ alignItems: 'center' }}>
-                <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}>Dites-nous en plus sur vous</Text>
+                <Text h3 style={{ textAlign: 'center', color: '#000000', marginTop: 15, marginBottom: 30 }}>Login Page</Text>
                 <Input
                     containerStyle={{ marginBottom: 15, width: '70%' }}
                     inputStyle={{ marginLeft: 10 }}
@@ -55,24 +55,24 @@ function SignIn(props) {
                     onChangeText={text => setSignUpPassword(text)}
                 />
             </View>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                <Text style={{ color: '#C4C4C4', alignSelf: 'center', marginLeft: 15, fontSize: 20 }}>
-                    Skip
-                </Text>
-                <NextButton title="NEXT"
+            <View style={{ alignItems: 'center', alignSelf: 'center' }}>
+                <NextButton title="LOGIN"
                     onPress={() => handleSubmitSignup()}
                 />
+                <Text style={{ textAlign: 'center', color: '#000000', marginTop: 15, marginBottom: 15 }}>Ou</Text>
+                <Button buttonStyle={{ backgroundColor: 'transparent' }} onPress={() => props.navigation.navigate('SignUp', { screen: 'SignUp' })} title="Continuer pour vous enregister" />
             </View>
             <View>
                 <Text style={styles.errormesssage}>{ErrorsSignin}</Text>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
+        alignItems: 'center',
         backgroundColor: '#F4F4F4',
     },
     errormesssage: {
@@ -94,4 +94,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
     null,
     mapDispatchToProps
-)(SignUp)
+)(SignIn)
