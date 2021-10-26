@@ -25,6 +25,65 @@ function Mood(props) {
                     Quel est votre mood ?
                 </Text>
             </View>
+
+
+            <View
+                style={{
+                    marginTop: 15,
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    width: '100%',
+                    alignItems: 'center',
+                    justifyContent: "center",
+                    alignSelf: "center",
+                    // backgroundColor: '#FFFFFF',
+                    borderRadius: 5,
+                }}
+            >
+                <Button
+                    onPress={() => { props.dietHandle("omni") }}
+                    title="Surprise Totale"
+                    buttonStyle={
+
+                        styles.moodButton}
+
+                />
+                <Button
+                    onPress={() => { props.dietHandle("Healthy") }}
+                    title="Healthy"
+                    buttonStyle={
+                        styles.moodButton}
+                />
+                <Button
+                    onPress={() => { props.dietHandle("Comme chez Maman") }}
+                    title="Comme chez Maman"
+                    buttonStyle={
+                        styles.moodButton}
+                />
+                <Button
+                    onPress={() => { props.dietHandle("Cuisine du monde") }}
+                    title="Cuisine du monde"
+                    buttonStyle={
+                        styles.moodButton}
+                />
+                <Button
+                    onPress={() => { props.dietHandle("Soir de Match") }}
+                    title="Soir de Match"
+                    buttonStyle={
+                        styles.moodButton}
+                />
+                <Button
+                    onPress={() => { props.dietHandle("A partager") }}
+                    title="A partager"
+                    buttonStyle={
+                        styles.moodButton}
+                />
+
+
+            </View>
+
+
+
             {/* <Moods /> */}
             <View>
                 <Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
@@ -33,7 +92,7 @@ function Mood(props) {
                 </Text>
             </View>
 
-            <View style={{ marginTop: 15, width: '100%', alignItems: 'center' }}>
+            <View style={{ marginTop: 15, width: '100%', alignItems: 'center', }}>
                 <View
                     style={{
                         marginTop: 15,
@@ -57,12 +116,13 @@ function Mood(props) {
                             marginBottom: 15,
                             flexDirection: 'row',
                             width: '90%',
-                            alignItems: 'center',
+                            alignItems: 'space-between',
                             padding: 0,
                             marginLeft: 2,
                         }}
                     >
                         <Button
+                            onPress={() => { props.budgetHandle(10) }}
                             title="5-10€"
                             buttonStyle={{
                                 backgroundColor: '#FFC901',
@@ -72,6 +132,7 @@ function Mood(props) {
                             }}
                         />
                         <Button
+                            onPress={() => { props.budgetHandle(15) }}
                             title="10-15€"
                             buttonStyle={{
                                 backgroundColor: '#F2A902',
@@ -81,6 +142,7 @@ function Mood(props) {
                             }}
                         />
                         <Button
+                            onPress={() => { props.budgetHandle(20) }}
                             title="15-20€"
                             buttonStyle={{
                                 backgroundColor: '#C95615',
@@ -90,6 +152,7 @@ function Mood(props) {
                             }}
                         />
                         <Button
+                            onPress={() => { props.budgetHandle(10000) }}
                             title="YOLO!"
                             buttonStyle={{
                                 backgroundColor: '#DB1919',
@@ -120,18 +183,19 @@ function Mood(props) {
                         56 boulevard Perreire, Paris (Icon){' '}
                     </Text>
                 </View>
-                <View style={{ marginTop: 15, width: '100%', alignItems: 'center' }}>
+                <View style={{ marginTop: 15, width: '100%', alignItems: 'center', alignSelf: "center", }}>
                     <Button
                         title="VITE J'AI FAIM"
                         buttonStyle={{
                             backgroundColor: '#F2A902',
                             borderRadius: 5,
                             marginRight: 10,
-                            width: 425,
+                            alignSelf: "center",
+                            width: 416,
                         }}
                     />
 
-                    {/* <NextButton buttonStyle={{ textAlign: 'right', width: 400 }} title="VITE J'AI FAIM" /> */}
+
                 </View>
             </View>
         </View>
@@ -143,24 +207,22 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F4F4F4',
     },
-    // button: {
-    //     backgroundColor: '#F2A902',
-    //     borderRadius: 5,
-    //     width: 100,
-    //     paddingHorizontal: 10,
-    //     paddingVertical: 10,
-    //     textAlign: 'center',
-    //     alignSelf: 'center',
-    //     marginRight: 10,
-    //     marginBottom: 10,
-    // }
+    moodButton: {
+        backgroundColor: '#FFC901',
+        width: 138,
+        height: 110,
+    }
 })
 
 function mapDispatchToProps(dispatch) {
     return {
-        onClick: function (diet) {
-            dispatch({ type: '', diet })
+        dietHandle: function (diet) {
+            dispatch({ type: "ADD_DIET", diet })
         },
+        budgetHandle: function (budget) {
+            dispatch({ type: 'budgetChoice', budget })
+        },
+
     }
 }
 

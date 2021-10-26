@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-import React from 'react'
-import { StyleSheet, View, Alert } from 'react-native'
-=======
 import React from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
->>>>>>> 4e4a381777330945882c40ffebe3bf013b73b53a
 import { Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
@@ -23,49 +18,27 @@ function SignUp(props) {
     const [token, setToken] = useState('');
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
-<<<<<<< HEAD
     var handleSubmitSignup = async () => {
-        console.log(signUpLastname)
-        console.log(MY_IP)
+        // send user's infos to back
         const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `lastnameFromFront=${signUpLastname}&firstnameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&telFromFront=${signUpTel}`
+            body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`,
         })
+        //get answer from back
         const body = await data.json()
         if (body.result == true) {
-            AsyncStorage.setItem('pseudo', pseudo);
-            props.addToken(body.token)
+            //set token
+            setToken(body.token)
+            // store token in local-storage
+            AsyncStorage.setItem('token', token)
+            // store token in redux
+            props.addToken(token)
             props.navigation.navigate('Mood', { screen: 'Mood' })
-            //setUserExists(true)
         } else {
             setErrorsSignup(body.error)
-            console.log(ErrorsSignup)
         }
     }
-=======
-	var handleSubmitSignup = async () => {
-		// send user's infos to back
-		const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`,
-		})
-		//get answer from back
-		const body = await data.json()
-		if (body.result == true) {
-			//set token
-			setToken(body.token)
-			// store token in local-storage
-			AsyncStorage.setItem('token', token)
-			// store token in redux
-			props.addToken(token)
-			props.navigation.navigate('Mood', { screen: 'Mood' })
-		} else {
-			setErrorsSignup(body.error)
-		}
-	}
->>>>>>> 3d2a4a9a74fb1a635b792c919b7e5d95d12f440f
 
     return (
         <KeyboardAvoidingView enabled behavior={Platform.OS === 'ios' ? 'padding' : null}
@@ -128,24 +101,24 @@ function SignUp(props) {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#F4F4F4',
-	},
-	errormesssage: {
-		marginTop: 50,
-		textAlign: 'center',
-		color: '#FF9800',
-		fontSize: 20,
-	},
+    container: {
+        flex: 1,
+        backgroundColor: '#F4F4F4',
+    },
+    errormesssage: {
+        marginTop: 50,
+        textAlign: 'center',
+        color: '#FF9800',
+        fontSize: 20,
+    },
 })
 
 function mapDispatchToProps(dispatch) {
-	return {
-		addToken: function (token) {
-			dispatch({ type: 'addToken', token: token })
-		},
-	}
+    return {
+        addToken: function (token) {
+            dispatch({ type: 'addToken', token: token })
+        },
+    }
 }
 
 export default connect(null, mapDispatchToProps)(SignUp)

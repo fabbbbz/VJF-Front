@@ -6,7 +6,7 @@ import { AntDesign } from '@expo/vector-icons'
 const TopBar = props => {
 	const navigation = useNavigation()
 	const [navActive, setNavActive] = useState(false)
-	console.log('top bar props: ', props.navigation)
+
 	const showDrawer = () => {
 		//props.navigation.navigate('Drawer')
 		setNavActive(true)
