@@ -17,21 +17,23 @@ import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
 import SignUp from './Screens/SignUp'
 import Mood from './Screens/Mood'
+import History from './Screens/History'
 
 const Stack = createStackNavigator()
 
 export default function App() {
-  return (
-    <Provider store={store}>
-      <NavigationContainer>
-        <Stack.Navigator screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="First" component={FirstScreen} />
-          <Stack.Screen name="Home" component={Home} />
-          <Stack.Screen name="SignUp" component={SignUp} />
-          <Stack.Screen name="Mood" component={Mood} />
-          <Stack.Screen name="Login" component={Mood} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
-  )
+	return (
+		<Provider store={store}>
+			<NavigationContainer>
+				<Stack.Navigator screenOptions={{ headerShown: false }}>
+					<Stack.Screen name="First" component={FirstScreen} />
+					<Stack.Screen name="Home" component={Home} />
+					<Stack.Screen name="SignUp" component={SignUp} />
+					<Stack.Screen name="Mood" component={Mood} />
+					<Stack.Screen name="Login" component={Mood} />
+					<Stack.Screen name="History" component={History} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
+	)
 }
