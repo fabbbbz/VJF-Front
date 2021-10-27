@@ -2,20 +2,27 @@ import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
+import { MY_IP } from '@env'
 
 const Address = props => {
-	const [lastOrder, setLastOrder] = useState({ meal: '', restaurant: '' })
+	const [address, setAddress] = useState('')
 
 	useEffect(() => {
-		// Fetch data to get last order
+		const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+		const fetchUser = async () => {
+			const data = await fetch(`http://${MY_IP}:3000/users/me/${token}`)
+			const user = await data.json()
+			setAddress(user.userInfo.adresse[0])
+		}
+		fetchUser()
 	}, [])
 
 	return (
 		<View style={styles.container}>
 			<Text h4 style={styles.text}>
-				Adress
+				Adresse de livraison
 			</Text>
-			<Text style={styles.text}>de : La Pizzeria des Gros</Text>
+			<Text style={styles.text}>{address}</Text>
 		</View>
 	)
 }

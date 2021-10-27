@@ -35,7 +35,6 @@ function Mood(props) {
 				minprice: props.budget[0],
 				maxprice: props.budget[1],
 			}
-			console.log('data to send : ', dataToSend)
 			const requestOptions = {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
@@ -47,6 +46,12 @@ function Mood(props) {
 			)
 			const result = await data.json()
 			console.log(result)
+
+			if (result) {
+				props.navigation.navigate('TimeToPay', {
+					screen: 'TimeToPay',
+				})
+			}
 		} catch (err) {
 			console.log(err.message)
 		}

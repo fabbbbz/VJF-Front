@@ -10,6 +10,8 @@ import Address from '../Components/Address'
 import PaiementMode from '../Components/PaiementMode'
 
 const TimeToPay = props => {
+	const [order, setOrder] = useState({})
+
 	const handlePaiement = () => {
 		console.log('take my money')
 	}
@@ -22,7 +24,7 @@ const TimeToPay = props => {
 			</Text>
 			<OrderRecap />
 			<Address />
-			<PaiementMode />
+
 			<NextButton title="PAYER" onPress={handlePaiement} />
 		</View>
 	)
