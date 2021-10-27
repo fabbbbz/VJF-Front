@@ -12,7 +12,9 @@ import { Provider } from 'react-redux'
 
 import { createStore, combineReducers } from 'redux'
 
-const store = createStore(combineReducers({ diet, token, donts, allergies, budget }))
+const store = createStore(
+	combineReducers({ diet, token, donts, allergies, budget })
+)
 
 import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
@@ -21,6 +23,7 @@ import Mood from './Screens/Mood'
 import Favorites from './Screens/Favorites'
 import SignIn from './Screens/SignIn'
 import LastOrderScreen from './Screens/LastOrderScreen'
+import TimeToPay from './Screens/TimeToPay'
 // import DrawerNav from './Components/Drawer'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 
@@ -36,6 +39,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="SignIn" component={SignIn} />
 			<Drawer.Screen name="Favorites" component={Favorites} />
 			<Drawer.Screen name="LastOrderScreen" component={LastOrderScreen} />
+			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
 		</Drawer.Navigator>
 	)
 }
@@ -53,8 +57,8 @@ export default function App() {
 					<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
 					<Stack.Screen name="Drawer" component={DrawerNav} />
 					<Stack.Screen name="Favorites" component={Favorites} />
-				</Stack.Navigator >
-			</NavigationContainer >
-		</Provider >
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
 	)
 }
