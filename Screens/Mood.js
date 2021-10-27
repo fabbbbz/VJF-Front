@@ -15,6 +15,8 @@ function Mood(props) {
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
 
+	const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+
 	const changeAdress = () => {
 		console.log('overlay ok')
 		setOverlay(true)
@@ -24,6 +26,16 @@ function Mood(props) {
 		setOverlay(false)
 		setAddressIsChanged(true)
 		console.log('overlay gone')
+	}
+
+	const getTheSupriseMeal = async () => {
+		const data = await fetch(`http://172.17.1.105:3000/orders/recap/${token}`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: `mood=${mood}&minprice=${minprice}&maxprice=${maxprice}`,
+		})
+		//get answer from back
+		const result = await data.json()
 	}
 
 	var address
@@ -259,7 +271,7 @@ function Mood(props) {
 							onChangeText={codePostal => setcodePostal(codePostal)}
 						/>
 					</ScrollView>
-					<NextButton title="VALIDER" onPress={() => updateAdress()} />
+					<NextButton title="VALIDER" onPress={getTheSupriseMeal} />
 				</Overlay>
 				<View
 					style={{ marginTop: 15, width: '100%', alignItems: 'center' }}
