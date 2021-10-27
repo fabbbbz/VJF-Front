@@ -65,6 +65,14 @@ function FirstScreen(props) {
 						})
 					}}
 				/>
+				<NextButton
+					title="HISTORY"
+					onPress={() => {
+						props.navigation.navigate('History', {
+							screen: 'History',
+						})
+					}}
+				/>
 			</ScrollView>
 		</View>
 	)

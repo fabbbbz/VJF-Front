@@ -15,6 +15,9 @@ const TimeToPay = props => {
 
 	const handlePaiement = () => {
 		console.log('take my money')
+		props.navigation.navigate('Livraison', {
+			screen: 'Livraison',
+		})
 	}
 
 	return (
