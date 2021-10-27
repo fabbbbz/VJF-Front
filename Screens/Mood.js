@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFC901',
         width: 138,
         height: 110,
-    }
+    },
 })
 
 function mapDispatchToProps(dispatch) {
