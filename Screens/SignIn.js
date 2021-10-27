@@ -38,6 +38,7 @@ function SignIn(props) {
 
 	return (
 		<ScrollView>
+			<TopBar navigation={props.navigation} />
 			<View style={{ alignItems: 'center' }}>
 				<Text
 					h3
