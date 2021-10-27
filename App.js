@@ -1,4 +1,4 @@
-// Modules Import 
+// Modules Import
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -26,7 +26,9 @@ import Livraison from './Screens/Livraison'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
-const store = createStore(combineReducers({ diet, token, donts, allergies, budget }))
+const store = createStore(
+	combineReducers({ diet, token, donts, allergies, budget, mood })
+)
 
 const DrawerNav = props => {
 	return (
