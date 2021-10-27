@@ -1,14 +1,50 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
-import { Button, Text, Input } from 'react-native-elements'
+import React, { useState } from 'react';
+import { View, StyleSheet, ScrollView } from 'react-native';
+import { Button, Text, Input, Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import Moods from '../Components/Moods';
 import NextButton from '../Components/NextButton';
 import { connect } from 'react-redux';
+import Geoloc from '../Components/Geoloc';
+import { Ionicons } from '@expo/vector-icons';
 
 
 
 function Mood(props) {
+
+    const [overlay, setOverlay] = useState(false)
+    const [addressIsChanged, setAddressIsChanged] = useState(false)
+    const [numRue, setNumRue] = useState('')
+    const [ville, setVille] = useState('')
+    const [codePostal, setcodePostal] = useState('')
+
+
+
+    const changeAdress = () => {
+        console.log('overlay ok')
+        setOverlay(true)
+
+    }
+
+    const updateAdress = () => {
+        setOverlay(false)
+        setAddressIsChanged(true)
+        console.log('overlay gone')
+    }
+
+    var address;
+    if (addressIsChanged) {
+        address =
+            <Text>
+                {numRue}, {ville}, {codePostal}
+            </Text>
+
+    }
+    else {
+        address = <Text style={{ color: '#000000' }}> <Geoloc /> </Text>
+    }
+    console.log('new adress')
+
 
 
     return (
@@ -54,11 +90,35 @@ function Mood(props) {
                         }} />
                     </View>
                 </View>
-                <View style={{ backgroundColor: '#FFFFFF', marginTop: 15, flexDirection: "row", width: "90%", height: 40, alignItems: "center", borderRadius: 5, }}>
-                    <Text style={{ color: '#000000', fontWeight: 'bold' }}> (Icon) Livré à: </Text>
-                    <Text style={{ color: '#000000' }}> 56 boulevard Perreire, Paris (Icon) </Text>
-
+                <View style={{ backgroundColor: '#FFFFFF', marginTop: 15, flexDirection: "row", width: "90%", height: 40, alignItems: "center", justifyContent: 'center' }}>
+                    <Ionicons name="location-outline" size={24} color="#F2A902" />
+                    <Text style={{ color: '#000000', fontWeight: 'bold' }}>Livré à:</Text>
+                    {address}
+                    <Ionicons
+                        name="ellipsis-vertical"
+                        size={24} color="#F2A902"
+                        onPress={() => changeAdress()}
+                        overlay={overlay} setOverlay={setOverlay}
+                    />
                 </View>
+                <Overlay
+                    isVisible={overlay}
+                    onBackdropPress={() => setOverlay(false)}
+                    overlayStyle={{
+                        width: '90%',
+                        marginTop: 60,
+                        marginBottom: 50,
+                        paddingVertical: 20,
+                    }}
+                >
+                    <ScrollView>
+                        <Input title="numRue" placeholder="N, rue" onChangeText={(numRue) => setNumRue(numRue)} />
+                        <Input title="ville" placeholder="Ville" onChangeText={(ville) => setVille(ville)} />
+                        <Input title="codePostal" placeholder="Code Postal" onChangeText={(codePostal) => setcodePostal(codePostal)} />
+
+                    </ScrollView>
+                    <NextButton title="VALIDER" onPress={() => updateAdress()} />
+                </Overlay>
                 <View style={{ marginTop: 15, width: "100%", alignItems: "center" }}>
 
                     <Button title="VITE J'AI FAIM" buttonStyle={{
