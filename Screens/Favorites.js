@@ -11,6 +11,7 @@ function Favorites(props) {
     const [favData, setFavData] = useState([])
 
     useEffect(() => {
+
         async function loadFavorites() {
             // token en dur pour le test, A remplacer par :token
             var rawResponse = await fetch(`http://${MY_IP}:3000/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ`)
@@ -28,16 +29,26 @@ function Favorites(props) {
 
     var favList = favData.map((fav, i) => {
 
-        return (<Card key={i} style={{ flexDirection: "row" }}><Card.Title> {fav.name}  {fav.price} € <Button type="clear" buttonStyle={{ alignSelf: "center" }} onPress={() => {
-            console.log("coucou")
-        }} icon={<Ionicons size={25} name='trash-outline' color='#FFC901' />} /> </Card.Title>
+        return (<Card key={i} containerStyle={{
+            borderRadius: 10, elevation: 4,
+            shadowOffset: { width: 5, height: 5 },
+            shadowColor: "#FFC901",
+            shadowOpacity: 1,
+            shadowRadius: 20,
+        }} wrapperStyle={{
+            display: "flex", flexDirection: "row", justifyContent: "space-between", flexWrap: "nowrap", alignItems: "center",
+        }}>
+            <Card.Title style={{ marginBottom: 0 }}> {fav.name}  {fav.price} € </Card.Title >
+            <Button type="clear" onPress={() => { handleFavDeletion(fav._id) }} icon={<Ionicons size={25} name='trash-outline' color='#FFC901' />} />
         </Card>)
     })
 
 
-    async function handleFavDeletion(meal) {
+    async function handleFavDeletion(meal_id) {
 
-        var rawResponse = await fetch(`/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ/${meal}`, {
+        var favFilter = favData.filter((e) => (e._id !== meal_id))
+        setFavData(favFilter)
+        var rawResponse = await fetch(`http://${MY_IP}:3000/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ/${meal_id}`, {
             method: 'DELETE'
         });
         var response = await rawResponse.json()
