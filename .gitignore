@@ -11,6 +11,7 @@ npm-debug.*
 web-build/
 *.env
 .env
+*.env*
 # macOS
 .DS_Store
 #MY_IP

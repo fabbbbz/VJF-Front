@@ -7,6 +7,7 @@ import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
+import { MY_IP } from '@env'
 
 function Mood(props) {
 <<<<<<< HEAD
@@ -246,16 +247,46 @@ function Mood(props) {
 	const [numRue, setNumRue] = useState('')
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
+	const [pricerange, setPricerange] = useState([])
 
 	const changeAdress = () => {
-		console.log('overlay ok')
 		setOverlay(true)
 	}
 
 	const updateAdress = () => {
 		setOverlay(false)
 		setAddressIsChanged(true)
-		console.log('overlay gone')
+	}
+
+	const getTheSupriseMeal = async () => {
+		try {
+			const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+
+			const dataToSend = {
+				mood: props.mood,
+				minprice: props.budget[0],
+				maxprice: props.budget[1],
+			}
+			const requestOptions = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(dataToSend),
+			}
+			const data = await fetch(
+				`http://${MY_IP}:3000/orders/recap/${token}`,
+				requestOptions
+			)
+			const result = await data.json()
+			console.log(result)
+
+			if (result) {
+				props.navigation.navigate('TimeToPay', {
+					screen: 'TimeToPay',
+				})
+			}
+		} catch (err) {
+			console.log(err.message)
+		}
 	}
 
 	var address
@@ -273,10 +304,9 @@ function Mood(props) {
 			</Text>
 		)
 	}
-	console.log('new adress')
 
 	return (
-		<View>
+		<ScrollView>
 			<TopBar showArrow={true} navigation={props.navigation} />
 
 			<View style={{ alignItems: 'center' }}>
@@ -312,42 +342,42 @@ function Mood(props) {
 						<Icon name="shuffle" size={15} color="white" iconPosition="top" />
 					}
 					onPress={() => {
-						props.dietHandle('omni')
+						props.moodHandle('total random')
 					}}
 					title="Surprise Totale"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Healthy')
+						props.moodHandle('healthy')
 					}}
 					title="Healthy"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Comme chez Maman')
+						props.moodHandle('comme chez maman')
 					}}
 					title="Comme chez Maman"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Cuisine du monde')
+						props.moodHandle('cuisine du monde')
 					}}
 					title="Cuisine du monde"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Soir de Match')
+						props.moodHandle('soir de match')
 					}}
 					title="Soir de Match"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('A partager')
+						props.moodHandle('a partager')
 					}}
 					title="A partager"
 					buttonStyle={styles.moodButton}
@@ -393,7 +423,7 @@ function Mood(props) {
 					>
 						<Button
 							onPress={() => {
-								props.budgetHandle(10)
+								props.budgetHandle([5, 9.99])
 							}}
 							title="5-10€"
 							buttonStyle={{
@@ -405,7 +435,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle(15)
+								props.budgetHandle([10, 14.99])
 							}}
 							title="10-15€"
 							buttonStyle={{
@@ -417,7 +447,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle(20)
+								props.budgetHandle([15, 20.99])
 							}}
 							title="15-20€"
 							buttonStyle={{
@@ -429,7 +459,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle(10000)
+								props.budgetHandle([21, 2000])
 							}}
 							title="YOLO!"
 							buttonStyle={{
@@ -494,10 +524,17 @@ function Mood(props) {
 					<NextButton title="VALIDER" onPress={() => updateAdress()} />
 				</Overlay>
 				<View
-					style={{ marginTop: 15, width: '100%', alignItems: 'center' }}
-				></View>
+					style={{
+						marginTop: 15,
+						width: '100%',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
+				>
+					<NextButton title="VITE J'AI FAIM" onPress={getTheSupriseMeal} />
+				</View>
 			</View>
-		</View>
+		</ScrollView>
 	)
 >>>>>>> 1fc694801788dacde17b6360dd451048d5a58d0e
 }
@@ -519,10 +556,20 @@ function mapDispatchToProps(dispatch) {
 		dietHandle: function (diet) {
 			dispatch({ type: 'ADD_DIET', diet })
 		},
+		moodHandle: function (mood) {
+			dispatch({ type: 'moodChoice', mood })
+		},
 		budgetHandle: function (budget) {
 			dispatch({ type: 'budgetChoice', budget })
 		},
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Mood)
+function mapStateToProps(state) {
+	return {
+		mood: state.mood,
+		budget: state.budget,
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mood)
