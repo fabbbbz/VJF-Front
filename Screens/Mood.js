@@ -205,7 +205,6 @@ function Mood(props) {
                         />
                     </View>
                 </View>
-<<<<<<< HEAD
                 <View style={{ backgroundColor: '#FFFFFF', marginTop: 15, flexDirection: "row", width: "90%", height: 40, alignItems: "center", justifyContent: 'center' }}>
                     <Ionicons name="location-outline" size={24} color="#F2A902" />
                     <Text style={{ color: '#000000', fontWeight: 'bold' }}>Livré à:</Text>
@@ -236,43 +235,10 @@ function Mood(props) {
                     <NextButton title="VALIDER" onPress={() => updateAdress()} />
                 </Overlay>
                 <View style={{ marginTop: 15, width: "100%", alignItems: "center" }}>
-=======
-                <View
-                style={{
-                    backgroundColor: '#FFFFFF',
-                    marginTop: 15,
-                    flexDirection: 'row',
-                    width: '90%',
-                    height: 40,
-                    alignItems: 'center',
-                    borderRadius: 5,
-                }}
-            >
-                <Text style={{ color: '#000000', fontWeight: 'bold' }}>
-                    {' '}
-                    (Icon) Livré à:{' '}
-                </Text>
-                <Text style={{ color: '#000000' }}>
-                    {' '}
-                    56 boulevard Perreire, Paris (Icon){' '}
-                </Text>
-            </View>
-            <View style={{ marginTop: 15, width: '100%', alignItems: 'center', alignSelf: "center", }}>
-                <Button
-                    title="VITE J'AI FAIM"
-                    buttonStyle={{
-                        backgroundColor: '#F2A902',
-                        borderRadius: 5,
-                        marginRight: 10,
-                        alignSelf: "center",
-                        width: 416,
-                    }}
-                />
->>>>>>> bdf9468319b2f2118bc69e5b9845f1f7284db490
 
 
+                </View>
             </View>
-        </View>
         </View >
     )
 }
