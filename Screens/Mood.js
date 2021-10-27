@@ -15,8 +15,6 @@ function Mood(props) {
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
 
-	const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
-
 	const changeAdress = () => {
 		console.log('overlay ok')
 		setOverlay(true)
@@ -56,7 +54,7 @@ function Mood(props) {
 	console.log('new adress')
 
 	return (
-		<View>
+		<ScrollView>
 			<TopBar showArrow={true} navigation={props.navigation} />
 
 			<View style={{ alignItems: 'center' }}>
@@ -92,42 +90,42 @@ function Mood(props) {
 						<Icon name="shuffle" size={15} color="white" iconPosition="top" />
 					}
 					onPress={() => {
-						props.dietHandle('omni')
+						props.moodHandle('Surprise Totale')
 					}}
 					title="Surprise Totale"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Healthy')
+						props.moodHandle('Healthy')
 					}}
 					title="Healthy"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Comme chez Maman')
+						props.moodHandle('Comme chez Maman')
 					}}
 					title="Comme chez Maman"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Cuisine du monde')
+						props.moodHandle('Cuisine du monde')
 					}}
 					title="Cuisine du monde"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('Soir de Match')
+						props.moodHandle('Soir de Match')
 					}}
 					title="Soir de Match"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.dietHandle('A partager')
+						props.moodHandle('A partager')
 					}}
 					title="A partager"
 					buttonStyle={styles.moodButton}
@@ -271,13 +269,28 @@ function Mood(props) {
 							onChangeText={codePostal => setcodePostal(codePostal)}
 						/>
 					</ScrollView>
-					<NextButton title="VALIDER" onPress={getTheSupriseMeal} />
+					<NextButton title="VALIDER" onPress={() => updateAdress()} />
 				</Overlay>
 				<View
-					style={{ marginTop: 15, width: '100%', alignItems: 'center' }}
-				></View>
+					style={{
+						marginTop: 15,
+						width: '100%',
+						alignItems: 'center',
+						justifyContent: 'center',
+					}}
+				>
+					<Button
+						title="VITE J'AI FAIM"
+						buttonStyle={{
+							backgroundColor: '#F2A902',
+							borderRadius: 5,
+							alignSelf: 'center',
+							width: 417,
+						}}
+					/>
+				</View>
 			</View>
-		</View>
+		</ScrollView>
 	)
 }
 
@@ -297,6 +310,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		dietHandle: function (diet) {
 			dispatch({ type: 'ADD_DIET', diet })
+		},
+		moodHandle: function (mood) {
+			dispatch({ type: 'moodChoice', mood })
 		},
 		budgetHandle: function (budget) {
 			dispatch({ type: 'budgetChoice', budget })

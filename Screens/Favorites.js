@@ -13,15 +13,12 @@ function Favorites(props) {
     var favList = []
     useEffect(() => {
         async function loadFavorites() {
-            // token en dur pour le test
+            // token en dur pour le test, A remplacer par :token
             var rawResponse = await fetch(`http://${MY_IP}:3000/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ`)
             var response = await rawResponse.json()
 
 
-            // console.log(response.favorites[0].name)
-            // console.log(response.favorites[0].price)
-            // console.log(response.favorites[0])
-            // console.log(response.favorites[1].name)
+
             // setFavData([...{ meal: response.favorites.name, price: response.favorites.price }])
 
 
@@ -37,16 +34,9 @@ function Favorites(props) {
             }
         }
 
-
-
-
         loadFavorites()
 
-        console.log("log de favList", favList)
-
-    },
-
-    );
+    }, []);
 
     // var favList = favData.map((favData, i) => {
 
