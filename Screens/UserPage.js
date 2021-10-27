@@ -30,7 +30,7 @@ function UserPage(props) {
     return (
         <ScrollView >
             <TopBar navigation={props.navigation} />
-            <Text h3 style={{ alignSelf: "center", marginTop: 15, textDecorationLine: 'underline' }}>Informations Personelles</Text>
+            <Text h3 style={{ alignSelf: "center", marginTop: 15, textDecorationLine: 'underline', color: "#FFC901" }}>Informations Personelles</Text>
             <Text style={{ marginTop: 15, marginLeft: 15, }}>Nom: {user.lastName} </Text>
             <Text style={{ marginTop: 15, marginLeft: 15, }}>Prénom: {user.firstName} </Text>
             <Text style={{ marginTop: 15, marginLeft: 15, }}>Email: {user.email} </Text>
