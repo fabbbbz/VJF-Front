@@ -24,6 +24,7 @@ import SignIn from './Screens/SignIn'
 import LastOrderScreen from './Screens/LastOrderScreen'
 import UserPage from './Screens/UserPage'
 import TimeToPay from './Screens/TimeToPay'
+import History from './Screens/History'
 // import DrawerNav from './Components/Drawer'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 
@@ -41,6 +42,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="LastOrderScreen" component={LastOrderScreen} />
 			<Drawer.Screen name="UserPage" component={UserPage} />
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
+			<Stack.Screen name="History" component={History} />
 		</Drawer.Navigator>
 	)
 }
@@ -58,6 +60,7 @@ export default function App() {
 					<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
 					<Stack.Screen name="Drawer" component={DrawerNav} />
 					<Stack.Screen name="Favorites" component={Favorites} />
+
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
