@@ -10,7 +10,6 @@ import { MY_IP } from "@env"
 function Favorites(props) {
     const [favData, setFavData] = useState([])
 
-    var favList = []
     useEffect(() => {
         async function loadFavorites() {
             // token en dur pour le test, A remplacer par :token
@@ -19,31 +18,18 @@ function Favorites(props) {
 
 
 
-            // setFavData([...{ meal: response.favorites.name, price: response.favorites.price }])
+            setFavData(response.favorites)
 
-
-
-
-            for (var i = 0; i < response.favorites.length; i++) {
-
-                favList.push(<Card>
-                    <Card.Title>{response.favorites[i].name} {response.favorites[i].price} €</Card.Title>
-                </Card>)
-                console.log(response.favorites[i].name)
-
-            }
         }
 
         loadFavorites()
 
     }, []);
 
-    // var favList = favData.map((favData, i) => {
+    var favList = favData.map((fav, i) => {
 
-
-
-    //     return (<favList key={i} mealName={favData.meal} price={favData.price} />)
-    // })
+        return (<Card key={i}><Card.Title> {fav.name}  {fav.price} €</Card.Title></Card>)
+    })
     return (
         <ScrollView >
             <TopBar navigation={props.navigation} />

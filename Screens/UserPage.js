@@ -7,7 +7,7 @@ import { MY_IP } from "@env"
 
 function UserPage(props) {
 
-    const [user, setUser] = useState()
+    const [user, setUser] = useState("")
 
     useEffect(() => {
 
@@ -16,7 +16,7 @@ function UserPage(props) {
             var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
             var response = await rawResponse.json()
 
-            console.log(response.userInfo)
+            console.log(response.userInfo.lastName)
 
 
             setUser(response.userInfo)
@@ -24,6 +24,8 @@ function UserPage(props) {
         }
         loadUser()
     }, []);
+
+    // console.log(user.lastName)
 
     return (
         <ScrollView >
