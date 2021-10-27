@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Button, Text, Input } from 'react-native-elements'
+import { View, StyleSheet, TextInput } from 'react-native'
+import { Button, Text, Input, Icon } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import Moods from '../Components/Moods'
 import NextButton from '../Components/NextButton'
@@ -41,6 +41,7 @@ function Mood(props) {
                 }}
             >
                 <Button
+                    icon={<Icon name="shuffle" size={15} color="white" iconPosition="top" />}
                     onPress={() => { props.dietHandle("omni") }}
                     title="Surprise Totale"
                     buttonStyle={
@@ -89,6 +90,7 @@ function Mood(props) {
                 <Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
                     {' '}
                     Nombre de personnes affamées{' '}
+
                 </Text>
             </View>
 
