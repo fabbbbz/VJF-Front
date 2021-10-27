@@ -47,7 +47,7 @@ function SignUp(props) {
 			style={styles.FlexGrowOne}
 		>
 			<View>
-				<TopBar />
+				<TopBar navigation={props.navigation} />
 				<View style={{ alignItems: 'center' }}>
 					<Text
 						h3
