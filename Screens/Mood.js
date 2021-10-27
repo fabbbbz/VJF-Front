@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import { Button, Text, Input, Overlay } from 'react-native-elements'
@@ -48,17 +47,6 @@ function Mood(props) {
 
 
 
-=======
-import React from 'react'
-import { View, StyleSheet } from 'react-native'
-import { Button, Text, Input } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
-import Moods from '../Components/Moods'
-import NextButton from '../Components/NextButton'
-import { connect } from 'react-redux'
-
-function Mood(props) {
->>>>>>> bdf9468319b2f2118bc69e5b9845f1f7284db490
     return (
         <View>
             <TopBar showArrow={true} navigation={props.navigation} />
@@ -93,6 +81,7 @@ function Mood(props) {
                 }}
             >
                 <Button
+                    icon={<Icon name="shuffle" size={15} color="white" iconPosition="top" />}
                     onPress={() => { props.dietHandle("omni") }}
                     title="Surprise Totale"
                     buttonStyle={
@@ -141,6 +130,7 @@ function Mood(props) {
                 <Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
                     {' '}
                     Nombre de personnes affamées{' '}
+
                 </Text>
             </View>
 
@@ -248,42 +238,42 @@ function Mood(props) {
                 <View style={{ marginTop: 15, width: "100%", alignItems: "center" }}>
 =======
                 <View
-                    style={{
-                        backgroundColor: '#FFFFFF',
-                        marginTop: 15,
-                        flexDirection: 'row',
-                        width: '90%',
-                        height: 40,
-                        alignItems: 'center',
+                style={{
+                    backgroundColor: '#FFFFFF',
+                    marginTop: 15,
+                    flexDirection: 'row',
+                    width: '90%',
+                    height: 40,
+                    alignItems: 'center',
+                    borderRadius: 5,
+                }}
+            >
+                <Text style={{ color: '#000000', fontWeight: 'bold' }}>
+                    {' '}
+                    (Icon) Livré à:{' '}
+                </Text>
+                <Text style={{ color: '#000000' }}>
+                    {' '}
+                    56 boulevard Perreire, Paris (Icon){' '}
+                </Text>
+            </View>
+            <View style={{ marginTop: 15, width: '100%', alignItems: 'center', alignSelf: "center", }}>
+                <Button
+                    title="VITE J'AI FAIM"
+                    buttonStyle={{
+                        backgroundColor: '#F2A902',
                         borderRadius: 5,
+                        marginRight: 10,
+                        alignSelf: "center",
+                        width: 416,
                     }}
-                >
-                    <Text style={{ color: '#000000', fontWeight: 'bold' }}>
-                        {' '}
-                        (Icon) Livré à:{' '}
-                    </Text>
-                    <Text style={{ color: '#000000' }}>
-                        {' '}
-                        56 boulevard Perreire, Paris (Icon){' '}
-                    </Text>
-                </View>
-                <View style={{ marginTop: 15, width: '100%', alignItems: 'center', alignSelf: "center", }}>
-                    <Button
-                        title="VITE J'AI FAIM"
-                        buttonStyle={{
-                            backgroundColor: '#F2A902',
-                            borderRadius: 5,
-                            marginRight: 10,
-                            alignSelf: "center",
-                            width: 416,
-                        }}
-                    />
+                />
 >>>>>>> bdf9468319b2f2118bc69e5b9845f1f7284db490
 
 
-                </View>
             </View>
         </View>
+        </View >
     )
 }
 
