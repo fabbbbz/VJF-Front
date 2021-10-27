@@ -1,21 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text, Input } from 'react-native-elements'
-import { AntDesign } from '@expo/vector-icons'
+import { Text } from 'react-native-elements'
+import { connect } from 'react-redux'
+import { MY_IP } from '@env'
 
 const OrderRecap = props => {
-	const [lastOrder, setLastOrder] = useState({ meal: '', restaurant: '' })
+	const [price, setPrice] = useState(0)
 
 	useEffect(() => {
 		// Fetch data to get last order
+		const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+		const fetchUser = async () => {
+			const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
+			const user = await data.json()
+			console.log(user)
+			setPrice(user.orderPrice)
+		}
+		fetchUser()
 	}, [])
 
 	return (
 		<View style={styles.container}>
-			<Text h4 style={styles.text}>
-				Une pizza au Nutella
+			<Text h3 style={styles.text}>
+				Plat mystere
 			</Text>
-			<Text style={styles.text}>de : La Pizzeria des Gros</Text>
+			<Text style={styles.text}>qte: {props.quantity}</Text>
+			<Text h5 style={{ textAlign: 'center', marginVertical: 10 }}>
+				Prix total : {price} €
+			</Text>
 		</View>
 	)
 }
@@ -35,4 +47,10 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default OrderRecap
+function mapStateToProps(state) {
+	return {
+		quantity: 1, // CHANGE FOR state.quantity
+	}
+}
+
+export default connect(mapStateToProps, null)(OrderRecap)

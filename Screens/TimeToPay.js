@@ -5,11 +5,14 @@ import TopBar from '../Components/TopBar'
 import { MY_IP } from '@env'
 import { connect } from 'react-redux'
 import NextButton from '../Components/NextButton'
+import NextButtonFullSize from '../Components/NextButtonFullSize'
 import OrderRecap from '../Components/OrderRecap'
 import Address from '../Components/Address'
 import PaiementMode from '../Components/PaiementMode'
 
 const TimeToPay = props => {
+	const [order, setOrder] = useState({})
+
 	const handlePaiement = () => {
 		console.log('take my money')
 	}
@@ -22,8 +25,8 @@ const TimeToPay = props => {
 			</Text>
 			<OrderRecap />
 			<Address />
-			<PaiementMode />
-			<NextButton title="PAYER" onPress={handlePaiement} />
+
+			<NextButtonFullSize title="PAYER" onPress={handlePaiement} />
 		</View>
 	)
 }

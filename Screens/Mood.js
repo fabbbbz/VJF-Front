@@ -7,6 +7,7 @@ import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
+import { MY_IP } from '@env'
 
 function Mood(props) {
 	const [overlay, setOverlay] = useState(false)
@@ -14,26 +15,49 @@ function Mood(props) {
 	const [numRue, setNumRue] = useState('')
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
+	const [pricerange, setPricerange] = useState([])
+
+	console.log('mood:', props.mood)
+	console.log('budget', props.budget)
 
 	const changeAdress = () => {
-		console.log('overlay ok')
 		setOverlay(true)
 	}
 
 	const updateAdress = () => {
 		setOverlay(false)
 		setAddressIsChanged(true)
-		console.log('overlay gone')
 	}
 
 	const getTheSupriseMeal = async () => {
-		const data = await fetch(`http://172.17.1.105:3000/orders/recap/${token}`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: `mood=${mood}&minprice=${minprice}&maxprice=${maxprice}`,
-		})
-		//get answer from back
-		const result = await data.json()
+		try {
+			const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+
+			const dataToSend = {
+				mood: props.mood,
+				minprice: props.budget[0],
+				maxprice: props.budget[1],
+			}
+			const requestOptions = {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(dataToSend),
+			}
+			const data = await fetch(
+				`http://${MY_IP}:3000/orders/recap/${token}`,
+				requestOptions
+			)
+			const result = await data.json()
+			console.log(result)
+
+			if (result) {
+				props.navigation.navigate('TimeToPay', {
+					screen: 'TimeToPay',
+				})
+			}
+		} catch (err) {
+			console.log(err.message)
+		}
 	}
 
 	var address
@@ -51,7 +75,6 @@ function Mood(props) {
 			</Text>
 		)
 	}
-	console.log('new adress')
 
 	return (
 		<ScrollView>
@@ -90,42 +113,42 @@ function Mood(props) {
 						<Icon name="shuffle" size={15} color="white" iconPosition="top" />
 					}
 					onPress={() => {
-						props.moodHandle('Surprise Totale')
+						props.moodHandle('total random')
 					}}
 					title="Surprise Totale"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.moodHandle('Healthy')
+						props.moodHandle('healthy')
 					}}
 					title="Healthy"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.moodHandle('Comme chez Maman')
+						props.moodHandle('comme chez maman')
 					}}
 					title="Comme chez Maman"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.moodHandle('Cuisine du monde')
+						props.moodHandle('cuisine du monde')
 					}}
 					title="Cuisine du monde"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.moodHandle('Soir de Match')
+						props.moodHandle('soir de match')
 					}}
 					title="Soir de Match"
 					buttonStyle={styles.moodButton}
 				/>
 				<Button
 					onPress={() => {
-						props.moodHandle('A partager')
+						props.moodHandle('a partager')
 					}}
 					title="A partager"
 					buttonStyle={styles.moodButton}
@@ -171,7 +194,7 @@ function Mood(props) {
 					>
 						<Button
 							onPress={() => {
-								props.budgetHandle(10)
+								props.budgetHandle([5, 9.99])
 							}}
 							title="5-10€"
 							buttonStyle={{
@@ -183,7 +206,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle(15)
+								props.budgetHandle([10, 14.99])
 							}}
 							title="10-15€"
 							buttonStyle={{
@@ -195,7 +218,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle(20)
+								props.budgetHandle([15, 20.99])
 							}}
 							title="15-20€"
 							buttonStyle={{
@@ -207,7 +230,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle(10000)
+								props.budgetHandle([21, 2000])
 							}}
 							title="YOLO!"
 							buttonStyle={{
@@ -279,15 +302,7 @@ function Mood(props) {
 						justifyContent: 'center',
 					}}
 				>
-					<Button
-						title="VITE J'AI FAIM"
-						buttonStyle={{
-							backgroundColor: '#F2A902',
-							borderRadius: 5,
-							alignSelf: 'center',
-							width: 417,
-						}}
-					/>
+					<NextButton title="VITE J'AI FAIM" onPress={getTheSupriseMeal} />
 				</View>
 			</View>
 		</ScrollView>
@@ -320,4 +335,11 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(Mood)
+function mapStateToProps(state) {
+	return {
+		mood: state.mood,
+		budget: state.budget,
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Mood)
