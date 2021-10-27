@@ -15,8 +15,6 @@ const Home = props => {
 	// const token = props.token
 	const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
 
-	console.log('allergies : ' + props.allergies)
-
 	const handleAllergies = allergy => {
 		setOverlay(false)
 	}
@@ -37,12 +35,11 @@ const Home = props => {
 			requestOptions
 		)
 		const result = await data.json()
-		console.log(result)
 	}
 
 	return (
 		<View style={styles.container}>
-			<TopBar />
+			<TopBar navigation={props.navigation} />
 			<ScrollView>
 				<Diet />
 				<Donts />
