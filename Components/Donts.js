@@ -27,7 +27,6 @@ const Donts = props => {
 		setManualIngredient('')
 		setManualDonts(prevDonts => [...prevDonts, manualIngredient])
 	}
-	console.log(manualDonts)
 
 	return (
 		<SafeAreaView style={styles.container}>

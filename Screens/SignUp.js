@@ -1,12 +1,12 @@
 import React from 'react';
 import { StyleSheet, View, KeyboardAvoidingView } from 'react-native';
 import { Text, Input } from 'react-native-elements'
-import TopBar from '../Components/TopBar';
-import NextButton from '../Components/NextButton';
-import { connect } from 'react-redux';
-import { MY_IP } from "@env"
-import { useState } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import TopBar from '../Components/TopBar'
+import NextButton from '../Components/NextButton'
+import { connect } from 'react-redux'
+import { MY_IP } from '@env'
+import { useState } from 'react'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function SignUp(props) {
     const [signUpFirstname, setignUpFirstname] = useState('')
@@ -19,19 +19,19 @@ function SignUp(props) {
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
     var handleSubmitSignup = async () => {
-        // send user's infos to back 
-        const data = await fetch(`http://172.17.1.105:3000/users/sign-up`, {
+        // send user's infos to back
+        const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`
+            body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`,
         })
-        //get answer from back 
+        //get answer from back
         const body = await data.json()
         if (body.result == true) {
-            //set token 
+            //set token
             setToken(body.token)
             // store token in local-storage
-            AsyncStorage.setItem('token', token);
+            AsyncStorage.setItem('token', token)
             // store token in redux
             props.addToken(token)
             props.navigation.navigate('Mood', { screen: 'Mood' })
@@ -111,17 +111,14 @@ const styles = StyleSheet.create({
         color: '#FF9800',
         fontSize: 20,
     },
-});
+})
 
 function mapDispatchToProps(dispatch) {
     return {
         addToken: function (token) {
             dispatch({ type: 'addToken', token: token })
-        }
+        },
     }
 }
 
-export default connect(
-    null,
-    mapDispatchToProps
-)(SignUp)
+export default connect(null, mapDispatchToProps)(SignUp)
