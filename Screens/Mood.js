@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
-import { Button, Text, Input, Overlay } from 'react-native-elements'
+import { Button, Text, Input, Overlay, Icon } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import Moods from '../Components/Moods';
 import NextButton from '../Components/NextButton';
@@ -48,7 +48,7 @@ function Mood(props) {
 
 
     return (
-        <View>
+        <ScrollView>
             <TopBar showArrow={true} navigation={props.navigation} />
 
             <View style={{ alignItems: 'center' }}>
@@ -82,7 +82,7 @@ function Mood(props) {
             >
                 <Button
                     icon={<Icon name="shuffle" size={15} color="white" iconPosition="top" />}
-                    onPress={() => { props.dietHandle("omni") }}
+                    onPress={() => { props.moodHandle("Surprise Totale") }}
                     title="Surprise Totale"
                     buttonStyle={
 
@@ -90,31 +90,31 @@ function Mood(props) {
 
                 />
                 <Button
-                    onPress={() => { props.dietHandle("Healthy") }}
+                    onPress={() => { props.moodHandle("Healthy") }}
                     title="Healthy"
                     buttonStyle={
                         styles.moodButton}
                 />
                 <Button
-                    onPress={() => { props.dietHandle("Comme chez Maman") }}
+                    onPress={() => { props.moodHandle("Comme chez Maman") }}
                     title="Comme chez Maman"
                     buttonStyle={
                         styles.moodButton}
                 />
                 <Button
-                    onPress={() => { props.dietHandle("Cuisine du monde") }}
+                    onPress={() => { props.moodHandle("Cuisine du monde") }}
                     title="Cuisine du monde"
                     buttonStyle={
                         styles.moodButton}
                 />
                 <Button
-                    onPress={() => { props.dietHandle("Soir de Match") }}
+                    onPress={() => { props.moodHandle("Soir de Match") }}
                     title="Soir de Match"
                     buttonStyle={
                         styles.moodButton}
                 />
                 <Button
-                    onPress={() => { props.dietHandle("A partager") }}
+                    onPress={() => { props.moodHandle("A partager") }}
                     title="A partager"
                     buttonStyle={
                         styles.moodButton}
@@ -205,7 +205,6 @@ function Mood(props) {
                         />
                     </View>
                 </View>
-<<<<<<< HEAD
                 <View style={{ backgroundColor: '#FFFFFF', marginTop: 15, flexDirection: "row", width: "90%", height: 40, alignItems: "center", justifyContent: 'center' }}>
                     <Ionicons name="location-outline" size={24} color="#F2A902" />
                     <Text style={{ color: '#000000', fontWeight: 'bold' }}>Livré à:</Text>
@@ -235,45 +234,20 @@ function Mood(props) {
                     </ScrollView>
                     <NextButton title="VALIDER" onPress={() => updateAdress()} />
                 </Overlay>
-                <View style={{ marginTop: 15, width: "100%", alignItems: "center" }}>
-=======
-                <View
-                style={{
-                    backgroundColor: '#FFFFFF',
-                    marginTop: 15,
-                    flexDirection: 'row',
-                    width: '90%',
-                    height: 40,
-                    alignItems: 'center',
-                    borderRadius: 5,
-                }}
-            >
-                <Text style={{ color: '#000000', fontWeight: 'bold' }}>
-                    {' '}
-                    (Icon) Livré à:{' '}
-                </Text>
-                <Text style={{ color: '#000000' }}>
-                    {' '}
-                    56 boulevard Perreire, Paris (Icon){' '}
-                </Text>
-            </View>
-            <View style={{ marginTop: 15, width: '100%', alignItems: 'center', alignSelf: "center", }}>
-                <Button
-                    title="VITE J'AI FAIM"
-                    buttonStyle={{
-                        backgroundColor: '#F2A902',
-                        borderRadius: 5,
-                        marginRight: 10,
-                        alignSelf: "center",
-                        width: 416,
-                    }}
-                />
->>>>>>> bdf9468319b2f2118bc69e5b9845f1f7284db490
+                <View style={{ marginTop: 15, width: "100%", alignItems: "center", justifyContent: "center" }}>
+                    <Button
+                        title="VITE J'AI FAIM"
+                        buttonStyle={{
+                            backgroundColor: '#F2A902',
+                            borderRadius: 5,
+                            alignSelf: "center",
+                            width: 417,
+                        }}
+                    />
 
-
+                </View>
             </View>
-        </View>
-        </View >
+        </ScrollView >
     )
 }
 
@@ -293,6 +267,9 @@ function mapDispatchToProps(dispatch) {
     return {
         dietHandle: function (diet) {
             dispatch({ type: "ADD_DIET", diet })
+        },
+        moodHandle: function (mood) {
+            dispatch({ type: "moodChoice", mood })
         },
         budgetHandle: function (budget) {
             dispatch({ type: 'budgetChoice', budget })
