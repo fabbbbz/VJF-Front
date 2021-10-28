@@ -8,7 +8,6 @@ import LottieView from "lottie-react-native";
 import CountDown from 'react-native-countdown-component';
 
 function Livraison(props) {
-
 	const [start, setStart] = useState(true) //const use to start the delivery process 
 	const [seconds, setSeconds] = useState(5); // const to set the number of seconds for setTimeout
 	const [commandRender, setCommandRender] = useState('') // wich screen need to be render (preparation..livraison..)
@@ -20,6 +19,11 @@ function Livraison(props) {
 			setCommandRender('order')
 		}
 	}, [])
+
+	// Redirect to final page after the delivery process 
+	var finsihProcess = () => {
+		props.navigation.navigate('FinalPage', { screen: 'FinalPage' })
+	}
 
 	// render order
 	var order =
@@ -36,17 +40,22 @@ function Livraison(props) {
 		</View>
 	// render preparation 
 	var preparation =
-		<View>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande validée </Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				autoPlay
-				style={styles.done}
-			/>
-
+		<View >
+			<View
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+				}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande validée </Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					autoPlay
+					style={styles.done}
+				/>
+			</View>
 			<Text
 				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
 			>
@@ -62,24 +71,30 @@ function Livraison(props) {
 	// render livraison 
 	var livraison =
 		<View>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande validée </Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				autoPlay
-				style={styles.done}
-			/>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande preparée!!</Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				autoPlay
-				style={styles.done}
-			/>
+			<View
+				style={{}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande validée </Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					autoPlay
+					style={styles.done}
+				/>
+			</View>
+			<View
+				style={{}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande preparée!!</Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					autoPlay
+					style={styles.done}
+				/>
+			</View>
 			<Text
 				style={{ textAlign: 'center', color: '#000000', marginTop: 15, marginBottom: 15 }}
 			>
@@ -98,33 +113,40 @@ function Livraison(props) {
 	// render done 
 	var done =
 		<View>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande preparée!!</Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				style={styles.done}
-				autoPlay
-			/>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande livrée!!</Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				style={styles.done}
-				autoPlay
-			/>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Toc toc c'est la !!</Text>
-			<LottieView
-				source={require("../assets/foodishere.json")}
-				style={styles.deliverymanwait}
-				autoPlay
-			/>
+			<View
+				style={{}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande preparée!!</Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					style={styles.done}
+					autoPlay
+				/>
+			</View>
+			<View>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande livrée!!</Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					style={styles.done}
+					autoPlay
+				/>
+			</View>
+			<View>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Toc toc c'est la !!</Text>
+				<LottieView
+					source={require("../assets/foodishere.json")}
+					style={styles.deliverymanwait}
+					autoPlay
+				/>
+			</View>
 		</View>
 
 	// var showscreen = status de la commande 
@@ -139,6 +161,7 @@ function Livraison(props) {
 		}
 
 	}
+
 	if (commandRender == 'preparation') {
 		showscreen = preparation
 		if (seconds > 0) {
@@ -147,8 +170,8 @@ function Livraison(props) {
 			setCommandRender('livraison')
 			setSeconds(10)
 		}
-
 	}
+
 	if (commandRender == 'livraison') {
 		showscreen = livraison
 		if (seconds > 0) {
@@ -164,11 +187,9 @@ function Livraison(props) {
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
 		} else {
-			setCommandRender('preparation')
-			setSeconds(10)
+			finsihProcess()
 		}
 	}
-
 
 	return (
 		<ScrollView >
@@ -209,8 +230,8 @@ const styles = StyleSheet.create({
 		height: 250,
 	},
 	done: {
-		width: 100,
-		height: 100,
+		width: 70,
+		height: 70,
 	},
 	waiting: {
 		width: 300,
