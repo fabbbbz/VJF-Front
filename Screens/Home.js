@@ -35,6 +35,11 @@ const Home = props => {
 			requestOptions
 		)
 		const result = await data.json()
+		if (result) {
+			props.navigation.navigate('Mood', {
+				screen: 'Mood',
+			})
+		}
 	}
 
 	return (
