@@ -16,7 +16,6 @@ function SignUp(props) {
 	const [signUpPhone, setSignUpPhone] = useState('')
 	const [ErrorsSignup, setErrorsSignup] = useState('')
 	const [token, setToken] = useState('')
-	const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
 	var handleSubmitSignup = async () => {
 		// send user's infos to back
@@ -33,81 +32,75 @@ function SignUp(props) {
 			// store token in local-storage
 			AsyncStorage.setItem('token', token)
 			// store token in redux
-			props.addToken(token)
-			props.navigation.navigate('Mood', { screen: 'Mood' })
+			props.addToken(body.token)
+			props.navigation.navigate('Home', { screen: 'Home' })
 		} else {
 			setErrorsSignup(body.error)
 		}
 	}
 
 	return (
-		<KeyboardAvoidingView
-			enabled
-			behavior={Platform.OS === 'ios' ? 'padding' : null}
-			style={styles.FlexGrowOne}
-		>
-			<View>
-				<TopBar navigation={props.navigation} />
-				<View style={{ alignItems: 'center' }}>
-					<Text
-						h3
-						style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
-					>
-						Dites-nous en plus sur vous
-					</Text>
+		<View>
+			<TopBar navigation={props.navigation} />
+			<View style={{ alignItems: 'center' }}>
+				<Text
+					h3
+					style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
+				>
+					Dites-nous en plus sur vous
+				</Text>
 
-					<Input
-						containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
-						inputStyle={{ marginLeft: 10 }}
-						placeholder="Nom"
-						onChangeText={text => setsignUpLastname(text)}
-					/>
-					<Input
-						containerStyle={{ marginBottom: 15, width: '70%' }}
-						inputStyle={{ marginLeft: 10 }}
-						placeholder="Prénom"
-						onChangeText={text => setignUpFirstname(text)}
-					/>
-					<Input
-						containerStyle={{ marginBottom: 15, width: '70%' }}
-						inputStyle={{ marginLeft: 10 }}
-						placeholder="Téléphone"
-						onChangeText={text => setSignUpPhone(text)}
-					/>
-					<Input
-						containerStyle={{ marginBottom: 15, width: '70%' }}
-						inputStyle={{ marginLeft: 10 }}
-						placeholder="Email"
-						onChangeText={text => setSignUpEmail(text)}
-					/>
+				<Input
+					containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
+					inputStyle={{ marginLeft: 10 }}
+					placeholder="Nom"
+					onChangeText={text => setsignUpLastname(text)}
+				/>
+				<Input
+					containerStyle={{ marginBottom: 15, width: '70%' }}
+					inputStyle={{ marginLeft: 10 }}
+					placeholder="Prénom"
+					onChangeText={text => setignUpFirstname(text)}
+				/>
+				<Input
+					containerStyle={{ marginBottom: 15, width: '70%' }}
+					inputStyle={{ marginLeft: 10 }}
+					placeholder="Téléphone"
+					onChangeText={text => setSignUpPhone(text)}
+				/>
+				<Input
+					containerStyle={{ marginBottom: 15, width: '70%' }}
+					inputStyle={{ marginLeft: 10 }}
+					placeholder="Email"
+					onChangeText={text => setSignUpEmail(text)}
+				/>
 
-					<Input
-						containerStyle={{ marginBottom: 15, width: '70%' }}
-						inputStyle={{ marginLeft: 10 }}
-						secureTextEntry
-						placeholder="Password"
-						onChangeText={text => setSignUpPassword(text)}
-					/>
-				</View>
-
-				<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-					<Text
-						style={{
-							color: '#C4C4C4',
-							alignSelf: 'center',
-							marginLeft: 15,
-							fontSize: 20,
-						}}
-					>
-						Skip
-					</Text>
-					<NextButton title="NEXT" onPress={() => handleSubmitSignup()} />
-				</View>
-				<View>
-					<Text style={styles.errormesssage}>{ErrorsSignup}</Text>
-				</View>
+				<Input
+					containerStyle={{ marginBottom: 15, width: '70%' }}
+					inputStyle={{ marginLeft: 10 }}
+					secureTextEntry
+					placeholder="Password"
+					onChangeText={text => setSignUpPassword(text)}
+				/>
 			</View>
-		</KeyboardAvoidingView>
+
+			<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+				<Text
+					style={{
+						color: '#C4C4C4',
+						alignSelf: 'center',
+						marginLeft: 15,
+						fontSize: 20,
+					}}
+				>
+					Skip
+				</Text>
+				<NextButton title="NEXT" onPress={() => handleSubmitSignup()} />
+			</View>
+			<View>
+				<Text style={styles.errormesssage}>{ErrorsSignup}</Text>
+			</View>
+		</View>
 	)
 }
 
