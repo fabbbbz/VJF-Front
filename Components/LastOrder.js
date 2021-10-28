@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { View, StyleSheet } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
@@ -10,7 +11,7 @@ const LastOrder = props => {
 
 	useEffect(() => {
 		// Fetch data to get last order
-		const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+		const token = props.token
 		const fetchUser = async () => {
 			const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
 			const lastOrder = await data.json()
@@ -46,4 +47,10 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default LastOrder
+function mapStateToProps(state) {
+	return {
+		token: state.token,
+	}
+}
+
+export default connect(mapStateToProps, null)(LastOrder)

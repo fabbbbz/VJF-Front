@@ -31,7 +31,7 @@ function Mood(props) {
 
 	const getTheSupriseMeal = async () => {
 		try {
-			const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+			const token = props.token
 
 			const dataToSend = {
 				mood: props.mood,
@@ -348,6 +348,7 @@ function mapStateToProps(state) {
 		mood: state.mood,
 		budget: state.budget,
 		order: state.order,
+		token: state.token,
 	}
 }
 

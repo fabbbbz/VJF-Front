@@ -20,16 +20,20 @@ function SignIn(props) {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
+
 		})
 		//get answer from back
 		const body = await data.json()
+		console.log(body.user.firstName)
 		if (body.result == true) {
 			//set token
 			setToken(body.token)
 			// store token in local-storage
 			AsyncStorage.setItem('token', body.token)
+			AsyncStorage.setItem('firstName', body.user.firstName)
 			// store token in redux
 			props.addToken(body.token)
+			props.addFirstName(body.user.firstName)
 			props.navigation.navigate('Mood', { screen: 'Mood' })
 		} else {
 			setErrorsSignin(body.error)
@@ -110,6 +114,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		addToken: function (token) {
 			dispatch({ type: 'addToken', token: token })
+		},
+		addFirstName: function (firstName) {
+			dispatch({ type: 'addFirstName', firstName: firstName })
 		},
 	}
 }
