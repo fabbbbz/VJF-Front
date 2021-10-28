@@ -5,7 +5,6 @@ import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import Notification from '../Components/Notification'
 
-
 function FinalPage(props) {
     return (
         <View style={styles.container}>
@@ -46,4 +45,5 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
     return { token: state.token }
 }
+
 export default connect(mapStateToProps, null)(FinalPage)
