@@ -5,9 +5,31 @@ import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import * as Permissions from "expo-permissions"
+import Notification from '../Components/Notification'
 
 function FirstScreen(props) {
 	useEffect(() => {
+		// Permission for iOS
+		Permissions.getAsync(Permissions.NOTIFICATIONS)
+			.then(statusObj => {
+				console.log(statusObj.status)
+				// Check if we already have permission
+				if (statusObj.status !== "granted") {
+					// If permission is not there, ask for the same
+					return Permissions.askAsync(Permissions.NOTIFICATIONS)
+				}
+				return statusObj
+			})
+			.then(statusObj => {
+				// If permission is still not given throw error
+				if (statusObj.status !== "granted") {
+					throw new Error("Permission not granted")
+				}
+			})
+			.catch(err => {
+				return null
+			})
 		AsyncStorage.getItem('token', (error, value) => {
 			if (value) {
 				console.log("value getItem", value)
@@ -73,6 +95,10 @@ function FirstScreen(props) {
 							screen: 'History',
 						})
 					}}
+				/>
+				<NextButton
+					title="TESTNOTIF"
+					onPress={Notification}
 				/>
 			</ScrollView>
 		</View>
