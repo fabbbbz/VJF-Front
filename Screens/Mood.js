@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Button, Text, Input, Overlay, Icon } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
-import Moods from '../Components/Moods'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
@@ -32,7 +31,7 @@ function Mood(props) {
 
 	const getTheSupriseMeal = async () => {
 		try {
-			const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+			const token = props.token
 
 			const dataToSend = {
 				mood: props.mood,
@@ -52,8 +51,10 @@ function Mood(props) {
 			console.log('data: ', formatedData)
 
 			if (formatedData) {
-				const { result, message } = formatedData
+				const { result, message, order } = formatedData
 				if (result === 'success' && message !== 'no meal fits') {
+					// GET THE ORDER ID
+					props.orderReducer(order._id)
 					props.navigation.navigate('TimeToPay', {
 						screen: 'TimeToPay',
 					})
@@ -117,7 +118,7 @@ function Mood(props) {
 						<Icon name="shuffle" size={15} color="white" iconPosition="top" />
 					}
 					onPress={() => {
-						props.moodHandle('total random')
+						props.moodHandle('all')
 					}}
 					title="Surprise Totale"
 					buttonStyle={styles.moodButton}
@@ -222,7 +223,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle([15, 20.99])
+								props.budgetHandle([15, 19.99])
 							}}
 							title="15-20€"
 							buttonStyle={{
@@ -234,7 +235,7 @@ function Mood(props) {
 						/>
 						<Button
 							onPress={() => {
-								props.budgetHandle([21, 2000])
+								props.budgetHandle([20, 2000])
 							}}
 							title="YOLO!"
 							buttonStyle={{
@@ -336,6 +337,9 @@ function mapDispatchToProps(dispatch) {
 		budgetHandle: function (budget) {
 			dispatch({ type: 'budgetChoice', budget })
 		},
+		orderReducer: function (orderId) {
+			dispatch({ type: 'STORE_ORDER', orderId })
+		},
 	}
 }
 
@@ -343,6 +347,8 @@ function mapStateToProps(state) {
 	return {
 		mood: state.mood,
 		budget: state.budget,
+		order: state.order,
+		token: state.token,
 	}
 }
 

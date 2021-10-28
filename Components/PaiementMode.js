@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Text, Input } from 'react-native-elements'
-import { AntDesign } from '@expo/vector-icons'
+import { Text } from 'react-native-elements'
+
 
 const PaiementMode = props => {
 	const [lastOrder, setLastOrder] = useState({ meal: '', restaurant: '' })

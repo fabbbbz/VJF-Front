@@ -2,29 +2,38 @@ import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
-import { connect } from 'react-redux'
 import { useState, useEffect } from 'react'
 import LottieView from "lottie-react-native";
 import CountDown from 'react-native-countdown-component';
 
 function Livraison(props) {
-
-	const [start, setStart] = useState(true)
-	const [seconds, setSeconds] = useState(5);
-	const [commandRender, setCommandRender] = useState('')
+	const [start, setStart] = useState(true) //const use to start the delivery process 
+	const [seconds, setSeconds] = useState(5); // const to set the number of seconds for setTimeout
+	const [commandRender, setCommandRender] = useState('') // wich screen need to be render (preparation..livraison..)
 
 	useEffect(() => {
+		// if start = true launch delivery process 
 		if (start) {
+			// set commandRender to order value 
 			setCommandRender('order')
-			console.log('Preparation...')
 		}
 	}, [])
 
+	// Redirect to final page after the delivery process 
+	var finsihProcess = () => {
+		props.navigation.navigate('FinalPage', { screen: 'FinalPage' })
+	}
 
+	// render order
 	var order =
-		<View>
+		<View
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				marginLeft: 15
+			}}>
 			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				style={{ textAlign: 'left', color: '#000000', marginTop: 50 }}
 			>
 				Envoie de la commande au restaurant !</Text>
 			<LottieView
@@ -33,24 +42,35 @@ function Livraison(props) {
 				autoPlay
 			/>
 		</View>
-
+	// render preparation 
 	var preparation =
-		<View>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande validée </Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				autoPlay
-				style={styles.done}
-			/>
+		<View >
+			<View
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'center',
+					marginLeft: 15
+				}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande validée </Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					autoPlay
+					style={styles.done}
+				/>
+			</View>
 
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Votre commande est en prépartation ! </Text>
-			<View style={{ marginTop: 15 }} >
+			<View style={{
+				display: 'flex',
+				alignItems: 'center',
+			}}>
+				<Text
+					style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
+				>
+					Votre commande est en prépartation ! </Text>
 				<LottieView
 					source={require("../assets/prepa.json")}
 					style={styles.preparation}
@@ -58,27 +78,43 @@ function Livraison(props) {
 				/>
 			</View>
 		</View >
-
+	// render livraison 
 	var livraison =
 		<View>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande validée </Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				autoPlay
-				style={styles.done}
-			/>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande preparée!!</Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				autoPlay
-				style={styles.done}
-			/>
+			<View
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'center',
+					marginLeft: 15
+				}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande validée </Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					autoPlay
+					style={styles.done}
+				/>
+			</View>
+			<View
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'center',
+					marginLeft: 15
+				}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande preparée!!</Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					autoPlay
+					style={styles.done}
+				/>
+			</View>
 			<Text
 				style={{ textAlign: 'center', color: '#000000', marginTop: 15, marginBottom: 15 }}
 			>
@@ -94,71 +130,84 @@ function Livraison(props) {
 				autoPlay
 			/>
 		</View>
-
+	// render done 
 	var done =
-		<View>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande preparée!!</Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				style={styles.done}
-				autoPlay
-			/>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Commande livrée!!</Text>
-			<LottieView
-				source={require("../assets/done.json")}
-				style={styles.done}
-				autoPlay
-			/>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Toc toc c'est la !!</Text>
-			<LottieView
-				source={require("../assets/foodishere.json")}
-				style={styles.deliverymanwait}
-				autoPlay
-			/>
+		<View >
+			<View style={{
+				display: 'flex',
+				flexDirection: 'row',
+				alignItems: 'center',
+				marginLeft: 15
+			}}>
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande preparée!!</Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					style={styles.done}
+					autoPlay
+				/>
+			</View>
+			<View style={{
+				display: 'flex',
+				flexDirection: 'row',
+				alignItems: 'center',
+				marginLeft: 15
+			}}>
+
+				<Text
+					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				>
+					Commande livrée!!</Text>
+				<LottieView
+					source={require("../assets/done.json")}
+					style={styles.done}
+					autoPlay
+				/>
+			</View>
+			<View>
+				<Text
+					style={{ textAlign: 'center', color: '#000000', marginTop: 40 }}
+				>
+					Toc-Toc c'est la!!</Text>
+				<LottieView
+					source={require("../assets/foodishere.json")}
+					style={styles.deliverymanwait}
+					autoPlay
+				/>
+			</View>
 		</View>
 
+	// var showscreen = status de la commande 
 	var showscreen
 	if (commandRender == 'order') {
 		showscreen = order
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
-			console.log('Timer: ' + seconds)
 		} else {
 			setCommandRender('preparation')
-			console.log('Change to preparation')
 			setSeconds(10)
 		}
 
 	}
+
 	if (commandRender == 'preparation') {
 		showscreen = preparation
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
-			console.log('Timer: ' + seconds)
 		} else {
 			setCommandRender('livraison')
-			console.log('Change to livraison')
 			setSeconds(10)
 		}
-
 	}
+
 	if (commandRender == 'livraison') {
 		showscreen = livraison
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
-			console.log('Timer: ' + seconds)
 		} else {
 			setCommandRender('done')
-			console.log('Change to done')
 			setSeconds(10)
 		}
 	}
@@ -168,12 +217,9 @@ function Livraison(props) {
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
 		} else {
-			setCommandRender('preparation')
-			console.log('Change to prera again')
-			setSeconds(10)
+			finsihProcess()
 		}
 	}
-
 
 	return (
 		<ScrollView >
@@ -214,8 +260,8 @@ const styles = StyleSheet.create({
 		height: 250,
 	},
 	done: {
-		width: 100,
-		height: 100,
+		width: 70,
+		height: 70,
 	},
 	waiting: {
 		width: 300,

@@ -9,7 +9,7 @@ const OrderRecap = props => {
 
 	useEffect(() => {
 		// Fetch data to get last order
-		const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+		const token = props.token
 		const fetchUser = async () => {
 			const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
 			const user = await data.json()
@@ -50,6 +50,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
 	return {
 		quantity: 1, // CHANGE FOR state.quantity
+		token: state.token,
 	}
 }
 

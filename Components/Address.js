@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
+import { connect } from 'react-redux'
 import { View, StyleSheet } from 'react-native'
-import { Text, Input } from 'react-native-elements'
-import { AntDesign } from '@expo/vector-icons'
+import { Text } from 'react-native-elements'
 import { MY_IP } from '@env'
 
 const Address = props => {
 	const [address, setAddress] = useState('')
 
 	useEffect(() => {
-		const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+		const token = props.token
 		const fetchUser = async () => {
 			const data = await fetch(`http://${MY_IP}:3000/users/me/${token}`)
 			const user = await data.json()
@@ -42,4 +42,10 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default Address
+function mapStateToProps(state) {
+	return {
+		token: state.token,
+	}
+}
+
+export default connect(mapStateToProps, null)(Address)

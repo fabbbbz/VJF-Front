@@ -2,23 +2,38 @@ import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
-import { MY_IP } from '@env'
 import { connect } from 'react-redux'
-import NextButton from '../Components/NextButton'
 import NextButtonFullSize from '../Components/NextButtonFullSize'
 import OrderRecap from '../Components/OrderRecap'
 import Address from '../Components/Address'
-import PaiementMode from '../Components/PaiementMode'
+import { MY_IP } from '@env'
+//import { MY_IP } from '@env'
 
 const TimeToPay = props => {
 	const [order, setOrder] = useState({})
 
-	const handlePaiement = () => {
-		console.log('take my money')
-		// fetch une route pour update status de la commande
-		props.navigation.navigate('Livraison', {
-			screen: 'Livraison',
-		})
+	console.log('orderId: ', props.order)
+
+	const handlePaiement = async () => {
+		try {
+			console.log('take my money')
+			// fetch une route pour update status de la commande
+			const data = await fetch(
+				`http://${MY_IP}:3000/orders/update-order/${props.order}`,
+				{
+					method: 'PUT',
+				}
+			)
+			const result = await data.json()
+			console.log(result)
+			if (result) {
+				props.navigation.navigate('Livraison', {
+					screen: 'Livraison',
+				})
+			}
+		} catch (err) {
+			console.log(err.message)
+		}
 	}
 
 	return (
@@ -50,4 +65,10 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default TimeToPay
+function mapStateToProps(state) {
+	return {
+		order: state.order,
+	}
+}
+
+export default connect(mapStateToProps, null)(TimeToPay)

@@ -7,67 +7,101 @@ import { MY_IP } from "@env"
 import { connect } from 'react-redux'
 
 function UserPage(props) {
-
-    const [user, setUser] = useState("")
+    const [user, setUser] = useState('')
 
     useEffect(() => {
         async function loadUser() {
-            // token en dur pour le test, A remplacer par :token
-            var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/${props.token}`)
+            const token = props.token
+            var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/${token}`)
             var response = await rawResponse.json()
             console.log(response.userInfo.lastName)
             setUser(response.userInfo)
-
         }
         loadUser()
-    }, []);
+    }, [])
 
     // console.log(user.lastName)
+
     return (
-        <ScrollView >
+        <ScrollView>
             <TopBar navigation={props.navigation} />
-            <Text h3 style={{ alignSelf: "center", marginTop: 15, textDecorationLine: 'underline', color: "#FFC901" }}>Informations Personelles</Text>
+            <Text
+                h3
+                style={{
+                    alignSelf: 'center',
+                    marginTop: 15,
+                    textDecorationLine: 'underline',
+                    color: '#FFC901',
+                }}
+            >
+                Informations Personelles
+            </Text>
 
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
-                <Card.Title style={{ marginBottom: 0 }}> Nom:</Card.Title >
+                <Card.Title style={{ marginBottom: 0 }}> Nom:</Card.Title>
                 <Text>{user.lastName} </Text>
-                <Button type="clear" onPress={() => console.log("bonjour")} icon={<Ionicons size={25} name="create-outline" color='#FFC901' />} />
+                <Button
+                    type="clear"
+                    onPress={() => console.log('bonjour')}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
             </Card>
 
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
-                <Card.Title style={{ marginBottom: 0 }}> Prénom:</Card.Title >
+                <Card.Title style={{ marginBottom: 0 }}> Prénom:</Card.Title>
                 <Text>{user.firstName} </Text>
-                <Button type="clear" onPress={() => console.log("bonjour")} icon={<Ionicons size={25} name="create-outline" color='#FFC901' />} />
+                <Button
+                    type="clear"
+                    onPress={() => console.log('bonjour')}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
             </Card>
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
-                <Card.Title style={{ marginBottom: 0 }}> Email:</Card.Title >
+                <Card.Title style={{ marginBottom: 0 }}> Email:</Card.Title>
                 <Text>{user.email} </Text>
-                <Button type="clear" onPress={() => console.log("bonjour")} icon={<Ionicons size={25} name="create-outline" color='#FFC901' />} />
+                <Button
+                    type="clear"
+                    onPress={() => console.log('bonjour')}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
             </Card>
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
-                <Card.Title style={{ marginBottom: 0 }}> Téléphone:</Card.Title >
+                <Card.Title style={{ marginBottom: 0 }}> Téléphone:</Card.Title>
                 <Text>{user.phone} </Text>
-                <Button type="clear" onPress={() => console.log("bonjour")} icon={<Ionicons size={25} name="create-outline" color='#FFC901' />} />
+                <Button
+                    type="clear"
+                    onPress={() => console.log('bonjour')}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
             </Card>
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
-                <Card.Title style={{ marginBottom: 0 }}> Adresse:</Card.Title >
+                <Card.Title style={{ marginBottom: 0 }}> Adresse:</Card.Title>
                 <Text>{user.adresse} </Text>
-                <Button type="clear" onPress={() => console.log("bonjour")} icon={<Ionicons size={25} name="create-outline" color='#FFC901' />} />
+                <Button
+                    type="clear"
+                    onPress={() => console.log('bonjour')}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
             </Card>
-        </ScrollView >
-    );
+        </ScrollView>
+    )
 }
 const styles = StyleSheet.create({
     container: {
-        borderRadius: 10, elevation: 4,
+        borderRadius: 10,
+        elevation: 4,
         shadowOffset: { width: 5, height: 5 },
-        shadowColor: "#FFC901",
+        shadowColor: '#FFC901',
         shadowOpacity: 1,
         shadowRadius: 20,
     },
     wrapper: {
-        display: "flex", flexDirection: "row", justifyContent: "space-between", flexWrap: "nowrap", alignItems: "center",
-    }
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        flexWrap: 'nowrap',
+        alignItems: 'center',
+    },
 })
 function mapStateToProps(state) {
     return {

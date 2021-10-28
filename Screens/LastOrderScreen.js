@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { connect } from 'react-redux'
 import {
 	View,
 	StyleSheet,
@@ -9,7 +10,6 @@ import {
 import { Text, Input, Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { MY_IP } from '@env'
-import { connect } from 'react-redux'
 import LastOrder from '../Components/LastOrder'
 
 const LastOrderScreen = props => {
@@ -23,7 +23,7 @@ const LastOrderScreen = props => {
 	}
 
 	const updateUser = async () => {
-		const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+		const token = props.token
 		const mealId = 'SOME_ID'
 		console.log('fetch api')
 		const data = await fetch(`http://${MY_IP}:3000/users/favorites`, {
@@ -112,4 +112,10 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default LastOrderScreen
+function mapStateToProps(state) {
+	return {
+		token: state.token,
+	}
+}
+
+export default connect(mapStateToProps, null)(LastOrderScreen)
