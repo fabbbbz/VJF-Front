@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { Overlay } from 'react-native-elements'
+import { Overlay, Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import Diet from '../Components/Diet'
 import Donts from '../Components/Donts'
