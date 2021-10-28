@@ -20,12 +20,14 @@ function Favorites(props) {
 
 
             setFavData(response.favorites)
-
+            console.log('favorites')
         }
 
         loadFavorites()
 
     }, []);
+
+
 
     var favList = favData.map((fav, i) => {
 

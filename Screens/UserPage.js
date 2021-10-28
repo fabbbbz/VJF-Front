@@ -14,7 +14,7 @@ function UserPage(props) {
 
         async function loadUser() {
             // token en dur pour le test, A remplacer par :token
-            var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
+            var rawResponse = await fetch(`http://172.17.1.145:3000/users/me/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
             var response = await rawResponse.json()
 
             console.log(response.userInfo.lastName)

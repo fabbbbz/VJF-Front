@@ -9,11 +9,11 @@ const OrderRecap = props => {
 
 	useEffect(() => {
 		// Fetch data to get last order
-		const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+		const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde' // HARD CODED FOR TEST
 		const fetchUser = async () => {
 			const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
 			const user = await data.json()
-			console.log(user)
+			// console.log(user)
 			setPrice(user.orderPrice)
 		}
 		fetchUser()

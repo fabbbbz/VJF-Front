@@ -31,7 +31,7 @@ function Mood(props) {
 
     const getTheSupriseMeal = async () => {
         try {
-            const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+            const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde' // HARD CODED FOR TEST // batman:BHbxITgVrZnaS5OQHxYVgaIaROQHliZr
 
             const dataToSend = {
                 mood: props.mood,
@@ -44,11 +44,11 @@ function Mood(props) {
                 body: JSON.stringify(dataToSend),
             }
             const data = await fetch(
-                `http://${MY_IP}:3000/orders/recap/${token}`,
+                `http:///172.17.1.145:3000/orders/recap/${token}`,
                 requestOptions
             )
             const result = await data.json()
-            console.log(result)
+            console.log('result', result)
 
             if (result) {
                 props.navigation.navigate('TimeToPay', {
