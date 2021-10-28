@@ -27,7 +27,6 @@ function UserPage(props) {
     }, []);
 
     // console.log(user.lastName)
-
     return (
         <ScrollView >
             <TopBar navigation={props.navigation} />

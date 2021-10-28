@@ -24,6 +24,7 @@ import UserPage from './Screens/UserPage'
 import TimeToPay from './Screens/TimeToPay'
 import History from './Screens/History'
 import Livraison from './Screens/Livraison'
+import Logout from './Components/Logout'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -44,6 +45,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
 			<Stack.Screen name="History" component={History} />
 			<Drawer.Screen name="Livraison" component={Livraison} />
+			<Drawer.Screen name="Logout" component={Logout} />
 		</Drawer.Navigator>
 	)
 }

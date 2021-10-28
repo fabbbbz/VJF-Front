@@ -16,7 +16,7 @@ function Favorites(props) {
             // token en dur pour le test, A remplacer par :token
             var rawResponse = await fetch(`http://${MY_IP}:3000/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ`)
             var response = await rawResponse.json()
-            console.log(response.favorites);
+            // console.log(response.favorites);
 
 
             setFavData(response.favorites)
