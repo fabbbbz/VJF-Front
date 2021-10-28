@@ -27,9 +27,14 @@ function Livraison(props) {
 
 	// render order
 	var order =
-		<View>
+		<View
+			style={{
+				display: 'flex',
+				alignItems: 'center',
+				marginLeft: 15
+			}}>
 			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				style={{ textAlign: 'left', color: '#000000', marginTop: 50 }}
 			>
 				Envoie de la commande au restaurant !</Text>
 			<LottieView
@@ -45,6 +50,8 @@ function Livraison(props) {
 				style={{
 					display: 'flex',
 					flexDirection: 'row',
+					alignItems: 'center',
+					marginLeft: 15
 				}}>
 				<Text
 					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
@@ -56,11 +63,15 @@ function Livraison(props) {
 					style={styles.done}
 				/>
 			</View>
-			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
-			>
-				Votre commande est en prépartation ! </Text>
-			<View style={{ marginTop: 15 }} >
+
+			<View style={{
+				display: 'flex',
+				alignItems: 'center',
+			}}>
+				<Text
+					style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
+				>
+					Votre commande est en prépartation ! </Text>
 				<LottieView
 					source={require("../assets/prepa.json")}
 					style={styles.preparation}
@@ -72,7 +83,12 @@ function Livraison(props) {
 	var livraison =
 		<View>
 			<View
-				style={{}}>
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'center',
+					marginLeft: 15
+				}}>
 				<Text
 					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
 				>
@@ -84,7 +100,12 @@ function Livraison(props) {
 				/>
 			</View>
 			<View
-				style={{}}>
+				style={{
+					display: 'flex',
+					flexDirection: 'row',
+					alignItems: 'center',
+					marginLeft: 15
+				}}>
 				<Text
 					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
 				>
@@ -112,9 +133,13 @@ function Livraison(props) {
 		</View>
 	// render done 
 	var done =
-		<View>
-			<View
-				style={{}}>
+		<View >
+			<View style={{
+				display: 'flex',
+				flexDirection: 'row',
+				alignItems: 'center',
+				marginLeft: 15
+			}}>
 				<Text
 					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
 				>
@@ -125,7 +150,13 @@ function Livraison(props) {
 					autoPlay
 				/>
 			</View>
-			<View>
+			<View style={{
+				display: 'flex',
+				flexDirection: 'row',
+				alignItems: 'center',
+				marginLeft: 15
+			}}>
+
 				<Text
 					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
 				>
@@ -138,9 +169,9 @@ function Livraison(props) {
 			</View>
 			<View>
 				<Text
-					style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+					style={{ textAlign: 'center', color: '#000000', marginTop: 40 }}
 				>
-					Toc toc c'est la !!</Text>
+					Toc-Toc c'est la!!</Text>
 				<LottieView
 					source={require("../assets/foodishere.json")}
 					style={styles.deliverymanwait}
