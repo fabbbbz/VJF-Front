@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, Image, ScrollView } from 'react-native'
-import { Button, Text } from 'react-native-elements'
+import { Text } from 'react-native-elements'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 

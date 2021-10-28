@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'

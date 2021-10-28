@@ -2,7 +2,6 @@ import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
-import { connect } from 'react-redux'
 import { useState, useEffect } from 'react'
 import LottieView from "lottie-react-native";
 import CountDown from 'react-native-countdown-component';

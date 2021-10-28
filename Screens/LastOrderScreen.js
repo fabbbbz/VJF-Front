@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import {
 	View,
 	StyleSheet,
@@ -9,7 +9,6 @@ import {
 import { Text, Input, Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { MY_IP } from '@env'
-import { connect } from 'react-redux'
 import LastOrder from '../Components/LastOrder'
 
 const LastOrderScreen = props => {

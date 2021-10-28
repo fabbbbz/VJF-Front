@@ -16,7 +16,7 @@ function SignIn(props) {
 
 	var handleSubmitSignin = async () => {
 		// send user's infos to back
-		const data = await fetch(`http://172.17.1.105:3000/users/sign-in`, {
+		const data = await fetch(`http://${MY_IP}:3000/users/sign-in`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,

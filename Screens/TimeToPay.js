@@ -3,14 +3,11 @@ import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { connect } from 'react-redux'
-import NextButton from '../Components/NextButton'
 import NextButtonFullSize from '../Components/NextButtonFullSize'
 import OrderRecap from '../Components/OrderRecap'
 import Address from '../Components/Address'
-import PaiementMode from '../Components/PaiementMode'
-
+import { MY_IP } from '@env'
 //import { MY_IP } from '@env'
-const MY_IP = '172.17.1.176'
 
 const TimeToPay = props => {
 	const [order, setOrder] = useState({})

@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Image, ScrollView } from 'react-native';
-import { Button, Text, Input, Card, ListItem, Icon } from 'react-native-elements'
+import { ScrollView } from 'react-native';
+import { Button, Text, Card } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
-import Moods from '../Components/Moods';
 import { Ionicons } from '@expo/vector-icons';
 import { MY_IP } from "@env"
 

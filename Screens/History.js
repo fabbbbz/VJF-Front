@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
-import { Button, Text } from 'react-native-elements'
-import { color } from 'react-native-reanimated';
+import { View, StyleSheet } from 'react-native'
+import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import Plats from '../Components/Plats'
 
