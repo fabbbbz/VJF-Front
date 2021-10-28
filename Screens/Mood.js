@@ -17,6 +17,9 @@ function Mood(props) {
 	const [codePostal, setcodePostal] = useState('')
 	const [pricerange, setPricerange] = useState([])
 
+	console.log('mood:', props.mood)
+	console.log('budget', props.budget)
+
 	const changeAdress = () => {
 		setOverlay(true)
 	}
