@@ -23,6 +23,8 @@ function Favorites(props) {
         loadFavorites()
     }, [])
 
+
+
     var favList = favData.map((fav, i) => {
         return (
             <Card

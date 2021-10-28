@@ -1,46 +1,68 @@
-import React, { useState, useEffect } from 'react'
-import { StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-elements'
+import React, { useEffect, useState } from 'react'
+import { StyleSheet, TouchableOpacity, View, Card } from 'react-native'
+import { Button, Text } from 'react-native-elements'
+import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { MY_IP } from "@env"
 
 
-const Plats = ({ name, onPress }) => {
+export default function Plats() {
 
-    // useEffect(() => {
-    //     async function loadOrders() {
-    //         // token en dur pour le test, A remplacer par :token
-    //         var rawResponse = await fetch(`http://${MY_IP}:3000/users/orders/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
-    //         var response = await rawResponse.json()
+    const [ordersHistory, setOrdersHistory] = useState([])
+    const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde'
 
-    //         console.log(response)
+    useEffect(() => {
 
-    //     }
+        async function loadOrders() {
+            // token en dur pour le test, A remplacer par :token
+            var rawResponse = await fetch(`http://172.17.1.145:3000/users/history/${token}`)
+            var response = await rawResponse.json()
 
-    //     loadOrders()
+            setOrdersHistory(response.meals)
+            console.log('logg', response)
+        }
 
-    // }, []);
+
+        loadOrders()
+    }, []);
+
+    console.log('azerty', ordersHistory)
+    // const event = new Date(meals.date);
+    // const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+
+    // console.log('date', event.toLocaleDateString('fr-FR', options));
 
 
     return (
-        <View syle={styles.container}>
-            <View style={{ flexDirection: 'row', color: "#FFFFF" }}>
-                <Text >Nom du plat</Text>
-                <MaterialCommunityIcons name="heart-plus" size={24} color="black" onPress={() => addToFavorite()} />
-                <MaterialCommunityIcons name="heart-remove" size={24} color="black" onPress={() => removeFromFavorite()} />
-            </View >
-        </View>
+
+        <View >
+            {ordersHistory.map((order, i) => (
+                < View >
+                    <Text>{new Date(order.date).toLocaleDateString()}</Text>
+                    <Text>{order.mealName}</Text>
+                    <View>
+                        <MaterialCommunityIcons name="heart-plus" size={24} color="black" onPress={() => addToFavorite()} />
+                        <MaterialCommunityIcons name="heart-remove" size={24} color="black" onPress={() => removeFromFavorite()} />
+                    </View >
+                </View >
+            ))
+            }
+        </View >
     )
 }
 
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: '#FFFFFF',
-        paddingVertical: 10,
-        paddingHorizontal: 12,
-        borderRadius: 10,
-        margin: 15,
-        borderColor: '#F2A902',
-    },
-})
+// const styles = StyleSheet.create({
+//     container: {
+//         backgroundColor: '#FFFFFF',
+//         paddingVertical: 10,
+//         paddingHorizontal: 12,
+//         borderRadius: 10,
+//         margin: 15,
+//         borderColor: '#F2A902',
 
-export default Plats
+//     },
+// })
+
+// style={styles.container}
+// style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+// style={{ flexDirection: 'row', alignContent: 'flex-start' }}

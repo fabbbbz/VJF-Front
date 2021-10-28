@@ -11,8 +11,13 @@ function UserPage(props) {
 
     useEffect(() => {
         async function loadUser() {
+<<<<<<< HEAD
             const token = props.token
             var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/${token}`)
+=======
+            // token en dur pour le test, A remplacer par :token
+            var rawResponse = await fetch(`http://172.17.1.145:3000/users/me/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
+>>>>>>> clem
             var response = await rawResponse.json()
             console.log(response.userInfo.lastName)
             setUser(response.userInfo)

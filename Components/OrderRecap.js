@@ -13,7 +13,7 @@ const OrderRecap = props => {
 		const fetchUser = async () => {
 			const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
 			const user = await data.json()
-			console.log(user)
+			// console.log(user)
 			setPrice(user.orderPrice)
 		}
 		fetchUser()

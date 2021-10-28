@@ -44,7 +44,7 @@ function Mood(props) {
                 body: JSON.stringify(dataToSend),
             }
             const data = await fetch(
-                `http://${MY_IP}:3000/orders/recap/${token}`,
+                `http:///172.17.1.145:3000/orders/recap/${token}`,
                 requestOptions
             )
             const formatedData = await data.json()
