@@ -1,9 +1,14 @@
+<<<<<<< HEAD
 import React from 'react'
+=======
+import { React } from "react"
+>>>>>>> 5923a46f9585faa8c6ed801770bb19b2b39b6e75
 import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 
 const Plats = ({ name, onPress }) => {
+<<<<<<< HEAD
 	// useEffect(() => {
 	//     async function loadOrders() {
 	//         // token en dur pour le test, A remplacer par :token
@@ -37,6 +42,38 @@ const Plats = ({ name, onPress }) => {
 			</View>
 		</View>
 	)
+=======
+
+    // useEffect(() => {
+    //     async function loadOrders() {
+    //         // token en dur pour le test, A remplacer par :token
+    //         var rawResponse = await fetch(`http://${MY_IP}:3000/users/orders/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
+    //         var response = await rawResponse.json()
+
+    //         console.log(response)
+
+    //     }
+
+    //     loadOrders()
+
+    // }, []);
+    function addToFavorite() {
+        console.log('addToFavorite')
+    }
+    function removeFromFavorite() {
+        console.log('removeFromFavorite')
+    }
+
+    return (
+        <View syle={styles.container}>
+            <View style={{ flexDirection: 'row', color: "#FFFFF" }}>
+                <Text >Nom du plat</Text>
+                <MaterialCommunityIcons name="heart-plus" size={24} color="black" onPress={() => addToFavorite()} />
+                <MaterialCommunityIcons name="heart-remove" size={24} color="black" onPress={() => removeFromFavorite()} />
+            </View >
+        </View>
+    )
+>>>>>>> 5923a46f9585faa8c6ed801770bb19b2b39b6e75
 }
 
 const styles = StyleSheet.create({

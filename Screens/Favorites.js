@@ -15,7 +15,6 @@ function Favorites(props) {
                 `http://${MY_IP}:3000/users/favorites/${token}`
             )
             var response = await rawResponse.json()
-            console.log(response.favorites)
 
             setFavData(response.favorites)
         }
