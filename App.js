@@ -17,13 +17,22 @@ import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
 import SignUp from './Screens/SignUp'
 import Mood from './Screens/Mood'
+<<<<<<< HEAD
+import History from './Screens/History'
+=======
 import Favorites from './Screens/Favorites'
 import SignIn from './Screens/SignIn'
 import LastOrderScreen from './Screens/LastOrderScreen'
+<<<<<<< HEAD
 import UserPage from './Screens/UserPage'
 import TimeToPay from './Screens/TimeToPay'
 import History from './Screens/History'
 import Livraison from './Screens/Livraison'
+=======
+// import DrawerNav from './Components/Drawer'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+>>>>>>> master
+>>>>>>> geoloc
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
@@ -57,12 +66,26 @@ export default function App() {
 					<Stack.Screen name="Home" component={Home} />
 					<Stack.Screen name="SignUp" component={SignUp} />
 					<Stack.Screen name="Mood" component={Mood} />
+<<<<<<< HEAD
+					<Stack.Screen name="Login" component={Mood} />
+					<Stack.Screen name="History" component={History} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
+=======
 					<Stack.Screen name="SignIn" component={SignIn} />
 					<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
 					<Stack.Screen name="Drawer" component={DrawerNav} />
 					<Stack.Screen name="Favorites" component={Favorites} />
+<<<<<<< HEAD
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
+=======
+				</Stack.Navigator >
+			</NavigationContainer >
+		</Provider >
+>>>>>>> master
+>>>>>>> geoloc
 	)
 }
