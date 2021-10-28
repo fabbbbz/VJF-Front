@@ -1,4 +1,4 @@
-// Modules Import 
+// Modules Import
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
@@ -22,11 +22,14 @@ import SignIn from './Screens/SignIn'
 import LastOrderScreen from './Screens/LastOrderScreen'
 import UserPage from './Screens/UserPage'
 import TimeToPay from './Screens/TimeToPay'
+import History from './Screens/History'
 import Livraison from './Screens/Livraison'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
-const store = createStore(combineReducers({ diet, token, donts, allergies, budget }))
+const store = createStore(
+	combineReducers({ diet, token, donts, allergies, budget, mood })
+)
 
 const DrawerNav = props => {
 	return (
@@ -39,6 +42,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="LastOrderScreen" component={LastOrderScreen} />
 			<Drawer.Screen name="UserPage" component={UserPage} />
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
+			<Stack.Screen name="History" component={History} />
 			<Drawer.Screen name="Livraison" component={Livraison} />
 		</Drawer.Navigator>
 	)
