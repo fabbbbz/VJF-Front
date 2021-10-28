@@ -5,24 +5,25 @@ import TopBar from '../Components/TopBar';
 import Moods from '../Components/Moods';
 import { Ionicons } from '@expo/vector-icons';
 import { MY_IP } from "@env"
-
+import { connect } from 'react-redux'
 
 function Favorites(props) {
     const [favData, setFavData] = useState([])
     useEffect(() => {
         async function loadFavorites() {
             // token en dur pour le test, A remplacer par :token
-            var rawResponse = await fetch(`http://${MY_IP}:3000/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ`)
+            var rawResponse = await fetch(`http://172.17.1.32:3000/users/favorites/4oGFAQhaMitbtQ3FWCPCsQlC5PP-aCoU`)
             var response = await rawResponse.json()
-            // console.log(response.favorites);
+            console.log("est ce que ça marche", response.favorites);
 
             setFavData(response.favorites)
 
         }
 
         loadFavorites()
-
+        console.log("coucou")
     }, []);
+
 
     var favList = favData.map((fav, i) => {
 
@@ -63,4 +64,11 @@ function Favorites(props) {
     );
 }
 
-export default Favorites
+function mapStateToProps(state) {
+    return {
+        token: state.token,
+
+    }
+}
+
+export default connect(mapStateToProps, null)(Favorites)

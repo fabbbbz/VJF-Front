@@ -11,7 +11,9 @@ function FirstScreen(props) {
 	useEffect(() => {
 		AsyncStorage.getItem('token', (error, value) => {
 			if (value) {
-				console.log(value)
+				console.log("value getItem", value)
+				props.addToken(value)
+				// props.navigation.navigate('Mood', { screen: "Mood" })
 			}
 		})
 	}, [])
@@ -86,7 +88,14 @@ const styles = StyleSheet.create({
 	},
 })
 //get token from store
+function mapDispatchToProps(dispatch) {
+	return {
+		addToken: function (token) {
+			dispatch({ type: 'addToken', token: token })
+		},
+	}
+}
 function mapStateToProps(state) {
 	return { token: state.token }
 }
-export default connect(mapStateToProps, null)(FirstScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(FirstScreen)

@@ -8,6 +8,7 @@ import donts from './reducers/donts'
 import allergies from './reducers/allergies'
 import budget from './reducers/budget'
 import mood from './reducers/mood'
+import firstName from './reducers/firstName'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -29,7 +30,7 @@ import Logout from './Components/Logout'
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
-	combineReducers({ diet, token, donts, allergies, budget, mood })
+	combineReducers({ diet, token, firstName, donts, allergies, budget, mood })
 )
 
 const DrawerNav = props => {

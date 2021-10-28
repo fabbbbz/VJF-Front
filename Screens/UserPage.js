@@ -4,7 +4,7 @@ import { View, StyleSheet, Image, ScrollView } from 'react-native';
 import { Button, Text, Input, Card, ListItem } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
 import { MY_IP } from "@env"
-
+import { connect } from 'react-redux'
 
 function UserPage(props) {
 
@@ -13,7 +13,7 @@ function UserPage(props) {
     useEffect(() => {
         async function loadUser() {
             // token en dur pour le test, A remplacer par :token
-            var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
+            var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/${props.token}`)
             var response = await rawResponse.json()
             console.log(response.userInfo.lastName)
             setUser(response.userInfo)
@@ -69,4 +69,11 @@ const styles = StyleSheet.create({
         display: "flex", flexDirection: "row", justifyContent: "space-between", flexWrap: "nowrap", alignItems: "center",
     }
 })
-export default UserPage
+function mapStateToProps(state) {
+    return {
+        token: state.token,
+
+    }
+}
+
+export default connect(mapStateToProps, null)(UserPage)
