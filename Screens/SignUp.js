@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
