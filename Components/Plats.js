@@ -1,3 +1,4 @@
+import { React } from "react"
 import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
@@ -18,7 +19,12 @@ const Plats = ({ name, onPress }) => {
     //     loadOrders()
 
     // }, []);
-
+    function addToFavorite() {
+        console.log('addToFavorite')
+    }
+    function removeFromFavorite() {
+        console.log('removeFromFavorite')
+    }
 
     return (
         <View syle={styles.container}>

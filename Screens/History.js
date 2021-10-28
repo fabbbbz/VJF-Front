@@ -11,10 +11,10 @@ function History(props) {
             <TopBar navigation={props.navigation} />
             <View style={styles.container}>
                 <Text h2 style={{ color: '#F2A902' }}>Derniers Plats</Text>
+                {/* <Plats />
                 <Plats />
                 <Plats />
-                <Plats />
-                <Plats />
+                <Plats /> */}
             </View>
         </View >
     )
