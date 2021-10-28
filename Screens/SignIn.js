@@ -14,7 +14,7 @@ function SignIn(props) {
 	const [ErrorsSignin, setErrorsSignin] = useState('')
 	const [token, setToken] = useState('')
 
-	var handleSubmitSignup = async () => {
+	var handleSubmitSignin = async () => {
 		// send user's infos to back
 		const data = await fetch(`http://172.17.1.105:3000/users/sign-in`, {
 			method: 'POST',
@@ -27,9 +27,9 @@ function SignIn(props) {
 			//set token
 			setToken(body.token)
 			// store token in local-storage
-			AsyncStorage.setItem('token', token)
+			AsyncStorage.setItem('token', body.token)
 			// store token in redux
-			props.addToken(token)
+			props.addToken(body.token)
 			props.navigation.navigate('Mood', { screen: 'Mood' })
 		} else {
 			setErrorsSignin(body.error)
@@ -66,7 +66,7 @@ function SignIn(props) {
 				/>
 			</View>
 			<View style={{ alignItems: 'center', alignSelf: 'center' }}>
-				<NextButton title="LOGIN" onPress={() => handleSubmitSignup()} />
+				<NextButton title="LOGIN" onPress={() => handleSubmitSignin()} />
 				<Text
 					style={{
 						textAlign: 'center',
