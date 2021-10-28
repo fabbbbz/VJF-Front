@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
-<<<<<<< HEAD
 import { Text } from 'react-native-elements'
-=======
-import { Text } from "react-native-elements"
->>>>>>> 5923a46f9585faa8c6ed801770bb19b2b39b6e75
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons'
 import { connect } from 'react-redux'
@@ -23,12 +19,8 @@ const TopBar = props => {
 	}, [])
 
 	// if (props.token.length < 1) {
-<<<<<<< HEAD
-	// 	props.navigation.navigate('SignIn', { screen: 'SignIn' })
-=======
 
 	// 	props.navigation.navigate('SignIn', { screen: "SignIn" })
->>>>>>> 5923a46f9585faa8c6ed801770bb19b2b39b6e75
 	// }
 	return (
 		<View style={styles.topbar}>
