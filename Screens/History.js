@@ -17,14 +17,8 @@ function History(props) {
                 <Plats />
                 <Plats />
             </View>
-
-
-
-
-
         </View >
     )
-
 }
 
 const styles = StyleSheet.create({
