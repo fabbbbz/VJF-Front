@@ -119,7 +119,7 @@ function Mood(props) {
 						<Icon name="shuffle" size={15} color="white" iconPosition="top" />
 					}
 					onPress={() => {
-						props.moodHandle('total random')
+						props.moodHandle('all')
 					}}
 					title="Surprise Totale"
 					buttonStyle={styles.moodButton}
