@@ -7,7 +7,8 @@ import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
+// import { MY_IP } from '@env'
+const MY_IP = '172.17.1.176'
 
 function Mood(props) {
 	const [overlay, setOverlay] = useState(false)
@@ -47,13 +48,16 @@ function Mood(props) {
 				`http://${MY_IP}:3000/orders/recap/${token}`,
 				requestOptions
 			)
-			const result = await data.json()
-			console.log(result)
+			const formatedData = await data.json()
+			console.log('data: ', formatedData)
 
-			if (result) {
-				props.navigation.navigate('TimeToPay', {
-					screen: 'TimeToPay',
-				})
+			if (formatedData) {
+				const { result, message } = formatedData
+				if (result === 'success' && message !== 'no meal fits') {
+					props.navigation.navigate('TimeToPay', {
+						screen: 'TimeToPay',
+					})
+				}
 			}
 		} catch (err) {
 			console.log(err.message)

@@ -15,6 +15,7 @@ const TimeToPay = props => {
 
 	const handlePaiement = () => {
 		console.log('take my money')
+		// fetch une route pour update status de la commande
 		props.navigation.navigate('Livraison', {
 			screen: 'Livraison',
 		})
