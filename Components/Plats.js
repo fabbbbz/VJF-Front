@@ -1,8 +1,5 @@
-import React, { useEffect } from 'react'
-import { StyleSheet, TouchableOpacity, View } from 'react-native'
-import { Button, Text } from 'react-native-elements'
-
-import { AntDesign } from '@expo/vector-icons'
+import { StyleSheet, View } from 'react-native'
+import { Text } from 'react-native-elements'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 

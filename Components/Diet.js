@@ -1,9 +1,7 @@
-import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { CheckBox, Text } from 'react-native-elements'
+import { Text } from 'react-native-elements'
 import RadioButtonRN from 'radio-buttons-react-native'
 import { connect } from 'react-redux'
-import MyCheckbox from './Checkbox'
 
 const Diet = props => {
 	// const [userdiet, setUserdiet] = useState('omni')
