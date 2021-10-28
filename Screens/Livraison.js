@@ -5,8 +5,10 @@ import TopBar from '../Components/TopBar'
 import { connect } from 'react-redux'
 import { useState, useEffect } from 'react'
 import LottieView from "lottie-react-native";
+import CountDown from 'react-native-countdown-component';
 
 function Livraison(props) {
+
 	const [start, setStart] = useState(true)
 	const [seconds, setSeconds] = useState(5);
 	const [commandRender, setCommandRender] = useState('')
@@ -17,6 +19,7 @@ function Livraison(props) {
 			console.log('Preparation...')
 		}
 	}, [])
+
 
 	var order =
 		<View>
@@ -77,10 +80,14 @@ function Livraison(props) {
 				style={styles.done}
 			/>
 			<Text
-				style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+				style={{ textAlign: 'center', color: '#000000', marginTop: 15, marginBottom: 15 }}
 			>
-				Remis au livreur</Text>
-
+				Votre commande sera livrée dans:</Text>
+			<CountDown
+				timeToShow={['M', 'S']}
+				until={10}
+				size={20}
+			/>
 			<LottieView
 				source={require("../assets/deliveryman.json")}
 				style={styles.deliveryman}
@@ -155,17 +162,18 @@ function Livraison(props) {
 			setSeconds(10)
 		}
 	}
+
 	if (commandRender == 'done') {
 		showscreen = done
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
-			console.log('Timer: ' + seconds)
 		} else {
 			setCommandRender('preparation')
-			console.log('Change to done')
+			console.log('Change to prera again')
 			setSeconds(10)
 		}
 	}
+
 
 	return (
 		<ScrollView >
@@ -180,6 +188,8 @@ function Livraison(props) {
 					</Text>
 				</View>
 				<View style={{ marginLeft: 30, marginTop: 15 }}>
+				</View>
+				<View>
 					{showscreen}
 				</View>
 			</View>

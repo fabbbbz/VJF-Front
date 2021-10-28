@@ -12,9 +12,8 @@ import MyCheckbox from '../Components/Checkbox'
 
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
-	// const token = props.token
-	const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
-
+	const token = props.token
+	//const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
 	const handleAllergies = allergy => {
 		setOverlay(false)
 	}
@@ -35,6 +34,7 @@ const Home = props => {
 			requestOptions
 		)
 		const result = await data.json()
+		console.log(token)
 	}
 
 	return (
@@ -91,6 +91,7 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
+	console.log('Mytoken = ' + state.token);
 	return {
 		diet: state.diet,
 		token: state.token,
