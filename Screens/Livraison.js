@@ -9,18 +9,19 @@ import CountDown from 'react-native-countdown-component';
 
 function Livraison(props) {
 
-	const [start, setStart] = useState(true)
-	const [seconds, setSeconds] = useState(5);
-	const [commandRender, setCommandRender] = useState('')
+	const [start, setStart] = useState(true) //const use to start the delivery process 
+	const [seconds, setSeconds] = useState(5); // const to set the number of seconds for setTimeout
+	const [commandRender, setCommandRender] = useState('') // wich screen need to be render (preparation..livraison..)
 
 	useEffect(() => {
+		// if start = true launch delivery process 
 		if (start) {
+			// set commandRender to order value 
 			setCommandRender('order')
-			console.log('Preparation...')
 		}
 	}, [])
 
-
+	// render order
 	var order =
 		<View>
 			<Text
@@ -33,7 +34,7 @@ function Livraison(props) {
 				autoPlay
 			/>
 		</View>
-
+	// render preparation 
 	var preparation =
 		<View>
 			<Text
@@ -58,7 +59,7 @@ function Livraison(props) {
 				/>
 			</View>
 		</View >
-
+	// render livraison 
 	var livraison =
 		<View>
 			<Text
@@ -94,7 +95,7 @@ function Livraison(props) {
 				autoPlay
 			/>
 		</View>
-
+	// render done 
 	var done =
 		<View>
 			<Text
@@ -126,15 +127,14 @@ function Livraison(props) {
 			/>
 		</View>
 
+	// var showscreen = status de la commande 
 	var showscreen
 	if (commandRender == 'order') {
 		showscreen = order
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
-			console.log('Timer: ' + seconds)
 		} else {
 			setCommandRender('preparation')
-			console.log('Change to preparation')
 			setSeconds(10)
 		}
 
@@ -143,10 +143,8 @@ function Livraison(props) {
 		showscreen = preparation
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
-			console.log('Timer: ' + seconds)
 		} else {
 			setCommandRender('livraison')
-			console.log('Change to livraison')
 			setSeconds(10)
 		}
 
@@ -155,10 +153,8 @@ function Livraison(props) {
 		showscreen = livraison
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
-			console.log('Timer: ' + seconds)
 		} else {
 			setCommandRender('done')
-			console.log('Change to done')
 			setSeconds(10)
 		}
 	}
@@ -169,7 +165,6 @@ function Livraison(props) {
 			setTimeout(() => setSeconds(seconds - 1), 1000);
 		} else {
 			setCommandRender('preparation')
-			console.log('Change to prera again')
 			setSeconds(10)
 		}
 	}
