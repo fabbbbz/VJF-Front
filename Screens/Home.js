@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
@@ -12,8 +12,10 @@ import MyCheckbox from '../Components/Checkbox'
 
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
-	// const token = props.token
-	const token = 'BHbxITgVrZnaS5OQHxYVgaIaROQHliZr' // HARD CODED FOR TEST
+	const token = props.token
+	console.log('tokenInStore:', token)
+	console.log('diet: ', props.diet)
+	console.log('donts: ', props.donts)
 
 	const handleAllergies = allergy => {
 		setOverlay(false)
@@ -35,6 +37,11 @@ const Home = props => {
 			requestOptions
 		)
 		const result = await data.json()
+		if (result) {
+			props.navigation.navigate('Mood', {
+				screen: 'Mood',
+			})
+		}
 	}
 
 	return (
@@ -91,6 +98,7 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
+	console.log('Mytoken = ' + state.token)
 	return {
 		diet: state.diet,
 		token: state.token,

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { View, Text, StyleSheet, Image } from 'react-native'
+import { View, StyleSheet, Image } from 'react-native'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons'
-
+import { connect } from 'react-redux'
 const TopBar = props => {
 	const navigation = useNavigation()
 	const [navActive, setNavActive] = useState(false)
@@ -14,9 +14,15 @@ const TopBar = props => {
 	}
 
 	useEffect(() => {
+
+
 		props.navigation.navigate('Drawer')
 	}, [])
 
+	if (props.token.length < 1) {
+
+		props.navigation.navigate('SignIn', { screen: "SignIn" })
+	}
 	return (
 		<View style={styles.topbar}>
 			{props.showArrow ? (
@@ -33,7 +39,9 @@ const TopBar = props => {
 				style={styles.tinyLogo}
 				source={require('../assets/VJF-logo.png')}
 			/>
+			<Text style={{ color: "white", fontWeight: "bold" }}>{props.firstName}</Text>
 			<AntDesign name="user" size={24} color="#FFC901" onPress={showDrawer} />
+
 		</View>
 	)
 }
@@ -59,4 +67,13 @@ const styles = StyleSheet.create({
 	},
 })
 
-export default TopBar
+function mapStateToProps(state) {
+	return {
+		token: state.token,
+		firstName: state.firstName
+
+	}
+}
+
+export default connect(mapStateToProps, null)(TopBar)
+

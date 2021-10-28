@@ -1,17 +1,18 @@
 import React from 'react'
 import { StyleSheet, View, Image, ScrollView } from 'react-native'
-import { Button, Text } from 'react-native-elements'
-import Icon from 'react-native-vector-icons/FontAwesome'
+import { Text } from 'react-native-elements'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function FirstScreen(props) {
 	useEffect(() => {
 		AsyncStorage.getItem('token', (error, value) => {
 			if (value) {
-				console.log(value)
+				console.log("value getItem", value)
+				props.addToken(value)
+				// props.navigation.navigate('Mood', { screen: "Mood" })
 			}
 		})
 	}, [])
@@ -86,7 +87,14 @@ const styles = StyleSheet.create({
 	},
 })
 //get token from store
+function mapDispatchToProps(dispatch) {
+	return {
+		addToken: function (token) {
+			dispatch({ type: 'addToken', token: token })
+		},
+	}
+}
 function mapStateToProps(state) {
 	return { token: state.token }
 }
-export default connect(mapStateToProps, null)(FirstScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(FirstScreen)

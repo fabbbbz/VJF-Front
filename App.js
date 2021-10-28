@@ -8,6 +8,8 @@ import donts from './reducers/donts'
 import allergies from './reducers/allergies'
 import budget from './reducers/budget'
 import mood from './reducers/mood'
+import firstName from './reducers/firstName'
+import order from './reducers/order'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -24,11 +26,12 @@ import UserPage from './Screens/UserPage'
 import TimeToPay from './Screens/TimeToPay'
 import History from './Screens/History'
 import Livraison from './Screens/Livraison'
-
+import Logout from './Components/Logout'
+import FinalPage from './Screens/FinalPage'
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
-	combineReducers({ diet, token, donts, allergies, budget, mood })
+	combineReducers({ diet, token, firstName, donts, allergies, budget, mood, order })
 )
 
 const DrawerNav = props => {
@@ -44,7 +47,9 @@ const DrawerNav = props => {
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
 			<Stack.Screen name="History" component={History} />
 			<Drawer.Screen name="Livraison" component={Livraison} />
-		</Drawer.Navigator>
+			<Drawer.Screen name="Logout" component={Logout} />
+			<Drawer.Screen name="FinalPage" component={FinalPage} />
+		</Drawer.Navigator >
 	)
 }
 
@@ -60,7 +65,7 @@ export default function App() {
 					<Stack.Screen name="SignIn" component={SignIn} />
 					<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
 					<Stack.Screen name="Drawer" component={DrawerNav} />
-					<Stack.Screen name="Favorites" component={Favorites} />
+					<Stack.Screen name="Favorites" component={FinalPage} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>

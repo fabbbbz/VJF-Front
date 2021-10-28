@@ -14,22 +14,26 @@ function SignIn(props) {
 	const [ErrorsSignin, setErrorsSignin] = useState('')
 	const [token, setToken] = useState('')
 
-	var handleSubmitSignup = async () => {
+	var handleSubmitSignin = async () => {
 		// send user's infos to back
-		const data = await fetch(`http://172.17.1.105:3000/users/sign-in`, {
+		const data = await fetch(`http://${MY_IP}:3000/users/sign-in`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
+
 		})
 		//get answer from back
 		const body = await data.json()
+		console.log(body.user.firstName)
 		if (body.result == true) {
 			//set token
 			setToken(body.token)
 			// store token in local-storage
-			AsyncStorage.setItem('token', token)
+			AsyncStorage.setItem('token', body.token)
+			AsyncStorage.setItem('firstName', body.user.firstName)
 			// store token in redux
-			props.addToken(token)
+			props.addToken(body.token)
+			props.addFirstName(body.user.firstName)
 			props.navigation.navigate('Mood', { screen: 'Mood' })
 		} else {
 			setErrorsSignin(body.error)
@@ -66,7 +70,7 @@ function SignIn(props) {
 				/>
 			</View>
 			<View style={{ alignItems: 'center', alignSelf: 'center' }}>
-				<NextButton title="LOGIN" onPress={() => handleSubmitSignup()} />
+				<NextButton title="LOGIN" onPress={() => handleSubmitSignin()} />
 				<Text
 					style={{
 						textAlign: 'center',
@@ -110,6 +114,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		addToken: function (token) {
 			dispatch({ type: 'addToken', token: token })
+		},
+		addFirstName: function (firstName) {
+			dispatch({ type: 'addFirstName', firstName: firstName })
 		},
 	}
 }

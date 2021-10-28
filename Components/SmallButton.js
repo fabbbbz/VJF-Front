@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { StyleSheet } from 'react-native'
 import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 

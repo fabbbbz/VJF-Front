@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, Image, TouchableOpacity } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Text, Button } from 'react-native-elements'
-import SmallButton from './SmallButton'
+
 
 const Allergies = props => {
 	const [allergies, setAllergies] = useState([])
