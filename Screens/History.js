@@ -9,7 +9,7 @@ function History(props) {
 
     return (
         <View style={{ flex: 1 }} >
-            <TopBar />
+            <TopBar navigation={props.navigation} />
             <View style={styles.container}>
                 <Text h2 style={{ color: '#F2A902' }}>Derniers Plats</Text>
                 <Plats />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native'
 import { Button, Text } from 'react-native-elements'
 
@@ -7,6 +7,20 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const Plats = ({ name, onPress }) => {
+
+    // useEffect(() => {
+    //     async function loadOrders() {
+    //         // token en dur pour le test, A remplacer par :token
+    //         var rawResponse = await fetch(`http://${MY_IP}:3000/users/orders/BHbxITgVrZnaS5OQHxYVgaIaROQHliZr`)
+    //         var response = await rawResponse.json()
+
+    //         console.log(response)
+
+    //     }
+
+    //     loadOrders()
+
+    // }, []);
 
 
     return (
