@@ -34,7 +34,6 @@ function Mood(props) {
 		try {
 			const token = props.token
 
-<<<<<<< HEAD
             const dataToSend = {
                 mood: props.mood,
                 minprice: props.budget[0],
