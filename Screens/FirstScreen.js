@@ -6,14 +6,23 @@ import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Permissions from "expo-permissions"
-import Notification from '../Components/Notification'
+
+import {
+	LogBox
+} from 'react-native';
+
+// Ignore all logs for DEMO 
+//LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 function FirstScreen(props) {
+
 	useEffect(() => {
+		console.log('Mytoken = ' + props.token)
 		// Permission for iOS
 		Permissions.getAsync(Permissions.NOTIFICATIONS)
 			.then(statusObj => {
-				console.log(statusObj.status)
+				// Check if permission to send notification is ok
+				//console.log(statusObj.status)
 				// Check if we already have permission
 				if (statusObj.status !== "granted") {
 					// If permission is not there, ask for the same
@@ -39,6 +48,17 @@ function FirstScreen(props) {
 		})
 	}, [])
 
+	var redirectUser = () => {
+		if (props.token) {
+			console.log('if ' + props.token)
+			props.navigation.navigate('Mood', { screen: 'Mood' })
+		} else {
+			props.navigation.navigate('SignUp', { screen: 'SignUp' })
+			console.log('else ' + props.token)
+		}
+
+	}
+
 	return (
 		<View style={styles.container}>
 			<Image
@@ -50,55 +70,15 @@ function FirstScreen(props) {
 				Vite j'ai faim!
 			</Text>
 
-			<Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50 }}>
+			<Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50, marginBottom: 50 }}>
 				Vous nous renseignez, on choisit pour vous!
 			</Text>
 			<ScrollView>
 				<NextButton
-					title="HOME"
+					title="NEXT"
 					onPress={() => {
-						props.navigation.navigate('Home', { screen: 'Home' })
+						redirectUser()
 					}}
-				/>
-				<NextButton
-					title="SIGNUP"
-					onPress={() => {
-						props.navigation.navigate('SignUp', { screen: 'SignUp' })
-					}}
-				/>
-				<NextButton
-					title="MOOD"
-					onPress={() => {
-						props.navigation.navigate('Mood', { screen: 'Mood' })
-					}}
-				/>
-				<NextButton
-					title="LAST ORDER"
-					onPress={() => {
-						props.navigation.navigate('LastOrderScreen', {
-							screen: 'LastOrderScreen',
-						})
-					}}
-				/>
-				<NextButton
-					title="SIGN IN"
-					onPress={() => {
-						props.navigation.navigate('LastOrderScreen', {
-							screen: 'LastOrderScreen',
-						})
-					}}
-				/>
-				<NextButton
-					title="HISTORY"
-					onPress={() => {
-						props.navigation.navigate('History', {
-							screen: 'History',
-						})
-					}}
-				/>
-				<NextButton
-					title="TESTNOTIF"
-					onPress={Notification}
 				/>
 			</ScrollView>
 		</View>
@@ -112,6 +92,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F4F4F4',
 	},
 })
+
 //get token from store
 function mapDispatchToProps(dispatch) {
 	return {
@@ -120,7 +101,9 @@ function mapDispatchToProps(dispatch) {
 		},
 	}
 }
+
 function mapStateToProps(state) {
 	return { token: state.token }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(FirstScreen)
