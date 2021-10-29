@@ -22,24 +22,35 @@ const Home = props => {
 	}
 
 	const handleSubmitFoodProfile = async () => {
-		const dataToUpdate = {
-			diet: props.diet,
-			dont: props.donts,
-			allergies: props.allergies,
+		try {
+			const token = props.token
+			if (!token) {
+				props.navigation.navigate('Mood', {
+					screen: 'Mood',
+				})
+				return
+			}
+			const dataToUpdate = {
+				diet: props.diet,
+				dont: props.donts,
+				allergies: props.allergies,
+			}
+			const requestOptions = {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(dataToUpdate),
+			}
+			const data = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
+				requestOptions
+			)
+			const result = await data.json()
+			props.navigation.navigate('Mood', {
+				screen: 'Mood',
+			})
+		} catch (err) {
+			console.log(err)
 		}
-		const requestOptions = {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(dataToUpdate),
-		}
-		const data = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
-			requestOptions
-		)
-		const result = await data.json()
-		props.navigation.navigate('Mood', {
-			screen: 'Mood',
-		})
 	}
 
 	return (
