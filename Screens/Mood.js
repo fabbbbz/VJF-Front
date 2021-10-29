@@ -32,7 +32,6 @@ function Mood(props) {
 
 	const getTheSupriseMeal = async () => {
 		try {
-			const token = props.token
 			const dataToSend = {
 				mood: props.mood,
 				minprice: props.budget[0],
@@ -65,7 +64,6 @@ function Mood(props) {
 			console.log(err.message)
 		}
 	}
-
 	var address
 	if (addressIsChanged) {
 		address = (
@@ -81,7 +79,6 @@ function Mood(props) {
 			</Text>
 		)
 	}
-
 	return (
 		<ScrollView>
 			<TopBar showArrow={true} navigation={props.navigation} />
