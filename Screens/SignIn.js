@@ -4,7 +4,6 @@ import { Text, Input, Button } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
-import { MY_IP } from '@env'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
@@ -15,7 +14,6 @@ function SignIn(props) {
 	const [token, setToken] = useState('')
 
 	var handleSubmitSignin = async () => {
-		console.log(`${MY_IP}`)
 		// send user's infos to back
 		const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-in`, {
 			method: 'POST',
@@ -25,13 +23,11 @@ function SignIn(props) {
 		})
 		//get answer from back
 		const body = await data.json()
-		console.log(body.user.firstName)
 		if (body.result == true) {
 			//set token
 			setToken(body.token)
 			// store token in local-storage
 			AsyncStorage.setItem('token', body.token)
-			AsyncStorage.setItem('firstName', body.user.firstName)
 			// store token in redux
 			props.addToken(body.token)
 			props.addFirstName(body.user.firstName)
