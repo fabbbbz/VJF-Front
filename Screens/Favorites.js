@@ -63,7 +63,7 @@ function Favorites(props) {
         var favFilter = favData.filter(e => e._id !== meal_id)
         setFavData(favFilter)
         var rawResponse = await fetch(
-            `http://${MY_IP}:3000/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ/${meal_id}`,
+            `http://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ/${meal_id}`,
             {
                 method: 'DELETE',
             }
