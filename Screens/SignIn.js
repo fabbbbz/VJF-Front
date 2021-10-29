@@ -15,6 +15,7 @@ function SignIn(props) {
 	const [token, setToken] = useState('')
 
 	var handleSubmitSignin = async () => {
+		console.log(`${MY_IP}`)
 		// send user's infos to back
 		const data = await fetch(`http://${MY_IP}:3000/users/sign-in`, {
 			method: 'POST',
