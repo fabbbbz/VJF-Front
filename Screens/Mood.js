@@ -16,6 +16,7 @@ function Mood(props) {
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
 	const [pricerange, setPricerange] = useState([])
+	const [moodSelected, SetMoodSelected] = useState(false)
 
 	const changeAdress = () => {
 		setOverlay(true)
@@ -88,12 +89,17 @@ function Mood(props) {
 					On y est presque !
 				</Text>
 			</View>
-			<View>
-				<Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
-					{' '}
-					Quel est votre mood ?
-				</Text>
-			</View>
+			<Text
+				h4
+				style={{
+					color: '#000000',
+					fontWeight: 'bold',
+					textAlign: 'center',
+					marginTop: 20,
+				}}
+			>
+				Quel est votre mood ?
+			</Text>
 
 			<View
 				style={{
@@ -159,25 +165,30 @@ function Mood(props) {
 			<View>
 				<Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
 					{' '}
-					Nombre de personnes affamées{' '}
+					Nombre de personnes affamées: 1
 				</Text>
 			</View>
 
-			<View style={{ marginTop: 15, width: '100%', alignItems: 'center' }}>
+			<View
+				style={{
+					marginTop: 15,
+					width: '100%',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
+			>
 				<View
 					style={{
 						marginTop: 15,
 						flexDirection: 'column',
 						width: '90%',
-						alignItems: 'center',
 						backgroundColor: '#FFFFFF',
 						borderRadius: 5,
+						alignItems: 'center',
+						justifyContent: 'center',
 					}}
 				>
-					<Text
-						h4
-						style={{ color: '#000000', fontWeight: 'bold', width: '90%' }}
-					>
+					<Text h4 style={{ color: '#000000', fontWeight: 'bold' }}>
 						{' '}
 						Budget
 					</Text>
@@ -187,7 +198,7 @@ function Mood(props) {
 							marginBottom: 15,
 							flexDirection: 'row',
 							width: '90%',
-							alignItems: 'space-between',
+							justifyContent: 'center',
 							padding: 0,
 							marginLeft: 2,
 						}}
@@ -254,7 +265,17 @@ function Mood(props) {
 					}}
 				>
 					<Ionicons name="location-outline" size={24} color="#F2A902" />
-					<Text style={{ color: '#000000', fontWeight: 'bold' }}>Livré à:</Text>
+					<Text
+						style={{
+							flex: 1,
+							color: '#000000',
+							fontWeight: 'bold',
+							flexWrap: 'wrap',
+							justifyContent: 'center',
+						}}
+					>
+						Livré à:
+					</Text>
 					{address}
 					<Ionicons
 						name="ellipsis-vertical"
