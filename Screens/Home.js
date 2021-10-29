@@ -25,8 +25,8 @@ const Home = props => {
 		try {
 			const token = props.token
 			if (!token) {
-				props.navigation.navigate('Mood', {
-					screen: 'Mood',
+				props.navigation.navigate('SignUp', {
+					screen: 'SignUp',
 				})
 				return
 			}

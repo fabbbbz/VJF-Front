@@ -5,17 +5,14 @@ import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import * as Permissions from "expo-permissions"
+import * as Permissions from 'expo-permissions'
 
-import {
-	LogBox
-} from 'react-native';
+import { LogBox } from 'react-native'
 
-// Ignore all logs for DEMO 
+// Ignore all logs for DEMO
 //LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 function FirstScreen(props) {
-
 	useEffect(() => {
 		// Permission for iOS
 		Permissions.getAsync(Permissions.NOTIFICATIONS)
@@ -23,7 +20,7 @@ function FirstScreen(props) {
 				// Check if permission to send notification is ok
 				//console.log(statusObj.status)
 				// Check if we already have permission
-				if (statusObj.status !== "granted") {
+				if (statusObj.status !== 'granted') {
 					// If permission is not there, ask for the same
 					return Permissions.askAsync(Permissions.NOTIFICATIONS)
 				}
@@ -31,8 +28,8 @@ function FirstScreen(props) {
 			})
 			.then(statusObj => {
 				// If permission is still not given throw error
-				if (statusObj.status !== "granted") {
-					throw new Error("Permission not granted")
+				if (statusObj.status !== 'granted') {
+					throw new Error('Permission not granted')
 				}
 			})
 			.catch(err => {
@@ -49,10 +46,9 @@ function FirstScreen(props) {
 	var redirectUser = () => {
 		if (props.token) {
 			props.navigation.navigate('Mood', { screen: 'Mood' })
-		} else {
-			props.navigation.navigate('SignUp', { screen: 'SignUp' })
+			return
 		}
-
+		props.navigation.navigate('SignUp', { screen: 'SignUp' })
 	}
 
 	return (
@@ -66,16 +62,19 @@ function FirstScreen(props) {
 				Vite j'ai faim!
 			</Text>
 
-			<Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50, marginBottom: 50 }}>
+			<Text
+				h4
+				style={{
+					textAlign: 'center',
+					color: '#F2A902',
+					marginTop: 50,
+					marginBottom: 50,
+				}}
+			>
 				Vous nous renseignez, on choisit pour vous!
 			</Text>
 			<ScrollView>
-				<NextButton
-					title="NEXT"
-					onPress={() => {
-						redirectUser()
-					}}
-				/>
+				<NextButton title="NEXT" onPress={redirectUser} />
 			</ScrollView>
 		</View>
 	)
