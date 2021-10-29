@@ -45,7 +45,7 @@ function Mood(props) {
 				body: JSON.stringify(dataToSend),
 			}
 			const data = await fetch(
-				`http://${MY_IP}:3000/orders/recap/${token}`,
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`,
 				requestOptions
 			)
 			const formatedData = await data.json()
@@ -65,7 +65,6 @@ function Mood(props) {
 			console.log(err.message)
 		}
 	}
-
 	var address
 	if (addressIsChanged) {
 		address = (
@@ -81,7 +80,6 @@ function Mood(props) {
 			</Text>
 		)
 	}
-
 	return (
 		<ScrollView>
 			<TopBar showArrow={true} navigation={props.navigation} />
