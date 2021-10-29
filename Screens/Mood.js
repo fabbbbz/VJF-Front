@@ -33,25 +33,6 @@ function Mood(props) {
 	const getTheSupriseMeal = async () => {
 		try {
 			const token = props.token
-
-<<<<<<< HEAD
-            const dataToSend = {
-                mood: props.mood,
-                minprice: props.budget[0],
-                maxprice: props.budget[1],
-            }
-            const requestOptions = {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dataToSend),
-            }
-            const data = await fetch(
-                `http://${MY_IP}:3000/orders/recap/${token}`,
-                requestOptions
-            )
-            const formatedData = await data.json()
-            console.log('data: ', formatedData)
-=======
 			const dataToSend = {
 				mood: props.mood,
 				minprice: props.budget[0],
@@ -69,7 +50,6 @@ function Mood(props) {
 			)
 			const formatedData = await data.json()
 			console.log('[MoodScreen] data fetched: ', formatedData)
->>>>>>> friday
 
 			if (formatedData) {
 				const { result, message, order } = formatedData
