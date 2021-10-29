@@ -25,6 +25,7 @@ function Geoloc(props) {
 					for (let item of response) {
 						let address = `${item.name}, ${item.street}, ${item.postalCode}, ${item.city}`
 						setDisplayCurrentAddress(address)
+						props.addAddress(address)
 					}
 				}
 			}
@@ -39,6 +40,9 @@ function mapDispatchToProps(dispatch) {
 	return {
 		addCoords: function (lat, lng) {
 			dispatch({ type: 'STORE_COORD', payload: { lat, lng } })
+		},
+		addAddress: function (address) {
+			dispatch({ type: 'STORE_ADDRESS', address })
 		},
 	}
 }

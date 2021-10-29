@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
 import { MY_IP } from '@env'
+import Geoloc from './Geoloc'
 
 const Address = props => {
 	const [address, setAddress] = useState('')
@@ -10,7 +11,9 @@ const Address = props => {
 	useEffect(() => {
 		const token = props.token
 		const fetchUser = async () => {
-			const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/me/${token}`)
+			const data = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/me/${token}`
+			)
 			const user = await data.json()
 			setAddress(user.userInfo.adresse[0])
 		}
@@ -20,9 +23,9 @@ const Address = props => {
 	return (
 		<View style={styles.container}>
 			<Text h4 style={styles.text}>
-				Adresse de livraison
+				livré à :
 			</Text>
-			<Text style={styles.text}>{address}</Text>
+			<Text style={styles.text}>{props.address}</Text>
 		</View>
 	)
 }
@@ -45,6 +48,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
 	return {
 		token: state.token,
+		address: state.address,
 	}
 }
 

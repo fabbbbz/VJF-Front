@@ -11,6 +11,7 @@ import mood from './reducers/mood'
 import firstName from './reducers/firstName'
 import order from './reducers/order'
 import coords from './reducers/coords'
+import address from './reducers/address'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -42,6 +43,7 @@ const store = createStore(
 		mood,
 		order,
 		coords,
+		address,
 	})
 )
 
