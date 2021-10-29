@@ -16,7 +16,7 @@ const NextButton = ({ title, onPress }) => {
 				style={{
 					display: 'flex',
 					flexDirection: 'row',
-					justifyContent: 'space-between',
+					justifyContent: 'center',
 				}}
 				onPress={onPress}
 			>
@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontSize: 16,
 		fontWeight: '700',
-		marginLeft: 65,
+		flex: 1,
+		textAlign: 'center',
 	},
 })
 
