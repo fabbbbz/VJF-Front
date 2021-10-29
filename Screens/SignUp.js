@@ -19,7 +19,7 @@ function SignUp(props) {
 
 	var handleSubmitSignup = async () => {
 		// send user's infos to back
-		const data = await fetch(`http://${MY_IP}:3000/users/sign-up`, {
+		const data = await fetch(`http://172.17.1.105:3000/users/sign-up`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`,
@@ -30,7 +30,7 @@ function SignUp(props) {
 			//set token
 			setToken(body.token)
 			// store token in local-storage
-			AsyncStorage.setItem('token', token)
+			AsyncStorage.setItem('token', body.token)
 			// store token in redux
 			props.addToken(body.token)
 			props.navigation.navigate('Home', { screen: 'Home' })
