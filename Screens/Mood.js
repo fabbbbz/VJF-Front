@@ -50,7 +50,6 @@ function Mood(props) {
             )
             const formatedData = await data.json()
             console.log('data: ', formatedData)
-=======
 			const dataToSend = {
 				mood: props.mood,
 				minprice: props.budget[0],
@@ -68,7 +67,6 @@ function Mood(props) {
 			)
 			const formatedData = await data.json()
 			console.log('[MoodScreen] data fetched: ', formatedData)
->>>>>>> friday
 
 			if (formatedData) {
 				const { result, message, order } = formatedData
@@ -84,7 +82,6 @@ function Mood(props) {
 			console.log(err.message)
 		}
 	}
-
 	var address
 	if (addressIsChanged) {
 		address = (
@@ -100,7 +97,6 @@ function Mood(props) {
 			</Text>
 		)
 	}
-
 	return (
 		<ScrollView>
 			<TopBar showArrow={true} navigation={props.navigation} />
