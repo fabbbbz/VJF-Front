@@ -6,8 +6,7 @@ import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
-// import { MY_IP } from '@env'
-const MY_IP = '172.17.1.176'
+import { MY_IP } from '@env'
 
 function Mood(props) {
     const [overlay, setOverlay] = useState(false)
@@ -44,7 +43,7 @@ function Mood(props) {
                 body: JSON.stringify(dataToSend),
             }
             const data = await fetch(
-                `http:///172.17.1.145:3000/orders/recap/${token}`,
+                `http://${MY_IP}:3000/orders/recap/${token}`,
                 requestOptions
             )
             const formatedData = await data.json()

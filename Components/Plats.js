@@ -22,7 +22,7 @@ export default function Plats() {
 
 		async function loadOrders() {
 			// token en dur pour le test, A remplacer par :token
-			var rawResponse = await fetch(`http://172.17.1.145:3000/users/history/${token}`)
+			var rawResponse = await fetch(`http://${My_IP}:3000/users/history/${token}`)
 			var response = await rawResponse.json()
 
 			setOrdersHistory(response.meals)

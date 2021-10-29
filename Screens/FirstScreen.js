@@ -17,7 +17,6 @@ import {
 function FirstScreen(props) {
 
 	useEffect(() => {
-		console.log('Mytoken = ' + props.token)
 		// Permission for iOS
 		Permissions.getAsync(Permissions.NOTIFICATIONS)
 			.then(statusObj => {
@@ -41,7 +40,6 @@ function FirstScreen(props) {
 			})
 		AsyncStorage.getItem('token', (error, value) => {
 			if (value) {
-				console.log("value getItem", value)
 				props.addToken(value)
 				// props.navigation.navigate('Mood', { screen: "Mood" })
 			}
@@ -50,11 +48,9 @@ function FirstScreen(props) {
 
 	var redirectUser = () => {
 		if (props.token) {
-			console.log('if ' + props.token)
 			props.navigation.navigate('Mood', { screen: 'Mood' })
 		} else {
 			props.navigation.navigate('SignUp', { screen: 'SignUp' })
-			console.log('else ' + props.token)
 		}
 
 	}
