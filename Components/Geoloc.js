@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import { Text } from 'react-native'
+import { connect } from 'react-redux'
 
 import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
 
-export default function Geoloc() {
+function Geoloc(props) {
 	const [displayCurrentAddress, setDisplayCurrentAddress] = useState('')
+
+	console.log('coords:', props.coords)
 
 	useEffect(() => {
 		async function askPermissions() {
@@ -14,6 +17,8 @@ export default function Geoloc() {
 				let { coords } = await Location.getCurrentPositionAsync()
 				if (coords) {
 					const { latitude, longitude } = coords
+					console.log(latitude, longitude)
+					props.addCoords(latitude, longitude)
 					let response = await Location.reverseGeocodeAsync({
 						latitude,
 						longitude,
@@ -30,3 +35,19 @@ export default function Geoloc() {
 
 	return <Text>{displayCurrentAddress}</Text>
 }
+
+function mapDispatchToProps(dispatch) {
+	return {
+		addCoords: function (lat, lng) {
+			dispatch({ type: 'STORE_COORD', payload: { lat, lng } })
+		},
+	}
+}
+
+function mapStateToProps(state) {
+	return {
+		coords: state.coords,
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Geoloc)

@@ -8,18 +8,29 @@ import { MY_IP } from '@env'
 const LastOrder = props => {
 	const [meal, setMeal] = useState('')
 	const [restaurant, setRestaurant] = useState('')
+	const [hasOrder, setHasOrder] = useState(true)
 
 	useEffect(() => {
 		// Fetch data to get last order
 		const token = props.token
+		console.log('token : ', token)
 		const fetchUser = async () => {
-			const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
-			const lastOrder = await data.json()
-			console.log(lastOrder)
-			setMeal(lastOrder.mealName)
-			setRestaurant(lastOrder.restaurant)
+			try {
+				const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
+				const lastOrder = await data.json()
+				if (!lastOrder) setLastOrder(false)
+
+				setMeal(lastOrder.mealName)
+				setRestaurant(lastOrder.restaurant)
+			} catch (err) {
+				console.log(err.message)
+			}
 		}
-		fetchUser()
+		if (token) {
+			fetchUser()
+		} else {
+			setHasOrder(false)
+		}
 	}, [])
 
 	return (
@@ -27,7 +38,9 @@ const LastOrder = props => {
 			<Text h4 style={styles.text}>
 				{meal}
 			</Text>
-			<Text style={styles.text}>de : {restaurant}</Text>
+			<Text style={styles.text}>
+				{hasOrder ? `de : ${restaurant}` : "Vous n'avez pas encore commandé"}
+			</Text>
 		</View>
 	)
 }
