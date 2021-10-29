@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-	console.log('Mytoken = ' + state.token)
+	// console.log('Mytoken = ' + state.token)
 	return {
 		diet: state.diet,
 		token: state.token,
