@@ -3,6 +3,7 @@ import { View, StyleSheet, ScrollView } from 'react-native'
 import { Button, Text, Input, Overlay, Icon } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
+import NextButtonFullSize from '../Components/NextButtonFullSize'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
@@ -15,11 +16,6 @@ function Mood(props) {
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
 	const [pricerange, setPricerange] = useState([])
-
-	console.log('[MoodScreen] mood:', props.mood)
-	console.log('[MoodScreen] budget', props.budget)
-	console.log('[MoodScreen] coords', props.coords)
-	console.log('[MoodScreen] TOKEN', props.token)
 
 	const changeAdress = () => {
 		setOverlay(true)
@@ -306,7 +302,10 @@ function Mood(props) {
 						justifyContent: 'center',
 					}}
 				>
-					<NextButton title="VITE J'AI FAIM" onPress={getTheSupriseMeal} />
+					<NextButtonFullSize
+						title="VITE J'AI FAIM"
+						onPress={getTheSupriseMeal}
+					/>
 				</View>
 			</View>
 		</ScrollView>
