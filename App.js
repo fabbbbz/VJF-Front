@@ -55,11 +55,11 @@ const DrawerNav = props => {
 			<Drawer.Screen name="Mood" component={Mood} />
 			<Drawer.Screen name="SignUp" component={SignUp} />
 			<Drawer.Screen name="SignIn" component={SignIn} />
-			<Drawer.Screen name="Favorites" component={Favorites} />
+			<Drawer.Screen name="Favoris" component={Favorites} />
 			<Drawer.Screen name="LastOrderScreen" component={LastOrderScreen} />
-			<Drawer.Screen name="UserPage" component={UserPage} />
+			<Drawer.Screen name="Infos Perso" component={UserPage} />
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
-			<Drawer.Screen name="History" component={History} />
+			<Drawer.Screen name="Historique" component={History} />
 			<Drawer.Screen name="Livraison" component={Livraison} />
 			<Drawer.Screen name="FinalPage" component={FinalPage} />
 			<Drawer.Screen name="Logout" component={Logout} />
