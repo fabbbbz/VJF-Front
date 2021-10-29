@@ -3,6 +3,7 @@ import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
+import Notification from '../Components/Notification'
 
 function FinalPage(props) {
     return (
@@ -23,6 +24,8 @@ function FinalPage(props) {
                 <NextButton
                     title="MOOD"
                     onPress={() => {
+                        console.log('finish !!')
+                        Notification()
                         props.navigation.navigate('Mood', { screen: 'Mood' })
                     }}
                 />
@@ -42,4 +45,5 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
     return { token: state.token }
 }
+
 export default connect(mapStateToProps, null)(FinalPage)

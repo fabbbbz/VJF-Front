@@ -47,8 +47,9 @@ const DrawerNav = props => {
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
 			<Stack.Screen name="History" component={History} />
 			<Drawer.Screen name="Livraison" component={Livraison} />
-			<Drawer.Screen name="Logout" component={Logout} />
 			<Drawer.Screen name="FinalPage" component={FinalPage} />
+			<Drawer.Screen name="Logout" component={Logout} />
+
 		</Drawer.Navigator >
 	)
 }
