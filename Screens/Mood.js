@@ -32,6 +32,7 @@ function Mood(props) {
 
     const getTheSupriseMeal = async () => {
         try {
+            const token = props.token
             const dataToSend = {
                 mood: props.mood,
                 minprice: props.budget[0],
