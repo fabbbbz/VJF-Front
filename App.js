@@ -48,6 +48,7 @@ const store = createStore(
 const DrawerNav = props => {
 	return (
 		<Drawer.Navigator screenOptions={{ headerShown: false }}>
+			<Drawer.Screen name="First" component={FirstScreen} />
 			<Drawer.Screen name="Home" component={Home} />
 			<Drawer.Screen name="Mood" component={Mood} />
 			<Drawer.Screen name="SignUp" component={SignUp} />
@@ -69,14 +70,7 @@ export default function App() {
 		<Provider store={store}>
 			<NavigationContainer>
 				<Stack.Navigator screenOptions={{ headerShown: false }}>
-					<Stack.Screen name="First" component={FirstScreen} />
-					<Stack.Screen name="Home" component={Home} />
-					<Stack.Screen name="SignUp" component={SignUp} />
-					<Stack.Screen name="Mood" component={Mood} />
-					<Stack.Screen name="SignIn" component={SignIn} />
-					<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
 					<Stack.Screen name="Drawer" component={DrawerNav} />
-					<Stack.Screen name="Favorites" component={FinalPage} />
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
