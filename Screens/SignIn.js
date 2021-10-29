@@ -1,6 +1,6 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView } from 'react-native'
-import { Text, Input, Button } from 'react-native-elements'
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
@@ -36,58 +36,66 @@ function SignIn(props) {
 			setErrorsSignin(body.error)
 		}
 	}
+	var finsihProcess = () => {
+		props.navigation.navigate('SignUp', { screen: 'SignUp' })
+	}
 
 	return (
 		<ScrollView>
 			<TopBar navigation={props.navigation} />
-			<View style={{ alignItems: 'center' }}>
-				<Text
-					h3
-					style={{
-						textAlign: 'center',
-						color: '#000000',
-						marginTop: 15,
-						marginBottom: 30,
-					}}
-				>
-					Login Page
-				</Text>
-				<Input
-					containerStyle={{ marginBottom: 15, width: '70%' }}
-					inputStyle={{ marginLeft: 10 }}
-					placeholder="Email"
-					onChangeText={text => setSignUpEmail(text)}
-				/>
-				<Input
-					containerStyle={{ marginBottom: 15, width: '70%' }}
-					inputStyle={{ marginLeft: 10 }}
-					secureTextEntry
-					placeholder="Password"
-					onChangeText={text => setSignUpPassword(text)}
-				/>
-			</View>
-			<View style={{ alignItems: 'center', alignSelf: 'center' }}>
-				<NextButton title="LOGIN" onPress={() => handleSubmitSignin()} />
-				<Text
-					style={{
-						textAlign: 'center',
-						color: '#000000',
-						marginTop: 15,
-						marginBottom: 15,
-					}}
-				>
-					Ou
-				</Text>
-				<Button
-					buttonStyle={{ backgroundColor: 'transparent' }}
-					onPress={() =>
-						props.navigation.navigate('SignUp', { screen: 'SignUp' })
-					}
-					title="Continuer pour vous enregister"
-				/>
-			</View>
 			<View>
-				<Text style={styles.errormesssage}>{ErrorsSignin}</Text>
+				<View style={{ alignItems: 'center' }}>
+					<Text
+						h3
+						style={{
+							textAlign: 'center',
+							color: '#000000',
+							marginTop: 15,
+							marginBottom: 30,
+						}}
+					>
+						Login Page
+					</Text>
+					<Input
+						containerStyle={{ marginBottom: 15, width: '70%' }}
+						inputStyle={{ marginLeft: 10 }}
+						placeholder="Email"
+						onChangeText={text => setSignUpEmail(text)}
+					/>
+					<Input
+						containerStyle={{ marginBottom: 15, width: '70%' }}
+						inputStyle={{ marginLeft: 10 }}
+						secureTextEntry
+						placeholder="Password"
+						onChangeText={text => setSignUpPassword(text)}
+					/>
+				</View>
+				<View style={{ alignSelf: 'center' }}>
+					<NextButton
+
+						title="LOGIN" onPress={() => handleSubmitSignin()} />
+					<Text
+						style={{
+							textAlign: 'center',
+							color: '#000000',
+							marginTop: 20,
+							marginBottom: 15,
+							fontSize: 20
+						}}
+					>
+						Ou
+					</Text>
+				</View>
+				<View style={styles.container}>
+					<TouchableOpacity>
+						<Text style={styles.text}>
+							Continuer pour vous enregister
+						</Text>
+					</TouchableOpacity>
+				</View>
+				<View>
+					<Text style={styles.errormesssage}>{ErrorsSignin}</Text>
+				</View>
 			</View>
 		</ScrollView>
 	)
@@ -104,6 +112,18 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#FF9800',
 		fontSize: 20,
+	},
+	container: {
+		flex: 1,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		justifyContent: 'center',
+		alignContent: 'center',
+		padding: 10,
+	},
+	text: {
+		fontSize: 20,
+		color: '#0000FF',
 	},
 })
 
