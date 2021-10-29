@@ -12,7 +12,7 @@ function Favorites(props) {
         async function loadFavorites() {
             const token = props.token
             var rawResponse = await fetch(
-                `http://${MY_IP}:3000/users/favorites/${token}`
+                `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
             )
             var response = await rawResponse.json()
 

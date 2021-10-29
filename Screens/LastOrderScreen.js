@@ -27,7 +27,7 @@ const LastOrderScreen = props => {
 			const token = props.token
 			const mealId = 'SOME_ID'
 			console.log('fetch api')
-			const data = await fetch(`http://${MY_IP}:3000/users/favorites`, {
+			const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 				body: `token=${token}&meal_id=${mealId}`,

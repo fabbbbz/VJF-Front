@@ -17,7 +17,7 @@ function SignIn(props) {
 	var handleSubmitSignin = async () => {
 		console.log(`${MY_IP}`)
 		// send user's infos to back
-		const data = await fetch(`http://${MY_IP}:3000/users/sign-in`, {
+		const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-in`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,

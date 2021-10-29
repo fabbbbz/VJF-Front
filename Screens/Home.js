@@ -33,7 +33,7 @@ const Home = props => {
 			body: JSON.stringify(dataToUpdate),
 		}
 		const data = await fetch(
-			`http://${MY_IP}:3000/users/update-me/${token}`,
+			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
 			requestOptions
 		)
 		const result = await data.json()
