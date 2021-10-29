@@ -17,7 +17,6 @@ function Geoloc(props) {
 				let { coords } = await Location.getCurrentPositionAsync()
 				if (coords) {
 					const { latitude, longitude } = coords
-					console.log(latitude, longitude)
 					props.addCoords(latitude, longitude)
 					let response = await Location.reverseGeocodeAsync({
 						latitude,
