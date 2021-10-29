@@ -19,7 +19,7 @@ const TimeToPay = props => {
             console.log('take my money')
             // fetch une route pour update status de la commande
             const data = await fetch(
-                `http://${MY_IP}:3000/orders/update-order/${props.order}`,
+                `https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/update-order/${props.order}`,
                 {
                     method: 'PUT',
                 }

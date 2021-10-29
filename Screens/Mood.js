@@ -30,6 +30,7 @@ function Mood(props) {
 		setAddressIsChanged(true)
 	}
 
+<<<<<<< HEAD
 	const getTheSupriseMeal = async () => {
 		try {
 			const token = props.token
@@ -50,6 +51,28 @@ function Mood(props) {
 			)
 			const formatedData = await data.json()
 			console.log('[MoodScreen] data fetched: ', formatedData)
+=======
+    const getTheSupriseMeal = async () => {
+        try {
+            const token = props.token
+            const dataToSend = {
+                mood: props.mood,
+                minprice: props.budget[0],
+                maxprice: props.budget[1],
+                coords: props.coords,
+            }
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataToSend),
+            }
+            const data = await fetch(
+                `https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`,
+                requestOptions
+            )
+            const formatedData = await data.json()
+            console.log('[MoodScreen] data fetched: ', formatedData)
+>>>>>>> 84fd860ddfb8bcd3d8172534a5c14f19a6a4193f
 
 			if (formatedData) {
 				const { result, message, order } = formatedData

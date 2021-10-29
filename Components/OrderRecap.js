@@ -11,7 +11,7 @@ const OrderRecap = props => {
 		// Fetch data to get last order
 		const token = props.token
 		const fetchUser = async () => {
-			const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
+			const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`)
 			const user = await data.json()
 			// console.log(user)
 			setPrice(user.orderPrice)

@@ -16,7 +16,7 @@ const LastOrder = props => {
 		console.log('token : ', token)
 		const fetchUser = async () => {
 			try {
-				const data = await fetch(`http://${MY_IP}:3000/orders/recap/${token}`)
+				const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`)
 				const lastOrder = await data.json()
 				if (!lastOrder) setLastOrder(false)
 
