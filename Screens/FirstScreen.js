@@ -64,10 +64,10 @@ function FirstScreen(props) {
 			style={styles.image}
 		>
 			<View style={styles.content}>
-				<Text h3 style={styles.text}>
+				<Text h4 style={styles.text}>
 					Vous nous renseignez
 				</Text>
-				<Text h3 style={styles.text2}>
+				<Text h4 style={styles.text2}>
 					On choisit pour vous
 				</Text>
 
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
 	text2: {
 		textAlign: 'center',
 		color: '#F2A902',
-		marginBottom: 35,
+		marginBottom: 50,
 	},
 })
 

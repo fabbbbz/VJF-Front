@@ -60,12 +60,14 @@ const Home = props => {
 				<Diet />
 				<Donts />
 				<Allergies overlay={overlay} setOverlay={setOverlay} />
-				<NextButton
-					title="NEXT"
-					color="#F2A902"
-					width="200"
-					onPress={handleSubmitFoodProfile}
-				/>
+				<View style={{ alignSelf: 'flex-end' }}>
+					<NextButton
+						title="CONTINUER"
+						color="#F2A902"
+						width="200"
+						onPress={handleSubmitFoodProfile}
+					/>
+				</View>
 				<Overlay
 					isVisible={overlay}
 					onBackdropPress={() => setOverlay(false)}

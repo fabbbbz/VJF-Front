@@ -17,6 +17,7 @@ function Mood(props) {
 	const [codePostal, setcodePostal] = useState('')
 	const [pricerange, setPricerange] = useState([])
 	const [moodSelected, SetMoodSelected] = useState(false)
+	const [errorMsg, setErrorMsg] = useState('')
 
 	const changeAdress = () => {
 		setOverlay(true)
@@ -30,6 +31,9 @@ function Mood(props) {
 	const getTheSupriseMeal = async () => {
 		try {
 			const token = props.token
+			if (!token)
+				setErrorMsg('Connectez-vous pour commandez votre repas surprise !')
+
 			const dataToSend = {
 				mood: props.mood,
 				minprice: props.budget[0],
@@ -56,6 +60,10 @@ function Mood(props) {
 					props.navigation.navigate('TimeToPay', {
 						screen: 'TimeToPay',
 					})
+				} else if (result === 'success' && message === 'no meal fits') {
+					setErrorMsg(
+						'Désolé, nous ne trouvons aucun plat correspondant à vos critères près de vous'
+					)
 				}
 			}
 		} catch (err) {
@@ -314,6 +322,12 @@ function Mood(props) {
 						/>
 					</ScrollView>
 					<NextButton title="VALIDER" onPress={() => updateAdress()} />
+				</Overlay>
+				<Overlay
+					isVisible={errorMsg ? true : false}
+					onBackdropPress={() => setErrorMsg('')}
+				>
+					<Text>{errorMsg}</Text>
 				</Overlay>
 				<View
 					style={{

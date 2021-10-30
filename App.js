@@ -30,6 +30,8 @@ import History from './Screens/History'
 import Livraison from './Screens/Livraison'
 import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
+import CustomDrawer from './Components/CustomDrawer'
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
@@ -49,21 +51,51 @@ const store = createStore(
 
 const DrawerNav = props => {
 	return (
-		<Drawer.Navigator screenOptions={{ headerShown: false }}>
-			<Drawer.Screen name="First" component={FirstScreen} />
-			<Drawer.Screen name="Home" component={Home} />
-			<Drawer.Screen name="Mood" component={Mood} />
-			<Drawer.Screen name="SignUp" component={SignUp} />
-			<Drawer.Screen name="SignIn" component={SignIn} />
-			<Drawer.Screen name="Favoris" component={Favorites} />
-			<Drawer.Screen name="LastOrderScreen" component={LastOrderScreen} />
-			<Drawer.Screen name="Infos Perso" component={UserPage} />
-			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
+		<Drawer.Navigator
+			screenOptions={{
+				headerShown: false,
+				drawerStyle: { backgroundColor: '#FFC901' },
+				drawerLabelStyle: { color: '#000000', fontSize: 16 },
+				drawerPosition: 'right',
+			}}
+			drawerContent={props => <CustomDrawer {...props} />}
+		>
+			<Drawer.Screen
+				name="StackNav"
+				component={StackNav}
+				options={{
+					drawerLabel: () => null,
+					title: null,
+					drawerIcon: () => null,
+					drawerActiveTintColor: '#FFC901',
+				}}
+			/>
+			<Drawer.Screen name="COMMANDEZ A MANGER" component={Mood} />
+			<Drawer.Screen name="Ma dernière commande" component={LastOrderScreen} />
+			<Drawer.Screen name="Mes Favoris" component={Favorites} />
 			<Drawer.Screen name="Historique" component={History} />
-			<Drawer.Screen name="Livraison" component={Livraison} />
-			<Drawer.Screen name="FinalPage" component={FinalPage} />
-			<Drawer.Screen name="Logout" component={Logout} />
+			<Drawer.Screen name="Infos Perso" component={UserPage} />
 		</Drawer.Navigator>
+	)
+}
+
+const StackNav = props => {
+	return (
+		<Stack.Navigator
+			screenOptions={{
+				headerShown: false,
+			}}
+		>
+			<Stack.Screen name="First" component={FirstScreen} />
+			<Stack.Screen name="Home" component={Home} />
+			<Stack.Screen name="Mood" component={Mood} />
+			<Stack.Screen name="SignUp" component={SignUp} />
+			<Stack.Screen name="SignIn" component={SignIn} />
+			<Stack.Screen name="Livraison" component={Livraison} />
+			<Stack.Screen name="FinalPage" component={FinalPage} />
+			<Stack.Screen name="TimeToPay" component={TimeToPay} />
+			<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
+		</Stack.Navigator>
 	)
 }
 

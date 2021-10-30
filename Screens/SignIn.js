@@ -15,12 +15,14 @@ function SignIn(props) {
 
 	var handleSubmitSignin = async () => {
 		// send user's infos to back
-		const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-in`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
-
-		})
+		const data = await fetch(
+			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-in`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
+			}
+		)
 		//get answer from back
 		const body = await data.json()
 		if (body.result == true) {
@@ -36,7 +38,8 @@ function SignIn(props) {
 			setErrorsSignin(body.error)
 		}
 	}
-	var finsihProcess = () => {
+
+	var finishProcess = () => {
 		props.navigation.navigate('SignUp', { screen: 'SignUp' })
 	}
 
@@ -71,26 +74,22 @@ function SignIn(props) {
 					/>
 				</View>
 				<View style={{ alignSelf: 'center' }}>
-					<NextButton
-
-						title="LOGIN" onPress={() => handleSubmitSignin()} />
+					<NextButton title="LOGIN" onPress={() => handleSubmitSignin()} />
 					<Text
 						style={{
 							textAlign: 'center',
 							color: '#000000',
 							marginTop: 20,
 							marginBottom: 15,
-							fontSize: 20
+							fontSize: 20,
 						}}
 					>
 						Ou
 					</Text>
 				</View>
 				<View style={styles.container}>
-					<TouchableOpacity>
-						<Text style={styles.text}>
-							Continuer pour vous enregister
-						</Text>
+					<TouchableOpacity onPress={finishProcess}>
+						<Text style={styles.text}>Continuer pour vous enregister</Text>
 					</TouchableOpacity>
 				</View>
 				<View>
