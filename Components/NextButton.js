@@ -36,7 +36,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		textAlign: 'center',
-		alignSelf: 'flex-end',
 		marginRight: 10,
 	},
 	text: {

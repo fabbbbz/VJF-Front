@@ -1,21 +1,24 @@
 import React from 'react'
-import { StyleSheet, View, Image, ScrollView } from 'react-native'
+import {
+	StyleSheet,
+	View,
+	Image,
+	ScrollView,
+	ImageBackground,
+} from 'react-native'
 import { Text } from 'react-native-elements'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import * as Permissions from "expo-permissions"
+import * as Permissions from 'expo-permissions'
 
-import {
-	LogBox
-} from 'react-native';
+import { LogBox } from 'react-native'
 
-// Ignore all logs for DEMO 
+// Ignore all logs for DEMO
 //LogBox.ignoreAllLogs(); //Ignore all log notifications
 
 function FirstScreen(props) {
-
 	useEffect(() => {
 		// Permission for iOS
 		Permissions.getAsync(Permissions.NOTIFICATIONS)
@@ -23,7 +26,7 @@ function FirstScreen(props) {
 				// Check if permission to send notification is ok
 				//console.log(statusObj.status)
 				// Check if we already have permission
-				if (statusObj.status !== "granted") {
+				if (statusObj.status !== 'granted') {
 					// If permission is not there, ask for the same
 					return Permissions.askAsync(Permissions.NOTIFICATIONS)
 				}
@@ -31,8 +34,8 @@ function FirstScreen(props) {
 			})
 			.then(statusObj => {
 				// If permission is still not given throw error
-				if (statusObj.status !== "granted") {
-					throw new Error("Permission not granted")
+				if (statusObj.status !== 'granted') {
+					throw new Error('Permission not granted')
 				}
 			})
 			.catch(err => {
@@ -52,40 +55,56 @@ function FirstScreen(props) {
 		} else {
 			props.navigation.navigate('SignIn', { screen: 'SignIn' })
 		}
-
 	}
 
 	return (
-		<View style={styles.container}>
-			<Image
-				source={require('../assets/VJF-logo.png')}
-				style={{ width: 200, height: 200, marginTop: 100 }}
-			/>
+		<ImageBackground
+			source={require('./../assets/BGVJF-min.png')}
+			resizeMode="cover"
+			style={styles.image}
+		>
+			<View style={styles.content}>
+				<Text h3 style={styles.text}>
+					Vous nous renseignez
+				</Text>
+				<Text h3 style={styles.text2}>
+					On choisit pour vous
+				</Text>
 
-			<Text h1 style={{ textAlign: 'center', color: '#000000', marginTop: 50 }}>
-				Vite j'ai faim!
-			</Text>
-
-			<Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50, marginBottom: 50 }}>
-				Vous nous renseignez, on choisit pour vous!
-			</Text>
-			<ScrollView>
 				<NextButton
-					title="NEXT"
+					title="Commencer"
 					onPress={() => {
 						redirectUser()
 					}}
 				/>
-			</ScrollView>
-		</View>
+			</View>
+		</ImageBackground>
 	)
 }
 
 const styles = StyleSheet.create({
-	container: {
+	image: {
 		flex: 1,
+		resizeMode: 'cover',
+		width: '100%',
 		alignItems: 'center',
-		backgroundColor: '#F4F4F4',
+		justifyContent: 'flex-end',
+	},
+	content: {
+		marginBottom: 80,
+		display: 'flex',
+		flexDirection: 'column',
+		alignItems: 'center',
+	},
+	text: {
+		textAlign: 'center',
+		color: '#F2A902',
+		marginBottom: 10,
+	},
+	text2: {
+		textAlign: 'center',
+		color: '#F2A902',
+		marginBottom: 35,
 	},
 })
 

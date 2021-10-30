@@ -72,38 +72,19 @@ function Favorites(props) {
 		console.log(response)
 	}
 
-<<<<<<< HEAD
-    async function handleFavDeletion(meal_id) {
-        var favFilter = favData.filter(e => e._id !== meal_id)
-        setFavData(favFilter)
-        var rawResponse = await fetch(
-            `http://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ/${meal_id}`,
-            {
-                method: 'DELETE',
-            }
-        )
-        var response = await rawResponse.json()
-        console.log(response)
-    }
+	async function handleFavDeletion(meal_id) {
+		var favFilter = favData.filter(e => e._id !== meal_id)
+		setFavData(favFilter)
+		var rawResponse = await fetch(
+			`http://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ/${meal_id}`,
+			{
+				method: 'DELETE',
+			}
+		)
+		var response = await rawResponse.json()
+		console.log(response)
+	}
 
-    return (
-        <ScrollView>
-            <TopBar navigation={props.navigation} />
-            <Text
-                h3
-                style={{
-                    alignSelf: 'center',
-                    marginTop: 15,
-                    textDecorationLine: 'underline',
-                    color: '#FFC901',
-                }}
-            >
-                Favoris
-            </Text>
-            {favList}
-        </ScrollView>
-    )
-=======
 	return (
 		<ScrollView>
 			<TopBar navigation={props.navigation} />
@@ -121,7 +102,6 @@ function Favorites(props) {
 			{favList}
 		</ScrollView>
 	)
->>>>>>> fix
 }
 
 function mapStateToProps(state) {

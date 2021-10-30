@@ -13,10 +13,12 @@ const LastOrder = props => {
 	useEffect(() => {
 		// Fetch data to get last order
 		const token = props.token
-		console.log('token : ', token)
+		console.log('[LASTORDER-PAGE] token : ', token)
 		const fetchUser = async () => {
 			try {
-				const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`)
+				const data = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`
+				)
 				const lastOrder = await data.json()
 				if (!lastOrder) setLastOrder(false)
 
@@ -31,7 +33,7 @@ const LastOrder = props => {
 		} else {
 			setHasOrder(false)
 		}
-	}, [])
+	})
 
 	return (
 		<View style={styles.container}>
