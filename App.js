@@ -29,6 +29,7 @@ import History from './Screens/History'
 import Livraison from './Screens/Livraison'
 import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
+import Allergies from './Screens/Allergies'
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
@@ -58,6 +59,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="UserPage" component={UserPage} />
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
 			<Drawer.Screen name="History" component={History} />
+			<Drawer.Screen name="Allergies" component={Allergies} />
 			<Drawer.Screen name="Livraison" component={Livraison} />
 			<Drawer.Screen name="FinalPage" component={FinalPage} />
 			<Drawer.Screen name="Logout" component={Logout} />
