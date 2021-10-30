@@ -27,11 +27,14 @@ const LastOrderScreen = props => {
 			const token = props.token
 			const mealId = 'SOME_ID'
 			console.log('fetch api')
-			const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `token=${token}&meal_id=${mealId}`,
-			})
+			const data = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: `token=${token}&meal_id=${mealId}`,
+				}
+			)
 			const result = await data.json()
 			console.log(result)
 		} catch (err) {

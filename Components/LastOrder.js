@@ -4,16 +4,17 @@ import { View, StyleSheet } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
 import { MY_IP } from '@env'
+import { useIsFocused } from '@react-navigation/native'
 
 const LastOrder = props => {
 	const [meal, setMeal] = useState('')
 	const [restaurant, setRestaurant] = useState('')
 	const [hasOrder, setHasOrder] = useState(true)
+	const isFocused = useIsFocused()
 
 	useEffect(() => {
 		// Fetch data to get last order
 		const token = props.token
-		console.log('[LASTORDER-PAGE] token : ', token)
 		const fetchUser = async () => {
 			try {
 				const data = await fetch(
@@ -25,6 +26,7 @@ const LastOrder = props => {
 				setMeal(lastOrder.mealName)
 				setRestaurant(lastOrder.restaurant)
 			} catch (err) {
+				console.log('Error in LastOrder fetch')
 				console.log(err.message)
 			}
 		}
@@ -33,7 +35,10 @@ const LastOrder = props => {
 		} else {
 			setHasOrder(false)
 		}
-	})
+		return () => {
+			console.log('component LastOrder is destroyed')
+		}
+	}, [isFocused])
 
 	return (
 		<View style={styles.container}>
