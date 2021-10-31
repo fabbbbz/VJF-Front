@@ -20,13 +20,17 @@ function SignUp(props) {
 
 	var handleSubmitSignup = async () => {
 		// send user's infos to back
-		const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-up`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`,
-		})
+		const data = await fetch(
+			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-up`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: `lastNameFromFront=${signUpLastname}&firstNameFromFront=${signUpFirstname}&emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}&phoneFromFront=${signUpPhone}`,
+			}
+		)
 		//get answer from back
 		const body = await data.json()
+		console.log('data received from back (signUP) : ', body)
 		if (body.result == true) {
 			//set token
 			setToken(body.token)
@@ -87,7 +91,9 @@ function SignUp(props) {
 						/>
 					</View>
 
-					<View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+					<View
+						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
+					>
 						<Text
 							style={{
 								color: '#C4C4C4',
