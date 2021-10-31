@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { ScrollView } from 'react-native'
+import { ScrollView, Image, TouchableOpacity } from 'react-native'
 import { Button, Text, Card } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
@@ -8,30 +8,30 @@ import { MY_IP } from '@env'
 import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
+import { AntDesign } from '@expo/vector-icons'
 function Allergies(props) {
     const [allergies, setAllergies] = useState([])
     const [allergyExist, setAllergyExist] = useState(false)
     const [overlay, setOverlay] = useState(false)
     const token = props.token
+    var allergiesRender
 
-    const handleAllergies = allergy => {
-        setOverlay(false)
-    }
 
     useEffect(() => {
         async function loadAllergies() {
 
             var rawResponse = await fetch(
 
-                `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/${token}`
+                `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/allergies/${token}`
             )
             var response = await rawResponse.json()
-            console.log(response)
+
             /*verifie l'existance d'une allergie dans le document user et verifie que l'allergie soit != null 
 si ces conditions sont remplies allergyExist passe a true*/
-            if (response.allergies.length >= 1 && response.allergies[0] !== null) {
-                setAllergyExist(true)
 
+            if (response.allergies.length > 0 && response.allergies[0] !== null) {
+                setAllergyExist(true)
+                setAllergies(response.allergies)
             }
 
 
@@ -39,13 +39,16 @@ si ces conditions sont remplies allergyExist passe a true*/
         }
 
         loadAllergies()
+
     }, [])
 
     /* si allergyExist == true les allergies sont affichées
     sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
-    console.log(allergyExist)
+
+
+
     if (allergyExist == true) {
-        var allergiesRender = allergies.map((allergy, i) => {
+        allergiesRender = allergies.map((allergy, i) => {
             return (
                 <Card
                     key={i}
@@ -82,17 +85,40 @@ si ces conditions sont remplies allergyExist passe a true*/
     } else {
         allergiesRender = <Text style={{ alignSelf: "center", marginTop: 25, fontWeight: "bold" }}>vous n'avez pas d'allergies renseignées</Text>
     }
+
+
     async function handleAllergyDeletion(allergy) {
-        console.log(allergy)
+
         var allergyFilter = allergies.filter(e => e !== allergy)
         setAllergies(allergyFilter)
         var rawResponse = await fetch(
-            `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/${token}/${allergy}`,
+            `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/delallergies/${token}/${allergy}`,
+
+
             {
                 method: 'DELETE',
             }
         )
         // var response = await rawResponse.json()
+
+    }
+
+    async function handleAllergies(boolean) {
+        setOverlay(boolean)
+
+        const dataToUpdate = {
+            allergies: props.allergies,
+        }
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(dataToUpdate),
+        }
+        const data = await fetch(
+            `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
+            requestOptions
+        )
+        const result = await data.json()
 
     }
 
@@ -140,10 +166,18 @@ si ces conditions sont remplies allergyExist passe a true*/
                 <MyCheckbox title="Lupin" isAllergy={true} />
                 <MyCheckbox title="Sulfites" isAllergy={true} />
 
-                <NextButton title="VALIDER" onPress={() => handleAllergies()} />
+                <NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
             </Overlay>
 
-        </ScrollView>
+            <TouchableOpacity onPress={() => handleAllergies(true)}>
+                <Image
+                    style={{ width: 50, height: 50, alignSelf: "center" }}
+                    source={require('../assets/plusIcon.png')} />
+
+            </TouchableOpacity>
+
+
+        </ScrollView >
 
 
     )
@@ -152,6 +186,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 function mapStateToProps(state) {
     return {
         token: state.token,
+        allergies: state.allergies,
     }
 }
 export default connect(mapStateToProps, null)(Allergies)
