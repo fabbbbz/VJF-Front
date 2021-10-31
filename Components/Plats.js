@@ -4,36 +4,30 @@ import { Button, Text } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MY_IP } from "@env"
+import HeartFav from '../Components/HeartFav'
 
 
 export default function Plats() {
 
-	const [ordersHistory, setOrdersHistory] = useState([])
 	const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde'
 
-	function addToFavorite() {
-		console.log('addToFavorite')
-	}
-
-	function removeFromFavorite() {
-		console.log('removeFromFavorite')
-	}
+	const [ordersHistory, setOrdersHistory] = useState([])
+	const [mealId, setMealId] = useState([])
 
 	useEffect(() => {
 
 		async function loadOrders() {
 
-			var rawResponse = await fetch(`http://172.17.1.145:3000/users/history/${token}`)
+			var rawResponse = await fetch(`http://${MY_IP}:3000/users/history/${token}`)
 			var response = await rawResponse.json()
 
 			setOrdersHistory(response.meals)
-			console.log('logg', response)
+			setMealId(response.meals[1].mealId)
+			// console.log('logg', response.meals)
 		}
-
+		// console.log('mealId', mealId)
 		loadOrders()
 	}, []);
-
-	console.log('ordersHistory', ordersHistory)
 
 	return (
 
@@ -42,10 +36,7 @@ export default function Plats() {
 				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} >
 					<Text>{new Date(order.date).toLocaleDateString()}</Text>
 					<Text>{order.mealName}</Text>
-					<View style={{ flexDirection: 'row', alignContent: 'flex-start' }}>
-						<MaterialCommunityIcons name="heart-plus" size={24} color="black" onPress={() => addToFavorite()} />
-						<MaterialCommunityIcons name="heart-remove" size={24} color="black" onPress={() => removeFromFavorite()} />
-					</View >
+					<HeartFav mealId={mealId} />
 				</View >
 			))
 			}

@@ -26,9 +26,11 @@ import LastOrderScreen from './Screens/LastOrderScreen'
 import UserPage from './Screens/UserPage'
 import TimeToPay from './Screens/TimeToPay'
 import History from './Screens/History'
+import Donts from './Screens/Donts'
 import Livraison from './Screens/Livraison'
 import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
@@ -56,7 +58,8 @@ const DrawerNav = props => {
 			<Drawer.Screen name="LastOrderScreen" component={LastOrderScreen} />
 			<Drawer.Screen name="UserPage" component={UserPage} />
 			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
-			<Stack.Screen name="History" component={History} />
+			<Drawer.Screen name="History" component={History} />
+			<Drawer.Screen name="Donts" component={Donts} />
 			<Drawer.Screen name="Livraison" component={Livraison} />
 			<Drawer.Screen name="FinalPage" component={FinalPage} />
 			<Drawer.Screen name="Logout" component={Logout} />

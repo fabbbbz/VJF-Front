@@ -33,7 +33,7 @@ const LastOrderScreen = props => {
 				body: `token=${token}&meal_id=${mealId}`,
 			})
 			const result = await data.json()
-			console.log(result)
+			// console.log(result)
 		} catch (err) {
 			console.log(err.message)
 		}

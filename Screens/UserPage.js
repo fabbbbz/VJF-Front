@@ -14,7 +14,7 @@ function UserPage(props) {
             const token = props.token
             var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/${token}`)
             var response = await rawResponse.json()
-            console.log(response.userInfo.lastName)
+            // console.log(response.userInfo.lastName)
             setUser(response.userInfo)
         }
         loadUser()
