@@ -32,6 +32,7 @@ import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
 import CustomDrawer from './Components/CustomDrawer'
 
+import Allergies from './Screens/Allergies'
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
@@ -75,6 +76,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="Mes Favoris" component={Favorites} />
 			<Drawer.Screen name="Historique" component={History} />
 			<Drawer.Screen name="Infos Perso" component={UserPage} />
+			<Drawer.Screen name="Allergies" component={Allergies} />
 		</Drawer.Navigator>
 	)
 }

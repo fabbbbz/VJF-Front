@@ -8,9 +8,10 @@ import { MY_IP } from '@env'
 
 function Favorites(props) {
 	const [favData, setFavData] = useState([])
+	const token = props.token
 	useEffect(() => {
 		async function loadFavorites() {
-			const token = props.token
+
 			var rawResponse = await fetch(
 				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
 			)
@@ -76,7 +77,7 @@ function Favorites(props) {
 		var favFilter = favData.filter(e => e._id !== meal_id)
 		setFavData(favFilter)
 		var rawResponse = await fetch(
-			`http://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/CnCEm57iQYtTb33A8kN4Evci8Sq_BOplZ/${meal_id}`,
+			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}/${meal_id}`,
 			{
 				method: 'DELETE',
 			}

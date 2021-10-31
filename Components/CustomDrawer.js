@@ -25,7 +25,7 @@ const CustomDrawer = props => {
 				label={() => (
 					<Text style={{ fontSize: 18, fontWeight: '500' }}>Logout</Text>
 				)}
-				icon={() => <MaterialIcons name="logout" color="#000000" size="20" />}
+				// icon={() => <MaterialIcons name="logout" color="#000000" size="20" />}
 				onPress={logout}
 			/>
 		</View>

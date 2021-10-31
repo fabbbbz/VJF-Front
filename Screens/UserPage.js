@@ -73,7 +73,9 @@ function UserPage(props) {
                     onPress={() => console.log('bonjour')}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
+
             </Card>
+
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
                 <Card.Title style={{ marginBottom: 0 }}> Adresse:</Card.Title>
                 <Text>{user.adresse} </Text>
@@ -82,6 +84,16 @@ function UserPage(props) {
                     onPress={() => console.log('bonjour')}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
+            </Card>
+            <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
+                <Card.Title style={{ marginBottom: 0 }}> Régime alimentaire:</Card.Title>
+                <Text>{user.regimeAlim} </Text>
+                <Button
+                    type="clear"
+                    onPress={() => console.log('bonjour')}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
+
             </Card>
         </ScrollView>
     )
