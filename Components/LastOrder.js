@@ -25,6 +25,7 @@ const LastOrder = props => {
 
 				setMeal(lastOrder.mealName)
 				setRestaurant(lastOrder.restaurant)
+				props.setMealId(lastOrder.mealId)
 			} catch (err) {
 				console.log('Error in LastOrder fetch')
 				console.log(err.message)
