@@ -19,6 +19,10 @@ const MoodIcon = props => {
 					width: 135,
 					position: 'relative',
 				}}
+				onPress={() => {
+					props.moodHandle(props.short)
+					props.setIsSelected(!props.isSelected)
+				}}
 			>
 				<ImageBackground
 					source={props.background}
