@@ -8,6 +8,46 @@ import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
 import { MY_IP } from '@env'
+import MoodIcon from '../Components/MoodIcon'
+
+const moodsItems = [
+	{
+		name: '',
+		img: require('./../assets/btn-fullrandom.png'),
+		short: 'all',
+		id: 1,
+	},
+	{
+		name: 'Healthy',
+		img: require('./../assets/btn-healthy.png'),
+		short: 'healthy',
+		id: 2,
+	},
+	{
+		name: 'Comme chez Maman',
+		img: require('./../assets/btn-maman.png'),
+		short: 'comme chez maman',
+		id: 3,
+	},
+	{
+		name: 'Cuisine du Monde',
+		img: require('./../assets/btn-cuisinemonde.png'),
+		short: 'cuisine du monde',
+		id: 4,
+	},
+	{
+		name: 'Soir de Match',
+		img: require('./../assets/btn-soirdematch.png'),
+		short: 'soir de match',
+		id: 5,
+	},
+	{
+		name: 'A Partager',
+		img: require('./../assets/btn-apartager.png'),
+		short: 'a partager',
+		id: 6,
+	},
+]
 
 function Mood(props) {
 	const [overlay, setOverlay] = useState(false)
@@ -18,6 +58,7 @@ function Mood(props) {
 	const [pricerange, setPricerange] = useState([])
 	const [moodSelected, SetMoodSelected] = useState(false)
 	const [errorMsg, setErrorMsg] = useState('')
+	const [isSelected, setIsSelected] = useState(false) // mood selected, used to change color
 
 	const changeAdress = () => {
 		setOverlay(true)
@@ -109,67 +150,19 @@ function Mood(props) {
 				Quel est votre mood ?
 			</Text>
 
-			<View
-				style={{
-					marginTop: 15,
-					flexDirection: 'row',
-					flexWrap: 'wrap',
-					width: '100%',
-					alignItems: 'center',
-					justifyContent: 'center',
-					alignSelf: 'center',
-					// backgroundColor: '#FFFFFF',
-					borderRadius: 5,
-				}}
-			>
-				<Button
-					icon={
-						<Icon name="shuffle" size={15} color="white" iconPosition="top" />
-					}
-					onPress={() => {
-						props.moodHandle('all')
-					}}
-					title="Surprise Totale"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('healthy')
-					}}
-					title="Healthy"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('comme chez maman')
-					}}
-					title="Comme chez Maman"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('cuisine du monde')
-					}}
-					title="Cuisine du monde"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('soir de match')
-					}}
-					title="Soir de Match"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('a partager')
-					}}
-					title="A partager"
-					buttonStyle={styles.moodButton}
-				/>
+			<View style={styles.moodContainer}>
+				{moodsItems.map(mood => (
+					<MoodIcon
+						key={mood.id}
+						title={mood.name}
+						short={mood.short}
+						background={mood.img}
+						setIsSelected={setIsSelected}
+						isSelected={isSelected}
+					/>
+				))}
 			</View>
 
-			{/* <Moods /> */}
 			<View>
 				<Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
 					{' '}
@@ -352,10 +345,16 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#F4F4F4',
 	},
-	moodButton: {
-		backgroundColor: '#FFC901',
-		width: 138,
-		height: 110,
+	moodContainer: {
+		marginTop: 15,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		width: '100%',
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center',
+		// backgroundColor: '#FFFFFF',
+		borderRadius: 5,
 	},
 })
 
