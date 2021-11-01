@@ -3,6 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import UserDonts from '../Components/UserDonts';
+import { connect } from 'react-redux'
 
 
 function Donts(props) {
@@ -27,4 +28,10 @@ const styles = StyleSheet.create({
     },
 })
 
-export default Donts
+function mapStateToProps(state) {
+    return {
+        token: state.token,
+    }
+}
+
+export default connect(mapStateToProps, null)(Donts)

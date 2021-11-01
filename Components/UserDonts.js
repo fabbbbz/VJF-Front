@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, TouchableOpacity, View, Card } from 'react-native'
 import { Button, Text } from 'react-native-elements'
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons'
+import { connect } from 'react-redux'
 import { MY_IP } from "@env"
 
 
 
-export default function Donts() {
+function userDonts(props) {
 
-    const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde'
+    const token = props.token
 
     const [userDonts, setUserDonts] = useState([])
 
@@ -16,7 +17,7 @@ export default function Donts() {
 
         async function loadDonts() {
 
-            var rawResponse = await fetch(`http://192.168.1.14:3000/users/myDonts/s0ZwxY8HQFpUaQtinFq_aEo45nKGXIde`)
+            var rawResponse = await fetch(`http://${MY_IP}/users/myDonts/${token}`)
             var response = await rawResponse.json()
 
             setUserDonts(response.donts)
@@ -53,3 +54,11 @@ const styles = StyleSheet.create({
 
     },
 })
+
+function mapStateToProps(state) {
+    return {
+        token: state.token,
+    }
+}
+
+export default connect(mapStateToProps, null)(userDonts)
