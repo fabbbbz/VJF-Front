@@ -31,13 +31,9 @@ import Donts from './Screens/Donts'
 import Livraison from './Screens/Livraison'
 import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
-<<<<<<< HEAD
 import CustomDrawer from './Components/CustomDrawer'
 
 import Allergies from './Screens/Allergies'
-=======
-
->>>>>>> clem
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
@@ -57,7 +53,6 @@ const store = createStore(
 
 const DrawerNav = props => {
 	return (
-<<<<<<< HEAD
 		<Drawer.Navigator
 			screenOptions={{
 				headerShown: false,
@@ -83,22 +78,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="Historique" component={History} />
 			<Drawer.Screen name="Infos Perso" component={UserPage} />
 			<Drawer.Screen name="Allergies" component={Allergies} />
-=======
-		<Drawer.Navigator screenOptions={{ headerShown: false }}>
-			<Drawer.Screen name="Home" component={Home} />
-			<Drawer.Screen name="Mood" component={Mood} />
-			<Drawer.Screen name="SignUp" component={SignUp} />
-			<Drawer.Screen name="SignIn" component={SignIn} />
-			<Drawer.Screen name="Favorites" component={Favorites} />
-			<Drawer.Screen name="LastOrderScreen" component={LastOrderScreen} />
-			<Drawer.Screen name="UserPage" component={UserPage} />
-			<Drawer.Screen name="TimeToPay" component={TimeToPay} />
-			<Drawer.Screen name="History" component={History} />
 			<Drawer.Screen name="Donts" component={Donts} />
-			<Drawer.Screen name="Livraison" component={Livraison} />
-			<Drawer.Screen name="FinalPage" component={FinalPage} />
-			<Drawer.Screen name="Logout" component={Logout} />
->>>>>>> clem
 		</Drawer.Navigator>
 	)
 }
