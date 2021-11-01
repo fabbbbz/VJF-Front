@@ -42,6 +42,47 @@ si ces conditions sont remplies allergyExist passe a true*/
 
     }, [])
 
+    // trying to rerender after adding new allergies
+
+    useEffect(() => {
+
+        allergiesRender = allergies.map((allergy, i) => {
+            return (
+                <Card
+                    key={i}
+                    containerStyle={{
+                        borderRadius: 10,
+                        elevation: 4,
+                        shadowOffset: { width: 2, height: 2 },
+                        shadowColor: 'rgba(0,0,0, 0.2)',
+                        shadowOpacity: 0.5,
+                        shadowRadius: 2,
+                    }}
+                    wrapperStyle={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        flexWrap: 'nowrap',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
+
+                        {allergy}
+                    </Card.Title>
+                    <Button
+                        type="clear"
+                        onPress={() => {
+                            handleAllergyDeletion(allergy)
+                        }}
+                        icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
+                    />
+                </Card>
+            )
+        })
+
+    }, [allergies])
+
     /* si allergyExist == true les allergies sont affichées
     sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
 
@@ -119,7 +160,7 @@ si ces conditions sont remplies allergyExist passe a true*/
             requestOptions
         )
         const result = await data.json()
-
+        setAllergies(result.doc.allergies)
     }
 
 
