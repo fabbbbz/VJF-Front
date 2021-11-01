@@ -4,19 +4,15 @@ import { Button, Text } from 'react-native-elements'
 import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MY_IP } from "@env"
+import HeartFav from '../Components/HeartFav'
 
 
 export default function Plats() {
 
-	const [ordersHistory, setOrdersHistory] = useState([])
 	const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde'
 
-	function addToFavorite() {
-		console.log('addToFavorite')
-	}
-	function removeFromFavorite() {
-		console.log('removeFromFavorite')
-	}
+	const [ordersHistory, setOrdersHistory] = useState([])
+	const [mealId, setMealId] = useState([])
 
 	useEffect(() => {
 
@@ -26,31 +22,21 @@ export default function Plats() {
 			var response = await rawResponse.json()
 
 			setOrdersHistory(response.meals)
-			console.log('logg', response)
+			setMealId(response.meals[1].mealId)
+			// console.log('logg', response.meals)
 		}
-
-
+		// console.log('mealId', mealId)
 		loadOrders()
 	}, []);
 
-	console.log('azerty', ordersHistory)
-	// const event = new Date(meals.date);
-	// const options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-
-	// console.log('date', event.toLocaleDateString('fr-FR', options));
-
-
 	return (
 
-		<View >
+		<View style={styles.container}>
 			{ordersHistory.map((order, i) => (
-				< View >
+				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} >
 					<Text>{new Date(order.date).toLocaleDateString()}</Text>
 					<Text>{order.mealName}</Text>
-					<View>
-						<MaterialCommunityIcons name="heart-plus" size={24} color="black" onPress={() => addToFavorite()} />
-						<MaterialCommunityIcons name="heart-remove" size={24} color="black" onPress={() => removeFromFavorite()} />
-					</View >
+					<HeartFav mealId={mealId} />
 				</View >
 			))
 			}
@@ -58,18 +44,14 @@ export default function Plats() {
 	)
 }
 
-// const styles = StyleSheet.create({
-//     container: {
-//         backgroundColor: '#FFFFFF',
-//         paddingVertical: 10,
-//         paddingHorizontal: 12,
-//         borderRadius: 10,
-//         margin: 15,
-//         borderColor: '#F2A902',
+const styles = StyleSheet.create({
+	container: {
+		backgroundColor: '#FFFFFF',
+		paddingVertical: 10,
+		paddingHorizontal: 12,
+		borderRadius: 10,
+		margin: 15,
+		borderColor: '#F2A902',
 
-//     },
-// })
-
-// style={styles.container}
-// style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-// style={{ flexDirection: 'row', alignContent: 'flex-start' }}
+	},
+})

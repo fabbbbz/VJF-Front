@@ -2,10 +2,11 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
-import Plats from '../Components/Plats';
+import UserDonts from '../Components/UserDonts';
+import { connect } from 'react-redux'
 
 
-function History(props) {
+function Donts(props) {
 
 
     return (
@@ -13,8 +14,8 @@ function History(props) {
         <View style={styles.container}>
             <TopBar navigation={props.navigation} />
             <View >
-                <Text h2 style={{ color: '#F2A902', textAlign: 'center' }}>Derniers Plats</Text>
-                <Plats />
+                <Text h2 style={{ color: '#F2A902', textAlign: 'center' }}>Donts</Text>
+                < UserDonts />
             </View>
         </View >
     )
@@ -27,4 +28,10 @@ const styles = StyleSheet.create({
     },
 })
 
-export default History
+function mapStateToProps(state) {
+    return {
+        token: state.token,
+    }
+}
+
+export default connect(mapStateToProps, null)(Donts)
