@@ -10,226 +10,178 @@ import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
 import { AntDesign } from '@expo/vector-icons'
 function Allergies(props) {
-    const [allergies, setAllergies] = useState([])
-    const [allergyExist, setAllergyExist] = useState(false)
-    const [overlay, setOverlay] = useState(false)
-    const token = props.token
-    var allergiesRender
+	const [allergies, setAllergies] = useState([])
+	const [allergyExist, setAllergyExist] = useState(false)
+	const [overlay, setOverlay] = useState(false)
+	const token = props.token
+	var allergiesRender
 
+	useEffect(() => {
+		async function loadAllergies() {
+			var rawResponse = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/allergies/${token}`
+			)
+			var response = await rawResponse.json()
 
-    useEffect(() => {
-        async function loadAllergies() {
-
-            var rawResponse = await fetch(
-
-                `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/allergies/${token}`
-            )
-            var response = await rawResponse.json()
-
-            /*verifie l'existance d'une allergie dans le document user et verifie que l'allergie soit != null 
+			/*verifie l'existance d'une allergie dans le document user et verifie que l'allergie soit != null 
 si ces conditions sont remplies allergyExist passe a true*/
 
-            if (response.allergies.length > 0 && response.allergies[0] !== null) {
-                setAllergyExist(true)
-                setAllergies(response.allergies)
-            }
+			if (response.allergies.length > 0 && response.allergies[0] !== null) {
+				setAllergyExist(true)
+				setAllergies(response.allergies)
+			}
+		}
+
+		loadAllergies()
+	}, [])
+
+	/* si allergyExist == true les allergies sont affichées
+	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
 
 
 
-        }
+	if (allergyExist == true) {
+		allergiesRender = allergies.map((allergy, i) => {
+			return (
+				<Card
+					key={i}
+					containerStyle={{
+						borderRadius: 10,
+						elevation: 4,
+						shadowOffset: { width: 2, height: 2 },
+						shadowColor: 'rgba(0,0,0, 0.2)',
+						shadowOpacity: 0.5,
+						shadowRadius: 2,
+					}}
+					wrapperStyle={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						flexWrap: 'nowrap',
+						alignItems: 'center',
+					}}
+				>
+					<Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
 
-        loadAllergies()
-
-    }, [])
-
-    // trying to rerender after adding new allergies
-
-    useEffect(() => {
-
-        allergiesRender = allergies.map((allergy, i) => {
-            return (
-                <Card
-                    key={i}
-                    containerStyle={{
-                        borderRadius: 10,
-                        elevation: 4,
-                        shadowOffset: { width: 2, height: 2 },
-                        shadowColor: 'rgba(0,0,0, 0.2)',
-                        shadowOpacity: 0.5,
-                        shadowRadius: 2,
-                    }}
-                    wrapperStyle={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        flexWrap: 'nowrap',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
-
-                        {allergy}
-                    </Card.Title>
-                    <Button
-                        type="clear"
-                        onPress={() => {
-                            handleAllergyDeletion(allergy)
-                        }}
-                        icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
-                    />
-                </Card>
-            )
-        })
-
-    }, [allergies])
-
-    /* si allergyExist == true les allergies sont affichées
-    sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
+						{allergy}
+					</Card.Title>
+					<Button
+						type="clear"
+						onPress={() => {
+							handleAllergyDeletion(allergy)
+						}}
+						icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
+					/>
+				</Card>
+			)
+		})
+	} else {
+		allergiesRender = <Text style={{ alignSelf: "center", marginTop: 25, fontWeight: "bold" }}>vous n'avez pas d'allergies renseignées</Text>
+	}
 
 
+	async function handleAllergyDeletion(allergy) {
 
-    if (allergyExist == true) {
-        allergiesRender = allergies.map((allergy, i) => {
-            return (
-                <Card
-                    key={i}
-                    containerStyle={{
-                        borderRadius: 10,
-                        elevation: 4,
-                        shadowOffset: { width: 2, height: 2 },
-                        shadowColor: 'rgba(0,0,0, 0.2)',
-                        shadowOpacity: 0.5,
-                        shadowRadius: 2,
-                    }}
-                    wrapperStyle={{
-                        display: 'flex',
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        flexWrap: 'nowrap',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
-
-                        {allergy}
-                    </Card.Title>
-                    <Button
-                        type="clear"
-                        onPress={() => {
-                            handleAllergyDeletion(allergy)
-                        }}
-                        icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
-                    />
-                </Card>
-            )
-        })
-    } else {
-        allergiesRender = <Text style={{ alignSelf: "center", marginTop: 25, fontWeight: "bold" }}>vous n'avez pas d'allergies renseignées</Text>
-    }
+		var allergyFilter = allergies.filter(e => e !== allergy)
+		setAllergies(allergyFilter)
+		var rawResponse = await fetch(
+			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/delallergies/${token}/${allergy}`,
 
 
-    async function handleAllergyDeletion(allergy) {
+			{
+				method: 'DELETE',
+			}
+		)
+		// var response = await rawResponse.json()
 
-        var allergyFilter = allergies.filter(e => e !== allergy)
-        setAllergies(allergyFilter)
-        var rawResponse = await fetch(
-            `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/delallergies/${token}/${allergy}`,
+	}
 
+	async function handleAllergies(boolean) {
+		setOverlay(boolean)
 
-            {
-                method: 'DELETE',
-            }
-        )
-        // var response = await rawResponse.json()
-
-    }
-
-    async function handleAllergies(boolean) {
-        setOverlay(boolean)
-
-        const dataToUpdate = {
-            allergies: props.allergies,
-        }
-        const requestOptions = {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(dataToUpdate),
-        }
-        const data = await fetch(
-            `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
-            requestOptions
-        )
-        const result = await data.json()
-        setAllergies(result.doc.allergies)
-    }
+		const dataToUpdate = {
+			allergies: props.allergies,
+		}
+		const requestOptions = {
+			method: 'PUT',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(dataToUpdate),
+		}
+		const data = await fetch(
+			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
+			requestOptions
+		)
+		const result = await data.json()
+		setAllergies(result.doc.allergies)
+	}
 
 
 
-    return (
-        <ScrollView>
-            <TopBar navigation={props.navigation} />
-            <Text
-                h3
-                style={{
-                    alignSelf: 'center',
-                    marginTop: 15,
-                    textDecorationLine: 'underline',
-                    color: '#FFC901',
-                }}
-            >
-                Allergies
-            </Text>
-            {allergiesRender}
+	return (
+		<ScrollView>
+			<TopBar navigation={props.navigation} />
+			<Text
+				h3
+				style={{
+					alignSelf: 'center',
+					marginTop: 15,
+					textDecorationLine: 'underline',
+					color: '#FFC901',
+				}}
+			>
+				Allergies
+			</Text>
+			{allergiesRender}
 
-            <Overlay
+			<Overlay
 
-                isVisible={overlay}
-                onBackdropPress={() => setOverlay(false)}
-                overlayStyle={{
-                    width: '90%',
-                    marginTop: 60,
-                    marginBottom: 50,
-                    paddingVertical: 20,
-                }}
-            >
-                <ScrollView>
-                    <MyCheckbox title="Gluten" isAllergy={true} />
-                    <MyCheckbox title="Sesame" isAllergy={true} />
-                    <MyCheckbox title="Fruits à coque" isAllergy={true} />
-                    <MyCheckbox title="Crustacés" isAllergy={true} />
-                    <MyCheckbox title="Oeuf" isAllergy={true} />
-                    <MyCheckbox title="Poisson" isAllergy={true} />
-                    <MyCheckbox title="Moutarde" isAllergy={true} />
-                    <MyCheckbox title="Lait" isAllergy={true} />
-                    <MyCheckbox title="Celeri" isAllergy={true} />
-                    <MyCheckbox title="Arachides" isAllergy={true} />
-                    <MyCheckbox title="Soja" isAllergy={true} />
-                    <MyCheckbox title="Mollusques" isAllergy={true} />
-                    <MyCheckbox title="Lupin" isAllergy={true} />
-                    <MyCheckbox title="Sulfites" isAllergy={true} />
+				isVisible={overlay}
+				onBackdropPress={() => setOverlay(false)}
+				overlayStyle={{
+					width: '90%',
+					marginTop: 60,
+					marginBottom: 50,
+					paddingVertical: 20,
+				}}
+			>
+				<ScrollView>
+					<MyCheckbox title="Gluten" isAllergy={true} />
+					<MyCheckbox title="Sesame" isAllergy={true} />
+					<MyCheckbox title="Fruits à coque" isAllergy={true} />
+					<MyCheckbox title="Crustacés" isAllergy={true} />
+					<MyCheckbox title="Oeuf" isAllergy={true} />
+					<MyCheckbox title="Poisson" isAllergy={true} />
+					<MyCheckbox title="Moutarde" isAllergy={true} />
+					<MyCheckbox title="Lait" isAllergy={true} />
+					<MyCheckbox title="Celeri" isAllergy={true} />
+					<MyCheckbox title="Arachides" isAllergy={true} />
+					<MyCheckbox title="Soja" isAllergy={true} />
+					<MyCheckbox title="Mollusques" isAllergy={true} />
+					<MyCheckbox title="Lupin" isAllergy={true} />
+					<MyCheckbox title="Sulfites" isAllergy={true} />
 
-                    <NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
-                </ScrollView>
-            </Overlay>
+					<NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+				</ScrollView>
+			</Overlay>
 
-            <TouchableOpacity onPress={() => handleAllergies(true)}>
-                <Image
-                    style={{ width: 50, height: 50, alignSelf: "center" }}
-                    source={require('../assets/plusIcon.png')} />
+			<TouchableOpacity onPress={() => handleAllergies(true)}>
+				<Image
+					style={{ width: 50, height: 50, alignSelf: "center" }}
+					source={require('../assets/plusIcon.png')} />
 
-            </TouchableOpacity>
-
-
-        </ScrollView >
+			</TouchableOpacity>
 
 
-    )
+		</ScrollView >
+
+
+	)
 }
 
 function mapStateToProps(state) {
-    return {
-        token: state.token,
-        allergies: state.allergies,
-    }
+	return {
+		token: state.token,
+		allergies: state.allergies,
+	}
 }
 export default connect(mapStateToProps, null)(Allergies)

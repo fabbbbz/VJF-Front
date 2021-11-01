@@ -50,7 +50,7 @@ function Mood(props) {
 				requestOptions
 			)
 			const formatedData = await data.json()
-			console.log('[MoodScreen] data fetched: ', formatedData)
+			// console.log('[MoodScreen] data fetched: ', formatedData)
 
 			if (formatedData) {
 				const { result, message, order } = formatedData
