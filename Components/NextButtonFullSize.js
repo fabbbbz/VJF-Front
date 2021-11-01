@@ -15,11 +15,13 @@ const NextButtonFullSize = ({ title, onPress }) => {
 				style={{
 					display: 'flex',
 					flexDirection: 'row',
-					justifyContent: 'space-between',
+					justifyContent: 'center',
 				}}
 				onPress={onPress}
 			>
-				<Text style={styles.text}>{title}</Text>
+				<Text style={title == "VITE J'AI FAIM" ? styles.big : styles.text}>
+					{title}
+				</Text>
 				<AntDesign name="arrowright" size={24} color="white" />
 			</TouchableOpacity>
 		</LinearGradient>
@@ -42,6 +44,15 @@ const styles = StyleSheet.create({
 		color: '#fff',
 		fontSize: 16,
 		fontWeight: '700',
+		flex: 1,
+		textAlign: 'center',
+	},
+	big: {
+		color: '#fff',
+		fontSize: 24,
+		fontWeight: '500',
+		flex: 1,
+		textAlign: 'center',
 	},
 })
 

@@ -11,7 +11,7 @@ const TopBar = props => {
 	const showDrawer = () => {
 		//props.navigation.navigate('Drawer')
 		setNavActive(true)
-		if (navActive) navigation.toggleDrawer()
+		if (navActive) props.navigation.toggleDrawer()
 	}
 
 	useEffect(() => {

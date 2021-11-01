@@ -12,7 +12,7 @@ function UserPage(props) {
     useEffect(() => {
         async function loadUser() {
             const token = props.token
-            var rawResponse = await fetch(`http://${MY_IP}:3000/users/me/${token}`)
+            var rawResponse = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/me/${token}`)
             var response = await rawResponse.json()
             console.log(response.userInfo.lastName)
             setUser(response.userInfo)
@@ -73,7 +73,9 @@ function UserPage(props) {
                     onPress={() => console.log('bonjour')}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
+
             </Card>
+
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
                 <Card.Title style={{ marginBottom: 0 }}> Adresse:</Card.Title>
                 <Text>{user.adresse} </Text>
@@ -82,6 +84,16 @@ function UserPage(props) {
                     onPress={() => console.log('bonjour')}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
+            </Card>
+            <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
+                <Card.Title style={{ marginBottom: 0 }}> Régime alimentaire:</Card.Title>
+                <Text>{user.regimeAlim} </Text>
+                <Button
+                    type="clear"
+                    onPress={() => console.log('bonjour')}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
+
             </Card>
         </ScrollView>
     )

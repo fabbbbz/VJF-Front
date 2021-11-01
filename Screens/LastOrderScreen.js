@@ -15,6 +15,7 @@ import LastOrder from '../Components/LastOrder'
 const LastOrderScreen = props => {
 	const [overlay, setOverlay] = useState(false)
 	const [choice, setChoice] = useState('')
+	const [mealId, setMealId] = useState('')
 
 	const handleThumbClick = async choice => {
 		setChoice(choice)
@@ -22,16 +23,19 @@ const LastOrderScreen = props => {
 		if (choice === 'good') updateUser()
 	}
 
+	console.log('mealId...: ', mealId)
 	const updateUser = async () => {
 		try {
 			const token = props.token
-			const mealId = 'SOME_ID'
 			console.log('fetch api')
-			const data = await fetch(`http://${MY_IP}:3000/users/favorites`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `token=${token}&meal_id=${mealId}`,
-			})
+			const data = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: `token=${token}&meal_id=${mealId}`,
+				}
+			)
 			const result = await data.json()
 			console.log(result)
 		} catch (err) {
@@ -45,7 +49,7 @@ const LastOrderScreen = props => {
 			<Text h3 style={styles.text}>
 				Votre dernière commande
 			</Text>
-			<LastOrder />
+			<LastOrder mealId={mealId} setMealId={setMealId} />
 			<Text h4 style={styles.text}>
 				Qu'en avez vous pensé ?
 			</Text>

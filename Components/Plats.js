@@ -22,8 +22,8 @@ export default function Plats() {
 	useEffect(() => {
 
 		async function loadOrders() {
-
-			var rawResponse = await fetch(`http://172.17.1.145:3000/users/history/${token}`)
+			// token en dur pour le test, A remplacer par :token
+			var rawResponse = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/history/${token}`)
 			var response = await rawResponse.json()
 
 			setOrdersHistory(response.meals)

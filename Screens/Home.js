@@ -22,25 +22,34 @@ const Home = props => {
 	}
 
 	const handleSubmitFoodProfile = async () => {
-		const dataToUpdate = {
-			diet: props.diet,
-			dont: props.donts,
-			allergies: props.allergies,
-		}
-		const requestOptions = {
-			method: 'PUT',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(dataToUpdate),
-		}
-		const data = await fetch(
-			`http://${MY_IP}:3000/users/update-me/${token}`,
-			requestOptions
-		)
-		const result = await data.json()
-		if (result) {
+		try {
+			const token = props.token
+			if (!token) {
+				props.navigation.navigate('SignUp', {
+					screen: 'SignUp',
+				})
+				return
+			}
+			const dataToUpdate = {
+				diet: props.diet,
+				dont: props.donts,
+				allergies: props.allergies,
+			}
+			const requestOptions = {
+				method: 'PUT',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(dataToUpdate),
+			}
+			const data = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
+				requestOptions
+			)
+			const result = await data.json()
 			props.navigation.navigate('Mood', {
 				screen: 'Mood',
 			})
+		} catch (err) {
+			console.log(err)
 		}
 	}
 
@@ -51,12 +60,14 @@ const Home = props => {
 				<Diet />
 				<Donts />
 				<Allergies overlay={overlay} setOverlay={setOverlay} />
-				<NextButton
-					title="NEXT"
-					color="#F2A902"
-					width="200"
-					onPress={handleSubmitFoodProfile}
-				/>
+				<View style={{ alignSelf: 'flex-end' }}>
+					<NextButton
+						title="CONTINUER"
+						color="#F2A902"
+						width="200"
+						onPress={handleSubmitFoodProfile}
+					/>
+				</View>
 				<Overlay
 					isVisible={overlay}
 					onBackdropPress={() => setOverlay(false)}
