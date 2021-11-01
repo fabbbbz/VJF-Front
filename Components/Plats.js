@@ -23,9 +23,11 @@ function Plats(props) {
 
 			setOrdersHistory(response.meals)
 			setMealId(response.meals[1].mealId)
+			console.log(ordersHistory)
 			// console.log('logg', response.meals)
 		}
-		// console.log('mealId', mealId)
+
+
 		loadOrders()
 	}, []);
 
@@ -36,7 +38,7 @@ function Plats(props) {
 				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} >
 					<Text>{new Date(order.date).toLocaleDateString()}</Text>
 					<Text>{order.mealName}</Text>
-					<HeartFav mealId={mealId} />
+					<HeartFav mealId={order.mealId} />
 				</View >
 			))
 			}
