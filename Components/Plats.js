@@ -5,11 +5,11 @@ import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MY_IP } from "@env"
 import HeartFav from '../Components/HeartFav'
+import { connect } from 'react-redux'
 
+function Plats(props) {
 
-export default function Plats() {
-
-	const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde'
+	const token = props.token
 
 	const [ordersHistory, setOrdersHistory] = useState([])
 	const [mealId, setMealId] = useState([])
@@ -55,3 +55,10 @@ const styles = StyleSheet.create({
 
 	},
 })
+function mapStateToProps(state) {
+	return {
+		token: state.token,
+	}
+}
+
+export default connect(mapStateToProps, null)(Plats)

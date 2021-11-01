@@ -19,7 +19,7 @@ function HeartFav(props) {
             const token = props.token
             const mealId = props.mealId
             console.log('fetch api')
-            const data = await fetch(`http://172.17.1.145:3000/users/favorites`, {
+            const data = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `token=${token}&meal_id=${mealId}`,
