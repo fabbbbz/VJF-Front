@@ -105,16 +105,16 @@ const styles = StyleSheet.create({
 	text: {
 		textAlign: 'center',
 		color: '#F2A902',
-		marginTop: 20,
 	},
 	text2: {
 		textAlign: 'center',
 		color: '#F2A902',
-		marginBottom: 20,
+		marginBottom: 30,
 	},
 	bigLogo: {
 		height: 390,
-		width: 330,
+		width: 320,
+		marginBottom: 30,
 	},
 })
 
