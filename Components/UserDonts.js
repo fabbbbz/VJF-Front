@@ -3,13 +3,14 @@ import { StyleSheet, TouchableOpacity, View, Card } from 'react-native'
 import { Button, Text } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
-import { MY_IP } from "@env"
+
 
 
 
 function userDonts(props) {
 
     const token = props.token
+    console.log('token user dont', token)
 
     const [userDonts, setUserDonts] = useState([])
 
@@ -17,7 +18,7 @@ function userDonts(props) {
 
         async function loadDonts() {
 
-            var rawResponse = await fetch(`http://${MY_IP}/users/myDonts/${token}`)
+            var rawResponse = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/myDonts/${token}`)
             var response = await rawResponse.json()
 
             setUserDonts(response.donts)
@@ -28,6 +29,7 @@ function userDonts(props) {
         loadDonts()
     }, []);
     // marginLeft: "45%"
+
     return (
 
         <View style={styles.container}>
