@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Button, Text, Input, Overlay, Icon } from 'react-native-elements'
+import NumericInput from 'react-native-numeric-input'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
 import NextButtonFullSize from '../Components/NextButtonFullSize'
@@ -19,6 +20,7 @@ function Mood(props) {
 	const [codePostal, setcodePostal] = useState('')
 	const [errorMsg, setErrorMsg] = useState('')
 	const [selectedBudget, setSelectedBudget] = useState('')
+	const [portions, setPortions] = useState(1)
 
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
@@ -46,6 +48,7 @@ function Mood(props) {
 				minprice: props.budget[0],
 				maxprice: props.budget[1],
 				coords: props.coords,
+				portions,
 			}
 			const requestOptions = {
 				method: 'POST',
@@ -85,12 +88,7 @@ function Mood(props) {
 			</Text>
 		)
 	} else {
-		address = (
-			<Text style={{ color: '#000000' }}>
-				{' '}
-				<Geoloc />{' '}
-			</Text>
-		)
+		address = <Geoloc />
 	}
 	return (
 		<ScrollView>
@@ -130,13 +128,6 @@ function Mood(props) {
 				))}
 			</View>
 
-			<View>
-				<Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
-					{' '}
-					Nombre de personnes affamées: 1
-				</Text>
-			</View>
-
 			<View
 				style={{
 					marginTop: 15,
@@ -158,7 +149,7 @@ function Mood(props) {
 				>
 					<Text h4 style={{ color: '#000000', fontWeight: 'bold' }}>
 						{' '}
-						Budget
+						Budget (par portion)
 					</Text>
 					<View
 						style={{
@@ -229,30 +220,56 @@ function Mood(props) {
 						/>
 					</View>
 				</View>
+
+				<View>
+					<Text
+						h4
+						style={{
+							color: '#000000',
+							fontWeight: 'bold',
+							textAlign: 'center',
+							marginTop: 20,
+						}}
+					>
+						Nombre de personnes affamées:
+					</Text>
+					<View style={{ alignSelf: 'center', marginTop: 10 }}>
+						<NumericInput
+							value={portions}
+							onChange={value => setPortions(value)}
+							rounded
+							rightButtonBackgroundColor="#FFC901"
+							leftButtonBackgroundColor="#F2A902"
+							totalHeight={45}
+							totalWidth={120}
+							inputStyle={{ fontWeight: '700' }}
+						/>
+					</View>
+				</View>
 				<View
 					style={{
 						backgroundColor: '#FFFFFF',
 						marginTop: 15,
 						flexDirection: 'row',
 						width: '90%',
-						height: 40,
+						height: 60,
 						alignItems: 'center',
 						justifyContent: 'center',
 					}}
 				>
 					<Ionicons name="location-outline" size={24} color="#F2A902" />
-					<Text
-						style={{
-							flex: 1,
-							color: '#000000',
-							fontWeight: 'bold',
-							flexWrap: 'wrap',
-							justifyContent: 'center',
-						}}
-					>
-						Livré à:
-					</Text>
-					{address}
+					<View style={{ display: 'flex', flexDirection: 'column' }}>
+						<Text
+							style={{
+								color: '#000000',
+								fontWeight: 'bold',
+								justifyContent: 'center',
+							}}
+						>
+							Livré au:
+						</Text>
+						{address}
+					</View>
 					<Ionicons
 						name="ellipsis-vertical"
 						size={24}
