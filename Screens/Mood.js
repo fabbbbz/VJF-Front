@@ -9,58 +9,16 @@ import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
 import { MY_IP } from '@env'
 import MoodIcon from '../Components/MoodIcon'
-
-const moodsItems = [
-	{
-		name: '',
-		img: require('./../assets/btn-fullrandom.png'),
-		short: 'all',
-		id: 1,
-	},
-	{
-		name: 'Healthy',
-		img: require('./../assets/btn-healthy.png'),
-		short: 'healthy',
-		id: 2,
-	},
-	{
-		name: 'Comme chez Maman',
-		img: require('./../assets/btn-maman.png'),
-		short: 'comme chez maman',
-		id: 3,
-	},
-	{
-		name: 'Cuisine du Monde',
-		img: require('./../assets/btn-cuisinemonde.png'),
-		short: 'cuisine du monde',
-		id: 4,
-	},
-	{
-		name: 'Soir de Match',
-		img: require('./../assets/btn-soirdematch.png'),
-		short: 'soir de match',
-		id: 5,
-	},
-	{
-		name: 'A Partager',
-		img: require('./../assets/btn-apartager.png'),
-		short: 'a partager',
-		id: 6,
-	},
-]
+import moodsItems from '../data/moods'
 
 function Mood(props) {
-	console.log(moodsItems)
-
 	const [overlay, setOverlay] = useState(false)
 	const [addressIsChanged, setAddressIsChanged] = useState(false)
 	const [numRue, setNumRue] = useState('')
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
-	const [pricerange, setPricerange] = useState([])
-	const [moodSelected, SetMoodSelected] = useState(false)
 	const [errorMsg, setErrorMsg] = useState('')
-	const [isSelected, setIsSelected] = useState(false) // mood selected, used to change color
+	const [selectedBudget, setSelectedBudget] = useState('')
 
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
@@ -76,8 +34,6 @@ function Mood(props) {
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
-
-	console.log(props.coords)
 
 	const getTheSupriseMeal = async () => {
 		try {
@@ -218,10 +174,12 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([5, 9.99])
+								setSelectedBudget('5-10')
 							}}
 							title="5-10€"
 							buttonStyle={{
-								backgroundColor: '#FFC901',
+								backgroundColor:
+									selectedBudget === '5-10' ? '#000000' : '#FFC901',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
@@ -230,10 +188,12 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([10, 14.99])
+								setSelectedBudget('10-15')
 							}}
 							title="10-15€"
 							buttonStyle={{
-								backgroundColor: '#F2A902',
+								backgroundColor:
+									selectedBudget === '10-15' ? '#000000' : '#F2A902',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
@@ -242,10 +202,12 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([15, 19.99])
+								setSelectedBudget('15-20')
 							}}
 							title="15-20€"
 							buttonStyle={{
-								backgroundColor: '#C95615',
+								backgroundColor:
+									selectedBudget === '15-20' ? '#000000' : '#C95615',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
@@ -254,10 +216,12 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([20, 2000])
+								setSelectedBudget('20+')
 							}}
 							title="YOLO!"
 							buttonStyle={{
-								backgroundColor: '#DB1919',
+								backgroundColor:
+									selectedBudget === '20+' ? '#000000' : '#DB1919',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
