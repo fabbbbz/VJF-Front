@@ -182,6 +182,7 @@ si ces conditions sont remplies allergyExist passe a true*/
             {allergiesRender}
 
             <Overlay
+
                 isVisible={overlay}
                 onBackdropPress={() => setOverlay(false)}
                 overlayStyle={{
@@ -191,23 +192,24 @@ si ces conditions sont remplies allergyExist passe a true*/
                     paddingVertical: 20,
                 }}
             >
+                <ScrollView>
+                    <MyCheckbox title="Gluten" isAllergy={true} />
+                    <MyCheckbox title="Sesame" isAllergy={true} />
+                    <MyCheckbox title="Fruits à coque" isAllergy={true} />
+                    <MyCheckbox title="Crustacés" isAllergy={true} />
+                    <MyCheckbox title="Oeuf" isAllergy={true} />
+                    <MyCheckbox title="Poisson" isAllergy={true} />
+                    <MyCheckbox title="Moutarde" isAllergy={true} />
+                    <MyCheckbox title="Lait" isAllergy={true} />
+                    <MyCheckbox title="Celeri" isAllergy={true} />
+                    <MyCheckbox title="Arachides" isAllergy={true} />
+                    <MyCheckbox title="Soja" isAllergy={true} />
+                    <MyCheckbox title="Mollusques" isAllergy={true} />
+                    <MyCheckbox title="Lupin" isAllergy={true} />
+                    <MyCheckbox title="Sulfites" isAllergy={true} />
 
-                <MyCheckbox title="Gluten" isAllergy={true} />
-                <MyCheckbox title="Sesame" isAllergy={true} />
-                <MyCheckbox title="Fruits à coque" isAllergy={true} />
-                <MyCheckbox title="Crustacés" isAllergy={true} />
-                <MyCheckbox title="Oeuf" isAllergy={true} />
-                <MyCheckbox title="Poisson" isAllergy={true} />
-                <MyCheckbox title="Moutarde" isAllergy={true} />
-                <MyCheckbox title="Lait" isAllergy={true} />
-                <MyCheckbox title="Celeri" isAllergy={true} />
-                <MyCheckbox title="Arachides" isAllergy={true} />
-                <MyCheckbox title="Soja" isAllergy={true} />
-                <MyCheckbox title="Mollusques" isAllergy={true} />
-                <MyCheckbox title="Lupin" isAllergy={true} />
-                <MyCheckbox title="Sulfites" isAllergy={true} />
-
-                <NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+                    <NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+                </ScrollView>
             </Overlay>
 
             <TouchableOpacity onPress={() => handleAllergies(true)}>
