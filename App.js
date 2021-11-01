@@ -78,7 +78,10 @@ const DrawerNav = props => {
 			<Drawer.Screen name="Historique" component={History} />
 			<Drawer.Screen name="Infos Perso" component={UserPage} />
 			<Drawer.Screen name="Allergies" component={Allergies} />
+<<<<<<< HEAD
 			<Drawer.Screen name="Donts" component={Donts} />
+=======
+>>>>>>> 2b462717996f163388d93831177dc0899cbcf0a8
 		</Drawer.Navigator>
 	)
 }

@@ -64,19 +64,25 @@ function FirstScreen(props) {
 			style={styles.image}
 		>
 			<View style={styles.content}>
-				<Text h4 style={styles.text}>
-					Vous nous renseignez
-				</Text>
-				<Text h4 style={styles.text2}>
-					On choisit pour vous
-				</Text>
-
-				<NextButton
-					title="Commencer"
-					onPress={() => {
-						redirectUser()
-					}}
+				<Image
+					style={styles.bigLogo}
+					source={require('./../assets/VJF-logo-big.png')}
 				/>
+				<View>
+					<Text h4 style={styles.text}>
+						Vous nous renseignez
+					</Text>
+					<Text h4 style={styles.text2}>
+						On choisit pour vous
+					</Text>
+
+					<NextButton
+						title="Commencer"
+						onPress={() => {
+							redirectUser()
+						}}
+					/>
+				</View>
 			</View>
 		</ImageBackground>
 	)
@@ -88,23 +94,27 @@ const styles = StyleSheet.create({
 		resizeMode: 'cover',
 		width: '100%',
 		alignItems: 'center',
-		justifyContent: 'flex-end',
+		justifyContent: 'center',
 	},
 	content: {
-		marginBottom: 80,
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+		justifyContent: 'center',
 	},
 	text: {
 		textAlign: 'center',
 		color: '#F2A902',
-		marginBottom: 10,
 	},
 	text2: {
 		textAlign: 'center',
 		color: '#F2A902',
-		marginBottom: 50,
+		marginBottom: 30,
+	},
+	bigLogo: {
+		height: 390,
+		width: 320,
+		marginBottom: 30,
 	},
 })
 
