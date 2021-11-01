@@ -14,14 +14,14 @@ const MoodIcon = props => {
 		<TouchableOpacity>
 			<TouchableOpacity
 				style={{
-					backgroundColor: '#FFC901',
+					backgroundColor: props.isSelected ? '#000000' : '#FFC901',
 					height: 110,
 					width: 135,
 					position: 'relative',
 				}}
 				onPress={() => {
 					props.moodHandle(props.short)
-					props.setIsSelected(!props.isSelected)
+					props.handleSetSelected(props.moodId)
 				}}
 			>
 				<ImageBackground
@@ -29,7 +29,7 @@ const MoodIcon = props => {
 					style={{
 						height: 110,
 						width: 135,
-						opacity: props.short === 'all' ? 1 : 0.6,
+						opacity: 0.6,
 						position: 'absolute',
 					}}
 				/>
@@ -37,25 +37,17 @@ const MoodIcon = props => {
 					style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}
 				>
 					<Text
-						style={{ fontSize: 18, fontWeight: '700', textAlign: 'center' }}
+						style={{
+							fontSize: 18,
+							fontWeight: '700',
+							textAlign: 'center',
+							color: props.isSelected ? '#FFC901' : '#000000',
+						}}
 					>
 						{props.title}
 					</Text>
 				</View>
 			</TouchableOpacity>
-
-			{/* <Button
-				onPress={() => {
-					props.moodHandle(props.short)
-					props.setIsSelected(!props.isSelected)
-				}}
-				title={props.title}
-				buttonStyle={{
-					backgroundColor: props.isSelected ? '#F2A902' : '#FFC901',
-					width: 138,
-					height: 110,
-				}}
-			/> */}
 		</TouchableOpacity>
 	)
 }

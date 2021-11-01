@@ -50,6 +50,8 @@ const moodsItems = [
 ]
 
 function Mood(props) {
+	console.log(moodsItems)
+
 	const [overlay, setOverlay] = useState(false)
 	const [addressIsChanged, setAddressIsChanged] = useState(false)
 	const [numRue, setNumRue] = useState('')
@@ -60,6 +62,12 @@ function Mood(props) {
 	const [errorMsg, setErrorMsg] = useState('')
 	const [isSelected, setIsSelected] = useState(false) // mood selected, used to change color
 
+	const handleSetSelected = moodId => {
+		moodsItems.forEach(mood => (mood.isSelected = false))
+		const mood = moodsItems.find(mood => mood.id === moodId)
+		mood.isSelected = true
+	}
+
 	const changeAdress = () => {
 		setOverlay(true)
 	}
@@ -68,6 +76,8 @@ function Mood(props) {
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
+
+	console.log(props.coords)
 
 	const getTheSupriseMeal = async () => {
 		try {
@@ -154,11 +164,12 @@ function Mood(props) {
 				{moodsItems.map(mood => (
 					<MoodIcon
 						key={mood.id}
+						moodId={mood.id}
 						title={mood.name}
 						short={mood.short}
 						background={mood.img}
-						setIsSelected={setIsSelected}
-						isSelected={isSelected}
+						handleSetSelected={handleSetSelected}
+						isSelected={mood.isSelected}
 					/>
 				))}
 			</View>
