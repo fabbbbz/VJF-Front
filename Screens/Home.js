@@ -13,9 +13,9 @@ import MyCheckbox from '../Components/Checkbox'
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
 	const token = props.token
-	console.log('tokenInStore:', token)
-	console.log('diet: ', props.diet)
-	console.log('donts: ', props.donts)
+	// console.log('tokenInStore:', token)
+	// console.log('diet: ', props.diet)
+	// console.log('donts: ', props.donts)
 
 	const handleAllergies = allergy => {
 		setOverlay(false)
