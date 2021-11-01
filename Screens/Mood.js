@@ -48,7 +48,7 @@ function Mood(props) {
 				minprice: props.budget[0],
 				maxprice: props.budget[1],
 				coords: props.coords,
-				portions,
+				quantity: portions,
 			}
 			const requestOptions = {
 				method: 'POST',
