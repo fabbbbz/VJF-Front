@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import TopBar from '../Components/TopBar';
-import { View, StyleSheet, Image, ScrollView } from 'react-native';
-import { Button, Text, Input, Card, ListItem } from 'react-native-elements'
+import { StyleSheet, ScrollView } from 'react-native';
+import { Button, Text, Card } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons';
-import { MY_IP } from "@env"
 import { connect } from 'react-redux'
 
 function UserPage(props) {

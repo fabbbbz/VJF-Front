@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
-import { MY_IP } from '@env'
-import Geoloc from './Geoloc'
 
 const Address = props => {
 	const [address, setAddress] = useState('')
@@ -23,7 +21,7 @@ const Address = props => {
 	return (
 		<View style={styles.container}>
 			<Text h4 style={styles.text}>
-				livré à :
+				Adresse de livraison :
 			</Text>
 			<Text style={styles.text}>{props.address}</Text>
 		</View>

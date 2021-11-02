@@ -7,10 +7,7 @@ import { connect } from 'react-redux'
 
 
 function Donts(props) {
-
-
     return (
-
         <View style={styles.container}>
             <TopBar navigation={props.navigation} />
             <View >

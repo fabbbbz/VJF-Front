@@ -4,9 +4,7 @@ import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar';
 import Plats from '../Components/Plats';
 
-
 function History(props) {
-
 
     return (
 

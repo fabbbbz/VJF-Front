@@ -1,14 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View } from 'react-native'
 
 
 const Moods = props => {
-
-
-
 	return (
-
-
 		<View
 			style={{
 				marginTop: 15,
@@ -19,11 +14,7 @@ const Moods = props => {
 				borderRadius: 5,
 			}}
 		>
-
-
 		</View>
-
-
 	)
 }
 
