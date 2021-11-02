@@ -1,10 +1,9 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView } from 'react-native'
+import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
 import { Text, Input } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
-import { MY_IP } from '@env'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
@@ -125,6 +124,10 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#FF9800',
 		fontSize: 20,
+	},
+	text: {
+		fontSize: 20,
+		color: '#0000FF',
 	},
 })
 

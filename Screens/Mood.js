@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { Button, Text, Input, Overlay, Icon } from 'react-native-elements'
+import { Button, Text, Input, Overlay } from 'react-native-elements'
 import NumericInput from 'react-native-numeric-input'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
@@ -8,7 +8,6 @@ import NextButtonFullSize from '../Components/NextButtonFullSize'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
 import MoodIcon from '../Components/MoodIcon'
 import moodsItems from '../data/moods'
 
@@ -77,7 +76,6 @@ function Mood(props) {
 				}
 			}
 		} catch (err) {
-			console.log(err.message)
 		}
 	}
 	var address

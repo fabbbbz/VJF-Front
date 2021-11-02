@@ -4,11 +4,9 @@ import { ScrollView, Image, TouchableOpacity } from 'react-native'
 import { Button, Text, Card } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
 import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
-import { AntDesign } from '@expo/vector-icons'
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)

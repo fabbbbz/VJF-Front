@@ -6,8 +6,6 @@ import { connect } from 'react-redux'
 import NextButtonFullSize from '../Components/NextButtonFullSize'
 import OrderRecap from '../Components/OrderRecap'
 import Address from '../Components/Address'
-import { MY_IP } from '@env'
-//import { MY_IP } from '@env'
 
 const TimeToPay = props => {
     const [order, setOrder] = useState({})

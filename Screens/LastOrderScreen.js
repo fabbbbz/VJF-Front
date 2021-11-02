@@ -29,7 +29,6 @@ const LastOrderScreen = props => {
 	const updateUser = async () => {
 		try {
 			const token = props.token
-			console.log('fetch api')
 			const data = await fetch(
 				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
 				{
@@ -39,9 +38,7 @@ const LastOrderScreen = props => {
 				}
 			)
 			const result = await data.json()
-			// console.log(result)
 		} catch (err) {
-			console.log(err.message)
 		}
 	}
 

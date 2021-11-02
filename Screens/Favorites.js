@@ -4,7 +4,6 @@ import { ScrollView } from 'react-native'
 import { Button, Text, Card } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
 import { useIsFocused } from '@react-navigation/native'
 
 

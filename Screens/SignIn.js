@@ -112,14 +112,6 @@ const styles = StyleSheet.create({
 		color: '#FF9800',
 		fontSize: 20,
 	},
-	container: {
-		flex: 1,
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'center',
-		alignContent: 'center',
-		padding: 10,
-	},
 	text: {
 		fontSize: 20,
 		color: '#0000FF',

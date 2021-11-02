@@ -3,7 +3,6 @@ import {
 	StyleSheet,
 	View,
 	Image,
-	ScrollView,
 	ImageBackground,
 } from 'react-native'
 import { Text } from 'react-native-elements'
@@ -12,8 +11,6 @@ import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import * as Permissions from 'expo-permissions'
-
-import { LogBox } from 'react-native'
 
 // Ignore all logs for DEMO
 //LogBox.ignoreAllLogs(); //Ignore all log notifications

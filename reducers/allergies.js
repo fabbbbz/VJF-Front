@@ -1,7 +1,6 @@
 export default function (allergies = [], action) {
 	switch (action.type) {
 		case 'ADD_ALLERGY':
-			console.log('add allergy')
 			const newAllergies = [...allergies, action.allergy]
 			return newAllergies
 		case 'REMOVE_ALLERGY':

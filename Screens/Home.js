@@ -1,21 +1,17 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { Overlay, Text } from 'react-native-elements'
+import { Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import Diet from '../Components/Diet'
 import Donts from '../Components/Donts'
 import Allergies from '../Components/Allergies'
 import NextButton from '../Components/NextButton'
-import { MY_IP } from '@env'
 import { connect } from 'react-redux'
 import MyCheckbox from '../Components/Checkbox'
 
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
 	const token = props.token
-	// console.log('tokenInStore:', token)
-	// console.log('diet: ', props.diet)
-	// console.log('donts: ', props.donts)
 
 	const handleAllergies = allergy => {
 		setOverlay(false)
@@ -49,7 +45,6 @@ const Home = props => {
 				screen: 'Mood',
 			})
 		} catch (err) {
-			console.log(err)
 		}
 	}
 
@@ -109,7 +104,6 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-	// console.log('Mytoken = ' + state.token)
 	return {
 		diet: state.diet,
 		token: state.token,
