@@ -14,6 +14,7 @@ function Allergies(props) {
 	const [allergyExist, setAllergyExist] = useState(false)
 	const [overlay, setOverlay] = useState(false)
 	const isFocused = useIsFocused()
+	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
 	var allergiesRender
 
@@ -39,7 +40,8 @@ si ces conditions sont remplies allergyExist passe a true*/
 
 
 	useEffect(() => {
-		allergiesRender = allergies.map((allergy, i) => {
+		allergiesRender = newAllergies.map((allergy, i) => {
+
 			return (
 				<Card
 					key={i}
@@ -73,6 +75,10 @@ si ces conditions sont remplies allergyExist passe a true*/
 				</Card>
 			)
 		})
+		var array = mergeArrays(allergies, props.allergies)
+		if (array) {
+			setnewAllergies(array)
+		}
 	}, [allergies])
 
 	/* si allergyExist == true les allergies sont affichées
@@ -80,7 +86,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 
 
 	if (allergyExist == true) {
-		allergiesRender = allergies.map((allergy, i) => {
+		allergiesRender = newAllergies.map((allergy, i) => {
 			return (
 				<Card
 					key={i}
@@ -155,11 +161,21 @@ si ces conditions sont remplies allergyExist passe a true*/
 			requestOptions
 		)
 		const result = await data.json()
+
 		console.log(result)
 		setAllergies(result.doc.allergies)
 	}
 
+	// testing 
+	function mergeArrays(...arrays) {
+		let jointArray = []
+		arrays.forEach(array => {
+			jointArray = [...jointArray, ...array]
+		})
+		const uniqueArray = jointArray.filter((item, index) => jointArray.indexOf(item) === index)
+		return uniqueArray
 
+	}
 
 	return (
 		<ScrollView>
