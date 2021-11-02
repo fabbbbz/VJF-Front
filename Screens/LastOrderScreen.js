@@ -17,10 +17,7 @@ const LastOrderScreen = props => {
 	const [choice, setChoice] = useState('')
 	const [mealId, setMealId] = useState('')
 	const [voted, setVoted] = useState(false)
-<<<<<<< HEAD
 	const [hasOrder, setHasOrder] = useState(true)
-=======
->>>>>>> adresse
 
 	console.log('voted? ', voted)
 	console.log('mealId? ', mealId)
@@ -29,11 +26,7 @@ const LastOrderScreen = props => {
 		setChoice(userchoice)
 		setOverlay(true)
 		setVoted(true)
-<<<<<<< HEAD
 		updateUser(userchoice)
-=======
-		if (choice === 'good') updateUser()
->>>>>>> adresse
 	}
 
 	const updateUser = async choice => {
@@ -76,54 +69,51 @@ const LastOrderScreen = props => {
 			<Text h3 style={styles.text}>
 				Votre dernière commande
 			</Text>
-<<<<<<< HEAD
 			<LastOrder
 				mealId={mealId}
 				setMealId={setMealId}
 				hasOrder={hasOrder}
 				setHasOrder={setHasOrder}
 			/>
-			{!voted && hasOrder && (
-=======
-			<LastOrder mealId={mealId} setMealId={setMealId} />
-			{!voted && (
->>>>>>> adresse
-				<View>
-					<Text h4 style={styles.text}>
-						Qu'en avez vous pensé ?
-					</Text>
-					<View
-						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-evenly',
-							marginTop: 20,
-						}}
-					>
-						<TouchableOpacity onPress={() => handleThumbClick('bad')}>
-							<Image
-								style={styles.tinyLogo}
-								source={require('../assets/thumbdown.png')}
+			{
+				!voted && hasOrder && (
+					<View>
+						<Text h4 style={styles.text}>
+							Qu'en avez vous pensé ?
+						</Text>
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'space-evenly',
+								marginTop: 20,
+							}}
+						>
+							<TouchableOpacity onPress={() => handleThumbClick('bad')}>
+								<Image
+									style={styles.tinyLogo}
+									source={require('../assets/thumbdown.png')}
+								/>
+							</TouchableOpacity>
+							<TouchableOpacity onPress={() => handleThumbClick('good')}>
+								<Image
+									style={styles.tinyLogo}
+									source={require('../assets/thumbup.png')}
+									onPress={() => handleThumbClick('good')}
+								/>
+							</TouchableOpacity>
+						</View>
+						<KeyboardAvoidingView
+							behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+						>
+							<Input
+								placeholder="Ajoutez un commentaire"
+								style={{ marginTop: 40, marginHorizontal: 10 }}
 							/>
-						</TouchableOpacity>
-						<TouchableOpacity onPress={() => handleThumbClick('good')}>
-							<Image
-								style={styles.tinyLogo}
-								source={require('../assets/thumbup.png')}
-								onPress={() => handleThumbClick('good')}
-							/>
-						</TouchableOpacity>
+						</KeyboardAvoidingView>
 					</View>
-					<KeyboardAvoidingView
-						behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-					>
-						<Input
-							placeholder="Ajoutez un commentaire"
-							style={{ marginTop: 40, marginHorizontal: 10 }}
-						/>
-					</KeyboardAvoidingView>
-				</View>
-			)}
+				)
+			}
 			<Overlay
 				isVisible={overlay}
 				onBackdropPress={() => setOverlay(false)} // REMOVE FOR PRODUCTION
@@ -142,7 +132,7 @@ const LastOrderScreen = props => {
 					<Text>Vous ne recevrez plus ce plat</Text>
 				)}
 			</Overlay>
-		</View>
+		</View >
 	)
 }
 

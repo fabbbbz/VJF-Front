@@ -7,13 +7,9 @@ import * as Permissions from 'expo-permissions'
 
 function Geoloc(props) {
 	const [displayCurrentAddress, setDisplayCurrentAddress] = useState('')
-<<<<<<< HEAD
-
-=======
 	const token = props.token
 	var addressComplete
 	// console.log('coords:', props.coords)
->>>>>>> adresse
 
 	useEffect(() => {
 		async function askPermissions() {
