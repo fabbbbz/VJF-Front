@@ -20,8 +20,6 @@ function Mood(props) {
 	const [errorMsg, setErrorMsg] = useState('')
 	const [selectedBudget, setSelectedBudget] = useState('')
 	const [portions, setPortions] = useState(1)
-	var addressComplete
-	const token = props.token
 
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
@@ -34,28 +32,15 @@ function Mood(props) {
 	}
 
 	const updateAdress = async () => {
+		var addressComplete
+		const token = props.token
 		addressComplete = numRue + "," + ville + "," + codePostal
 		props.addressHandle(addressComplete)
-
-
-
-
-		await fetch(`http://172.17.1.114:3000/users/update-useraddress/${token}`, {
+		await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-useraddress/${token}`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `address=${addressComplete}`,
 		})
-
-		// const requestOptions = {
-		// 	method: 'PUT',
-		// 	headers: { 'Content-Type': 'application/json' },
-		// 	body: `address=${addressComplete}`,
-		// }
-		// const data = await fetch(
-		// 	`http://172.17.1.114:3000/users/update-userinfo/${token}`,
-		// 	requestOptions
-		// )
-		console.log("address en bdd", addressComplete)
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
@@ -65,7 +50,6 @@ function Mood(props) {
 			const token = props.token
 			if (!token)
 				setErrorMsg('Connectez-vous pour commandez votre repas surprise !')
-
 			const dataToSend = {
 				mood: props.mood,
 				minprice: props.budget[0],
