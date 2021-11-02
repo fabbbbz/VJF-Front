@@ -68,20 +68,7 @@ function Favorites(props) {
 		var favFilter = favData.filter(e => e._id !== meal_id)
 		setFavData(favFilter)
 		var rawResponse = await fetch(
-			`http://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}/${meal_id}`,
-			{
-				method: 'DELETE',
-			}
-		)
-		var response = await rawResponse.json()
-		console.log(response)
-	}
-
-	async function handleFavDeletion(meal_id) {
-		var favFilter = favData.filter(e => e._id !== meal_id)
-		setFavData(favFilter)
-		var rawResponse = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}/${meal_id}`,
+			`http:/172.17.1.151:3000/users/favorites/${token}/${meal_id}`,
 			{
 				method: 'DELETE',
 			}

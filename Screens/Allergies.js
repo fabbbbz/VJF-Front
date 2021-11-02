@@ -40,11 +40,8 @@ si ces conditions sont remplies allergyExist passe a true*/
 
 	/* si allergyExist == true les allergies sont affichées
 	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
-<<<<<<< HEAD
 
 
-=======
->>>>>>> clem
 
 	if (allergyExist == true) {
 		allergiesRender = allergies.map((allergy, i) => {

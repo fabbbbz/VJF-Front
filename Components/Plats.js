@@ -7,13 +7,7 @@ import { MY_IP } from '@env'
 import HeartFav from '../Components/HeartFav'
 import { connect } from 'react-redux'
 
-<<<<<<< HEAD
 function Plats(props) {
-=======
-
-function Plats(props) {
-
->>>>>>> clem
 	const token = props.token
 
 	const [ordersHistory, setOrdersHistory] = useState([])
@@ -38,23 +32,6 @@ function Plats(props) {
 
 	return (
 		<View style={styles.container}>
-<<<<<<< HEAD
-			{ordersHistory.map((order, i) => (
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						marginTop: 25,
-						marginBottom: 25,
-					}}
-				>
-					<Text>{new Date(order.date).toLocaleDateString()}</Text>
-					<Text>{order.mealName}</Text>
-					<HeartFav mealId={order.mealId} />
-				</View>
-			))}
-		</View>
-=======
 			{ordersHistory.map((order, j) => (
 				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={j} >
 					<Text>{new Date(order.date).toLocaleDateString()}</Text>
@@ -64,7 +41,6 @@ function Plats(props) {
 			))
 			}
 		</View >
->>>>>>> clem
 	)
 }
 
@@ -78,18 +54,10 @@ const styles = StyleSheet.create({
 		borderColor: '#F2A902',
 	},
 })
-<<<<<<< HEAD
-=======
-
->>>>>>> clem
 function mapStateToProps(state) {
 	return {
 		token: state.token,
 	}
 }
 
-<<<<<<< HEAD
 export default connect(mapStateToProps, null)(Plats)
-=======
-export default connect(mapStateToProps, null)(Plats)
->>>>>>> clem
