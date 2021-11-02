@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { View, StyleSheet } from 'react-native'
-import { Text, Input } from 'react-native-elements'
-import { AntDesign } from '@expo/vector-icons'
-import { MY_IP } from '@env'
+import { Text } from 'react-native-elements'
 import { useIsFocused } from '@react-navigation/native'
 
 const LastOrder = props => {
@@ -27,8 +25,6 @@ const LastOrder = props => {
 				setRestaurant(lastOrder.restaurant)
 				props.setMealId(lastOrder.mealId)
 			} catch (err) {
-				console.log('Error in LastOrder fetch')
-				console.log(err.message)
 			}
 		}
 		if (token) {
@@ -37,7 +33,6 @@ const LastOrder = props => {
 			setHasOrder(false)
 		}
 		return () => {
-			console.log('component LastOrder is destroyed')
 		}
 	}, [isFocused])
 

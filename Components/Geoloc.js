@@ -8,7 +8,6 @@ import * as Permissions from 'expo-permissions'
 function Geoloc(props) {
 	const [displayCurrentAddress, setDisplayCurrentAddress] = useState('')
 
-	// console.log('coords:', props.coords)
 
 	useEffect(() => {
 		async function askPermissions() {

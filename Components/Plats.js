@@ -1,9 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, TouchableOpacity, View, Card } from 'react-native'
-import { Button, Text } from 'react-native-elements'
-import { AntDesign } from '@expo/vector-icons'
-import { MaterialCommunityIcons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
+import { StyleSheet, View } from 'react-native'
+import { Text } from 'react-native-elements'
 import HeartFav from '../Components/HeartFav'
 import { connect } from 'react-redux'
 
@@ -23,8 +20,6 @@ function Plats(props) {
 
 			setOrdersHistory(response.meals)
 			setMealId(response.meals[1].mealId)
-			console.log(ordersHistory)
-			// console.log('logg', response.meals)
 		}
 
 		loadOrders()

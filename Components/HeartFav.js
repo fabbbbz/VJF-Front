@@ -9,14 +9,12 @@ function HeartFav(props) {
 	const addToFavorite = async () => {
 		setIsFaved(true)
 		updateUser()
-		console.log('addedToFavorite')
 	}
 
 	const updateUser = async () => {
 		try {
 			const token = props.token
 			const mealId = props.mealId
-			console.log('fetch api')
 			const data = await fetch(
 				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
 				{
@@ -26,9 +24,7 @@ function HeartFav(props) {
 				}
 			)
 			const result = await data.json()
-			console.log('result', result)
 		} catch (err) {
-			console.log(err.message)
 		}
 	}
 

@@ -4,12 +4,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux'
 
 function Logout(props) {
-
-
-
     useEffect(() => {
-
-
         AsyncStorage.removeItem("token")
         props.deleteToken()
     }, []);
@@ -17,7 +12,6 @@ function Logout(props) {
 
     return (
         <View>
-
             {props.navigation.navigate('SignIn', { screen: "SignIn" })}
         </View>
     );

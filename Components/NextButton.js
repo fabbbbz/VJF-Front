@@ -1,6 +1,5 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Text } from 'react-native'
-import { Button } from 'react-native-elements'
 import { LinearGradient } from 'expo-linear-gradient'
 import { AntDesign } from '@expo/vector-icons'
 
