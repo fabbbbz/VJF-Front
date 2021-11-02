@@ -9,12 +9,15 @@ import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
 import { AntDesign } from '@expo/vector-icons'
+import { useIsFocused } from '@react-navigation/native'
+
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)
 	const [overlay, setOverlay] = useState(false)
 	const token = props.token
 	var allergiesRender
+	const isFocused = useIsFocused()
 
 	useEffect(() => {
 		async function loadAllergies() {
@@ -33,12 +36,15 @@ si ces conditions sont remplies allergyExist passe a true*/
 		}
 
 		loadAllergies()
-	}, [])
+	}, [isFocused])
 
 	/* si allergyExist == true les allergies sont affichées
 	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> clem
 
 	if (allergyExist == true) {
 		allergiesRender = allergies.map((allergy, i) => {
