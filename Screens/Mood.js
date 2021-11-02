@@ -10,6 +10,7 @@ import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
 import MoodIcon from '../Components/MoodIcon'
 import moodsItems from '../data/moods'
+import { CheckBox } from 'react-native-elements'
 
 function Mood(props) {
 	const [overlay, setOverlay] = useState(false)
@@ -20,6 +21,8 @@ function Mood(props) {
 	const [errorMsg, setErrorMsg] = useState('')
 	const [selectedBudget, setSelectedBudget] = useState('')
 	const [portions, setPortions] = useState(1)
+	const [check, setCheck] = useState(false)
+
 
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
@@ -44,8 +47,33 @@ function Mood(props) {
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
+	const getFromFavorites = async () => {
+		console.log('getFromFavorites')
+		try {
+			const token = props.token
+			if (!token)
+				setErrorMsg('Connectez-vous pour commandez votre repas surprise !')
+			const data = await fetch(
+				`http://172.17.1.78:3000/orders/makeorderinfav/${token}`
+			)
+			const formatedData = await data.json()
+
+			if (formatedData) {
+				const { result, order } = formatedData
+				if (result === 'success') {
+					// GET THE ORDER ID
+					props.orderReducer(order._id)
+					props.navigation.navigate('TimeToPay', {
+						screen: 'TimeToPay',
+					})
+				}
+			}
+		} catch (err) {
+		}
+	}
 
 	const getTheSupriseMeal = async () => {
+		console.log('getTheSupriseMeal')
 		try {
 			const token = props.token
 			if (!token)
@@ -63,7 +91,7 @@ function Mood(props) {
 				body: JSON.stringify(dataToSend),
 			}
 			const data = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`,
+				`http://172.17.1.78:3000/orders/recap/${token}`,
 				requestOptions
 			)
 			const formatedData = await data.json()
@@ -86,6 +114,17 @@ function Mood(props) {
 		} catch (err) {
 		}
 	}
+
+	var checkOrNot = () => {
+		if (check) {
+			getFromFavorites()
+			console.log('getFromFavorites')
+		}
+		else {
+			getTheSupriseMeal('getSupriseMeal')
+		}
+	}
+
 	var address
 	if (addressIsChanged) {
 		address = (
@@ -285,6 +324,9 @@ function Mood(props) {
 						setOverlay={setOverlay}
 					/>
 				</View>
+
+
+
 				<Overlay
 					isVisible={overlay}
 					onBackdropPress={() => setOverlay(false)}
@@ -320,6 +362,12 @@ function Mood(props) {
 				>
 					<Text>{errorMsg}</Text>
 				</Overlay>
+				<CheckBox
+					title='Choisir un plat uniquement dans les favoris'
+					checkedColor="#FFC901"
+					checked={check}
+					onPress={() => setCheck(!check)}
+				/>
 				<View
 					style={{
 						marginTop: 15,
@@ -330,7 +378,7 @@ function Mood(props) {
 				>
 					<NextButtonFullSize
 						title="VITE J'AI FAIM"
-						onPress={getTheSupriseMeal}
+						onPress={checkOrNot}
 					/>
 				</View>
 			</View>
