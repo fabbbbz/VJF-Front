@@ -1,11 +1,12 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
-import { Text, Input } from 'react-native-elements'
+import { Text, Input, SocialIcon, Button } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import { AntDesign } from '@expo/vector-icons'
 
 function SignIn(props) {
 	const [signUpEmail, setSignUpEmail] = useState('')
@@ -57,7 +58,7 @@ function SignIn(props) {
 							marginBottom: 30,
 						}}
 					>
-						Login Page
+						Connectez-vous
 					</Text>
 					<Input
 						containerStyle={{ marginBottom: 15, width: '70%' }}
@@ -73,21 +74,42 @@ function SignIn(props) {
 						onChangeText={text => setSignUpPassword(text)}
 					/>
 				</View>
-				<View style={{ alignSelf: 'center' }}>
+				<View
+					style={{
+						alignSelf: 'center',
+						display: 'flex',
+						flexDirection: 'column',
+						justifyContent: 'center',
+						alignItems: 'center',
+						marginBottom: 50,
+					}}
+				>
 					<NextButton title="LOGIN" onPress={() => handleSubmitSignin()} />
-					<Text
-						style={{
-							textAlign: 'center',
-							color: '#000000',
-							marginTop: 20,
-							marginBottom: 15,
-							fontSize: 20,
+					<Text style={{ marginBottom: 3 }}>ou</Text>
+					<Button
+						icon={<AntDesign name="google" size={24} color="white" />}
+						title="Login with Google"
+						buttonStyle={{
+							backgroundColor: '#DB1919',
+							padding: 10,
+							width: 200,
+							borderRadius: 5,
+							marginBottom: 10,
 						}}
-					>
-						Ou
-					</Text>
+					/>
+					<Button
+						icon={<AntDesign name="facebook-square" size={24} color="white" />}
+						title="Login with Facebook"
+						buttonStyle={{
+							backgroundColor: '#3F59FF',
+							padding: 10,
+							width: 200,
+							borderRadius: 5,
+						}}
+					/>
 				</View>
 				<View style={styles.container}>
+					<Text style={{ textAlign: 'center' }}>Pas encore de compte ?</Text>
 					<TouchableOpacity onPress={goSignup}>
 						<Text style={styles.text}>Continuer pour vous enregister</Text>
 					</TouchableOpacity>
@@ -114,7 +136,8 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 20,
-		color: '#0000FF',
+		color: '#F2A902',
+		fontWeight: '700',
 	},
 })
 
