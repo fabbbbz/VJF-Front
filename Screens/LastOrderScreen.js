@@ -17,6 +17,10 @@ const LastOrderScreen = props => {
 	const [choice, setChoice] = useState('')
 	const [mealId, setMealId] = useState('')
 	const [voted, setVoted] = useState(false)
+	const [hasOrder, setHasOrder] = useState(true)
+
+	console.log('voted? ', voted)
+	console.log('mealId? ', mealId)
 
 	const handleThumbClick = async userchoice => {
 		setChoice(userchoice)
@@ -65,8 +69,13 @@ const LastOrderScreen = props => {
 			<Text h3 style={styles.text}>
 				Votre dernière commande
 			</Text>
-			<LastOrder mealId={mealId} setMealId={setMealId} />
-			{!voted && (
+			<LastOrder
+				mealId={mealId}
+				setMealId={setMealId}
+				hasOrder={hasOrder}
+				setHasOrder={setHasOrder}
+			/>
+			{!voted && hasOrder && (
 				<View>
 					<Text h4 style={styles.text}>
 						Qu'en avez vous pensé ?
