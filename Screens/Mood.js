@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Button, Text, Input, Overlay, Icon } from 'react-native-elements'
+import NumericInput from 'react-native-numeric-input'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
 import NextButtonFullSize from '../Components/NextButtonFullSize'
@@ -8,6 +9,8 @@ import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
 import { MY_IP } from '@env'
+import MoodIcon from '../Components/MoodIcon'
+import moodsItems from '../data/moods'
 
 function Mood(props) {
 	const [overlay, setOverlay] = useState(false)
@@ -15,9 +18,15 @@ function Mood(props) {
 	const [numRue, setNumRue] = useState('')
 	const [ville, setVille] = useState('')
 	const [codePostal, setcodePostal] = useState('')
-	const [pricerange, setPricerange] = useState([])
-	const [moodSelected, SetMoodSelected] = useState(false)
 	const [errorMsg, setErrorMsg] = useState('')
+	const [selectedBudget, setSelectedBudget] = useState('')
+	const [portions, setPortions] = useState(1)
+
+	const handleSetSelected = moodId => {
+		moodsItems.forEach(mood => (mood.isSelected = false))
+		const mood = moodsItems.find(mood => mood.id === moodId)
+		mood.isSelected = true
+	}
 
 	const changeAdress = () => {
 		setOverlay(true)
@@ -39,6 +48,7 @@ function Mood(props) {
 				minprice: props.budget[0],
 				maxprice: props.budget[1],
 				coords: props.coords,
+				quantity: portions,
 			}
 			const requestOptions = {
 				method: 'POST',
@@ -78,12 +88,7 @@ function Mood(props) {
 			</Text>
 		)
 	} else {
-		address = (
-			<Text style={{ color: '#000000' }}>
-				{' '}
-				<Geoloc />{' '}
-			</Text>
-		)
+		address = <Geoloc />
 	}
 	return (
 		<ScrollView>
@@ -109,72 +114,18 @@ function Mood(props) {
 				Quel est votre mood ?
 			</Text>
 
-			<View
-				style={{
-					marginTop: 15,
-					flexDirection: 'row',
-					flexWrap: 'wrap',
-					width: '100%',
-					alignItems: 'center',
-					justifyContent: 'center',
-					alignSelf: 'center',
-					// backgroundColor: '#FFFFFF',
-					borderRadius: 5,
-				}}
-			>
-				<Button
-					icon={
-						<Icon name="shuffle" size={15} color="white" iconPosition="top" />
-					}
-					onPress={() => {
-						props.moodHandle('all')
-					}}
-					title="Surprise Totale"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('healthy')
-					}}
-					title="Healthy"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('comme chez maman')
-					}}
-					title="Comme chez Maman"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('cuisine du monde')
-					}}
-					title="Cuisine du monde"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('soir de match')
-					}}
-					title="Soir de Match"
-					buttonStyle={styles.moodButton}
-				/>
-				<Button
-					onPress={() => {
-						props.moodHandle('a partager')
-					}}
-					title="A partager"
-					buttonStyle={styles.moodButton}
-				/>
-			</View>
-
-			{/* <Moods /> */}
-			<View>
-				<Text style={{ color: '#000000', marginTop: 15, fontWeight: 'bold' }}>
-					{' '}
-					Nombre de personnes affamées: 1
-				</Text>
+			<View style={styles.moodContainer}>
+				{moodsItems.map(mood => (
+					<MoodIcon
+						key={mood.id}
+						moodId={mood.id}
+						title={mood.name}
+						short={mood.short}
+						background={mood.img}
+						handleSetSelected={handleSetSelected}
+						isSelected={mood.isSelected}
+					/>
+				))}
 			</View>
 
 			<View
@@ -198,7 +149,7 @@ function Mood(props) {
 				>
 					<Text h4 style={{ color: '#000000', fontWeight: 'bold' }}>
 						{' '}
-						Budget
+						Budget (par portion)
 					</Text>
 					<View
 						style={{
@@ -214,10 +165,12 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([5, 9.99])
+								setSelectedBudget('5-10')
 							}}
 							title="5-10€"
 							buttonStyle={{
-								backgroundColor: '#FFC901',
+								backgroundColor:
+									selectedBudget === '5-10' ? '#000000' : '#FFC901',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
@@ -226,10 +179,12 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([10, 14.99])
+								setSelectedBudget('10-15')
 							}}
 							title="10-15€"
 							buttonStyle={{
-								backgroundColor: '#F2A902',
+								backgroundColor:
+									selectedBudget === '10-15' ? '#000000' : '#F2A902',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
@@ -238,10 +193,12 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([15, 19.99])
+								setSelectedBudget('15-20')
 							}}
 							title="15-20€"
 							buttonStyle={{
-								backgroundColor: '#C95615',
+								backgroundColor:
+									selectedBudget === '15-20' ? '#000000' : '#C95615',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
@@ -250,14 +207,42 @@ function Mood(props) {
 						<Button
 							onPress={() => {
 								props.budgetHandle([20, 2000])
+								setSelectedBudget('20+')
 							}}
 							title="YOLO!"
 							buttonStyle={{
-								backgroundColor: '#DB1919',
+								backgroundColor:
+									selectedBudget === '20+' ? '#000000' : '#DB1919',
 								borderRadius: 5,
 								width: 80,
 								marginRight: 10,
 							}}
+						/>
+					</View>
+				</View>
+
+				<View>
+					<Text
+						h4
+						style={{
+							color: '#000000',
+							fontWeight: 'bold',
+							textAlign: 'center',
+							marginTop: 20,
+						}}
+					>
+						Nombre de personnes affamées:
+					</Text>
+					<View style={{ alignSelf: 'center', marginTop: 10 }}>
+						<NumericInput
+							value={portions}
+							onChange={value => setPortions(value)}
+							rounded
+							rightButtonBackgroundColor="#FFC901"
+							leftButtonBackgroundColor="#F2A902"
+							totalHeight={45}
+							totalWidth={120}
+							inputStyle={{ fontWeight: '700' }}
 						/>
 					</View>
 				</View>
@@ -267,24 +252,24 @@ function Mood(props) {
 						marginTop: 15,
 						flexDirection: 'row',
 						width: '90%',
-						height: 40,
+						height: 60,
 						alignItems: 'center',
 						justifyContent: 'center',
 					}}
 				>
 					<Ionicons name="location-outline" size={24} color="#F2A902" />
-					<Text
-						style={{
-							flex: 1,
-							color: '#000000',
-							fontWeight: 'bold',
-							flexWrap: 'wrap',
-							justifyContent: 'center',
-						}}
-					>
-						Livré à:
-					</Text>
-					{address}
+					<View style={{ display: 'flex', flexDirection: 'column' }}>
+						<Text
+							style={{
+								color: '#000000',
+								fontWeight: 'bold',
+								justifyContent: 'center',
+							}}
+						>
+							Livré au:
+						</Text>
+						{address}
+					</View>
 					<Ionicons
 						name="ellipsis-vertical"
 						size={24}
@@ -352,10 +337,16 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#F4F4F4',
 	},
-	moodButton: {
-		backgroundColor: '#FFC901',
-		width: 138,
-		height: 110,
+	moodContainer: {
+		marginTop: 15,
+		flexDirection: 'row',
+		flexWrap: 'wrap',
+		width: '100%',
+		alignItems: 'center',
+		justifyContent: 'center',
+		alignSelf: 'center',
+		// backgroundColor: '#FFFFFF',
+		borderRadius: 5,
 	},
 })
 

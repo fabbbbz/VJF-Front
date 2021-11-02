@@ -102,10 +102,10 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 10,
         elevation: 4,
-        shadowOffset: { width: 5, height: 5 },
-        shadowColor: '#FFC901',
-        shadowOpacity: 1,
-        shadowRadius: 20,
+        shadowOffset: { width: 2, height: 2 },
+        shadowColor: 'rgba(0,0,0, 0.2)',
+        shadowOpacity: 0.5,
+        shadowRadius: 2,
     },
     wrapper: {
         display: 'flex',

@@ -23,7 +23,7 @@ const Address = props => {
 	return (
 		<View style={styles.container}>
 			<Text h4 style={styles.text}>
-				livré à :
+				Adresse de livraison :
 			</Text>
 			<Text style={styles.text}>{props.address}</Text>
 		</View>

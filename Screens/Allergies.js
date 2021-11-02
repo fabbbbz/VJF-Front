@@ -36,7 +36,9 @@ si ces conditions sont remplies allergyExist passe a true*/
 	}, [])
 
 	/* si allergyExist == true les allergies sont affichées
-    sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
+	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
+
+
 
 	if (allergyExist == true) {
 		allergiesRender = allergies.map((allergy, i) => {
@@ -59,7 +61,8 @@ si ces conditions sont remplies allergyExist passe a true*/
 						alignItems: 'center',
 					}}
 				>
-					<Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
+					<Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
+
 						{allergy}
 					</Card.Title>
 					<Button
@@ -73,24 +76,24 @@ si ces conditions sont remplies allergyExist passe a true*/
 			)
 		})
 	} else {
-		allergiesRender = (
-			<Text style={{ alignSelf: 'center', marginTop: 25, fontWeight: 'bold' }}>
-				vous n'avez pas d'allergies renseignées
-			</Text>
-		)
+		allergiesRender = <Text style={{ alignSelf: "center", marginTop: 25, fontWeight: "bold" }}>vous n'avez pas d'allergies renseignées</Text>
 	}
 
+
 	async function handleAllergyDeletion(allergy) {
+
 		var allergyFilter = allergies.filter(e => e !== allergy)
 		setAllergies(allergyFilter)
 		var rawResponse = await fetch(
 			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/delallergies/${token}/${allergy}`,
+
 
 			{
 				method: 'DELETE',
 			}
 		)
 		// var response = await rawResponse.json()
+
 	}
 
 	async function handleAllergies(boolean) {
@@ -109,7 +112,10 @@ si ces conditions sont remplies allergyExist passe a true*/
 			requestOptions
 		)
 		const result = await data.json()
+		setAllergies(result.doc.allergies)
 	}
+
+
 
 	return (
 		<ScrollView>
@@ -128,6 +134,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 			{allergiesRender}
 
 			<Overlay
+
 				isVisible={overlay}
 				onBackdropPress={() => setOverlay(false)}
 				overlayStyle={{
@@ -137,31 +144,37 @@ si ces conditions sont remplies allergyExist passe a true*/
 					paddingVertical: 20,
 				}}
 			>
-				<MyCheckbox title="Gluten" isAllergy={true} />
-				<MyCheckbox title="Sesame" isAllergy={true} />
-				<MyCheckbox title="Fruits à coque" isAllergy={true} />
-				<MyCheckbox title="Crustacés" isAllergy={true} />
-				<MyCheckbox title="Oeuf" isAllergy={true} />
-				<MyCheckbox title="Poisson" isAllergy={true} />
-				<MyCheckbox title="Moutarde" isAllergy={true} />
-				<MyCheckbox title="Lait" isAllergy={true} />
-				<MyCheckbox title="Celeri" isAllergy={true} />
-				<MyCheckbox title="Arachides" isAllergy={true} />
-				<MyCheckbox title="Soja" isAllergy={true} />
-				<MyCheckbox title="Mollusques" isAllergy={true} />
-				<MyCheckbox title="Lupin" isAllergy={true} />
-				<MyCheckbox title="Sulfites" isAllergy={true} />
+				<ScrollView>
+					<MyCheckbox title="Gluten" isAllergy={true} />
+					<MyCheckbox title="Sesame" isAllergy={true} />
+					<MyCheckbox title="Fruits à coque" isAllergy={true} />
+					<MyCheckbox title="Crustacés" isAllergy={true} />
+					<MyCheckbox title="Oeuf" isAllergy={true} />
+					<MyCheckbox title="Poisson" isAllergy={true} />
+					<MyCheckbox title="Moutarde" isAllergy={true} />
+					<MyCheckbox title="Lait" isAllergy={true} />
+					<MyCheckbox title="Celeri" isAllergy={true} />
+					<MyCheckbox title="Arachides" isAllergy={true} />
+					<MyCheckbox title="Soja" isAllergy={true} />
+					<MyCheckbox title="Mollusques" isAllergy={true} />
+					<MyCheckbox title="Lupin" isAllergy={true} />
+					<MyCheckbox title="Sulfites" isAllergy={true} />
 
-				<NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+					<NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+				</ScrollView>
 			</Overlay>
 
 			<TouchableOpacity onPress={() => handleAllergies(true)}>
 				<Image
-					style={{ width: 50, height: 50, alignSelf: 'center' }}
-					source={require('../assets/plusIcon.png')}
-				/>
+					style={{ width: 50, height: 50, alignSelf: "center" }}
+					source={require('../assets/plusIcon.png')} />
+
 			</TouchableOpacity>
-		</ScrollView>
+
+
+		</ScrollView >
+
+
 	)
 }
 
