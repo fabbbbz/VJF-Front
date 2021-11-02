@@ -5,11 +5,12 @@ import { AntDesign } from '@expo/vector-icons'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MY_IP } from "@env"
 import HeartFav from '../Components/HeartFav'
+import { connect } from 'react-redux'
 
 
-export default function Plats() {
+function Plats(props) {
 
-	const token = 's0ZwxY8HQFpUaQtinFq_aEo45nKGXIde'
+	const token = props.token
 
 	const [ordersHistory, setOrdersHistory] = useState([])
 	const [mealId, setMealId] = useState([])
@@ -32,11 +33,11 @@ export default function Plats() {
 	return (
 
 		<View style={styles.container}>
-			{ordersHistory.map((order, i) => (
-				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} >
+			{ordersHistory.map((order, j) => (
+				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={j} >
 					<Text>{new Date(order.date).toLocaleDateString()}</Text>
 					<Text>{order.mealName}</Text>
-					<HeartFav mealId={mealId} />
+					<HeartFav mealId={order.mealId} />
 				</View >
 			))
 			}
@@ -55,3 +56,11 @@ const styles = StyleSheet.create({
 
 	},
 })
+
+function mapStateToProps(state) {
+	return {
+		token: state.token,
+	}
+}
+
+export default connect(mapStateToProps, null)(Plats)

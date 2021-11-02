@@ -9,12 +9,15 @@ import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
 import { AntDesign } from '@expo/vector-icons'
+import { useIsFocused } from '@react-navigation/native'
+
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)
 	const [overlay, setOverlay] = useState(false)
 	const token = props.token
 	var allergiesRender
+	const isFocused = useIsFocused()
 
 	useEffect(() => {
 		async function loadAllergies() {
@@ -33,10 +36,10 @@ si ces conditions sont remplies allergyExist passe a true*/
 		}
 
 		loadAllergies()
-	}, [])
+	}, [isFocused])
 
 	/* si allergyExist == true les allergies sont affichées
-    sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
+	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
 
 	if (allergyExist == true) {
 		allergiesRender = allergies.map((allergy, i) => {
@@ -137,22 +140,24 @@ si ces conditions sont remplies allergyExist passe a true*/
 					paddingVertical: 20,
 				}}
 			>
-				<MyCheckbox title="Gluten" isAllergy={true} />
-				<MyCheckbox title="Sesame" isAllergy={true} />
-				<MyCheckbox title="Fruits à coque" isAllergy={true} />
-				<MyCheckbox title="Crustacés" isAllergy={true} />
-				<MyCheckbox title="Oeuf" isAllergy={true} />
-				<MyCheckbox title="Poisson" isAllergy={true} />
-				<MyCheckbox title="Moutarde" isAllergy={true} />
-				<MyCheckbox title="Lait" isAllergy={true} />
-				<MyCheckbox title="Celeri" isAllergy={true} />
-				<MyCheckbox title="Arachides" isAllergy={true} />
-				<MyCheckbox title="Soja" isAllergy={true} />
-				<MyCheckbox title="Mollusques" isAllergy={true} />
-				<MyCheckbox title="Lupin" isAllergy={true} />
-				<MyCheckbox title="Sulfites" isAllergy={true} />
+				<ScrollView>
+					<MyCheckbox title="Gluten" isAllergy={true} />
+					<MyCheckbox title="Sesame" isAllergy={true} />
+					<MyCheckbox title="Fruits à coque" isAllergy={true} />
+					<MyCheckbox title="Crustacés" isAllergy={true} />
+					<MyCheckbox title="Oeuf" isAllergy={true} />
+					<MyCheckbox title="Poisson" isAllergy={true} />
+					<MyCheckbox title="Moutarde" isAllergy={true} />
+					<MyCheckbox title="Lait" isAllergy={true} />
+					<MyCheckbox title="Celeri" isAllergy={true} />
+					<MyCheckbox title="Arachides" isAllergy={true} />
+					<MyCheckbox title="Soja" isAllergy={true} />
+					<MyCheckbox title="Mollusques" isAllergy={true} />
+					<MyCheckbox title="Lupin" isAllergy={true} />
+					<MyCheckbox title="Sulfites" isAllergy={true} />
 
-				<NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+					<NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+				</ScrollView>
 			</Overlay>
 
 			<TouchableOpacity onPress={() => handleAllergies(true)}>
