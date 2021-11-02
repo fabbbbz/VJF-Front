@@ -25,8 +25,8 @@ const TimeToPay = props => {
             const result = await data.json()
             console.log(result)
             if (result) {
-                props.navigation.navigate('Livraison', {
-                    screen: 'Livraison',
+                props.navigation.navigate('PaymentScreen', {
+                    screen: 'PaymentScreen',
                 })
             }
         } catch (err) {

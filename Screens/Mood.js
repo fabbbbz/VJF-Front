@@ -40,21 +40,12 @@ function Mood(props) {
 
 
 
-		await fetch(`http://172.17.1.114:3000/users/update-useraddress/${token}`, {
+		await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-useraddress/${token}`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `address=${addressComplete}`,
 		})
 
-		// const requestOptions = {
-		// 	method: 'PUT',
-		// 	headers: { 'Content-Type': 'application/json' },
-		// 	body: `address=${addressComplete}`,
-		// }
-		// const data = await fetch(
-		// 	`http://172.17.1.114:3000/users/update-userinfo/${token}`,
-		// 	requestOptions
-		// )
 		console.log("address en bdd", addressComplete)
 		setOverlay(false)
 		setAddressIsChanged(true)
