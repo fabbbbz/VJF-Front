@@ -39,23 +39,11 @@ function Mood(props) {
 		const token = props.token
 		addressComplete = numRue + "," + ville + "," + codePostal
 		props.addressHandle(addressComplete)
-<<<<<<< HEAD
-
-
-
-
-=======
->>>>>>> 2908a0ef007cb85dc68c5d62978a1b6bae66f693
 		await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-useraddress/${token}`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `address=${addressComplete}`,
 		})
-<<<<<<< HEAD
-
-		console.log("address en bdd", addressComplete)
-=======
->>>>>>> 2908a0ef007cb85dc68c5d62978a1b6bae66f693
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}

@@ -1,7 +1,12 @@
 import { CardField, useStripe } from '@stripe/stripe-react-native';
-import { Button } from "react-native-elements"
+import React, { useState } from 'react'
+import { View, StyleSheet, ScrollView } from 'react-native'
+import { Button, Text, Input, Overlay } from 'react-native-elements'
+import { SafeAreaView } from 'react-native-safe-area-context';
+import TopBar from '../Components/TopBar'
 
-export default function PaymentScreen() {
+
+export default function PaymentScreen(props) {
     const fetchPaymentIntentClientSecret = async () => {
         const response = await fetch(`pk_test_51JrTrKGYLeZVv03J8ZnXBOOpJYjTSpbRwRpsDc87euQ5gniEbZ1RbxmqgQkpZ7OCq2igW25TR1rykbn2BsF26obr00vlt5uXhp/create-payment-intent`, {
             method: 'POST',
@@ -39,7 +44,12 @@ export default function PaymentScreen() {
     };
 
     return (
-        <View>
+        <SafeAreaView style={{
+            width: '100%',
+            backgroundColor: '#FFFFFF',
+        }}>
+            <TopBar showArrow={true} navigation={props.navigation} />
+            <Text h4 style={{ alignSelf: "center", fontWeight: "bold", marginTop: 25 }}>Si tu veux manger vite, il faut payer vite !</Text>
             <CardField onCardChange={(cardDetails) => console.log('cardDetails', cardDetails)} />
             <CardField
                 postalCodeEnabled={true}
@@ -49,11 +59,16 @@ export default function PaymentScreen() {
                 cardStyle={{
                     backgroundColor: '#FFFFFF',
                     textColor: '#000000',
+                    alignSelf: "100%"
                 }}
                 style={{
-                    width: '100%',
-                    height: 50,
+                    width: '98%',
+                    height: 150,
                     marginVertical: 30,
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
                 }}
                 onCardChange={(cardDetails) => {
                     console.log('cardDetails', cardDetails);
@@ -62,7 +77,8 @@ export default function PaymentScreen() {
                     console.log('focusField', focusedField);
                 }}
             />
-            <Button onPress={handlePayPress} title="Pay" disabled={loading} />
-        </View>
+            <Button onPress={handlePayPress} title="Pay" buttonStyle={{ width: "85%", alignSelf: "center" }} />
+            {/* disabled={loading} */}
+        </SafeAreaView>
     );
 }
