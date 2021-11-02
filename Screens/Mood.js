@@ -41,7 +41,7 @@ function Mood(props) {
 
 
 
-		await fetch(`http://172.17.1.114:3000/users/update-userinfo/${token}`, {
+		await fetch(`http://172.17.1.114:3000/users/update-useraddress/${token}`, {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 			body: `address=${addressComplete}`,
