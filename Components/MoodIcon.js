@@ -6,6 +6,10 @@ import {
 	View,
 	Text,
 } from 'react-native'
+<<<<<<< HEAD
+=======
+import { Button } from 'react-native-elements'
+>>>>>>> adresse
 import { connect } from 'react-redux'
 
 const MoodIcon = props => {

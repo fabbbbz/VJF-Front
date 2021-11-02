@@ -7,7 +7,13 @@ import * as Permissions from 'expo-permissions'
 
 function Geoloc(props) {
 	const [displayCurrentAddress, setDisplayCurrentAddress] = useState('')
+<<<<<<< HEAD
 
+=======
+	const token = props.token
+	var addressComplete
+	// console.log('coords:', props.coords)
+>>>>>>> adresse
 
 	useEffect(() => {
 		async function askPermissions() {
@@ -28,8 +34,18 @@ function Geoloc(props) {
 					}
 				}
 			}
+
+			addressComplete = props.address
+
+			await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-useraddress/${token}`, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: `address=${props.address}`,
+			})
 		}
 		askPermissions()
+
+
 	}, [])
 
 	return <Text>{displayCurrentAddress}</Text>
@@ -49,6 +65,8 @@ function mapDispatchToProps(dispatch) {
 function mapStateToProps(state) {
 	return {
 		coords: state.coords,
+		address: state.address,
+		token: state.token
 	}
 }
 

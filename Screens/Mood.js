@@ -20,6 +20,8 @@ function Mood(props) {
 	const [errorMsg, setErrorMsg] = useState('')
 	const [selectedBudget, setSelectedBudget] = useState('')
 	const [portions, setPortions] = useState(1)
+	var addressComplete
+	const token = props.token
 
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
@@ -31,7 +33,29 @@ function Mood(props) {
 		setOverlay(true)
 	}
 
-	const updateAdress = () => {
+	const updateAdress = async () => {
+		addressComplete = numRue + "," + ville + "," + codePostal
+		props.addressHandle(addressComplete)
+
+
+
+
+		await fetch(`http://172.17.1.114:3000/users/update-useraddress/${token}`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: `address=${addressComplete}`,
+		})
+
+		// const requestOptions = {
+		// 	method: 'PUT',
+		// 	headers: { 'Content-Type': 'application/json' },
+		// 	body: `address=${addressComplete}`,
+		// }
+		// const data = await fetch(
+		// 	`http://172.17.1.114:3000/users/update-userinfo/${token}`,
+		// 	requestOptions
+		// )
+		console.log("address en bdd", addressComplete)
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
@@ -361,6 +385,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		orderReducer: function (orderId) {
 			dispatch({ type: 'STORE_ORDER', orderId })
+		},
+		addressHandle: function (address) {
+			dispatch({ type: 'STORE_ADDRESS', address })
 		},
 	}
 }

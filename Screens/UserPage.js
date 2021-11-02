@@ -7,16 +7,17 @@ import { connect } from 'react-redux'
 
 function UserPage(props) {
     const [user, setUser] = useState('')
-
+    const token = props.token
     useEffect(() => {
         async function loadUser() {
-            const token = props.token
+
             var rawResponse = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/me/${token}`)
             var response = await rawResponse.json()
             // console.log(response.userInfo.lastName)
             setUser(response.userInfo)
         }
         loadUser()
+        console.log("", props.adress)
     }, [])
 
     // console.log(user.lastName)
@@ -77,7 +78,7 @@ function UserPage(props) {
 
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
                 <Card.Title style={{ marginBottom: 0 }}> Adresse:</Card.Title>
-                <Text>{user.adresse} </Text>
+                <Text>{props.address} </Text>
                 <Button
                     type="clear"
                     onPress={() => console.log('bonjour')}
@@ -114,10 +115,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 })
+
 function mapStateToProps(state) {
     return {
         token: state.token,
-
+        address: state.address
     }
 }
 

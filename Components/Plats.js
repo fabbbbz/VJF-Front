@@ -1,6 +1,14 @@
 import React, { useEffect, useState } from 'react'
+<<<<<<< HEAD
 import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-elements'
+=======
+import { StyleSheet, TouchableOpacity, View, Card } from 'react-native'
+import { Button, Text } from 'react-native-elements'
+import { AntDesign } from '@expo/vector-icons'
+import { MaterialCommunityIcons } from '@expo/vector-icons'
+import { MY_IP } from '@env'
+>>>>>>> adresse
 import HeartFav from '../Components/HeartFav'
 import { connect } from 'react-redux'
 

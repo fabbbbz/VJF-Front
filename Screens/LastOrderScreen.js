@@ -17,7 +17,10 @@ const LastOrderScreen = props => {
 	const [choice, setChoice] = useState('')
 	const [mealId, setMealId] = useState('')
 	const [voted, setVoted] = useState(false)
+<<<<<<< HEAD
 	const [hasOrder, setHasOrder] = useState(true)
+=======
+>>>>>>> adresse
 
 	console.log('voted? ', voted)
 	console.log('mealId? ', mealId)
@@ -26,7 +29,11 @@ const LastOrderScreen = props => {
 		setChoice(userchoice)
 		setOverlay(true)
 		setVoted(true)
+<<<<<<< HEAD
 		updateUser(userchoice)
+=======
+		if (choice === 'good') updateUser()
+>>>>>>> adresse
 	}
 
 	const updateUser = async choice => {
@@ -69,6 +76,7 @@ const LastOrderScreen = props => {
 			<Text h3 style={styles.text}>
 				Votre dernière commande
 			</Text>
+<<<<<<< HEAD
 			<LastOrder
 				mealId={mealId}
 				setMealId={setMealId}
@@ -76,6 +84,10 @@ const LastOrderScreen = props => {
 				setHasOrder={setHasOrder}
 			/>
 			{!voted && hasOrder && (
+=======
+			<LastOrder mealId={mealId} setMealId={setMealId} />
+			{!voted && (
+>>>>>>> adresse
 				<View>
 					<Text h4 style={styles.text}>
 						Qu'en avez vous pensé ?
