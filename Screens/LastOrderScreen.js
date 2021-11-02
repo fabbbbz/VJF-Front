@@ -18,27 +18,44 @@ const LastOrderScreen = props => {
 	const [mealId, setMealId] = useState('')
 	const [voted, setVoted] = useState(false)
 
-	const handleThumbClick = async choice => {
-		setChoice(choice)
+	const handleThumbClick = async userchoice => {
+		setChoice(userchoice)
 		setOverlay(true)
 		setVoted(true)
-		if (choice === 'good') updateUser()
+		updateUser(userchoice)
 	}
 
-	console.log('mealId...: ', mealId)
-	const updateUser = async () => {
-		try {
-			const token = props.token
-			const data = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
-				{
-					method: 'POST',
-					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-					body: `token=${token}&meal_id=${mealId}`,
-				}
-			)
-			const result = await data.json()
-		} catch (err) {
+	const updateUser = async choice => {
+		const token = props.token
+		if (choice === 'good') {
+			try {
+				const data = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
+					{
+						method: 'POST',
+						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+						body: `token=${token}&meal_id=${mealId}`,
+					}
+				)
+				const result = await data.json()
+			} catch (err) {
+				console.log(err.message)
+			}
+		} else if (choice === 'bad') {
+			try {
+				const data = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/blacklist/${token}`,
+					{
+						method: 'PUT',
+						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+						body: `mealId=${mealId}`,
+					}
+				)
+				const result = await data.json()
+				// console.log(result)
+			} catch (err) {
+				console.log(err.message)
+			}
 		}
 	}
 

@@ -10,6 +10,9 @@ const LastOrder = props => {
 	const [hasOrder, setHasOrder] = useState(true)
 	const isFocused = useIsFocused()
 
+	console.log('has ordered?: ', hasOrder)
+	console.log('token: ', props.token)
+
 	useEffect(() => {
 		// Fetch data to get last order
 		const token = props.token
