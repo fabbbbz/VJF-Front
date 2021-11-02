@@ -29,7 +29,6 @@ function SignUp(props) {
 		)
 		//get answer from back
 		const body = await data.json()
-		console.log('data received from back (signUP) : ', body)
 		if (body.result == true) {
 			//set token
 			setToken(body.token)
@@ -42,7 +41,9 @@ function SignUp(props) {
 			setErrorsSignup(body.error)
 		}
 	}
-
+	var skipAction = () => {
+		props.navigation.navigate('Home', { screen: 'Home' })
+	}
 	return (
 		<KeyboardAwareScrollView>
 			<ScrollView>
@@ -101,7 +102,11 @@ function SignUp(props) {
 								fontSize: 20,
 							}}
 						>
-							Skip
+							<View style={styles.container}>
+								<TouchableOpacity onPress={skipAction}>
+									<Text style={styles.text}>Skip</Text>
+								</TouchableOpacity>
+							</View>
 						</Text>
 						<NextButton title="NEXT" onPress={() => handleSubmitSignup()} />
 					</View>
@@ -127,7 +132,7 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 20,
-		color: '#0000FF',
+		color: '#70726e',
 	},
 })
 
