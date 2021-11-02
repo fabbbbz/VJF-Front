@@ -16,10 +16,12 @@ const LastOrderScreen = props => {
 	const [overlay, setOverlay] = useState(false)
 	const [choice, setChoice] = useState('')
 	const [mealId, setMealId] = useState('')
+	const [voted, setVoted] = useState(false)
 
 	const handleThumbClick = async choice => {
 		setChoice(choice)
 		setOverlay(true)
+		setVoted(true)
 		if (choice === 'good') updateUser()
 	}
 
@@ -50,39 +52,43 @@ const LastOrderScreen = props => {
 				Votre dernière commande
 			</Text>
 			<LastOrder mealId={mealId} setMealId={setMealId} />
-			<Text h4 style={styles.text}>
-				Qu'en avez vous pensé ?
-			</Text>
-			<View
-				style={{
-					display: 'flex',
-					flexDirection: 'row',
-					justifyContent: 'space-evenly',
-					marginTop: 20,
-				}}
-			>
-				<TouchableOpacity onPress={() => handleThumbClick('bad')}>
-					<Image
-						style={styles.tinyLogo}
-						source={require('../assets/thumbdown.png')}
-					/>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => handleThumbClick('good')}>
-					<Image
-						style={styles.tinyLogo}
-						source={require('../assets/thumbup.png')}
-						onPress={() => handleThumbClick('good')}
-					/>
-				</TouchableOpacity>
-			</View>
-			<KeyboardAvoidingView
-				behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-			>
-				<Input
-					placeholder="Ajoutez un commentaire"
-					style={{ marginTop: 40, marginHorizontal: 10 }}
-				/>
-			</KeyboardAvoidingView>
+			{!voted && (
+				<View>
+					<Text h4 style={styles.text}>
+						Qu'en avez vous pensé ?
+					</Text>
+					<View
+						style={{
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'space-evenly',
+							marginTop: 20,
+						}}
+					>
+						<TouchableOpacity onPress={() => handleThumbClick('bad')}>
+							<Image
+								style={styles.tinyLogo}
+								source={require('../assets/thumbdown.png')}
+							/>
+						</TouchableOpacity>
+						<TouchableOpacity onPress={() => handleThumbClick('good')}>
+							<Image
+								style={styles.tinyLogo}
+								source={require('../assets/thumbup.png')}
+								onPress={() => handleThumbClick('good')}
+							/>
+						</TouchableOpacity>
+					</View>
+					<KeyboardAvoidingView
+						behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+					>
+						<Input
+							placeholder="Ajoutez un commentaire"
+							style={{ marginTop: 40, marginHorizontal: 10 }}
+						/>
+					</KeyboardAvoidingView>
+				</View>
+			)}
 			<Overlay
 				isVisible={overlay}
 				onBackdropPress={() => setOverlay(false)} // REMOVE FOR PRODUCTION

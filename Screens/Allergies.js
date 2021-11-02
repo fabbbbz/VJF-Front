@@ -80,8 +80,6 @@ si ces conditions sont remplies allergyExist passe a true*/
 	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
 
 
-
-
 	if (allergyExist == true) {
 		allergiesRender = allergies.map((allergy, i) => {
 			return (
