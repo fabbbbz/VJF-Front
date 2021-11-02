@@ -54,7 +54,7 @@ function Mood(props) {
 			if (!token)
 				setErrorMsg('Connectez-vous pour commandez votre repas surprise !')
 			const data = await fetch(
-				`http://172.17.1.78:3000/orders/makeorderinfav/${token}`
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/makeorderinfav/${token}`
 			)
 			const formatedData = await data.json()
 
@@ -91,7 +91,7 @@ function Mood(props) {
 				body: JSON.stringify(dataToSend),
 			}
 			const data = await fetch(
-				`http://172.17.1.78:3000/orders/recap/${token}`,
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`,
 				requestOptions
 			)
 			const formatedData = await data.json()
