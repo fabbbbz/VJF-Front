@@ -37,6 +37,7 @@ function UserPage(props) {
 					diet: props.diet,
 				}
 
+<<<<<<< HEAD
 				const requestOptions = {
 					method: 'PUT',
 					headers: { 'Content-Type': 'application/json' },
@@ -53,11 +54,22 @@ function UserPage(props) {
 		}
 		updateDiet()
 	})
+=======
+    return (
+        <ScrollView>
+            <TopBar navigation={props.navigation} />
+            <Text
+                h3 style={{ color: '#F2A902', textAlign: 'center', marginTop: "4%" }}
+            >
+                Informations Personelles
+            </Text>
+>>>>>>> clem
 
 	const handleDiet = () => {
 		setOverlayVisible(true)
 	}
 
+<<<<<<< HEAD
 	return (
 		<ScrollView>
 			<TopBar navigation={props.navigation} />
@@ -148,6 +160,55 @@ function UserPage(props) {
 			</Overlay>
 		</ScrollView>
 	)
+=======
+            <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
+                <Card.Title style={{ marginBottom: 0 }}> Prénom:</Card.Title>
+                <Text>{user.firstName} </Text>
+                <Button
+                    type="clear"
+                    onPress={() => console.log()}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
+            </Card>
+            <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
+                <Card.Title style={{ marginBottom: 0 }}> Email:</Card.Title>
+                <Text>{user.email} </Text>
+                <Button
+                    type="clear"
+                    onPress={() => console.log()}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
+            </Card>
+            <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
+                <Card.Title style={{ marginBottom: 0 }}> Téléphone:</Card.Title>
+                <Text>{user.phone} </Text>
+                <Button
+                    type="clear"
+                    onPress={() => console.log()}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
+            </Card>
+            <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
+                <Card.Title style={{ marginBottom: 0 }}> Adresse:</Card.Title>
+                <Text>{props.address} </Text>
+                <Button
+                    type="clear"
+                    onPress={() => console.log()}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
+            </Card>
+            <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
+                <Card.Title style={{ marginBottom: 0 }}> Régime alimentaire:</Card.Title>
+                <Text>{user.regimeAlim} </Text>
+                <Button
+                    type="clear"
+                    onPress={() => console.log()}
+                    icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
+                />
+            </Card>
+        </ScrollView>
+    )
+>>>>>>> clem
 }
 const styles = StyleSheet.create({
 	container: {

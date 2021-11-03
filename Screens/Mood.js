@@ -135,9 +135,9 @@ function Mood(props) {
 		address = <Geoloc />
 	}
 	return (
-		<View style={styles.container}>
-			<TopBar showArrow={true} navigation={props.navigation} />
+		<View>
 			<ScrollView>
+				<TopBar showArrow={true} navigation={props.navigation} />
 				<View style={{ alignItems: 'center' }}>
 					<Text
 						h3
