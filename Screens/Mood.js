@@ -23,7 +23,6 @@ function Mood(props) {
 	const [portions, setPortions] = useState(1)
 	const [check, setCheck] = useState(false)
 
-
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
 		const mood = moodsItems.find(mood => mood.id === moodId)
@@ -37,13 +36,16 @@ function Mood(props) {
 	const updateAdress = async () => {
 		var addressComplete
 		const token = props.token
-		addressComplete = numRue + "," + ville + "," + codePostal
+		addressComplete = numRue + ',' + ville + ',' + codePostal
 		props.addressHandle(addressComplete)
-		await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-useraddress/${token}`, {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-			body: `address=${addressComplete}`,
-		})
+		await fetch(
+			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-useraddress/${token}`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+				body: `address=${addressComplete}`,
+			}
+		)
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
@@ -68,8 +70,7 @@ function Mood(props) {
 					})
 				}
 			}
-		} catch (err) {
-		}
+		} catch (err) {}
 	}
 
 	const getTheSupriseMeal = async () => {
@@ -111,16 +112,14 @@ function Mood(props) {
 					)
 				}
 			}
-		} catch (err) {
-		}
+		} catch (err) {}
 	}
 
 	var checkOrNot = () => {
 		if (check) {
 			getFromFavorites()
 			console.log('getFromFavorites')
-		}
-		else {
+		} else {
 			getTheSupriseMeal('getSupriseMeal')
 		}
 	}
@@ -136,238 +135,43 @@ function Mood(props) {
 		address = <Geoloc />
 	}
 	return (
-		<ScrollView>
+		<View>
 			<TopBar showArrow={true} navigation={props.navigation} />
-
-			<View style={{ alignItems: 'center' }}>
-				<Text
-					h3
-					style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
-				>
-					On y est presque !
-				</Text>
-			</View>
-			<Text
-				h4
-				style={{
-					color: '#000000',
-					fontWeight: 'bold',
-					textAlign: 'center',
-					marginTop: 20,
-				}}
-			>
-				Quel est votre mood ?
-			</Text>
-
-			<View style={styles.moodContainer}>
-				{moodsItems.map(mood => (
-					<MoodIcon
-						key={mood.id}
-						moodId={mood.id}
-						title={mood.name}
-						short={mood.short}
-						background={mood.img}
-						handleSetSelected={handleSetSelected}
-						isSelected={mood.isSelected}
-					/>
-				))}
-			</View>
-
-			<View
-				style={{
-					marginTop: 15,
-					width: '100%',
-					alignItems: 'center',
-					justifyContent: 'center',
-				}}
-			>
-				<View
-					style={{
-						marginTop: 15,
-						flexDirection: 'column',
-						width: '90%',
-						backgroundColor: '#FFFFFF',
-						borderRadius: 5,
-						alignItems: 'center',
-						justifyContent: 'center',
-					}}
-				>
-					<Text h4 style={{ color: '#000000', fontWeight: 'bold' }}>
-						{' '}
-						Budget (par portion)
-					</Text>
-					<View
-						style={{
-							marginTop: 15,
-							marginBottom: 15,
-							flexDirection: 'row',
-							width: '90%',
-							justifyContent: 'center',
-							padding: 0,
-							marginLeft: 2,
-						}}
-					>
-						<Button
-							onPress={() => {
-								props.budgetHandle([5, 9.99])
-								setSelectedBudget('5-10')
-							}}
-							title="5-10€"
-							buttonStyle={{
-								backgroundColor:
-									selectedBudget === '5-10' ? '#000000' : '#FFC901',
-								borderRadius: 5,
-								width: 80,
-								marginRight: 10,
-							}}
-						/>
-						<Button
-							onPress={() => {
-								props.budgetHandle([10, 14.99])
-								setSelectedBudget('10-15')
-							}}
-							title="10-15€"
-							buttonStyle={{
-								backgroundColor:
-									selectedBudget === '10-15' ? '#000000' : '#F2A902',
-								borderRadius: 5,
-								width: 80,
-								marginRight: 10,
-							}}
-						/>
-						<Button
-							onPress={() => {
-								props.budgetHandle([15, 19.99])
-								setSelectedBudget('15-20')
-							}}
-							title="15-20€"
-							buttonStyle={{
-								backgroundColor:
-									selectedBudget === '15-20' ? '#000000' : '#C95615',
-								borderRadius: 5,
-								width: 80,
-								marginRight: 10,
-							}}
-						/>
-						<Button
-							onPress={() => {
-								props.budgetHandle([20, 2000])
-								setSelectedBudget('20+')
-							}}
-							title="YOLO!"
-							buttonStyle={{
-								backgroundColor:
-									selectedBudget === '20+' ? '#000000' : '#DB1919',
-								borderRadius: 5,
-								width: 80,
-								marginRight: 10,
-							}}
-						/>
-					</View>
-				</View>
-
-				<View>
+			<ScrollView>
+				<View style={{ alignItems: 'center' }}>
 					<Text
-						h4
-						style={{
-							color: '#000000',
-							fontWeight: 'bold',
-							textAlign: 'center',
-							marginTop: 20,
-						}}
+						h3
+						style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
 					>
-						Nombre de personnes affamées:
+						On y est presque !
 					</Text>
-					<View style={{ alignSelf: 'center', marginTop: 10 }}>
-						<NumericInput
-							value={portions}
-							onChange={value => setPortions(value)}
-							rounded
-							rightButtonBackgroundColor="#FFC901"
-							leftButtonBackgroundColor="#F2A902"
-							totalHeight={45}
-							totalWidth={120}
-							inputStyle={{ fontWeight: '700' }}
-						/>
-					</View>
 				</View>
-				<View
+				<Text
+					h4
 					style={{
-						backgroundColor: '#FFFFFF',
-						marginTop: 15,
-						flexDirection: 'row',
-						width: '90%',
-						height: 60,
-						alignItems: 'center',
-						justifyContent: 'center',
+						color: '#000000',
+						fontWeight: 'bold',
+						textAlign: 'center',
+						marginTop: 20,
 					}}
 				>
-					<Ionicons name="location-outline" size={24} color="#F2A902" />
-					<View style={{ display: 'flex', flexDirection: 'column' }}>
-						<Text
-							style={{
-								color: '#000000',
-								fontWeight: 'bold',
-								justifyContent: 'center',
-							}}
-						>
-							Livré au:
-						</Text>
-						{address}
-					</View>
-					<Ionicons
-						name="ellipsis-vertical"
-						size={24}
-						color="#F2A902"
-						onPress={() => changeAdress()}
-						overlay={overlay}
-						setOverlay={setOverlay}
-					/>
+					Quel est votre mood ?
+				</Text>
+
+				<View style={styles.moodContainer}>
+					{moodsItems.map(mood => (
+						<MoodIcon
+							key={mood.id}
+							moodId={mood.id}
+							title={mood.name}
+							short={mood.short}
+							background={mood.img}
+							handleSetSelected={handleSetSelected}
+							isSelected={mood.isSelected}
+						/>
+					))}
 				</View>
 
-
-
-				<Overlay
-					isVisible={overlay}
-					onBackdropPress={() => setOverlay(false)}
-					overlayStyle={{
-						width: '90%',
-						marginTop: 60,
-						marginBottom: 50,
-						paddingVertical: 20,
-					}}
-				>
-					<ScrollView>
-						<Input
-							title="numRue"
-							placeholder="N, rue"
-							onChangeText={numRue => setNumRue(numRue)}
-						/>
-						<Input
-							title="ville"
-							placeholder="Ville"
-							onChangeText={ville => setVille(ville)}
-						/>
-						<Input
-							title="codePostal"
-							placeholder="Code Postal"
-							onChangeText={codePostal => setcodePostal(codePostal)}
-						/>
-					</ScrollView>
-					<NextButton title="VALIDER" onPress={() => updateAdress()} />
-				</Overlay>
-				<Overlay
-					isVisible={errorMsg ? true : false}
-					onBackdropPress={() => setErrorMsg('')}
-				>
-					<Text>{errorMsg}</Text>
-				</Overlay>
-				<CheckBox
-					title='Choisir un plat uniquement dans les favoris'
-					checkedColor="#FFC901"
-					checked={check}
-					onPress={() => setCheck(!check)}
-				/>
 				<View
 					style={{
 						marginTop: 15,
@@ -376,13 +180,204 @@ function Mood(props) {
 						justifyContent: 'center',
 					}}
 				>
-					<NextButtonFullSize
-						title="VITE J'AI FAIM"
-						onPress={checkOrNot}
+					<View
+						style={{
+							marginTop: 15,
+							flexDirection: 'column',
+							width: '90%',
+							backgroundColor: '#FFFFFF',
+							borderRadius: 5,
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
+					>
+						<Text h4 style={{ color: '#000000', fontWeight: 'bold' }}>
+							{' '}
+							Budget (par portion)
+						</Text>
+						<View
+							style={{
+								marginTop: 15,
+								marginBottom: 15,
+								flexDirection: 'row',
+								width: '90%',
+								justifyContent: 'center',
+								padding: 0,
+								marginLeft: 2,
+							}}
+						>
+							<Button
+								onPress={() => {
+									props.budgetHandle([5, 9.99])
+									setSelectedBudget('5-10')
+								}}
+								title="5-10€"
+								buttonStyle={{
+									backgroundColor:
+										selectedBudget === '5-10' ? '#000000' : '#FFC901',
+									borderRadius: 5,
+									width: 80,
+									marginRight: 10,
+								}}
+							/>
+							<Button
+								onPress={() => {
+									props.budgetHandle([10, 14.99])
+									setSelectedBudget('10-15')
+								}}
+								title="10-15€"
+								buttonStyle={{
+									backgroundColor:
+										selectedBudget === '10-15' ? '#000000' : '#F2A902',
+									borderRadius: 5,
+									width: 80,
+									marginRight: 10,
+								}}
+							/>
+							<Button
+								onPress={() => {
+									props.budgetHandle([15, 19.99])
+									setSelectedBudget('15-20')
+								}}
+								title="15-20€"
+								buttonStyle={{
+									backgroundColor:
+										selectedBudget === '15-20' ? '#000000' : '#C95615',
+									borderRadius: 5,
+									width: 80,
+									marginRight: 10,
+								}}
+							/>
+							<Button
+								onPress={() => {
+									props.budgetHandle([20, 2000])
+									setSelectedBudget('20+')
+								}}
+								title="YOLO!"
+								buttonStyle={{
+									backgroundColor:
+										selectedBudget === '20+' ? '#000000' : '#DB1919',
+									borderRadius: 5,
+									width: 80,
+									marginRight: 10,
+								}}
+							/>
+						</View>
+					</View>
+
+					<View>
+						<Text
+							h4
+							style={{
+								color: '#000000',
+								fontWeight: 'bold',
+								textAlign: 'center',
+								marginTop: 20,
+							}}
+						>
+							Nombre de personnes affamées:
+						</Text>
+						<View style={{ alignSelf: 'center', marginTop: 10 }}>
+							<NumericInput
+								value={portions}
+								onChange={value => setPortions(value)}
+								rounded
+								rightButtonBackgroundColor="#FFC901"
+								leftButtonBackgroundColor="#F2A902"
+								totalHeight={45}
+								totalWidth={120}
+								inputStyle={{ fontWeight: '700' }}
+							/>
+						</View>
+					</View>
+					<View
+						style={{
+							backgroundColor: '#FFFFFF',
+							marginTop: 15,
+							flexDirection: 'row',
+							width: '90%',
+							height: 60,
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
+					>
+						<Ionicons name="location-outline" size={24} color="#F2A902" />
+						<View style={{ display: 'flex', flexDirection: 'column' }}>
+							<Text
+								style={{
+									color: '#000000',
+									fontWeight: 'bold',
+									justifyContent: 'center',
+								}}
+							>
+								Livré au:
+							</Text>
+							{address}
+						</View>
+						<Ionicons
+							name="ellipsis-vertical"
+							size={24}
+							color="#F2A902"
+							onPress={() => changeAdress()}
+							overlay={overlay}
+							setOverlay={setOverlay}
+						/>
+					</View>
+
+					<Overlay
+						isVisible={overlay}
+						onBackdropPress={() => setOverlay(false)}
+						overlayStyle={{
+							width: '90%',
+							marginTop: 60,
+							marginBottom: 50,
+							paddingVertical: 20,
+						}}
+					>
+						<ScrollView>
+							<Input
+								title="numRue"
+								placeholder="N, rue"
+								onChangeText={numRue => setNumRue(numRue)}
+							/>
+							<Input
+								title="ville"
+								placeholder="Ville"
+								onChangeText={ville => setVille(ville)}
+							/>
+							<Input
+								title="codePostal"
+								placeholder="Code Postal"
+								onChangeText={codePostal => setcodePostal(codePostal)}
+							/>
+						</ScrollView>
+						<NextButton title="VALIDER" onPress={() => updateAdress()} />
+					</Overlay>
+					<Overlay
+						isVisible={errorMsg ? true : false}
+						onBackdropPress={() => setErrorMsg('')}
+					>
+						<Text>{errorMsg}</Text>
+					</Overlay>
+					<CheckBox
+						title="Choisir un plat uniquement dans les favoris"
+						checkedColor="#FFC901"
+						checked={check}
+						onPress={() => setCheck(!check)}
 					/>
+					<View
+						style={{
+							marginTop: 15,
+							width: '100%',
+							alignItems: 'center',
+							justifyContent: 'center',
+						}}
+					>
+						<NextButtonFullSize title="VITE J'AI FAIM" onPress={checkOrNot} />
+					</View>
 				</View>
-			</View>
-		</ScrollView>
+			</ScrollView>
+		</View>
 	)
 }
 
