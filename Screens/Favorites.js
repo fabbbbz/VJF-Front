@@ -19,11 +19,13 @@ function Favorites(props) {
 				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
 			)
 			var response = await rawResponse.json()
-
+			console.log("CLG de FAVORITE", response.favorites)
 			setFavData(response.favorites)
+
 		}
 
 		loadFavorites()
+
 	}, [isFocused])
 
 	var favList = favData.map((fav, i) => {

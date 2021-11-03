@@ -12,9 +12,11 @@ import firstName from './reducers/firstName'
 import order from './reducers/order'
 import coords from './reducers/coords'
 import address from './reducers/address'
+import { StripeProvider } from '@stripe/stripe-react-native';
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { createDrawerNavigator } from '@react-navigation/drawer'
+
 
 // Screens Import
 import FirstScreen from './Screens/FirstScreen'
@@ -32,8 +34,8 @@ import Livraison from './Screens/Livraison'
 import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
 import CustomDrawer from './Components/CustomDrawer'
-
 import Allergies from './Screens/Allergies'
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
@@ -50,6 +52,8 @@ const store = createStore(
 		address,
 	})
 )
+//stripe
+
 
 const DrawerNav = props => {
 	return (
@@ -103,14 +107,28 @@ const StackNav = props => {
 	)
 }
 
+
+
 export default function App() {
 	return (
-		<Provider store={store}>
-			<NavigationContainer>
-				<Stack.Navigator screenOptions={{ headerShown: false }}>
-					<Stack.Screen name="Drawer" component={DrawerNav} />
-				</Stack.Navigator>
-			</NavigationContainer>
-		</Provider>
-	)
+
+
+		<StripeProvider
+			publishableKey="pk_test_51JrTrKGYLeZVv03J8ZnXBOOpJYjTSpbRwRpsDc87euQ5gniEbZ1RbxmqgQkpZ7OCq2igW25TR1rykbn2BsF26obr00vlt5uXhp"
+
+			urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
+			merchantIdentifier="merchant.com.{{ YOUR_APP_NAME }}" // required for Apple Pay 
+		>
+			<Provider store={store}>
+				<NavigationContainer>
+					<Stack.Navigator screenOptions={{ headerShown: false }}>
+						<Stack.Screen name="Drawer" component={DrawerNav} />
+					</Stack.Navigator>
+				</NavigationContainer>
+			</Provider>
+		</StripeProvider>
+
+
+	);
 }
+

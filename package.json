@@ -15,6 +15,7 @@
     "@react-navigation/drawer": "^6.1.8",
     "@react-navigation/native": "^6.0.6",
     "@react-navigation/stack": "^6.0.11",
+    "@stripe/stripe-react-native": "^0.2.3",
     "expo": "~43.0.0",
     "expo-linear-gradient": "^10.0.3",
     "expo-location": "~13.0.4",
@@ -44,7 +45,8 @@
     "react-native-vector-icons": "^9.0.0",
     "react-native-web": "0.17.1",
     "react-redux": "^7.2.5",
-    "redux": "^4.1.1"
+    "redux": "^4.1.1",
+    "stripe": "^8.186.0"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9"
