@@ -1,30 +1,20 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View, Image, ScrollView, PanResponder } from 'react-native'
-import { useIsFocused } from '@react-navigation/native'
+import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
-
+import { MY_IP } from "@env"
 
 function userDonts(props) {
 
     const token = props.token
-    const isFocused = useIsFocused()
-
     const [userDonts, setUserDonts] = useState([])
-
     useEffect(() => {
-
         async function loadDonts() {
-
-            var rawResponse = await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/myDonts/${token}`)
+            var rawResponse = await fetch(`http://${MY_IP}/users/myDonts/${token}`)
             var response = await rawResponse.json()
-
             setUserDonts(response.donts)
-
-            console.log('response', response.donts)
         }
-
         loadDonts()
     }, [isFocused]);
 

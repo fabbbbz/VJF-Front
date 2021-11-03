@@ -6,7 +6,6 @@ import {
 	View,
 	Text,
 } from 'react-native'
-import { Button } from 'react-native-elements'
 import { connect } from 'react-redux'
 
 const MoodIcon = props => {

@@ -9,35 +9,7 @@ import SmallButton from '../Components/SmallButton'
 
 
 function Donts(props) {
-
-    const token = props.token
-
-    const handleDonts = async () => {
-        try {
-
-            const dataToUpdate = {
-                dont: props.donts
-            }
-
-            console.log('props.dont', props.donts)
-            const requestOptions = {
-                method: 'PUT',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(dataToUpdate),
-            }
-            const data = await fetch(
-                `https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
-                requestOptions
-            )
-
-        } catch (err) {
-            console.log(err)
-        }
-    }
-
-
     return (
-
         <View style={styles.container}>
             <TopBar navigation={props.navigation} />
             <ScrollView >

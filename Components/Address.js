@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
-import { MY_IP } from '@env'
-import Geoloc from './Geoloc'
 
 const Address = props => {
 	const [address, setAddress] = useState('')

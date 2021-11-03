@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, Image } from 'react-native'
-import { Text } from 'react-native-elements'
 import { useNavigation } from '@react-navigation/native'
 import { AntDesign } from '@expo/vector-icons'
 import { connect } from 'react-redux'
@@ -18,10 +17,6 @@ const TopBar = props => {
 		props.navigation.navigate('Drawer')
 	}, [])
 
-	// if (props.token.length < 1) {
-
-	// 	props.navigation.navigate('SignIn', { screen: "SignIn" })
-	// }
 	return (
 		<View style={styles.topbar}>
 			{props.showArrow ? (

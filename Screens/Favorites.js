@@ -4,7 +4,6 @@ import { ScrollView } from 'react-native'
 import { Button, Text, Card } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
 import { useIsFocused } from '@react-navigation/native'
 
 
@@ -63,21 +62,6 @@ function Favorites(props) {
 	})
 
 	async function handleFavDeletion(meal_id) {
-		const token = props.token
-
-		var favFilter = favData.filter(e => e._id !== meal_id)
-		setFavData(favFilter)
-		var rawResponse = await fetch(
-			`http://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}/${meal_id}`,
-			{
-				method: 'DELETE',
-			}
-		)
-		var response = await rawResponse.json()
-		console.log(response)
-	}
-
-	async function handleFavDeletion(meal_id) {
 		var favFilter = favData.filter(e => e._id !== meal_id)
 		setFavData(favFilter)
 		var rawResponse = await fetch(
@@ -87,7 +71,6 @@ function Favorites(props) {
 			}
 		)
 		var response = await rawResponse.json()
-		console.log(response)
 	}
 
 	return (

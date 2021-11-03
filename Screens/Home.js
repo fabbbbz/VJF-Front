@@ -1,25 +1,25 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { Overlay, Text } from 'react-native-elements'
+import { Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import Diet from '../Components/Diet'
 import Donts from '../Components/Donts'
 import Allergies from '../Components/Allergies'
 import NextButton from '../Components/NextButton'
-import { MY_IP } from '@env'
 import { connect } from 'react-redux'
 import MyCheckbox from '../Components/Checkbox'
 
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
 	const token = props.token
-	// console.log('tokenInStore:', token)
-	// console.log('diet: ', props.diet)
-	// console.log('donts: ', props.donts)
 
 	const handleAllergies = allergy => {
 		setOverlay(false)
 	}
+
+	console.log('donts: ', props.donts)
+	console.log('diet: ', props.diet)
+	console.log('allergies: ', props.allergies)
 
 	const handleSubmitFoodProfile = async () => {
 		try {
@@ -35,6 +35,10 @@ const Home = props => {
 				dont: props.donts,
 				allergies: props.allergies,
 			}
+
+			console.log('donts2: ', props.donts)
+			console.log('diet2: ', props.diet)
+			console.log('allergies2: ', props.allergies)
 			const requestOptions = {
 				method: 'PUT',
 				headers: { 'Content-Type': 'application/json' },
@@ -48,9 +52,7 @@ const Home = props => {
 			props.navigation.navigate('Mood', {
 				screen: 'Mood',
 			})
-		} catch (err) {
-			console.log(err)
-		}
+		} catch (err) {}
 	}
 
 	return (
@@ -109,7 +111,6 @@ const styles = StyleSheet.create({
 })
 
 function mapStateToProps(state) {
-	// console.log('Mytoken = ' + state.token)
 	return {
 		diet: state.diet,
 		token: state.token,

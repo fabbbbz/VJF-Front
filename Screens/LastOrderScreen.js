@@ -17,31 +17,49 @@ const LastOrderScreen = props => {
 	const [choice, setChoice] = useState('')
 	const [mealId, setMealId] = useState('')
 	const [voted, setVoted] = useState(false)
+	const [hasOrder, setHasOrder] = useState(true)
 
-	const handleThumbClick = async choice => {
-		setChoice(choice)
+	console.log('voted? ', voted)
+	console.log('mealId? ', mealId)
+
+	const handleThumbClick = async userchoice => {
+		setChoice(userchoice)
 		setOverlay(true)
 		setVoted(true)
-		if (choice === 'good') updateUser()
+		updateUser(userchoice)
 	}
 
-	console.log('mealId...: ', mealId)
-	const updateUser = async () => {
-		try {
-			const token = props.token
-			console.log('fetch api')
-			const data = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
-				{
-					method: 'POST',
-					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-					body: `token=${token}&meal_id=${mealId}`,
-				}
-			)
-			const result = await data.json()
-			// console.log(result)
-		} catch (err) {
-			console.log(err.message)
+	const updateUser = async choice => {
+		const token = props.token
+		if (choice === 'good') {
+			try {
+				const data = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
+					{
+						method: 'POST',
+						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+						body: `token=${token}&meal_id=${mealId}`,
+					}
+				)
+				const result = await data.json()
+			} catch (err) {
+				console.log(err.message)
+			}
+		} else if (choice === 'bad') {
+			try {
+				const data = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/blacklist/${token}`,
+					{
+						method: 'PUT',
+						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+						body: `mealId=${mealId}`,
+					}
+				)
+				const result = await data.json()
+				// console.log(result)
+			} catch (err) {
+				console.log(err.message)
+			}
 		}
 	}
 
@@ -51,44 +69,51 @@ const LastOrderScreen = props => {
 			<Text h3 style={styles.text}>
 				Votre dernière commande
 			</Text>
-			<LastOrder mealId={mealId} setMealId={setMealId} />
-			{!voted && (
-				<View>
-					<Text h4 style={styles.text}>
-						Qu'en avez vous pensé ?
-					</Text>
-					<View
-						style={{
-							display: 'flex',
-							flexDirection: 'row',
-							justifyContent: 'space-evenly',
-							marginTop: 20,
-						}}
-					>
-						<TouchableOpacity onPress={() => handleThumbClick('bad')}>
-							<Image
-								style={styles.tinyLogo}
-								source={require('../assets/thumbdown.png')}
+			<LastOrder
+				mealId={mealId}
+				setMealId={setMealId}
+				hasOrder={hasOrder}
+				setHasOrder={setHasOrder}
+			/>
+			{
+				!voted && hasOrder && (
+					<View>
+						<Text h4 style={styles.text}>
+							Qu'en avez vous pensé ?
+						</Text>
+						<View
+							style={{
+								display: 'flex',
+								flexDirection: 'row',
+								justifyContent: 'space-evenly',
+								marginTop: 20,
+							}}
+						>
+							<TouchableOpacity onPress={() => handleThumbClick('bad')}>
+								<Image
+									style={styles.tinyLogo}
+									source={require('../assets/thumbdown.png')}
+								/>
+							</TouchableOpacity>
+							<TouchableOpacity onPress={() => handleThumbClick('good')}>
+								<Image
+									style={styles.tinyLogo}
+									source={require('../assets/thumbup.png')}
+									onPress={() => handleThumbClick('good')}
+								/>
+							</TouchableOpacity>
+						</View>
+						<KeyboardAvoidingView
+							behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+						>
+							<Input
+								placeholder="Ajoutez un commentaire"
+								style={{ marginTop: 40, marginHorizontal: 10 }}
 							/>
-						</TouchableOpacity>
-						<TouchableOpacity onPress={() => handleThumbClick('good')}>
-							<Image
-								style={styles.tinyLogo}
-								source={require('../assets/thumbup.png')}
-								onPress={() => handleThumbClick('good')}
-							/>
-						</TouchableOpacity>
+						</KeyboardAvoidingView>
 					</View>
-					<KeyboardAvoidingView
-						behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-					>
-						<Input
-							placeholder="Ajoutez un commentaire"
-							style={{ marginTop: 40, marginHorizontal: 10 }}
-						/>
-					</KeyboardAvoidingView>
-				</View>
-			)}
+				)
+			}
 			<Overlay
 				isVisible={overlay}
 				onBackdropPress={() => setOverlay(false)} // REMOVE FOR PRODUCTION
@@ -107,7 +132,7 @@ const LastOrderScreen = props => {
 					<Text>Vous ne recevrez plus ce plat</Text>
 				)}
 			</Overlay>
-		</View>
+		</View >
 	)
 }
 

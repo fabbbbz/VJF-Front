@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { View, StyleSheet } from 'react-native'
-import { Text, Input } from 'react-native-elements'
-import { AntDesign } from '@expo/vector-icons'
-import { MY_IP } from '@env'
+import { Text } from 'react-native-elements'
 import { useIsFocused } from '@react-navigation/native'
 
 const LastOrder = props => {
 	const [meal, setMeal] = useState('')
 	const [restaurant, setRestaurant] = useState('')
-	const [hasOrder, setHasOrder] = useState(true)
+	// const [hasOrder, setHasOrder] = useState(true)
 	const isFocused = useIsFocused()
+
+	console.log('has ordered?: ', props.hasOrder)
+	console.log('token: ', props.token)
 
 	useEffect(() => {
 		// Fetch data to get last order
@@ -21,33 +22,36 @@ const LastOrder = props => {
 					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`
 				)
 				const lastOrder = await data.json()
-				if (!lastOrder) setLastOrder(false)
+				console.log('last order :', lastOrder)
+				if (lastOrder.message === 'no order yet') {
+					props.setHasOrder(false)
+				} else {
+					props.setHasOrder(true)
+				}
+				//if (lastOrder) props.setHasOrder(true)
 
 				setMeal(lastOrder.mealName)
 				setRestaurant(lastOrder.restaurant)
 				props.setMealId(lastOrder.mealId)
-			} catch (err) {
-				console.log('Error in LastOrder fetch')
-				console.log(err.message)
-			}
+			} catch (err) {}
 		}
 		if (token) {
 			fetchUser()
 		} else {
-			setHasOrder(false)
+			props.setHasOrder(false)
 		}
-		return () => {
-			console.log('component LastOrder is destroyed')
-		}
+		return () => {}
 	}, [isFocused])
 
 	return (
 		<View style={styles.container}>
 			<Text h4 style={styles.text}>
-				{meal}
+				{props.hasOrder ? meal : 'Oh Oh'}
 			</Text>
 			<Text style={styles.text}>
-				{hasOrder ? `de : ${restaurant}` : "Vous n'avez pas encore commandé"}
+				{props.hasOrder
+					? `de : ${restaurant}`
+					: "Vous n'avez pas encore commandé"}
 			</Text>
 		</View>
 	)

@@ -39,7 +39,7 @@ function SignIn(props) {
 		}
 	}
 
-	var finishProcess = () => {
+	var goSignup = () => {
 		props.navigation.navigate('SignUp', { screen: 'SignUp' })
 	}
 
@@ -88,7 +88,7 @@ function SignIn(props) {
 					</Text>
 				</View>
 				<View style={styles.container}>
-					<TouchableOpacity onPress={finishProcess}>
+					<TouchableOpacity onPress={goSignup}>
 						<Text style={styles.text}>Continuer pour vous enregister</Text>
 					</TouchableOpacity>
 				</View>
@@ -111,14 +111,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 		color: '#FF9800',
 		fontSize: 20,
-	},
-	container: {
-		flex: 1,
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'center',
-		alignContent: 'center',
-		padding: 10,
 	},
 	text: {
 		fontSize: 20,

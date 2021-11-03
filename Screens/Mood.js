@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
-import { Button, Text, Input, Overlay, Icon } from 'react-native-elements'
+import { Button, Text, Input, Overlay } from 'react-native-elements'
 import NumericInput from 'react-native-numeric-input'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
@@ -8,9 +8,9 @@ import NextButtonFullSize from '../Components/NextButtonFullSize'
 import { connect } from 'react-redux'
 import Geoloc from '../Components/Geoloc'
 import { Ionicons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
 import MoodIcon from '../Components/MoodIcon'
 import moodsItems from '../data/moods'
+import { CheckBox } from 'react-native-elements'
 
 function Mood(props) {
 	const [overlay, setOverlay] = useState(false)
@@ -21,6 +21,8 @@ function Mood(props) {
 	const [errorMsg, setErrorMsg] = useState('')
 	const [selectedBudget, setSelectedBudget] = useState('')
 	const [portions, setPortions] = useState(1)
+	const [check, setCheck] = useState(false)
+
 
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
@@ -32,17 +34,50 @@ function Mood(props) {
 		setOverlay(true)
 	}
 
-	const updateAdress = () => {
+	const updateAdress = async () => {
+		var addressComplete
+		const token = props.token
+		addressComplete = numRue + "," + ville + "," + codePostal
+		props.addressHandle(addressComplete)
+		await fetch(`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-useraddress/${token}`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+			body: `address=${addressComplete}`,
+		})
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
-
-	const getTheSupriseMeal = async () => {
+	const getFromFavorites = async () => {
+		console.log('getFromFavorites')
 		try {
 			const token = props.token
 			if (!token)
 				setErrorMsg('Connectez-vous pour commandez votre repas surprise !')
+			const data = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/makeorderinfav/${token}`
+			)
+			const formatedData = await data.json()
 
+			if (formatedData) {
+				const { result, order } = formatedData
+				if (result === 'success') {
+					// GET THE ORDER ID
+					props.orderReducer(order._id)
+					props.navigation.navigate('TimeToPay', {
+						screen: 'TimeToPay',
+					})
+				}
+			}
+		} catch (err) {
+		}
+	}
+
+	const getTheSupriseMeal = async () => {
+		console.log('getTheSupriseMeal')
+		try {
+			const token = props.token
+			if (!token)
+				setErrorMsg('Connectez-vous pour commandez votre repas surprise !')
 			const dataToSend = {
 				mood: props.mood,
 				minprice: props.budget[0],
@@ -77,9 +112,19 @@ function Mood(props) {
 				}
 			}
 		} catch (err) {
-			console.log(err.message)
 		}
 	}
+
+	var checkOrNot = () => {
+		if (check) {
+			getFromFavorites()
+			console.log('getFromFavorites')
+		}
+		else {
+			getTheSupriseMeal('getSupriseMeal')
+		}
+	}
+
 	var address
 	if (addressIsChanged) {
 		address = (
@@ -279,6 +324,9 @@ function Mood(props) {
 						setOverlay={setOverlay}
 					/>
 				</View>
+
+
+
 				<Overlay
 					isVisible={overlay}
 					onBackdropPress={() => setOverlay(false)}
@@ -314,6 +362,12 @@ function Mood(props) {
 				>
 					<Text>{errorMsg}</Text>
 				</Overlay>
+				<CheckBox
+					title='Choisir un plat uniquement dans les favoris'
+					checkedColor="#FFC901"
+					checked={check}
+					onPress={() => setCheck(!check)}
+				/>
 				<View
 					style={{
 						marginTop: 15,
@@ -324,7 +378,7 @@ function Mood(props) {
 				>
 					<NextButtonFullSize
 						title="VITE J'AI FAIM"
-						onPress={getTheSupriseMeal}
+						onPress={checkOrNot}
 					/>
 				</View>
 			</View>
@@ -363,6 +417,9 @@ function mapDispatchToProps(dispatch) {
 		},
 		orderReducer: function (orderId) {
 			dispatch({ type: 'STORE_ORDER', orderId })
+		},
+		addressHandle: function (address) {
+			dispatch({ type: 'STORE_ADDRESS', address })
 		},
 	}
 }

@@ -4,17 +4,17 @@ import { ScrollView, Image, TouchableOpacity } from 'react-native'
 import { Button, Text, Card } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
-import { MY_IP } from '@env'
 import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
 import { AntDesign } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
-
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)
 	const [overlay, setOverlay] = useState(false)
+	const isFocused = useIsFocused()
+	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
 	var allergiesRender
 	const isFocused = useIsFocused()
@@ -38,16 +38,55 @@ si ces conditions sont remplies allergyExist passe a true*/
 		loadAllergies()
 	}, [isFocused])
 
+
+
+	useEffect(() => {
+		allergiesRender = newAllergies.map((allergy, i) => {
+
+			return (
+				<Card
+					key={i}
+					containerStyle={{
+						borderRadius: 10,
+						elevation: 4,
+						shadowOffset: { width: 2, height: 2 },
+						shadowColor: 'rgba(0,0,0, 0.2)',
+						shadowOpacity: 0.5,
+						shadowRadius: 2,
+					}}
+					wrapperStyle={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						flexWrap: 'nowrap',
+						alignItems: 'center',
+					}}
+				>
+					<Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
+
+						{allergy}
+					</Card.Title>
+					<Button
+						type="clear"
+						onPress={() => {
+							handleAllergyDeletion(allergy)
+						}}
+						icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
+					/>
+				</Card>
+			)
+		})
+		var array = mergeArrays(allergies, props.allergies)
+		if (array) {
+			setnewAllergies(array)
+		}
+	}, [allergies])
+
 	/* si allergyExist == true les allergies sont affichées
 	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
-<<<<<<< HEAD
-
-
-=======
->>>>>>> clem
 
 	if (allergyExist == true) {
-		allergiesRender = allergies.map((allergy, i) => {
+		allergiesRender = newAllergies.map((allergy, i) => {
 			return (
 				<Card
 					key={i}
@@ -90,22 +129,26 @@ si ces conditions sont remplies allergyExist passe a true*/
 
 		var allergyFilter = allergies.filter(e => e !== allergy)
 		setAllergies(allergyFilter)
+		props.removeAllergy(allergy)
+		console.log(allergy)
 		var rawResponse = await fetch(
 			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/delallergies/${token}/${allergy}`,
-
 
 			{
 				method: 'DELETE',
 			}
 		)
+
 		// var response = await rawResponse.json()
 
 	}
 
 	async function handleAllergies(boolean) {
 		setOverlay(boolean)
+		console.log("props", props.allergies)
 
 		const dataToUpdate = {
+
 			allergies: props.allergies,
 		}
 		const requestOptions = {
@@ -118,10 +161,21 @@ si ces conditions sont remplies allergyExist passe a true*/
 			requestOptions
 		)
 		const result = await data.json()
+
+		console.log(result)
 		setAllergies(result.doc.allergies)
 	}
 
+	// testing 
+	function mergeArrays(...arrays) {
+		let jointArray = []
+		arrays.forEach(array => {
+			jointArray = [...jointArray, ...array]
+		})
+		const uniqueArray = jointArray.filter((item, index) => jointArray.indexOf(item) === index)
+		return uniqueArray
 
+	}
 
 	return (
 		<ScrollView>
@@ -183,11 +237,20 @@ si ces conditions sont remplies allergyExist passe a true*/
 
 	)
 }
-
+function mapDispatchToProps(dispatch) {
+	return {
+		addAllergy: function (allergy) {
+			dispatch({ type: 'ADD_ALLERGY', allergy })
+		},
+		removeAllergy: function (allergy) {
+			dispatch({ type: 'REMOVE_ALLERGY', allergy })
+		},
+	}
+}
 function mapStateToProps(state) {
 	return {
 		token: state.token,
 		allergies: state.allergies,
 	}
 }
-export default connect(mapStateToProps, null)(Allergies)
+export default connect(mapStateToProps, mapDispatchToProps)(Allergies)
