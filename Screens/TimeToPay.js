@@ -25,8 +25,8 @@ const TimeToPay = props => {
                 method: 'PUT',
             }
         )
-        const result = await data.json()
-        console.log(result.price)
+        const reponse = await data.json()
+        console.log("CLG de result", reponse.order.price)
 
         const response = await fetch(`${API_URL}/orders/payment`, {
             method: 'POST',
@@ -34,7 +34,7 @@ const TimeToPay = props => {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                price: result.price,
+                price: reponse.order.price,
                 currency: 'eur',
             }),
         });
