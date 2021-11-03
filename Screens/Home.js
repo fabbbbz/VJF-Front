@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Overlay } from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 import TopBar from '../Components/TopBar'
 import Diet from '../Components/Diet'
 import Donts from '../Components/Donts'
@@ -56,7 +58,7 @@ const Home = props => {
 	}
 
 	return (
-		<View style={styles.container}>
+		<KeyboardAwareScrollView style={styles.container}>
 			<TopBar navigation={props.navigation} />
 			<ScrollView>
 				<Diet />
@@ -99,7 +101,7 @@ const Home = props => {
 					<NextButton title="VALIDER" onPress={() => handleAllergies()} />
 				</Overlay>
 			</ScrollView>
-		</View>
+		</KeyboardAwareScrollView>
 	)
 }
 
