@@ -28,15 +28,9 @@ function Donts(props) {
 
             setUserDonts(response.donts)
 
-            console.log('response fetch bdd', response.donts)
-
             if (response.donts.length > 0 && response.donts[0] !== null) {
                 setDontExists(true)
             }
-
-            console.log(dontExists)
-
-
         }
 
         loadDonts()
@@ -66,21 +60,11 @@ function Donts(props) {
             </View>
     }
 
-
-
-    console.log('manualDonts', manualDonts)
-
-
-
-
     const handleManualAdd = () => {
 
-        console.log("manualIngredient", manualIngredient)
         setManualIngredient('')
         setManualDonts(prevDonts => [...prevDonts, manualIngredient])
         handleDonts()
-
-        console.log('handleManualAdd')
     }
 
 
@@ -104,11 +88,11 @@ function Donts(props) {
 
     //suppression de donts ok
     async function handleDontDelete(dont) {
+
         const token = props.token
 
-        console.log("deletedont")
-
         var filterDonts = dontsList.filter((e) => (e !== dont))
+
         setDontsList(filterDonts)
 
         var rawResponse = await fetch(
@@ -124,7 +108,6 @@ function Donts(props) {
         if (response.donts.length == 0) {
             setDontExists(false)
         }
-        console.log('response del', response)
     }
 
 
