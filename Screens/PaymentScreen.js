@@ -77,7 +77,7 @@ export default function PaymentScreen(props) {
                     console.log('focusField', focusedField);
                 }}
             />
-            <Button onPress={handlePayPress} title="Pay" buttonStyle={{ width: "85%", alignSelf: "center" }} />
+            <Button onPress={handlePayPress} title="Payer" buttonStyle={{ width: "85%", alignSelf: "center" }} />
             {/* disabled={loading} */}
         </SafeAreaView>
     );
