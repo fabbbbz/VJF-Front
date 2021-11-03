@@ -7,11 +7,7 @@ import { useIsFocused } from '@react-navigation/native'
 const LastOrder = props => {
 	const [meal, setMeal] = useState('')
 	const [restaurant, setRestaurant] = useState('')
-	// const [hasOrder, setHasOrder] = useState(true)
 	const isFocused = useIsFocused()
-
-	console.log('has ordered?: ', props.hasOrder)
-	console.log('token: ', props.token)
 
 	useEffect(() => {
 		// Fetch data to get last order
@@ -22,7 +18,7 @@ const LastOrder = props => {
 					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/recap/${token}`
 				)
 				const lastOrder = await data.json()
-				console.log('last order :', lastOrder)
+
 				if (lastOrder.message === 'no order yet') {
 					props.setHasOrder(false)
 				} else {
@@ -33,14 +29,14 @@ const LastOrder = props => {
 				setMeal(lastOrder.mealName)
 				setRestaurant(lastOrder.restaurant)
 				props.setMealId(lastOrder.mealId)
-			} catch (err) {}
+			} catch (err) { }
 		}
 		if (token) {
 			fetchUser()
 		} else {
 			props.setHasOrder(false)
 		}
-		return () => {}
+		return () => { }
 	}, [isFocused])
 
 	return (

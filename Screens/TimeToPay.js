@@ -10,11 +10,9 @@ import Address from '../Components/Address'
 const TimeToPay = props => {
     const [order, setOrder] = useState({})
 
-    console.log('orderId: ', props.order)
-
     const handlePaiement = async () => {
         try {
-            console.log('take my money')
+            // console.log('take my money')
             // fetch une route pour update status de la commande
             const data = await fetch(
                 `https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/update-order/${props.order}`,
@@ -23,7 +21,7 @@ const TimeToPay = props => {
                 }
             )
             const result = await data.json()
-            console.log(result)
+            // console.log(result)
             if (result) {
                 props.navigation.navigate('Livraison', {
                     screen: 'Livraison',

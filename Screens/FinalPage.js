@@ -24,7 +24,6 @@ function FinalPage(props) {
 				<NextButton
 					title="Commander encore"
 					onPress={() => {
-						console.log('finish !!')
 						Notification()
 						props.navigation.navigate('Mood', { screen: 'Mood' })
 					}}

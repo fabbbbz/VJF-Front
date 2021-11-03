@@ -5,8 +5,6 @@ import TopBar from '../Components/TopBar';
 import { connect } from 'react-redux'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 
-
-
 function Donts(props) {
 
     const token = props.token
@@ -20,7 +18,6 @@ function Donts(props) {
 
     //affichage des donts
     useEffect(() => {
-
         async function loadDonts() {
 
             var rawResponse = await fetch(`http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/myDonts/${token}`)
@@ -34,6 +31,7 @@ function Donts(props) {
         }
 
         loadDonts()
+
     }, [manualIngredient, dontsList]);
 
 
@@ -61,7 +59,6 @@ function Donts(props) {
     }
 
     const handleManualAdd = () => {
-
         setManualIngredient('')
         setManualDonts(prevDonts => [...prevDonts, manualIngredient])
         handleDonts()
@@ -72,14 +69,17 @@ function Donts(props) {
     const handleDonts = async () => {
         try {
             const dont = manualIngredient
-            const listDont = await fetch(
-                `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/adddonts/${token}`,
-                {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                    body: `dont=${dont}`,
-                }
-            )
+
+            if (manualIngredient != '') {
+                const listDont = await fetch(
+                    `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/adddonts/${token}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `dont=${dont}`,
+                    }
+                )
+            }
 
         } catch (err) {
             console.log(err)
@@ -103,13 +103,13 @@ function Donts(props) {
                 body: `dont=${dont}`
             }
         )
+
         var response = await rawResponse.json()
 
         if (response.donts.length == 0) {
             setDontExists(false)
         }
     }
-
 
 
     return (
@@ -124,7 +124,6 @@ function Donts(props) {
                     <Text h4 style={styles.sectionTitle}>
                         Je n'aime pas du tout :
                     </Text>
-
                     <ScrollView style={styles.ingredients}>
                         <KeyboardAvoidingView
                             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
@@ -145,10 +144,8 @@ function Donts(props) {
                                 style={{ marginTop: 10, marginHorizontal: 10 }}
                             />
                         </KeyboardAvoidingView>
-
                     </ScrollView>
                 </View>
-
             </ScrollView>
         </View >
     )
@@ -178,8 +175,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
 })
-
-
 
 function mapDispatchToProps(dispatch) {
     return {

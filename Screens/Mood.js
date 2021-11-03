@@ -50,7 +50,7 @@ function Mood(props) {
 		setAddressIsChanged(true)
 	}
 	const getFromFavorites = async () => {
-		console.log('getFromFavorites')
+
 		try {
 			const token = props.token
 			if (!token)
@@ -70,7 +70,7 @@ function Mood(props) {
 					})
 				}
 			}
-		} catch (err) {}
+		} catch (err) { }
 	}
 
 	const getTheSupriseMeal = async () => {
@@ -112,14 +112,14 @@ function Mood(props) {
 					)
 				}
 			}
-		} catch (err) {}
+		} catch (err) { }
 	}
 
 	var checkOrNot = () => {
 		if (check) {
 			getFromFavorites()
-			console.log('getFromFavorites')
-		} else {
+		}
+		else {
 			getTheSupriseMeal('getSupriseMeal')
 		}
 	}

@@ -7,8 +7,8 @@ import { Ionicons } from '@expo/vector-icons'
 import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
-import { AntDesign } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
+
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)
@@ -17,7 +17,6 @@ function Allergies(props) {
 	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
 	var allergiesRender
-
 
 	useEffect(() => {
 		async function loadAllergies() {
@@ -37,8 +36,6 @@ si ces conditions sont remplies allergyExist passe a true*/
 
 		loadAllergies()
 	}, [isFocused])
-
-
 
 	useEffect(() => {
 		allergiesRender = newAllergies.map((allergy, i) => {
@@ -173,7 +170,6 @@ si ces conditions sont remplies allergyExist passe a true*/
 		})
 		const uniqueArray = jointArray.filter((item, index) => jointArray.indexOf(item) === index)
 		return uniqueArray
-
 	}
 
 	return (
@@ -191,9 +187,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 				Allergies
 			</Text>
 			{allergiesRender}
-
 			<Overlay
-
 				isVisible={overlay}
 				onBackdropPress={() => setOverlay(false)}
 				overlayStyle={{
@@ -222,20 +216,15 @@ si ces conditions sont remplies allergyExist passe a true*/
 					<NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
 				</ScrollView>
 			</Overlay>
-
 			<TouchableOpacity onPress={() => handleAllergies(true)}>
 				<Image
 					style={{ width: 50, height: 50, alignSelf: "center" }}
 					source={require('../assets/plusIcon.png')} />
-
 			</TouchableOpacity>
-
-
 		</ScrollView >
-
-
 	)
 }
+
 function mapDispatchToProps(dispatch) {
 	return {
 		addAllergy: function (allergy) {
@@ -246,10 +235,12 @@ function mapDispatchToProps(dispatch) {
 		},
 	}
 }
+
 function mapStateToProps(state) {
 	return {
 		token: state.token,
 		allergies: state.allergies,
 	}
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(Allergies)
