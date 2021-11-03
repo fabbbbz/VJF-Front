@@ -136,8 +136,8 @@ function Mood(props) {
 	}
 	return (
 		<View>
-			<TopBar showArrow={true} navigation={props.navigation} />
 			<ScrollView>
+				<TopBar showArrow={true} navigation={props.navigation} />
 				<View style={{ alignItems: 'center' }}>
 					<Text
 						h3

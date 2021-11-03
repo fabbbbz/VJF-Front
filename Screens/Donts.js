@@ -32,7 +32,7 @@ function Donts(props) {
 
         loadDonts()
 
-    }, [manualIngredient, dontsList]);
+    });
 
 
     if (dontExists) {
@@ -46,7 +46,7 @@ function Donts(props) {
                         onPress={() => {
                             handleDontDelete(dont)
                         }}
-                        icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
+                        icon={<Ionicons size={25} name="trash-outline" color="#000000" />}
                     />
                 </View >
             )
@@ -124,7 +124,7 @@ function Donts(props) {
                     <Text h4 style={styles.sectionTitle}>
                         Je n'aime pas du tout :
                     </Text>
-                    <ScrollView style={styles.ingredients}>
+                    <View style={styles.ingredients}>
                         <KeyboardAvoidingView
                             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                             keyboardVerticalOffset={keyboardVerticalOffset}
@@ -141,10 +141,10 @@ function Donts(props) {
                                     />
                                 }
                                 placeholder="Ajoutez un ingrédient"
-                                style={{ marginTop: 10, marginHorizontal: 10 }}
+
                             />
                         </KeyboardAvoidingView>
-                    </ScrollView>
+                    </View>
                 </View>
             </ScrollView>
         </View >
@@ -168,12 +168,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         textAlign: 'center',
-    },
-
-    ingredients: {
-        display: 'flex',
-        flexDirection: 'row',
-    },
+    }
 })
 
 function mapDispatchToProps(dispatch) {
@@ -195,5 +190,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Donts)
-
-

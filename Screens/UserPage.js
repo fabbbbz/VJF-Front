@@ -26,13 +26,7 @@ function UserPage(props) {
         <ScrollView>
             <TopBar navigation={props.navigation} />
             <Text
-                h3
-                style={{
-                    alignSelf: 'center',
-                    marginTop: 15,
-                    textDecorationLine: 'underline',
-                    color: '#FFC901',
-                }}
+                h3 style={{ color: '#F2A902', textAlign: 'center', marginTop: "4%" }}
             >
                 Informations Personelles
             </Text>
@@ -52,7 +46,7 @@ function UserPage(props) {
                 <Text>{user.firstName} </Text>
                 <Button
                     type="clear"
-                    onPress={() => console.log('bonjour')}
+                    onPress={() => console.log()}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
             </Card>
@@ -61,7 +55,7 @@ function UserPage(props) {
                 <Text>{user.email} </Text>
                 <Button
                     type="clear"
-                    onPress={() => console.log('bonjour')}
+                    onPress={() => console.log()}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
             </Card>
@@ -70,18 +64,16 @@ function UserPage(props) {
                 <Text>{user.phone} </Text>
                 <Button
                     type="clear"
-                    onPress={() => console.log('bonjour')}
+                    onPress={() => console.log()}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
-
             </Card>
-
             <Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
                 <Card.Title style={{ marginBottom: 0 }}> Adresse:</Card.Title>
                 <Text>{props.address} </Text>
                 <Button
                     type="clear"
-                    onPress={() => console.log('bonjour')}
+                    onPress={() => console.log()}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
             </Card>
@@ -90,10 +82,9 @@ function UserPage(props) {
                 <Text>{user.regimeAlim} </Text>
                 <Button
                     type="clear"
-                    onPress={() => console.log('bonjour')}
+                    onPress={() => console.log()}
                     icon={<Ionicons size={25} name="create-outline" color="#FFC901" />}
                 />
-
             </Card>
         </ScrollView>
     )
