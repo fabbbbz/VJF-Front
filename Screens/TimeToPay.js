@@ -7,7 +7,7 @@ import NextButtonFullSize from '../Components/NextButtonFullSize'
 import OrderRecap from '../Components/OrderRecap'
 import Address from '../Components/Address'
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { CardField, useStripe, useConfirmPayment } from '@stripe/stripe-react-native';
+import { CardField, useStripe, useConfirmPayment, } from '@stripe/stripe-react-native';
 
 const TimeToPay = props => {
     const [order, setOrder] = useState({})
@@ -15,14 +15,27 @@ const TimeToPay = props => {
     const [cardDetails, setCardDetails] = useState()
     const API_URL = "http://172.17.1.114:3000"
 
+
+
     const fetchPaymentIntentClientSecret = async () => {
+
+        const data = await fetch(
+            `https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/update-order/${props.order}`,
+            {
+                method: 'PUT',
+            }
+        )
+        const result = await data.json()
+        console.log(result.price)
+
         const response = await fetch(`${API_URL}/orders/payment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                currency: 'usd',
+                price: result.price,
+                currency: 'eur',
             }),
         });
         const { clientSecret } = await response.json();
@@ -31,27 +44,15 @@ const TimeToPay = props => {
     };
 
     const handlePayPress = async () => {
-        // if (!card) {
-        //     return;
-        // }
-        console.log('take my money')
-        // fetch une route pour update status de la commande
-        const data = await fetch(
-            `https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/update-order/${props.order}`,
-            {
-                method: 'PUT',
-            }
-        )
-        const result = await data.json()
-        console.log(result)
+
 
         // Fetch the intent client secret from the backend
         const clientSecret = await fetchPaymentIntentClientSecret();
 
         // Confirm the payment with the card details
         const { paymentIntent, error } = await confirmPayment(clientSecret, {
-            type: 'Card',
-            billingDetails: billingDetails
+            type: 'card',
+
         });
 
         if (error) {
@@ -62,39 +63,16 @@ const TimeToPay = props => {
 
 
 
-        if (cardDetails && result) {
+        if (cardDetails) {
             props.navigation.navigate('Livraison', {
                 screen: 'Livraison',
             })
-        } else {
-            console.log("il faut payer")
         }
 
     };
 
-    console.log('orderId: ', props.order)
+    // console.log('orderId: ', props.order)
 
-    // const handlePaiement = async () => {
-    //     try {
-    //         console.log('take my money')
-    //         // fetch une route pour update status de la commande
-    //         const data = await fetch(
-    //             `https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/update-order/${props.order}`,
-    //             {
-    //                 method: 'PUT',
-    //             }
-    //         )
-    //         const result = await data.json()
-    //         console.log(result)
-    //         if (result) {
-    //             props.navigation.navigate('Livraison', {
-    //                 screen: 'Livraison',
-    //             })
-    //         }
-    //     } catch (err) {
-    //         console.log(err.message)
-    //     }
-    // }
 
     return (
 
