@@ -58,9 +58,9 @@ const Home = props => {
 	}
 
 	return (
-		<KeyboardAwareScrollView style={styles.container}>
+		<View style={styles.container}>
 			<TopBar navigation={props.navigation} />
-			<ScrollView>
+			<KeyboardAwareScrollView>
 				<Diet />
 				<Donts />
 				<Allergies overlay={overlay} setOverlay={setOverlay} />
@@ -100,8 +100,8 @@ const Home = props => {
 					</ScrollView>
 					<NextButton title="VALIDER" onPress={() => handleAllergies()} />
 				</Overlay>
-			</ScrollView>
-		</KeyboardAwareScrollView>
+			</KeyboardAwareScrollView>
+		</View>
 	)
 }
 
