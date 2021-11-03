@@ -48,7 +48,7 @@ function SignUp(props) {
 		<KeyboardAwareScrollView>
 			<ScrollView>
 				<View>
-					<TopBar navigation={props.navigation} />
+					<View style={{ height: 80, backgroundColor: '#27292D' }} />
 					<View style={{ alignItems: 'center' }}>
 						<Text
 							h3

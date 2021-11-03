@@ -1,5 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
+import {
+	StyleSheet,
+	View,
+	ScrollView,
+	TouchableOpacity,
+	ImageBackground,
+	Image,
+} from 'react-native'
 import { Text, Input, SocialIcon, Button } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
@@ -45,35 +52,32 @@ function SignIn(props) {
 	}
 
 	return (
-		<ScrollView>
-			<TopBar navigation={props.navigation} />
-			<View>
-				<View style={{ alignItems: 'center' }}>
-					<Text
-						h3
-						style={{
-							textAlign: 'center',
-							color: '#000000',
-							marginTop: 15,
-							marginBottom: 30,
-						}}
-					>
-						Connectez-vous
-					</Text>
-					<Input
-						containerStyle={{ marginBottom: 15, width: '70%' }}
-						inputStyle={{ marginLeft: 10 }}
-						placeholder="Email"
-						onChangeText={text => setSignUpEmail(text)}
-					/>
-					<Input
-						containerStyle={{ marginBottom: 15, width: '70%' }}
-						inputStyle={{ marginLeft: 10 }}
-						secureTextEntry
-						placeholder="Password"
-						onChangeText={text => setSignUpPassword(text)}
-					/>
-				</View>
+		<View
+			style={{
+				flex: 1,
+				alignItems: 'center',
+				marginTop: 60,
+				justifyContent: 'center',
+				backgroundColor: '#27292D',
+			}}
+		>
+			<Image style={styles.logo} source={require('./../assets/VJF-logo.png')} />
+			<View style={styles.content}>
+				<Text style={styles.title}>Connexion</Text>
+
+				<Input
+					containerStyle={{ marginBottom: 15, width: '70%' }}
+					inputStyle={{ marginLeft: 10 }}
+					placeholder="Email"
+					onChangeText={text => setSignUpEmail(text)}
+				/>
+				<Input
+					containerStyle={{ marginBottom: 15, width: '70%' }}
+					inputStyle={{ marginLeft: 10 }}
+					secureTextEntry
+					placeholder="Password"
+					onChangeText={text => setSignUpPassword(text)}
+				/>
 				<View
 					style={{
 						alignSelf: 'center',
@@ -108,25 +112,28 @@ function SignIn(props) {
 						}}
 					/>
 				</View>
-				<View style={styles.container}>
-					<Text style={{ textAlign: 'center' }}>Pas encore de compte ?</Text>
-					<TouchableOpacity onPress={goSignup}>
-						<Text style={styles.text}>Continuer pour vous enregister</Text>
-					</TouchableOpacity>
-				</View>
-				<View>
-					<Text style={styles.errormesssage}>{ErrorsSignin}</Text>
-				</View>
 			</View>
-		</ScrollView>
+
+			<View style={styles.bottom}>
+				<Text style={{ textAlign: 'center', color: '#ffffff' }}>
+					Pas encore de compte ?
+				</Text>
+				<TouchableOpacity onPress={goSignup}>
+					<Text style={styles.text}>Continuer pour vous enregister</Text>
+				</TouchableOpacity>
+			</View>
+			<View>
+				<Text style={styles.errormesssage}>{ErrorsSignin}</Text>
+			</View>
+		</View>
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
+		display: 'flex',
 		alignItems: 'center',
-		backgroundColor: '#F4F4F4',
+		justifyContent: 'space-between',
 	},
 	errormesssage: {
 		marginTop: 50,
@@ -138,6 +145,29 @@ const styles = StyleSheet.create({
 		fontSize: 20,
 		color: '#F2A902',
 		fontWeight: '700',
+		textAlign: 'center',
+	},
+	title: {
+		color: '#F2A902',
+		textTransform: 'uppercase',
+		fontWeight: '300',
+		fontSize: 24,
+		marginBottom: 20,
+	},
+	content: {
+		alignItems: 'center',
+		backgroundColor: '#ffffff',
+		width: '85%',
+		paddingTop: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
+		borderRadius: 10,
+		alignSelf: 'center',
+		marginVertical: 20,
+	},
+	logo: {
+		height: 70,
+		width: 70,
 	},
 })
 
