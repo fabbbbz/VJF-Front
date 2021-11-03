@@ -16,32 +16,40 @@ function UserPage(props) {
 
 	useEffect(() => {
 		async function loadUser() {
-			var rawResponse = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/me/${token}`
-			)
-			var response = await rawResponse.json()
-			setUser(response.userInfo)
+			try {
+				var rawResponse = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/me/${token}`
+				)
+				var response = await rawResponse.json()
+				setUser(response.userInfo)
+			} catch (err) {
+				console.log(err)
+			}
 		}
 		loadUser()
 	})
 
 	useEffect(() => {
 		const updateDiet = async () => {
-			const dataToSend = {
-				token: token,
-				diet: props.diet,
-			}
+			try {
+				const dataToSend = {
+					token: token,
+					diet: props.diet,
+				}
 
-			const requestOptions = {
-				method: 'PUT',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(dataToSend),
+				const requestOptions = {
+					method: 'PUT',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(dataToSend),
+				}
+				const data = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-diet`,
+					requestOptions
+				)
+				const result = await data.json()
+			} catch (err) {
+				console.log(err)
 			}
-			const data = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-diet`,
-				requestOptions
-			)
-			const result = await data.json()
 		}
 		updateDiet()
 	})
