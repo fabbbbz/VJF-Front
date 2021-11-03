@@ -39,6 +39,7 @@ function mapDispatchToProps(dispatch) {
 		removeDont: function (dont) {
 			dispatch({ type: 'REMOVE_DONT', dont: dont })
 		},
+
 	}
 }
 

@@ -27,21 +27,15 @@ function Plats(props) {
 
 	return (
 		<View style={styles.container}>
-			{ordersHistory.map((order, i) => (
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						marginTop: 25,
-						marginBottom: 25,
-					}}
-				>
+			{ordersHistory.map((order, j) => (
+				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={j} >
 					<Text>{new Date(order.date).toLocaleDateString()}</Text>
 					<Text>{order.mealName}</Text>
 					<HeartFav mealId={order.mealId} />
-				</View>
-			))}
-		</View>
+				</View >
+			))
+			}
+		</View >
 	)
 }
 

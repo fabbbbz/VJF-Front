@@ -18,6 +18,7 @@ function Allergies(props) {
 	const token = props.token
 	var allergiesRender
 
+
 	useEffect(() => {
 		async function loadAllergies() {
 			var rawResponse = await fetch(
@@ -81,8 +82,6 @@ si ces conditions sont remplies allergyExist passe a true*/
 		}
 	}, [allergies])
 
-	/* si allergyExist == true les allergies sont affichées
-	sinon un message s'affiche avertissant l'utilisateur qu'il n'a pas renseigné d'allergies*/
 
 
 	if (allergyExist == true) {

@@ -37,14 +37,10 @@ function HeartFav(props) {
 	}
 
 	return (
-		<View>
-			<MaterialCommunityIcons
-				style={heartPlusColor}
-				name="heart-plus"
-				size={24}
-				onPress={() => addToFavorite('ajout fav')}
-			/>
-		</View>
+
+		<View >
+			<MaterialCommunityIcons style={heartPlusColor} name="heart-plus" size={24} onPress={() => addToFavorite('ajout fav')} />
+		</View >
 	)
 }
 
