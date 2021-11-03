@@ -38,9 +38,6 @@ const Home = props => {
 				allergies: props.allergies,
 			}
 
-			console.log('donts2: ', props.donts)
-			console.log('diet2: ', props.diet)
-			console.log('allergies2: ', props.allergies)
 			const requestOptions = {
 				method: 'PUT',
 				headers: { 'Content-Type': 'application/json' },
@@ -54,7 +51,7 @@ const Home = props => {
 			props.navigation.navigate('Mood', {
 				screen: 'Mood',
 			})
-		} catch (err) {}
+		} catch (err) { }
 	}
 
 	return (

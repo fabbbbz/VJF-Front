@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, TouchableOpacity, View, Card } from 'react-native'
+import React, { useState } from 'react'
+import { View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
 
 function HeartFav(props) {
 
 	const [isFaved, setIsFaved] = useState(false)
-	var favList = []
 	const addToFavorite = async () => {
 		setIsFaved(true)
 		updateUser()
-
 	}
 
 	const updateUser = async () => {
@@ -37,7 +35,6 @@ function HeartFav(props) {
 	}
 
 	return (
-
 		<View >
 			<MaterialCommunityIcons style={heartPlusColor} name="heart-plus" size={24} onPress={() => addToFavorite('ajout fav')} />
 		</View >

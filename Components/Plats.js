@@ -12,7 +12,7 @@ function Plats(props) {
 
 	useEffect(() => {
 		async function loadOrders() {
-			// token en dur pour le test, A remplacer par :token
+
 			var rawResponse = await fetch(
 				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/history/${token}`
 			)

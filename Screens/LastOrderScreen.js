@@ -19,9 +19,6 @@ const LastOrderScreen = props => {
 	const [voted, setVoted] = useState(false)
 	const [hasOrder, setHasOrder] = useState(true)
 
-	console.log('voted? ', voted)
-	console.log('mealId? ', mealId)
-
 	const handleThumbClick = async userchoice => {
 		setChoice(userchoice)
 		setOverlay(true)
