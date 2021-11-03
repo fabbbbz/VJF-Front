@@ -39,7 +39,6 @@ si ces conditions sont remplies allergyExist passe a true*/
 
 	useEffect(() => {
 		allergiesRender = newAllergies.map((allergy, i) => {
-
 			return (
 				<Card
 					key={i}
@@ -59,8 +58,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 						alignItems: 'center',
 					}}
 				>
-					<Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
-
+					<Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
 						{allergy}
 					</Card.Title>
 					<Button
@@ -78,8 +76,6 @@ si ces conditions sont remplies allergyExist passe a true*/
 			setnewAllergies(array)
 		}
 	}, [allergies])
-
-
 
 	if (allergyExist == true) {
 		allergiesRender = newAllergies.map((allergy, i) => {
@@ -102,8 +98,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 						alignItems: 'center',
 					}}
 				>
-					<Card.Title style={{ marginBottom: 0, alignItems: "center" }}>
-
+					<Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
 						{allergy}
 					</Card.Title>
 					<Button
@@ -117,16 +112,17 @@ si ces conditions sont remplies allergyExist passe a true*/
 			)
 		})
 	} else {
-		allergiesRender = <Text style={{ alignSelf: "center", marginTop: 25, fontWeight: "bold" }}>vous n'avez pas d'allergies renseignées</Text>
+		allergiesRender = (
+			<Text style={{ alignSelf: 'center', marginTop: 25, fontWeight: 'bold' }}>
+				vous n'avez pas d'allergies renseignées
+			</Text>
+		)
 	}
 
-
 	async function handleAllergyDeletion(allergy) {
-
 		var allergyFilter = allergies.filter(e => e !== allergy)
 		setAllergies(allergyFilter)
 		props.removeAllergy(allergy)
-		console.log(allergy)
 		var rawResponse = await fetch(
 			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/delallergies/${token}/${allergy}`,
 
@@ -136,15 +132,13 @@ si ces conditions sont remplies allergyExist passe a true*/
 		)
 
 		// var response = await rawResponse.json()
-
 	}
 
 	async function handleAllergies(boolean) {
 		setOverlay(boolean)
-		console.log("props", props.allergies)
+		console.log('props', props.allergies)
 
 		const dataToUpdate = {
-
 			allergies: props.allergies,
 		}
 		const requestOptions = {
@@ -158,17 +152,18 @@ si ces conditions sont remplies allergyExist passe a true*/
 		)
 		const result = await data.json()
 
-		console.log(result)
 		setAllergies(result.doc.allergies)
 	}
 
-	// testing 
+	// testing
 	function mergeArrays(...arrays) {
 		let jointArray = []
 		arrays.forEach(array => {
 			jointArray = [...jointArray, ...array]
 		})
-		const uniqueArray = jointArray.filter((item, index) => jointArray.indexOf(item) === index)
+		const uniqueArray = jointArray.filter(
+			(item, index) => jointArray.indexOf(item) === index
+		)
 		return uniqueArray
 	}
 
@@ -218,10 +213,11 @@ si ces conditions sont remplies allergyExist passe a true*/
 			</Overlay>
 			<TouchableOpacity onPress={() => handleAllergies(true)}>
 				<Image
-					style={{ width: 50, height: 50, alignSelf: "center" }}
-					source={require('../assets/plusIcon.png')} />
+					style={{ width: 50, height: 50, alignSelf: 'center' }}
+					source={require('../assets/plusIcon.png')}
+				/>
 			</TouchableOpacity>
-		</ScrollView >
+		</ScrollView>
 	)
 }
 

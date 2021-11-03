@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { useIsFocused } from '@react-navigation/native'
+
 const OrderRecap = props => {
 	const [price, setPrice] = useState(0)
 	const [quantity, setQuantity] = useState(0)
+	const isFocused = useIsFocused()
 
 	useEffect(() => {
 		// Fetch data to get last order
@@ -19,7 +22,7 @@ const OrderRecap = props => {
 			setQuantity(user.nbPortions)
 		}
 		fetchUser()
-	}, [])
+	}, [isFocused])
 
 	return (
 		<View style={styles.container}>
