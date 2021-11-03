@@ -9,6 +9,7 @@ import { Text, Input, Button } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { connect } from 'react-redux'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 function Donts(props) {
 	const token = props.token
@@ -129,7 +130,7 @@ function Donts(props) {
 	return (
 		<View style={styles.container}>
 			<TopBar navigation={props.navigation} />
-			<ScrollView>
+			<KeyboardAwareScrollView>
 				<Text
 					h2
 					style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}
@@ -141,28 +142,28 @@ function Donts(props) {
 					<Text h4 style={styles.sectionTitle}>
 						Je n'aime pas du tout :
 					</Text>
-					<ScrollView style={styles.ingredients}>
-						<KeyboardAvoidingView
-							behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-							keyboardVerticalOffset={keyboardVerticalOffset}
-						>
-							<Input
-								onChangeText={value => setManualIngredient(value)}
-								value={manualIngredient}
-								rightIcon={
-									<AntDesign
-										name="pluscircleo"
-										size={24}
-										color="black"
-										onPress={handleManualAdd}
-									/>
-								}
-								placeholder="Ajoutez un ingrédient"
-							/>
-						</KeyboardAvoidingView>
-					</ScrollView>
+
+					<KeyboardAvoidingView
+						behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+						keyboardVerticalOffset={keyboardVerticalOffset}
+						style={styles.ingredients}
+					>
+						<Input
+							onChangeText={value => setManualIngredient(value)}
+							value={manualIngredient}
+							rightIcon={
+								<AntDesign
+									name="pluscircleo"
+									size={24}
+									color="black"
+									onPress={handleManualAdd}
+								/>
+							}
+							placeholder="Ajoutez un ingrédient"
+						/>
+					</KeyboardAvoidingView>
 				</View>
-			</ScrollView>
+			</KeyboardAwareScrollView>
 		</View>
 	)
 }
