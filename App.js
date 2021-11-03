@@ -35,7 +35,7 @@ import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
 import CustomDrawer from './Components/CustomDrawer'
 import Allergies from './Screens/Allergies'
-import PaymentScreen from './Screens/PaymentScreen'
+
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()
 const store = createStore(
@@ -102,7 +102,6 @@ const StackNav = props => {
 			<Stack.Screen name="Livraison" component={Livraison} />
 			<Stack.Screen name="FinalPage" component={FinalPage} />
 			<Stack.Screen name="TimeToPay" component={TimeToPay} />
-			<Stack.Screen name="PaymentScreen" component={PaymentScreen} />
 			<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
 		</Stack.Navigator>
 	)
@@ -110,7 +109,7 @@ const StackNav = props => {
 
 
 
-function AppTEST() {
+export default function App() {
 	return (
 
 
@@ -132,14 +131,4 @@ function AppTEST() {
 
 	);
 }
-export default function App() {
-	return (
-		<Provider store={store}>
-			<NavigationContainer>
-				<Stack.Navigator screenOptions={{ headerShown: false }}>
-					<Stack.Screen name="Drawer" component={DrawerNav} />
-				</Stack.Navigator>
-			</NavigationContainer>
-		</Provider>
-	)
-}
+
