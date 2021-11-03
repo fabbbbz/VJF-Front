@@ -14,8 +14,8 @@ function Donts(props) {
     const [dontsList, setDontsList] = useState([])
     const [manualDonts, setManualDonts] = useState([])
     const [manualIngredient, setManualIngredient] = useState('')
+    const [dontExists, setDontExists] = useState(false)
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
-    const [newDont, setNewDont] = useState('')
 
 
     //affichage des donts
@@ -23,56 +23,73 @@ function Donts(props) {
 
         async function loadDonts() {
 
-            var rawResponse = await fetch(`http://192.168.1.14:3000/users/myDonts/${token}`)
+            var rawResponse = await fetch(`http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/myDonts/${token}`)
             var response = await rawResponse.json()
 
             setUserDonts(response.donts)
 
-            console.log('response', response.donts)
+            console.log('response fetch bdd', response.donts)
+
+            if (response.donts.length > 0 && response.donts[0] !== null) {
+                setDontExists(true)
+            }
+
+            console.log(dontExists)
+
+
         }
 
         loadDonts()
-    }, [newDont, dontsList]);
+    }, [manualIngredient, dontsList]);
 
 
-    var showUserDonts = userDonts.map((dont, k) => {
-        return (
-            < View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={k}>
-                <Text style={{ alignSelf: 'center' }}>{dont}</Text>
-                <Button
-                    title=""
-                    type="clear"
-                    onPress={() => {
-                        handleDontDelete(dont)
-                    }}
-                    icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
-                />
-            </View >
-        )
-    })
+    if (dontExists) {
+        var showUserDonts = userDonts.map((dont, k) => {
+            return (
+                < View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={k}>
+                    <Text style={{ alignSelf: 'center' }}>{dont}</Text>
+                    <Button
+                        title=""
+                        type="clear"
+                        onPress={() => {
+                            handleDontDelete(dont)
+                        }}
+                        icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
+                    />
+                </View >
+            )
+        })
+    } else {
+        var showUserDonts =
+            < View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25, marginBottom: 25 }}>
+                <Text>vous n'avez pas de dont renseignés</Text>
+            </View>
+    }
+
+
 
     console.log('manualDonts', manualDonts)
+
+
 
 
     const handleManualAdd = () => {
 
         console.log("manualIngredient", manualIngredient)
-        setNewDont(manualIngredient)
         setManualIngredient('')
         setManualDonts(prevDonts => [...prevDonts, manualIngredient])
         handleDonts()
 
         console.log('handleManualAdd')
-        console.log('newdont', newDont)
     }
 
 
     //Ajout de dont
     const handleDonts = async () => {
         try {
-            const dont = newDont
+            const dont = manualIngredient
             const listDont = await fetch(
-                `http://192.168.1.14:3000/users/adddonts/${token}`,
+                `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/adddonts/${token}`,
                 {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -95,7 +112,7 @@ function Donts(props) {
         setDontsList(filterDonts)
 
         var rawResponse = await fetch(
-            `http://192.168.1.14:3000/users/deletedonts/${token}/${dont}`,
+            `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/deletedonts/${token}/${dont}`,
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -103,6 +120,10 @@ function Donts(props) {
             }
         )
         var response = await rawResponse.json()
+
+        if (response.donts.length == 0) {
+            setDontExists(false)
+        }
         console.log('response del', response)
     }
 
@@ -122,20 +143,6 @@ function Donts(props) {
                     </Text>
 
                     <ScrollView style={styles.ingredients}>
-                        {manualDonts &&
-                            manualDonts.map((dont, m) => (
-                                <Button
-                                    title={dont} key={m}
-                                    buttonStyle={{
-                                        backgroundColor: '#000000',
-                                        borderRadius: 25,
-                                        size: 10,
-                                        margin: 5,
-                                        paddingHorizontal: 10,
-                                    }}
-                                />
-                            ))}
-
                         <KeyboardAvoidingView
                             behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                             keyboardVerticalOffset={keyboardVerticalOffset}

@@ -17,7 +17,7 @@ function Allergies(props) {
 	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
 	var allergiesRender
-	const isFocused = useIsFocused()
+
 
 	useEffect(() => {
 		async function loadAllergies() {
