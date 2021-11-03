@@ -20,9 +20,9 @@ function Livraison(props) {
 	}, [])
 
 	// Redirect to final page after the delivery process
-	var finsihProcess = () => {
-		props.navigation.navigate('FinalPage', { screen: 'FinalPage' })
-	}
+	//var finsihProcess = () => {
+	//	props.navigation.navigate('FinalPage', { screen: 'FinalPage' })
+	//}
 
 	// render order
 	var order = (
@@ -110,7 +110,7 @@ function Livraison(props) {
 				}}
 			>
 				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
-					Commande preparée!!
+					Commande preparée
 				</Text>
 				<LottieView
 					source={require('../assets/done.json')}
@@ -148,7 +148,7 @@ function Livraison(props) {
 				}}
 			>
 				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
-					Commande preparée!!
+					Commande preparée
 				</Text>
 				<LottieView
 					source={require('../assets/done.json')}
@@ -165,7 +165,7 @@ function Livraison(props) {
 				}}
 			>
 				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
-					Commande livrée!!
+					Commande livrée
 				</Text>
 				<LottieView
 					source={require('../assets/done.json')}
@@ -175,7 +175,7 @@ function Livraison(props) {
 			</View>
 			<View>
 				<Text style={{ textAlign: 'center', color: '#000000', marginTop: 40 }}>
-					Toc-Toc c'est la!!
+					Toc-Toc c'est la !
 				</Text>
 				<LottieView
 					source={require('../assets/foodishere.json')}
@@ -223,7 +223,7 @@ function Livraison(props) {
 		if (seconds > 0) {
 			setTimeout(() => setSeconds(seconds - 1), 1000)
 		} else {
-			finsihProcess()
+			props.navigation.navigate('FinalPage', { screen: 'FinalPage' })
 		}
 	}
 
