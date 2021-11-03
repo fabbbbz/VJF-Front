@@ -1,19 +1,16 @@
 import React, { useState, useEffect } from 'react'
 import { Text } from 'react-native'
 import { connect } from 'react-redux'
-
 import * as Location from 'expo-location'
-import * as Permissions from 'expo-permissions'
 
 function Geoloc(props) {
 	const [displayCurrentAddress, setDisplayCurrentAddress] = useState('')
 	const token = props.token
 	var addressComplete
-	// console.log('coords:', props.coords)
 
 	useEffect(() => {
 		async function askPermissions() {
-			var { status } = await Permissions.askAsync(Permissions.LOCATION)
+			var { status } = await Location.requestForegroundPermissionsAsync()
 			if (status === 'granted') {
 				let { coords } = await Location.getCurrentPositionAsync()
 				if (coords) {
