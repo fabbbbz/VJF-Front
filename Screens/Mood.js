@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Button, Text, Input, Overlay } from 'react-native-elements'
 import NumericInput from 'react-native-numeric-input'
@@ -11,6 +11,7 @@ import { Ionicons } from '@expo/vector-icons'
 import MoodIcon from '../Components/MoodIcon'
 import moodsItems from '../data/moods'
 import { CheckBox } from 'react-native-elements'
+import { useIsFocused } from '@react-navigation/native'
 
 function Mood(props) {
 	const [overlay, setOverlay] = useState(false)
@@ -22,6 +23,22 @@ function Mood(props) {
 	const [selectedBudget, setSelectedBudget] = useState('')
 	const [portions, setPortions] = useState(1)
 	const [check, setCheck] = useState(false)
+	const [showRandomFav, setshowRandomFav] = useState(false)
+	const isFocused = useIsFocused()
+
+	useEffect(() => {
+		async function loadFavorites() {
+			var rawResponse = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${props.token}`
+			)
+			var response = await rawResponse.json()
+			if (response.favorites.length > 1) {
+				setshowRandomFav(true)
+			}
+		}
+		loadFavorites()
+	}, [isFocused])
+
 
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
@@ -122,6 +139,18 @@ function Mood(props) {
 		else {
 			getTheSupriseMeal('getSupriseMeal')
 		}
+	}
+
+	var favoritesRandom
+	if (showRandomFav) {
+		console.log(showRandomFav)
+		var favoritesRandom =
+			<CheckBox
+				title="Choisir un plat uniquement dans les favoris"
+				checkedColor="#FFC901"
+				checked={check}
+				onPress={() => setCheck(!check)}
+			/>
 	}
 
 	var address
@@ -359,12 +388,7 @@ function Mood(props) {
 					>
 						<Text>{errorMsg}</Text>
 					</Overlay>
-					<CheckBox
-						title="Choisir un plat uniquement dans les favoris"
-						checkedColor="#FFC901"
-						checked={check}
-						onPress={() => setCheck(!check)}
-					/>
+					{favoritesRandom}
 					<View
 						style={{
 							marginTop: 15,
