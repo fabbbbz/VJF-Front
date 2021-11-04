@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import {
-	View,
-	StyleSheet,
-	ScrollView,
-	KeyboardAvoidingView,
+    View,
+    StyleSheet,
+    ScrollView,
+    KeyboardAvoidingView,
 } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
@@ -12,198 +12,187 @@ import { AntDesign, Ionicons } from '@expo/vector-icons'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 function Donts(props) {
-	const token = props.token
-	const [userDonts, setUserDonts] = useState([])
-	const [dontsList, setDontsList] = useState([])
-	const [manualDonts, setManualDonts] = useState([])
-	const [manualIngredient, setManualIngredient] = useState('')
-	const [dontExists, setDontExists] = useState(false)
-	const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
-	//affichage des donts
-	useEffect(() => {
-		async function loadDonts() {
-			var rawResponse = await fetch(
-				`http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/myDonts/${token}`
-			)
-			var response = await rawResponse.json()
+    const token = props.token
+    const [userDonts, setUserDonts] = useState([])
+    const [dontsList, setDontsList] = useState([])
+    const [manualDonts, setManualDonts] = useState([])
+    const [manualIngredient, setManualIngredient] = useState('')
+    const [dontExists, setDontExists] = useState(false)
+    const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
-			setUserDonts(response.donts)
 
-			if (response.donts.length > 0 && response.donts[0] !== null) {
-				setDontExists(true)
-			}
-		}
+    //affichage des donts
+    useEffect(() => {
+        async function loadDonts() {
 
-		loadDonts()
-	})
+            var rawResponse = await fetch(`http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/myDonts/${token}`)
+            var response = await rawResponse.json()
 
-	if (dontExists) {
-		var showUserDonts = userDonts.map((dont, k) => {
-			return (
-				<View
-					style={{
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						marginTop: 25,
-						marginBottom: 25,
-					}}
-					key={k}
-				>
-					<Text style={{ alignSelf: 'center' }}>{dont}</Text>
-					<Button
-						title=""
-						type="clear"
-						onPress={() => {
-							handleDontDelete(dont)
-						}}
-						icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
-					/>
-				</View>
-			)
-		})
-	} else {
-		var showUserDonts = (
-			<View
-				style={{
-					flexDirection: 'row',
-					justifyContent: 'center',
-					marginTop: 25,
-					marginBottom: 25,
-				}}
-			>
-				<Text>vous n'avez pas de dont renseignés</Text>
-			</View>
-		)
-	}
+            setUserDonts(response.donts)
 
-	const handleManualAdd = () => {
-		setManualIngredient('')
-		setManualDonts(prevDonts => [...prevDonts, manualIngredient])
-		handleDonts()
-	}
+            if (response.donts.length > 0 && response.donts[0] !== null) {
+                setDontExists(true)
+            }
+        }
 
-	//Ajout de dont
-	const handleDonts = async () => {
-		try {
-			const dont = manualIngredient
+        loadDonts()
 
-			if (manualIngredient != '') {
-				const listDont = await fetch(
-					`http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/adddonts/${token}`,
-					{
-						method: 'POST',
-						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-						body: `dont=${dont}`,
-					}
-				)
-			}
-		} catch (err) {
-			console.log(err)
-		}
-	}
+    });
 
-	//suppression de donts ok
-	async function handleDontDelete(dont) {
-		const token = props.token
 
-		var filterDonts = dontsList.filter(e => e !== dont)
+    if (dontExists) {
+        var showUserDonts = userDonts.map((dont, k) => {
+            return (
+                < View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={k}>
+                    <Text style={{ alignSelf: 'center' }}>{dont}</Text>
+                    <Button
+                        title=""
+                        type="clear"
+                        onPress={() => {
+                            handleDontDelete(dont)
+                        }}
+                        icon={<Ionicons size={25} name="trash-outline" color="#000000" />}
+                    />
+                </View >
+            )
+        })
+    } else {
+        var showUserDonts =
+            < View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25, marginBottom: 25 }}>
+                <Text>vous n'avez pas de dont renseignés</Text>
+            </View>
+    }
 
-		setDontsList(filterDonts)
+    const handleManualAdd = () => {
+        setManualIngredient('')
+        setManualDonts(prevDonts => [...prevDonts, manualIngredient])
+        handleDonts()
+    }
 
-		var rawResponse = await fetch(
-			`http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/deletedonts/${token}/${dont}`,
-			{
-				method: 'DELETE',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `dont=${dont}`,
-			}
-		)
 
-		var response = await rawResponse.json()
+    //Ajout de dont
+    const handleDonts = async () => {
+        try {
+            const dont = manualIngredient
 
-		if (response.donts.length == 0) {
-			setDontExists(false)
-		}
-	}
+            if (manualIngredient != '') {
+                const listDont = await fetch(
+                    `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/adddonts/${token}`,
+                    {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `dont=${dont}`,
+                    }
+                )
+            }
 
-	return (
-		<View style={styles.container}>
-			<TopBar navigation={props.navigation} />
-			<KeyboardAwareScrollView>
-				<Text
-					h2
-					style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}
-				>
-					Donts
-				</Text>
-				<ScrollView style={styles.userDonts}>{showUserDonts}</ScrollView>
-				<View style={styles.container}>
-					<Text h4 style={styles.sectionTitle}>
-						Je n'aime pas du tout :
-					</Text>
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
-					<KeyboardAvoidingView
-						behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-						keyboardVerticalOffset={keyboardVerticalOffset}
-						style={styles.ingredients}
-					>
-						<Input
-							onChangeText={value => setManualIngredient(value)}
-							value={manualIngredient}
-							rightIcon={
-								<AntDesign
-									name="pluscircleo"
-									size={24}
-									color="black"
-									onPress={handleManualAdd}
-								/>
-							}
-							placeholder="Ajoutez un ingrédient"
-						/>
-					</KeyboardAvoidingView>
-				</View>
-			</KeyboardAwareScrollView>
-		</View>
-	)
+    //suppression de donts ok
+    async function handleDontDelete(dont) {
+
+        const token = props.token
+
+        var filterDonts = dontsList.filter((e) => (e !== dont))
+
+        setDontsList(filterDonts)
+
+        var rawResponse = await fetch(
+            `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/deletedonts/${token}/${dont}`,
+            {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `dont=${dont}`
+            }
+        )
+
+        var response = await rawResponse.json()
+
+        if (response.donts.length == 0) {
+            setDontExists(false)
+        }
+    }
+
+
+    return (
+        <View style={styles.container}>
+            <TopBar navigation={props.navigation} />
+            <ScrollView >
+                <Text h2 style={{ color: '#F2A902', textAlign: 'center', marginTop: "4%" }}>Donts</Text>
+                <ScrollView style={styles.userDonts}>
+                    {showUserDonts}
+                </ScrollView>
+                <View style={styles.container}>
+                    <Text h4 style={styles.sectionTitle}>
+                        Je n'aime pas du tout :
+                    </Text>
+                    <View style={styles.ingredients}>
+                        <KeyboardAvoidingView
+                            behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                            keyboardVerticalOffset={keyboardVerticalOffset}
+                        >
+                            <Input
+                                onChangeText={value => setManualIngredient(value)}
+                                value={manualIngredient}
+                                rightIcon={
+                                    <AntDesign
+                                        name="pluscircleo"
+                                        size={24}
+                                        color="black"
+                                        onPress={handleManualAdd}
+                                    />
+                                }
+                                placeholder="Ajoutez un ingrédient"
+
+                            />
+                        </KeyboardAvoidingView>
+                    </View>
+                </View>
+            </ScrollView>
+        </View >
+    )
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#F4F4F4',
-	},
-	userDonts: {
-		backgroundColor: '#FFFFFF',
-		paddingVertical: 10,
-		paddingHorizontal: 15,
-		borderRadius: 10,
-		margin: 15,
-		borderColor: '#F2A902',
-	},
-	sectionTitle: {
-		marginBottom: 10,
-		marginTop: 10,
-		textAlign: 'center',
-	},
+    container: {
+        flex: 1,
+        backgroundColor: '#F4F4F4',
+    },
+    userDonts: {
+        backgroundColor: '#FFFFFF',
+        paddingVertical: 10,
+        paddingHorizontal: 15,
+        borderRadius: 10,
+        margin: 15,
+        borderColor: '#F2A902',
+    },
+    sectionTitle: {
+        marginBottom: 10,
+        marginTop: 10,
+        textAlign: 'center',
+    }
 })
 
 function mapDispatchToProps(dispatch) {
-	return {
-		addDont: function (dont) {
-			dispatch({ type: 'ADD_DONT', newDont: dont })
-		},
-		removeDont: function (dont) {
-			dispatch({ type: 'REMOVE_DONT', dont: dont })
-		},
-	}
+    return {
+        addDont: function (dont) {
+            dispatch({ type: 'ADD_DONT', newDont: dont })
+        },
+        removeDont: function (dont) {
+            dispatch({ type: 'REMOVE_DONT', dont: dont })
+        },
+    }
 }
 
 function mapStateToProps(state) {
-	return {
-		token: state.token,
-		donts: state.donts,
-	}
+    return {
+        token: state.token,
+        donts: state.donts,
+    }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Donts)

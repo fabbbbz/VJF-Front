@@ -19,10 +19,6 @@ const Home = props => {
 		setOverlay(false)
 	}
 
-	console.log('donts: ', props.donts)
-	console.log('diet: ', props.diet)
-	console.log('allergies: ', props.allergies)
-
 	const handleSubmitFoodProfile = async () => {
 		try {
 			const token = props.token
