@@ -6,7 +6,6 @@ import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
 
-
 function Favorites(props) {
 	const [favData, setFavData] = useState([])
 	const token = props.token
@@ -14,18 +13,18 @@ function Favorites(props) {
 
 	useEffect(() => {
 		async function loadFavorites() {
-
-			var rawResponse = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
-			)
-			var response = await rawResponse.json()
-			console.log("CLG de FAVORITE", response.favorites)
-			setFavData(response.favorites)
-
+			try {
+				var rawResponse = await fetch(
+					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
+				)
+				var response = await rawResponse.json()
+				setFavData(response.favorites)
+			} catch (err) {
+				console.log(err.message)
+			}
 		}
 
 		loadFavorites()
-
 	}, [isFocused])
 
 	var favList = favData.map((fav, i) => {
