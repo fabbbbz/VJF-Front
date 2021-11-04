@@ -14,14 +14,15 @@ function Favorites(props) {
 
 	useEffect(() => {
 		async function loadFavorites() {
-			try {
-				var rawResponse = await fetch(
-					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
-				)
-				var response = await rawResponse.json()
-				setFavData(response.favorites)
-			} catch (err) {
-				console.log(err.message)
+			var rawResponse = await fetch(
+				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
+			)
+			var response = await rawResponse.json()
+			console.log('CLG de FAVORITE', response.favorites)
+			setFavData(response.favorites)
+
+			if (response.favorites.length > 0 && response.favorites[0] !== null) {
+				setFavExists(true)
 			}
 		}
 
