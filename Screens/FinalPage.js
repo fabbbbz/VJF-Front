@@ -13,16 +13,24 @@ function FinalPage(props) {
 				style={{ width: 200, height: 200, marginTop: 100 }}
 			/>
 
-			<Text h1 style={{ textAlign: 'center', color: '#000000', marginTop: 50 }}>
-				Vite j'ai faim!
+			<Text
+				h1
+				style={{
+					textAlign: 'center',
+					color: '#ffffff',
+					marginTop: 50,
+					fontWeight: '300',
+				}}
+			>
+				BON APPETIT
 			</Text>
 
 			<Text h4 style={{ textAlign: 'center', color: '#F2A902', marginTop: 50 }}>
-				Merci pour votre confiance !
+				Merci pour votre confiance
 			</Text>
 			<ScrollView style={{ marginTop: 50 }}>
 				<NextButton
-					title="Commander encore"
+					title="J'ai encore faim"
 					onPress={() => {
 						Notification()
 						props.navigation.navigate('Mood', { screen: 'Mood' })
@@ -37,7 +45,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		alignItems: 'center',
-		backgroundColor: '#F4F4F4',
+		backgroundColor: '#27292D',
 	},
 })
 //get token from store

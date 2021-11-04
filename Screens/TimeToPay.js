@@ -56,7 +56,7 @@ const TimeToPay = props => {
 		if (error) {
 			console.log('Payment confirmation error', error)
 		} else if (paymentIntent) {
-			console.log('Payment successful', paymentIntent)
+			console.log('Payment status:', paymentIntent.status)
 		}
 
 		if (cardDetails) {
@@ -97,9 +97,6 @@ const TimeToPay = props => {
 				}}
 				onCardChange={cardDetails => {
 					setCardDetails(cardDetails)
-				}}
-				onFocus={focusedField => {
-					console.log('focusField', focusedField)
 				}}
 			/>
 			<NextButtonFullSize
