@@ -30,7 +30,7 @@ function SignIn(props) {
 		)
 		//get answer from back
 		const body = await data.json()
-		if (body.result == true) {
+		if (body.result == 'success') {
 			//set token
 			setToken(body.token)
 			// store token in local-storage
