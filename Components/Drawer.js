@@ -6,7 +6,6 @@ import { Home } from '../Screens/Home'
 const Drawer = createDrawerNavigator()
 
 const DrawerNav = props => {
-	console.log('drawer is here')
 	return (
 		<Drawer.Navigator initialRouteName="Home">
 			<Drawer.Screen name="Home" component={Home} />

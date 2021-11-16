@@ -17,7 +17,6 @@ const OrderRecap = props => {
 				`https://vitejaifaim.herokuapp.com/orders/recap/${token}`
 			)
 			const user = await data.json()
-			// console.log(user)
 			setPrice(user.orderPrice)
 			setQuantity(user.nbPortions)
 		}

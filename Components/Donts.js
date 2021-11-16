@@ -22,7 +22,6 @@ const Donts = props => {
 	}
 
 	const handleManualAdd = () => {
-		console.log(manualIngredient)
 		setManualIngredient('')
 		setManualDonts(prevDonts => [...prevDonts, manualIngredient])
 	}

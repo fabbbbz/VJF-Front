@@ -73,7 +73,6 @@ function Donts(props) {
                 )
             }
         } catch (err) {
-            console.log(err)
         }
     }
 

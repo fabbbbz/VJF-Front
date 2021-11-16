@@ -74,7 +74,6 @@ function Mood(props) {
 	}
 
 	const getTheSupriseMeal = async () => {
-		console.log('getTheSupriseMeal')
 		try {
 			const token = props.token
 			if (!token)

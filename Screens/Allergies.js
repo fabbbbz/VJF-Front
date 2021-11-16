@@ -130,14 +130,10 @@ si ces conditions sont remplies allergyExist passe a true*/
 				method: 'DELETE',
 			}
 		)
-
-		// var response = await rawResponse.json()
 	}
 
 	async function handleAllergies(boolean) {
 		setOverlay(boolean)
-		console.log('props', props.allergies)
-
 		const dataToUpdate = {
 			allergies: props.allergies,
 		}
