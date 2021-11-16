@@ -14,14 +14,12 @@ import MyCheckbox from '../Components/Checkbox'
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
 	const token = props.token
-
 	const handleAllergies = allergy => {
 		setOverlay(false)
 	}
 
 	const handleSubmitFoodProfile = async () => {
 		try {
-			const token = props.token
 			if (!token) {
 				props.navigation.navigate('SignUp', {
 					screen: 'SignUp',
@@ -40,7 +38,7 @@ const Home = props => {
 				body: JSON.stringify(dataToUpdate),
 			}
 			const data = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
+				`https://vitejaifaim.herokuapp.com/users/update-me/${token}`,
 				requestOptions
 			)
 			const result = await data.json()

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, ScrollView } from 'react-native'
+import React, { useState } from 'react'
+import { StyleSheet } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
@@ -7,10 +7,8 @@ import { connect } from 'react-redux'
 import NextButtonFullSize from '../Components/NextButtonFullSize'
 import OrderRecap from '../Components/OrderRecap'
 import Address from '../Components/Address'
-import { SafeAreaView } from 'react-native-safe-area-context'
 import {
 	CardField,
-	useStripe,
 	useConfirmPayment,
 } from '@stripe/stripe-react-native'
 
@@ -18,11 +16,11 @@ const TimeToPay = props => {
 	const [order, setOrder] = useState({})
 	const { confirmPayment, loading } = useConfirmPayment()
 	const [cardDetails, setCardDetails] = useState()
-	const API_URL = 'https://vitejaifaim-master-i57witqbae0.herokuapp.com'
+	const API_URL = 'https://vitejaifaim.herokuapp.com/'
 
 	const fetchPaymentIntentClientSecret = async () => {
 		const data = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/orders/update-order/${props.order}`,
+			`https://vitejaifaim.herokuapp.com/orders/update-order/${props.order}`,
 			{
 				method: 'PUT',
 			}
@@ -40,7 +38,6 @@ const TimeToPay = props => {
 			}),
 		})
 		const { clientSecret } = await response.json()
-
 		return clientSecret
 	}
 
@@ -52,13 +49,9 @@ const TimeToPay = props => {
 		const { paymentIntent, error } = await confirmPayment(clientSecret, {
 			type: 'Card',
 		})
-
 		if (error) {
-			console.log('Payment confirmation error', error)
 		} else if (paymentIntent) {
-			console.log('Payment status:', paymentIntent.status)
 		}
-
 		if (cardDetails) {
 			props.navigation.navigate('Livraison', {
 				screen: 'Livraison',

@@ -4,8 +4,6 @@ import { StyleSheet, ScrollView } from 'react-native'
 import { Button, Text, Card, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
-import { Input } from 'react-native-elements/dist/input/Input'
-import MyCheckbox from '../Components/Checkbox'
 import DietRadios from '../Components/MyRadio'
 
 function UserPage(props) {
@@ -18,44 +16,46 @@ function UserPage(props) {
 		async function loadUser() {
 			try {
 				var rawResponse = await fetch(
-					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/me/${token}`
+					`https://vitejaifaim.herokuapp.com/users/me/${token}`
 				)
 				var response = await rawResponse.json()
 				setUser(response.userInfo)
+				setDiet(response.userInfo.regimeAlim)
 			} catch (err) {
 				console.log(err)
 			}
 		}
 		loadUser()
-	})
+	}, [])
 
-	useEffect(() => {
+	const handleDiet = () => {
+		setOverlayVisible(true)
+
+	}
+
+	const showRegime = () => {
+		setDiet(props.diet)
+		setOverlayVisible(false)
 		const updateDiet = async () => {
 			try {
 				const dataToSend = {
 					token: token,
 					diet: props.diet,
 				}
-
 				const requestOptions = {
 					method: 'PUT',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify(dataToSend),
 				}
 				const data = await fetch(
-					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-diet`,
+					`https://vitejaifaim.herokuapp.com/users/update-diet`,
 					requestOptions
 				)
-				const result = await data.json()
 			} catch (err) {
 				console.log(err)
 			}
 		}
 		updateDiet()
-	})
-
-	const handleDiet = () => {
-		setOverlayVisible(true)
 	}
 
 	return (
@@ -124,7 +124,7 @@ function UserPage(props) {
 					{' '}
 					Régime alimentaire:
 				</Card.Title>
-				<Text>{user.regimeAlim} </Text>
+				<Text>{diet} </Text>
 				<Button
 					type="clear"
 					onPress={handleDiet}
@@ -133,7 +133,7 @@ function UserPage(props) {
 			</Card>
 			<Overlay
 				isVisible={overlayVisible}
-				onBackdropPress={() => setOverlayVisible(false)}
+				onBackdropPress={showRegime}
 				overlayStyle={{
 					width: '90%',
 					marginTop: 60,
@@ -149,6 +149,7 @@ function UserPage(props) {
 		</ScrollView>
 	)
 }
+
 const styles = StyleSheet.create({
 	container: {
 		borderRadius: 10,

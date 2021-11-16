@@ -9,7 +9,6 @@ import {
 } from 'react-native'
 import { Text, Input, Overlay } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
-import { MY_IP } from '@env'
 import LastOrder from '../Components/LastOrder'
 
 const LastOrderScreen = props => {
@@ -31,31 +30,26 @@ const LastOrderScreen = props => {
 		if (choice === 'good') {
 			try {
 				const data = await fetch(
-					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites`,
+					`https://vitejaifaim.herokuapp.com/users/favorites`,
 					{
 						method: 'POST',
 						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 						body: `token=${token}&meal_id=${mealId}`,
 					}
 				)
-				const result = await data.json()
 			} catch (err) {
-				console.log(err.message)
 			}
 		} else if (choice === 'bad') {
 			try {
 				const data = await fetch(
-					`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/blacklist/${token}`,
+					`https://vitejaifaim.herokuapp.com/users/blacklist/${token}`,
 					{
 						method: 'PUT',
 						headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
 						body: `mealId=${mealId}`,
 					}
 				)
-				const result = await data.json()
-				// console.log(result)
 			} catch (err) {
-				console.log(err.message)
 			}
 		}
 	}

@@ -107,17 +107,10 @@ const StackNav = props => {
 	)
 }
 
-
-
 export default function App() {
 	return (
-
-
 		<StripeProvider
 			publishableKey="pk_test_51JrTrKGYLeZVv03J8ZnXBOOpJYjTSpbRwRpsDc87euQ5gniEbZ1RbxmqgQkpZ7OCq2igW25TR1rykbn2BsF26obr00vlt5uXhp"
-
-			urlScheme="your-url-scheme" // required for 3D Secure and bank redirects
-			merchantIdentifier="merchant.com.{{ YOUR_APP_NAME }}" // required for Apple Pay 
 		>
 			<Provider store={store}>
 				<NavigationContainer>
@@ -127,8 +120,6 @@ export default function App() {
 				</NavigationContainer>
 			</Provider>
 		</StripeProvider>
-
-
 	);
 }
 

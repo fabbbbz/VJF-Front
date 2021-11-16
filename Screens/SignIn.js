@@ -2,13 +2,10 @@ import React from 'react'
 import {
 	StyleSheet,
 	View,
-	ScrollView,
 	TouchableOpacity,
-	ImageBackground,
 	Image,
 } from 'react-native'
-import { Text, Input, SocialIcon, Button } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
+import { Text, Input, Button } from 'react-native-elements'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useState } from 'react'
@@ -24,7 +21,7 @@ function SignIn(props) {
 	var handleSubmitSignin = async () => {
 		// send user's infos to back
 		const data = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-in`,
+			`https://vitejaifaim.herokuapp.com/users/sign-in`,
 			{
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

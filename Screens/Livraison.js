@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react'
 import LottieView from 'lottie-react-native'
 import CountDown from 'react-native-countdown-component'
 import { LogBox } from 'react-native';
-LogBox.ignoreAllLogs(); //Ignore all log notifications
+
 
 function Livraison(props) {
 	const [start, setStart] = useState(true) //const use to start the delivery process
@@ -21,10 +21,6 @@ function Livraison(props) {
 		}
 	}, [])
 
-	// Redirect to final page after the delivery process
-	//var finsihProcess = () => {
-	//	props.navigation.navigate('FinalPage', { screen: 'FinalPage' })
-	//}
 
 	// render order
 	var order = (

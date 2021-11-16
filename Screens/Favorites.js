@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import { Button, Text, Card } from 'react-native-elements'
+import { Button, Text } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
@@ -15,10 +15,9 @@ function Favorites(props) {
 	useEffect(() => {
 		async function loadFavorites() {
 			var rawResponse = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}`
+				`https://vitejaifaim.herokuapp.com/users/favorites/${token}`
 			)
 			var response = await rawResponse.json()
-			console.log('CLG de FAVORITE', response.favorites)
 			setFavData(response.favorites)
 
 			if (response.favorites.length > 0 && response.favorites[0] !== null) {
@@ -74,7 +73,7 @@ function Favorites(props) {
 		var favFilter = favData.filter(e => e._id !== meal_id)
 		setFavData(favFilter)
 		var rawResponse = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/favorites/${token}/${meal_id}`,
+			`https://vitejaifaim.herokuapp.com/users/favorites/${token}/${meal_id}`,
 			{
 				method: 'DELETE',
 			}

@@ -9,7 +9,7 @@ import { Text, Input, Button } from 'react-native-elements'
 import TopBar from '../Components/TopBar'
 import { connect } from 'react-redux'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 function Donts(props) {
 
@@ -21,25 +21,18 @@ function Donts(props) {
     const [dontExists, setDontExists] = useState(false)
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
 
-
     //affichage des donts
     useEffect(() => {
         async function loadDonts() {
-
-            var rawResponse = await fetch(`http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/myDonts/${token}`)
+            var rawResponse = await fetch(`https://vitejaifaim.herokuapp.com/users/myDonts/${token}`)
             var response = await rawResponse.json()
-
             setUserDonts(response.donts)
-
             if (response.donts.length > 0 && response.donts[0] !== null) {
                 setDontExists(true)
             }
         }
-
         loadDonts()
-
-    });
-
+    }, [])
 
     if (dontExists) {
         var showUserDonts = userDonts.map((dont, k) => {
@@ -64,29 +57,21 @@ function Donts(props) {
             </View>
     }
 
-    const handleManualAdd = () => {
-        setManualIngredient('')
-        setManualDonts(prevDonts => [...prevDonts, manualIngredient])
-        handleDonts()
-    }
-
-
     //Ajout de dont
     const handleDonts = async () => {
+        setManualIngredient('')
+        setManualDonts(prevDonts => [...prevDonts, manualIngredient])
         try {
-            const dont = manualIngredient
-
             if (manualIngredient != '') {
-                const listDont = await fetch(
-                    `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/adddonts/${token}`,
+                var rawResponse = await fetch(
+                    `https://vitejaifaim.herokuapp.com/users/adddonts/${token}`,
                     {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                        body: `dont=${dont}`,
+                        body: `dont=${manualIngredient}`,
                     }
                 )
             }
-
         } catch (err) {
             console.log(err)
         }
@@ -94,29 +79,21 @@ function Donts(props) {
 
     //suppression de donts ok
     async function handleDontDelete(dont) {
-
-        const token = props.token
-
         var filterDonts = dontsList.filter((e) => (e !== dont))
-
         setDontsList(filterDonts)
-
         var rawResponse = await fetch(
-            `http:/vitejaifaim-master-i57witqbae0.herokuapp.com/users/deletedonts/${token}/${dont}`,
+            `https://vitejaifaim.herokuapp.com/users/deletedonts/${token}/${dont}`,
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: `dont=${dont}`
             }
         )
-
         var response = await rawResponse.json()
-
         if (response.donts.length == 0) {
             setDontExists(false)
         }
     }
-
 
     return (
         <View style={styles.container}>
@@ -143,7 +120,7 @@ function Donts(props) {
                                         name="pluscircleo"
                                         size={24}
                                         color="black"
-                                        onPress={handleManualAdd}
+                                        onPress={handleDonts}
                                     />
                                 }
                                 placeholder="Ajoutez un ingrédient"

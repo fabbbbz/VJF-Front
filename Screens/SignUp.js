@@ -1,7 +1,6 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
 import { Text, Input } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
 import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useState } from 'react'
@@ -20,7 +19,7 @@ function SignUp(props) {
 	var handleSubmitSignup = async () => {
 		// send user's infos to back
 		const data = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/sign-up`,
+			`https://vitejaifaim.herokuapp.com/users/sign-up`,
 			{
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },

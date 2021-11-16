@@ -21,7 +21,7 @@ function Allergies(props) {
 	useEffect(() => {
 		async function loadAllergies() {
 			var rawResponse = await fetch(
-				`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/allergies/${token}`
+				`https://vitejaifaim.herokuapp.com/users/allergies/${token}`
 			)
 			var response = await rawResponse.json()
 
@@ -124,7 +124,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 		setAllergies(allergyFilter)
 		props.removeAllergy(allergy)
 		var rawResponse = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/delallergies/${token}/${allergy}`,
+			`https://vitejaifaim.herokuapp.com/users/delallergies/${token}/${allergy}`,
 
 			{
 				method: 'DELETE',
@@ -147,7 +147,7 @@ si ces conditions sont remplies allergyExist passe a true*/
 			body: JSON.stringify(dataToUpdate),
 		}
 		const data = await fetch(
-			`https://vitejaifaim-master-i57witqbae0.herokuapp.com/users/update-me/${token}`,
+			`https://vitejaifaim.herokuapp.com/users/update-me/${token}`,
 			requestOptions
 		)
 		const result = await data.json()

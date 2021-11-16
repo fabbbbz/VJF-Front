@@ -5,8 +5,6 @@ import RadioButtonRN from 'radio-buttons-react-native'
 import { connect } from 'react-redux'
 
 const Diet = props => {
-	// const [userdiet, setUserdiet] = useState('omni')
-
 	const diet = [
 		{
 			label: 'Je mange de tout',
