@@ -8,7 +8,7 @@ import {
 	SafeAreaView,
 } from 'react-native'
 import { Text, Input } from 'react-native-elements'
-import SmallButton from './SmallButton'
+import SmallButton from '../visual/SmallButton'
 import { AntDesign } from '@expo/vector-icons'
 
 const Donts = props => {
@@ -44,7 +44,7 @@ const Donts = props => {
 				<TouchableOpacity onPress={() => displayField()}>
 					<Image
 						style={styles.tinyLogo}
-						source={require('../assets/plusIcon.png')}
+						source={require('../../assets/plusIcon.png')}
 					/>
 				</TouchableOpacity>
 			</View>

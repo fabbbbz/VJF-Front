@@ -2,14 +2,13 @@ import React, { useState } from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Overlay } from 'react-native-elements'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
-import TopBar from '../Components/TopBar'
-import Diet from '../Components/Diet'
-import Donts from '../Components/Donts'
-import Allergies from '../Components/Allergies'
-import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
-import MyCheckbox from '../Components/Checkbox'
+import TopBar from '../Components/visual/TopBar'
+import Diet from '../Components/functional/Diet'
+import Donts from '../Components/functional/Donts'
+import Allergies from '../Components/functional/Allergies'
+import NextButton from '../Components/visual/NextButton'
+import MyCheckbox from '../Components/functional/Checkbox'
 
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)

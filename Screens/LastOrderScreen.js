@@ -8,8 +8,8 @@ import {
 	TouchableOpacity,
 } from 'react-native'
 import { Text, Input, Overlay } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
-import LastOrder from '../Components/LastOrder'
+import TopBar from '../Components/visual/TopBar'
+import LastOrder from '../Components/functional/LastOrder'
 
 const LastOrderScreen = props => {
 	const [overlay, setOverlay] = useState(false)

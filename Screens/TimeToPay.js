@@ -2,16 +2,16 @@ import React, { useState } from 'react'
 import { StyleSheet } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Text } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
 import { connect } from 'react-redux'
-import NextButtonFullSize from '../Components/NextButtonFullSize'
-import OrderRecap from '../Components/OrderRecap'
-import Address from '../Components/Address'
 import {
 	CardField,
 	useConfirmPayment,
 } from '@stripe/stripe-react-native'
 import { StripeProvider } from '@stripe/stripe-react-native';
+import NextButtonFullSize from '../Components/visual/NextButtonFullSize'
+import OrderRecap from '../Components/functional/OrderRecap'
+import Address from '../Components/functional/Address'
+import TopBar from '../Components/visual/TopBar'
 
 const TimeToPay = props => {
 	const { confirmPayment, loading } = useConfirmPayment()

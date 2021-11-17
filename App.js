@@ -30,8 +30,10 @@ import History from './Screens/History'
 import Donts from './Screens/Donts'
 import Livraison from './Screens/Livraison'
 import FinalPage from './Screens/FinalPage'
-import CustomDrawer from './Components/CustomDrawer'
 import Allergies from './Screens/Allergies'
+
+//Components
+import CustomDrawer from './Components/visual/CustomDrawer'
 
 const Stack = createStackNavigator()
 const Drawer = createDrawerNavigator()

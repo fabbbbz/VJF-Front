@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import TopBar from '../Components/TopBar'
 import { StyleSheet, ScrollView } from 'react-native'
 import { Button, Text, Card, Overlay } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
-import DietRadios from '../Components/MyRadio'
+import TopBar from '../Components/visual/TopBar'
+import DietRadios from '../Components/visual/MyRadio'
 
 function UserPage(props) {
 	const [user, setUser] = useState('')

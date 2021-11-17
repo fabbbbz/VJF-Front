@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, Image, TouchableOpacity, View, StyleSheet } from 'react-native'
 import { Button, Text, Card } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
 import { Overlay } from 'react-native-elements'
-import MyCheckbox from '../Components/Checkbox'
-import NextButton from '../Components/NextButton'
+import MyCheckbox from '../Components/functional/Checkbox'
+import NextButton from '../Components/visual/NextButton'
+import TopBar from '../Components/visual/TopBar'
 
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])

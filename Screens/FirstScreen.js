@@ -6,10 +6,10 @@ import {
 	ImageBackground,
 } from 'react-native'
 import { Text } from 'react-native-elements'
-import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
+import NextButton from '../Components/visual/NextButton'
 
 function FirstScreen(props) {
 	useEffect(() => {

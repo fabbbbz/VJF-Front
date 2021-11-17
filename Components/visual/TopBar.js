@@ -30,7 +30,7 @@ const TopBar = props => {
 			)}
 			<Image
 				style={styles.tinyLogo}
-				source={require('../assets/VJF-logo.png')}
+				source={require('../../assets/VJF-logo.png')}
 			/>
 
 			<AntDesign name="user" size={24} color="#FFC901" onPress={showDrawer} />

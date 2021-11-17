@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
 import { Text, Input } from 'react-native-elements'
-import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import NextButton from '../Components/visual/NextButton'
 
 function SignUp(props) {
 	const [signUpFirstname, setignUpFirstname] = useState('')

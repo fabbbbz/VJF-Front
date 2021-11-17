@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, StyleSheet, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
-import TopBar from '../Components/TopBar';
-import Plats from '../Components/Plats';
+import TopBar from '../Components/visual/TopBar';
+import Plats from '../Components/functional/Plats';
 
 function History(props) {
 

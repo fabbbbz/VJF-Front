@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { Text } from 'react-native-elements'
-import HeartFav from '../Components/HeartFav'
 import { connect } from 'react-redux'
-
+import HeartFav from './HeartFav'
 function Plats(props) {
 	const token = props.token
 	const [ordersHistory, setOrdersHistory] = useState([])

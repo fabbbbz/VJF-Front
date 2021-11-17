@@ -6,12 +6,11 @@ import {
 	Image,
 } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
-import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { AntDesign } from '@expo/vector-icons'
-
+import NextButton from '../Components/visual/NextButton'
 function SignIn(props) {
 	const [signUpEmail, setSignUpEmail] = useState('')
 	const [signUpPassword, setSignUpPassword] = useState('')

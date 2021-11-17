@@ -1,12 +1,10 @@
 import React from 'react'
 import { StyleSheet, View, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
 import { useState, useEffect } from 'react'
 import LottieView from 'lottie-react-native'
 import CountDown from 'react-native-countdown-component'
-import { LogBox } from 'react-native';
-
+import TopBar from '../Components/visual/TopBar'
 
 function Livraison(props) {
 	const [start, setStart] = useState(true) //const use to start the delivery process

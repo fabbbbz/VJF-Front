@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
-import NextButton from '../Components/NextButton'
 import { connect } from 'react-redux'
-import Notification from '../Components/Notification'
+import NextButton from '../Components/visual/NextButton'
+import Notification from '../Components/functional/Notification'
 
 function FinalPage(props) {
 	return (

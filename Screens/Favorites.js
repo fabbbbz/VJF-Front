@@ -2,10 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, StyleSheet, View } from 'react-native'
 import { Button, Text } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
 import { Ionicons } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
-
+import TopBar from '../Components/visual/TopBar'
 function Favorites(props) {
 	const [favData, setFavData] = useState([])
 	const token = props.token

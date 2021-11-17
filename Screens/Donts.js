@@ -6,9 +6,9 @@ import {
     KeyboardAvoidingView,
 } from 'react-native'
 import { Text, Input, Button } from 'react-native-elements'
-import TopBar from '../Components/TopBar'
 import { connect } from 'react-redux'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
+import TopBar from '../Components/visual/TopBar'
 
 function Donts(props) {
     const token = props.token
