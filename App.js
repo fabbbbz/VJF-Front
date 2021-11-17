@@ -17,7 +17,6 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 
-
 // Screens Import
 import FirstScreen from './Screens/FirstScreen'
 import Home from './Screens/Home'
@@ -31,7 +30,6 @@ import TimeToPay from './Screens/TimeToPay'
 import History from './Screens/History'
 import Donts from './Screens/Donts'
 import Livraison from './Screens/Livraison'
-import Logout from './Components/Logout'
 import FinalPage from './Screens/FinalPage'
 import CustomDrawer from './Components/CustomDrawer'
 import Allergies from './Screens/Allergies'
@@ -51,9 +49,7 @@ const store = createStore(
 		coords,
 		address,
 	})
-)
-//stripe
-
+);
 
 const DrawerNav = props => {
 	return (
@@ -85,7 +81,7 @@ const DrawerNav = props => {
 			<Drawer.Screen name="Donts" component={Donts} />
 		</Drawer.Navigator>
 	)
-}
+};
 
 const StackNav = props => {
 	return (
@@ -105,11 +101,11 @@ const StackNav = props => {
 			<Stack.Screen name="LastOrderScreen" component={LastOrderScreen} />
 		</Stack.Navigator>
 	)
-}
+};
 
 export default function App() {
 	return (
-		<StripeProvider publishableKey="pk_test_51JrTrKGYLeZVv03J8ZnXBOOpJYjTSpbRwRpsDc87euQ5gniEbZ1RbxmqgQkpZ7OCq2igW25TR1rykbn2BsF26obr00vlt5uXhp">
+		<StripeProvider publishableKey="pk_test_51JY5XQEKfhZc95pkU6vYakETH10f2c8OdiCJQzfdLEmkK4UYiNCeZ0ChXPhvS9TOoYusjwQnwiF5zFm3dODMOeKG00If0rpWLk">
 			<Provider store={store}>
 				<NavigationContainer>
 					<Stack.Navigator screenOptions={{ headerShown: false }}>
@@ -119,5 +115,4 @@ export default function App() {
 			</Provider>
 		</StripeProvider>
 	);
-}
-
+};

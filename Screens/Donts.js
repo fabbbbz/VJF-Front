@@ -54,7 +54,7 @@ function Donts(props) {
             </View>
     }
 
-    //Add dpnts 
+    //Add donts 
     const handleDonts = async () => {
         setUserDonts(prevDonts => [...prevDonts, manualIngredient])
         setManualIngredient('')
@@ -83,7 +83,6 @@ function Donts(props) {
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-                body: `dont=${dont}`
             }
         )
         var response = await rawResponse.json()
@@ -91,7 +90,6 @@ function Donts(props) {
             setDontExists(false)
         }
     }
-
 
     return (
         <View style={styles.container}>

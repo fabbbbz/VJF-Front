@@ -37,12 +37,11 @@ const TimeToPay = props => {
 		})
 		const { clientSecret } = await datatoStripe.json()
 		return clientSecret
-	}
+	};
 
 	const handlePayPress = async () => {
 		// Fetch the intent client secret from the backend
 		const clientSecret = await fetchPaymentIntentClientSecret()
-
 		// Confirm the payment with the card details
 		const { paymentIntent, error } = await confirmPayment(clientSecret, {
 			type: 'Card',
@@ -55,7 +54,7 @@ const TimeToPay = props => {
 				screen: 'Livraison',
 			})
 		}
-	}
+	};
 
 	return (
 		<KeyboardAwareScrollView style={styles.container}>
@@ -97,7 +96,7 @@ const TimeToPay = props => {
 			/>
 		</KeyboardAwareScrollView>
 	)
-}
+};
 
 const styles = StyleSheet.create({
 	container: {

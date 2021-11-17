@@ -37,7 +37,6 @@ function SignIn(props) {
 			AsyncStorage.setItem('token', body.token)
 			// store token in redux
 			props.addToken(body.token)
-			props.addFirstName(body.user.firstName)
 			props.navigation.navigate('Mood', { screen: 'Mood' })
 		} else {
 			setErrorsSignin(body.error)
