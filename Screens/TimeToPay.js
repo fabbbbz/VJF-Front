@@ -11,11 +11,11 @@ import {
 	CardField,
 	useConfirmPayment,
 } from '@stripe/stripe-react-native'
+import { StripeProvider } from '@stripe/stripe-react-native';
 
 const TimeToPay = props => {
 	const { confirmPayment, loading } = useConfirmPayment()
 	const [cardDetails, setCardDetails] = useState()
-
 	const fetchPaymentIntentClientSecret = async () => {
 		const data = await fetch(
 			`https://vitejaifaim.herokuapp.com/orders/update-order/${props.order}`,
@@ -57,44 +57,46 @@ const TimeToPay = props => {
 	};
 
 	return (
-		<KeyboardAwareScrollView style={styles.container}>
-			<TopBar navigation={props.navigation} />
-			<Text h3 style={styles.text}>
-				Récapitulatif
-			</Text>
-			<OrderRecap />
-			<Address />
+		<StripeProvider publishableKey="pk_test_51JY5XQEKfhZc95pkU6vYakETH10f2c8OdiCJQzfdLEmkK4UYiNCeZ0ChXPhvS9TOoYusjwQnwiF5zFm3dODMOeKG00If0rpWLk">
+			<KeyboardAwareScrollView style={styles.container}>
+				<TopBar navigation={props.navigation} />
+				<Text h3 style={styles.text}>
+					Récapitulatif
+				</Text>
+				<OrderRecap />
+				<Address />
 
-			<CardField
-				postalCodeEnabled={true}
-				placeholder={{
-					number: '4242 4242 4242 4242',
-				}}
-				cardStyle={{
-					backgroundColor: '#FFFFFF',
-					textColor: '#000000',
-					alignSelf: '100%',
-				}}
-				style={{
-					width: '92%',
-					height: 150,
-					marginVertical: 15,
-					display: 'flex',
-					flexDirection: 'column',
-					alignItems: 'center',
-					justifyContent: 'center',
-					alignSelf: 'center',
-				}}
-				onCardChange={cardDetails => {
-					setCardDetails(cardDetails)
-				}}
-			/>
-			<NextButtonFullSize
-				title="PAYER"
-				onPress={handlePayPress}
-				disabled={loading}
-			/>
-		</KeyboardAwareScrollView>
+				<CardField
+					postalCodeEnabled={true}
+					placeholder={{
+						number: '4242 4242 4242 4242',
+					}}
+					cardStyle={{
+						backgroundColor: '#FFFFFF',
+						textColor: '#000000',
+						alignSelf: '100%',
+					}}
+					style={{
+						width: '92%',
+						height: 150,
+						marginVertical: 15,
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+						justifyContent: 'center',
+						alignSelf: 'center',
+					}}
+					onCardChange={cardDetails => {
+						setCardDetails(cardDetails)
+					}}
+				/>
+				<NextButtonFullSize
+					title="PAYER"
+					onPress={handlePayPress}
+					disabled={loading}
+				/>
+			</KeyboardAwareScrollView>
+		</StripeProvider>
 	)
 };
 

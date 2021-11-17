@@ -21,7 +21,6 @@ function Livraison(props) {
 		}
 	}, [])
 
-
 	// render order
 	var order = (
 		<View

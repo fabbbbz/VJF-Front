@@ -83,6 +83,7 @@ function Donts(props) {
             {
                 method: 'DELETE',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+
             }
         )
         var response = await rawResponse.json()

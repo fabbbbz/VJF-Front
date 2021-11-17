@@ -12,7 +12,6 @@ import firstName from './reducers/firstName'
 import order from './reducers/order'
 import coords from './reducers/coords'
 import address from './reducers/address'
-import { StripeProvider } from '@stripe/stripe-react-native';
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { createDrawerNavigator } from '@react-navigation/drawer'
@@ -105,14 +104,12 @@ const StackNav = props => {
 
 export default function App() {
 	return (
-		<StripeProvider publishableKey="pk_test_51JY5XQEKfhZc95pkU6vYakETH10f2c8OdiCJQzfdLEmkK4UYiNCeZ0ChXPhvS9TOoYusjwQnwiF5zFm3dODMOeKG00If0rpWLk">
-			<Provider store={store}>
-				<NavigationContainer>
-					<Stack.Navigator screenOptions={{ headerShown: false }}>
-						<Stack.Screen name="Drawer" component={DrawerNav} />
-					</Stack.Navigator>
-				</NavigationContainer>
-			</Provider>
-		</StripeProvider>
+		<Provider store={store}>
+			<NavigationContainer>
+				<Stack.Navigator screenOptions={{ headerShown: false }}>
+					<Stack.Screen name="Drawer" component={DrawerNav} />
+				</Stack.Navigator>
+			</NavigationContainer>
+		</Provider>
 	);
 };

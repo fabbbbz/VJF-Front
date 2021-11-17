@@ -7,13 +7,11 @@ import { Ionicons } from '@expo/vector-icons'
 import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/Checkbox'
 import NextButton from '../Components/NextButton'
-import { useIsFocused } from '@react-navigation/native'
 
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)
 	const [overlay, setOverlay] = useState(false)
-	const isFocused = useIsFocused()
 	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
 	var allergiesRender
@@ -24,18 +22,13 @@ function Allergies(props) {
 				`https://vitejaifaim.herokuapp.com/users/allergies/${token}`
 			)
 			var response = await rawResponse.json()
-
-			/*verifie l'existance d'une allergie dans le document user et verifie que l'allergie soit != null 
-si ces conditions sont remplies allergyExist passe a true*/
-
 			if (response.allergies.length > 0 && response.allergies[0] !== null) {
 				setAllergyExist(true)
 				setAllergies(response.allergies)
 			}
 		}
-
 		loadAllergies()
-	}, [isFocused])
+	}, [])
 
 	useEffect(() => {
 		allergiesRender = newAllergies.map((allergy, i) => {
@@ -147,7 +140,6 @@ si ces conditions sont remplies allergyExist passe a true*/
 			requestOptions
 		)
 		const result = await data.json()
-
 		setAllergies(result.doc.allergies)
 	}
 

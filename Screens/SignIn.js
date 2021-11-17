@@ -28,6 +28,7 @@ function SignIn(props) {
 				body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
 			}
 		)
+
 		//get answer from back
 		const body = await data.json()
 		if (body.result == 'success') {
