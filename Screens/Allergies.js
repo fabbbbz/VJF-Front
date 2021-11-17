@@ -14,7 +14,6 @@ function Allergies(props) {
 	const [overlay, setOverlay] = useState(false)
 	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
-	var allergiesRender
 
 	useEffect(() => {
 		async function loadAllergies() {
@@ -30,48 +29,8 @@ function Allergies(props) {
 		loadAllergies()
 	}, [])
 
-	useEffect(() => {
-		allergiesRender = newAllergies.map((allergy, i) => {
-			return (
-				<Card
-					key={i}
-					containerStyle={{
-						borderRadius: 10,
-						elevation: 4,
-						shadowOffset: { width: 2, height: 2 },
-						shadowColor: 'rgba(0,0,0, 0.2)',
-						shadowOpacity: 0.5,
-						shadowRadius: 2,
-					}}
-					wrapperStyle={{
-						display: 'flex',
-						flexDirection: 'row',
-						justifyContent: 'space-between',
-						flexWrap: 'nowrap',
-						alignItems: 'center',
-					}}
-				>
-					<Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
-						{allergy}
-					</Card.Title>
-					<Button
-						type="clear"
-						onPress={() => {
-							handleAllergyDeletion(allergy)
-						}}
-						icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
-					/>
-				</Card>
-			)
-		})
-		var array = mergeArrays(allergies, props.allergies)
-		if (array) {
-			setnewAllergies(array)
-		}
-	}, [allergies])
-
 	if (allergyExist == true) {
-		allergiesRender = newAllergies.map((allergy, i) => {
+		var allergiesRender = newAllergies.map((allergy, i) => {
 			return (
 				<Card
 					key={i}
@@ -105,7 +64,7 @@ function Allergies(props) {
 			)
 		})
 	} else {
-		allergiesRender = (
+		var allergiesRender = (
 			<Text style={{ alignSelf: 'center', marginTop: 25, fontWeight: 'bold' }}>
 				vous n'avez pas d'allergies renseignées
 			</Text>
@@ -141,18 +100,6 @@ function Allergies(props) {
 		)
 		const result = await data.json()
 		setAllergies(result.doc.allergies)
-	}
-
-	// testing
-	function mergeArrays(...arrays) {
-		let jointArray = []
-		arrays.forEach(array => {
-			jointArray = [...jointArray, ...array]
-		})
-		const uniqueArray = jointArray.filter(
-			(item, index) => jointArray.indexOf(item) === index
-		)
-		return uniqueArray
 	}
 
 	return (
