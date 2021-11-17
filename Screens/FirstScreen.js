@@ -13,7 +13,6 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 
 function FirstScreen(props) {
 	useEffect(() => {
-
 		AsyncStorage.getItem('token', (error, value) => {
 			if (value) {
 				props.addToken(value)

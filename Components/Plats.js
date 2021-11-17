@@ -6,18 +6,15 @@ import { connect } from 'react-redux'
 
 function Plats(props) {
 	const token = props.token
-
 	const [ordersHistory, setOrdersHistory] = useState([])
 	const [mealId, setMealId] = useState([])
 
 	useEffect(() => {
 		async function loadOrders() {
-
 			var rawResponse = await fetch(
 				`https://vitejaifaim.herokuapp.com/users/history/${token}`
 			)
 			var response = await rawResponse.json()
-
 			setOrdersHistory(response.meals)
 			setMealId(response.meals[1].mealId)
 		}

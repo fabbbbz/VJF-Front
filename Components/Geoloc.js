@@ -27,9 +27,7 @@ function Geoloc(props) {
 					}
 				}
 			}
-
 			addressComplete = props.address
-
 			await fetch(`https://vitejaifaim.herokuapp.com/users/update-useraddress/${token}`, {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -40,7 +38,6 @@ function Geoloc(props) {
 
 
 	}, [])
-
 	return <Text>{displayCurrentAddress}</Text>
 }
 

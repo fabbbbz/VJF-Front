@@ -30,7 +30,6 @@ function UserPage(props) {
 
 	const handleDiet = () => {
 		setOverlayVisible(true)
-
 	}
 
 	const showRegime = () => {

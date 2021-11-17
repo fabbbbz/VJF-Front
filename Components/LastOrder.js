@@ -24,8 +24,6 @@ const LastOrder = props => {
 				} else {
 					props.setHasOrder(true)
 				}
-				//if (lastOrder) props.setHasOrder(true)
-
 				setMeal(lastOrder.mealName)
 				setRestaurant(lastOrder.restaurant)
 				props.setMealId(lastOrder.mealId)

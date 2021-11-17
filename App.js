@@ -109,9 +109,7 @@ const StackNav = props => {
 
 export default function App() {
 	return (
-		<StripeProvider
-			publishableKey="pk_test_51JrTrKGYLeZVv03J8ZnXBOOpJYjTSpbRwRpsDc87euQ5gniEbZ1RbxmqgQkpZ7OCq2igW25TR1rykbn2BsF26obr00vlt5uXhp"
-		>
+		<StripeProvider publishableKey="pk_test_51JrTrKGYLeZVv03J8ZnXBOOpJYjTSpbRwRpsDc87euQ5gniEbZ1RbxmqgQkpZ7OCq2igW25TR1rykbn2BsF26obr00vlt5uXhp">
 			<Provider store={store}>
 				<NavigationContainer>
 					<Stack.Navigator screenOptions={{ headerShown: false }}>

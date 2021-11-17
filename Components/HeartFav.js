@@ -23,7 +23,6 @@ function HeartFav(props) {
 					body: `token=${token}&meal_id=${mealId}`,
 				}
 			)
-			const result = await data.json()
 		} catch (err) {
 		}
 	}

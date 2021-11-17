@@ -13,10 +13,8 @@ import {
 } from '@stripe/stripe-react-native'
 
 const TimeToPay = props => {
-	const [order, setOrder] = useState({})
 	const { confirmPayment, loading } = useConfirmPayment()
 	const [cardDetails, setCardDetails] = useState()
-	const API_URL = 'https://vitejaifaim.herokuapp.com/'
 
 	const fetchPaymentIntentClientSecret = async () => {
 		const data = await fetch(
@@ -25,19 +23,19 @@ const TimeToPay = props => {
 				method: 'PUT',
 			}
 		)
-		const reponse = await data.json()
+		const response = await data.json()
 
-		const response = await fetch(`${API_URL}/orders/payment`, {
+		const datatoStripe = await fetch(`https://vitejaifaim.herokuapp.com/orders/payment`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
 			body: JSON.stringify({
-				price: reponse.order.price,
+				price: response.order.price,
 				currency: 'eur',
 			}),
 		})
-		const { clientSecret } = await response.json()
+		const { clientSecret } = await datatoStripe.json()
 		return clientSecret
 	}
 

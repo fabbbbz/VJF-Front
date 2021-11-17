@@ -10,13 +10,9 @@ import TopBar from '../Components/TopBar'
 import { connect } from 'react-redux'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 
-
 function Donts(props) {
-
     const token = props.token
     const [userDonts, setUserDonts] = useState([])
-    const [dontsList, setDontsList] = useState([])
-    const [manualDonts, setManualDonts] = useState([])
     const [manualIngredient, setManualIngredient] = useState('')
     const [dontExists, setDontExists] = useState(false)
     const keyboardVerticalOffset = Platform.OS === 'ios' ? 40 : 0
@@ -27,6 +23,7 @@ function Donts(props) {
             var rawResponse = await fetch(`https://vitejaifaim.herokuapp.com/users/myDonts/${token}`)
             var response = await rawResponse.json()
             setUserDonts(response.donts)
+            setDontExists(true)
             if (response.donts.length > 0 && response.donts[0] !== null) {
                 setDontExists(true)
             }
@@ -57,13 +54,13 @@ function Donts(props) {
             </View>
     }
 
-    //Ajout de dont
+    //Add dpnts 
     const handleDonts = async () => {
+        setUserDonts(prevDonts => [...prevDonts, manualIngredient])
         setManualIngredient('')
-        setManualDonts(prevDonts => [...prevDonts, manualIngredient])
         try {
             if (manualIngredient != '') {
-                var rawResponse = await fetch(
+                const listDont = await fetch(
                     `https://vitejaifaim.herokuapp.com/users/adddonts/${token}`,
                     {
                         method: 'POST',
@@ -72,14 +69,15 @@ function Donts(props) {
                     }
                 )
             }
+            setDontExists(true)
         } catch (err) {
         }
     }
 
-    //suppression de donts ok
+    //Del donts
     async function handleDontDelete(dont) {
-        var filterDonts = dontsList.filter((e) => (e !== dont))
-        setDontsList(filterDonts)
+        var filterDonts = userDonts.filter((e) => (e !== dont))
+        setUserDonts(filterDonts)
         var rawResponse = await fetch(
             `https://vitejaifaim.herokuapp.com/users/deletedonts/${token}/${dont}`,
             {
@@ -93,6 +91,7 @@ function Donts(props) {
             setDontExists(false)
         }
     }
+
 
     return (
         <View style={styles.container}>

@@ -19,12 +19,10 @@ function Favorites(props) {
 			)
 			var response = await rawResponse.json()
 			setFavData(response.favorites)
-
 			if (response.favorites.length > 0 && response.favorites[0] !== null) {
 				setFavExists(true)
 			}
 		}
-
 		loadFavorites()
 	}, [isFocused])
 
