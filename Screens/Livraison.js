@@ -8,7 +8,6 @@ import TopBar from '../Components/visual/TopBar'
 
 function Livraison(props) {
 	const [start, setStart] = useState(true) //const use to start the delivery process
-	const [seconds, setSeconds] = useState(5) // const to set the number of seconds for setTimeout
 	const [commandRender, setCommandRender] = useState('') // wich screen need to be render (preparation..livraison..)
 
 	useEffect(() => {
@@ -185,41 +184,22 @@ function Livraison(props) {
 	var showscreen
 	if (commandRender == 'order') {
 		showscreen = order
-		if (seconds > 0) {
-			setTimeout(() => setSeconds(seconds - 1), 1000)
-		} else {
-			setCommandRender('preparation')
-			setSeconds(10)
-		}
+		setTimeout(() => setCommandRender('preparation'), 5000);
 	}
 
 	if (commandRender == 'preparation') {
 		showscreen = preparation
-		if (seconds > 0) {
-			setTimeout(() => setSeconds(seconds - 1), 1000)
-		} else {
-			setCommandRender('livraison')
-			setSeconds(10)
-		}
+		setTimeout(() => setCommandRender('livraison'), 5000);
 	}
 
 	if (commandRender == 'livraison') {
 		showscreen = livraison
-		if (seconds > 0) {
-			setTimeout(() => setSeconds(seconds - 1), 1000)
-		} else {
-			setCommandRender('done')
-			setSeconds(10)
-		}
+		setTimeout(() => setCommandRender('done'), 5000);
 	}
 
 	if (commandRender == 'done') {
 		showscreen = done
-		if (seconds > 0) {
-			setTimeout(() => setSeconds(seconds - 1), 1000)
-		} else {
-			props.navigation.navigate('FinalPage', { screen: 'FinalPage' })
-		}
+		setTimeout(() => props.navigation.navigate('FinalPage', { screen: 'FinalPage' }), 5000);
 	}
 
 	return (

@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
-import { connect } from 'react-redux'
 import NextButton from '../Components/visual/NextButton'
 import Notification from '../Components/functional/Notification'
+import Livraison from './Livraison'
 
 function FinalPage(props) {
 	return (
@@ -48,9 +48,5 @@ const styles = StyleSheet.create({
 		backgroundColor: '#27292D',
 	},
 })
-//get token from store
-function mapStateToProps(state) {
-	return { token: state.token }
-}
 
-export default connect(mapStateToProps, null)(FinalPage)
+export default (FinalPage)

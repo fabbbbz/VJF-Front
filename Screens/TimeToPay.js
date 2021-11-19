@@ -27,8 +27,6 @@ const TimeToPay = props => {
 			}
 		)
 		const response = await data.json()
-		console.log(props.order)
-		const token = props.token
 		const datatoStripe = await fetch(`https://vitejaifaim.herokuapp.com/orders/payment`, {
 			method: 'POST',
 			headers: {
@@ -36,8 +34,7 @@ const TimeToPay = props => {
 			},
 			body: JSON.stringify({
 				price: response.order.price,
-				currency: 'eur',
-				token: token,
+				currency: 'eur'
 			}),
 		})
 		const { clientSecret } = await datatoStripe.json()
@@ -123,7 +120,6 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
 	return {
 		order: state.order,
-		token: state.token
 	}
 }
 
