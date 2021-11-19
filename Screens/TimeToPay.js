@@ -48,9 +48,10 @@ const TimeToPay = props => {
 		const { paymentIntent, error } = await confirmPayment(clientSecret, {
 			type: 'Card',
 		})
-		if (error) {
-		} else if (paymentIntent) {
-		}
+		// if (error) {
+		// } 
+		// else if (paymentIntent) {
+		// }
 		if (cardDetails) {
 			props.navigation.navigate('Livraison', {
 				screen: 'Livraison',

@@ -17,6 +17,7 @@ const LastOrderScreen = props => {
 	const [mealId, setMealId] = useState('')
 	const [voted, setVoted] = useState(false)
 	const [hasOrder, setHasOrder] = useState(true)
+	const token = props.token
 
 	const handleThumbClick = async userchoice => {
 		setChoice(userchoice)
@@ -26,7 +27,6 @@ const LastOrderScreen = props => {
 	}
 
 	const updateUser = async choice => {
-		const token = props.token
 		if (choice === 'good') {
 			try {
 				const data = await fetch(
