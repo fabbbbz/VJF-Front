@@ -18,8 +18,8 @@ const P_Key = " pk_test_51JY5XQEKfhZc95pkU6vYakETH10f2c8OdiCJQzfdLEmkK4UYiNCeZ0C
 const TimeToPay = props => {
 	const { confirmPayment, loading } = useConfirmPayment()
 	const [cardDetails, setCardDetails] = useState()
-
 	const token = props.token
+
 	// Send data to stripe & get command key
 	const fetchPaymentIntentClientSecret = async () => {
 		const data = await fetch(

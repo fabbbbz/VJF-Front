@@ -194,7 +194,7 @@ function Livraison(props) {
 
 	if (commandRender == 'livraison') {
 		showscreen = livraison
-		setTimeout(() => setCommandRender('done'), 5000);
+		setTimeout(() => setCommandRender('done'), 10000);
 	}
 
 	if (commandRender == 'done') {
