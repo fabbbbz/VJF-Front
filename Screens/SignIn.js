@@ -11,6 +11,7 @@ import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { AntDesign } from '@expo/vector-icons'
 import NextButton from '../Components/visual/NextButton'
+
 function SignIn(props) {
 	const [signUpEmail, setSignUpEmail] = useState('')
 	const [signUpPassword, setSignUpPassword] = useState('')
@@ -171,9 +172,6 @@ function mapDispatchToProps(dispatch) {
 	return {
 		addToken: function (token) {
 			dispatch({ type: 'addToken', token: token })
-		},
-		addFirstName: function (firstName) {
-			dispatch({ type: 'addFirstName', firstName: firstName })
 		},
 	}
 }

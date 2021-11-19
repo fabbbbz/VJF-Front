@@ -13,11 +13,13 @@ import OrderRecap from '../Components/functional/OrderRecap'
 import Address from '../Components/functional/Address'
 import TopBar from '../Components/visual/TopBar'
 
+const P_Key = " pk_test_51JY5XQEKfhZc95pkU6vYakETH10f2c8OdiCJQzfdLEmkK4UYiNCeZ0ChXPhvS9TOoYusjwQnwiF5zFm3dODMOeKG00If0rpWLk"
 
 const TimeToPay = props => {
 	const { confirmPayment, loading } = useConfirmPayment()
 	const [cardDetails, setCardDetails] = useState()
 
+	const token = props.token
 	// Send data to stripe & get command key
 	const fetchPaymentIntentClientSecret = async () => {
 		const data = await fetch(
@@ -34,7 +36,8 @@ const TimeToPay = props => {
 			},
 			body: JSON.stringify({
 				price: response.order.price,
-				currency: 'eur'
+				currency: 'eur',
+				token: token
 			}),
 		})
 		const { clientSecret } = await datatoStripe.json()
@@ -48,10 +51,10 @@ const TimeToPay = props => {
 		const { paymentIntent, error } = await confirmPayment(clientSecret, {
 			type: 'Card',
 		})
-		// if (error) {
-		// } 
-		// else if (paymentIntent) {
-		// }
+		if (error) {
+		}
+		else if (paymentIntent) {
+		}
 		if (cardDetails) {
 			props.navigation.navigate('Livraison', {
 				screen: 'Livraison',
@@ -60,7 +63,7 @@ const TimeToPay = props => {
 	};
 
 	return (
-		<StripeProvider publishableKey="pk_test_51JY5XQEKfhZc95pkU6vYakETH10f2c8OdiCJQzfdLEmkK4UYiNCeZ0ChXPhvS9TOoYusjwQnwiF5zFm3dODMOeKG00If0rpWLk">
+		<StripeProvider publishableKey={P_Key}>
 			<KeyboardAwareScrollView style={styles.container}>
 				<TopBar navigation={props.navigation} />
 				<Text h3 style={styles.text}>
@@ -121,6 +124,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
 	return {
 		order: state.order,
+		token: state.token
 	}
 }
 

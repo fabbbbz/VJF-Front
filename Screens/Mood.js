@@ -23,6 +23,7 @@ function Mood(props) {
 	const [portions, setPortions] = useState(1)
 	const [check, setCheck] = useState(false)
 
+
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
 		const mood = moodsItems.find(mood => mood.id === moodId)

@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
 	return {
 		token: state.token,
-		firstName: state.firstName,
 	}
 }
 
