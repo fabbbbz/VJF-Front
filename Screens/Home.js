@@ -13,6 +13,7 @@ import MyCheckbox from '../Components/functional/Checkbox'
 const Home = props => {
 	const [overlay, setOverlay] = useState(false)
 	const token = props.token
+
 	const handleAllergies = allergy => {
 		setOverlay(false)
 	}
@@ -37,7 +38,7 @@ const Home = props => {
 				body: JSON.stringify(dataToUpdate),
 			}
 			const data = await fetch(
-				`https://vitejaifaim.herokuapp.com/users/update-me/${token}`,
+				`https://vite-jai-faim.herokuapp.com/users/update-me/${token}`,
 				requestOptions
 			)
 			const result = await data.json()

@@ -45,4 +45,11 @@ function mapDispatchToProps(dispatch) {
 	}
 }
 
-export default connect(null, mapDispatchToProps)(MyCheckbox)
+function mapStateToProps(state) {
+	return {
+		allergies: state.allergies,
+	}
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyCheckbox)

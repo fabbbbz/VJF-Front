@@ -13,9 +13,12 @@ import OrderRecap from '../Components/functional/OrderRecap'
 import Address from '../Components/functional/Address'
 import TopBar from '../Components/visual/TopBar'
 
+
 const TimeToPay = props => {
 	const { confirmPayment, loading } = useConfirmPayment()
 	const [cardDetails, setCardDetails] = useState()
+
+	// Send data to stripe & get command key
 	const fetchPaymentIntentClientSecret = async () => {
 		const data = await fetch(
 			`https://vitejaifaim.herokuapp.com/orders/update-order/${props.order}`,
@@ -24,7 +27,8 @@ const TimeToPay = props => {
 			}
 		)
 		const response = await data.json()
-
+		console.log(props.order)
+		const token = props.token
 		const datatoStripe = await fetch(`https://vitejaifaim.herokuapp.com/orders/payment`, {
 			method: 'POST',
 			headers: {
@@ -33,6 +37,7 @@ const TimeToPay = props => {
 			body: JSON.stringify({
 				price: response.order.price,
 				currency: 'eur',
+				token: token,
 			}),
 		})
 		const { clientSecret } = await datatoStripe.json()
@@ -118,6 +123,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
 	return {
 		order: state.order,
+		token: state.token
 	}
 }
 

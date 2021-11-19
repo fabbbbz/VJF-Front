@@ -12,7 +12,6 @@ function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)
 	const [overlay, setOverlay] = useState(false)
-	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
 
 	useEffect(() => {
@@ -24,13 +23,16 @@ function Allergies(props) {
 			if (response.allergies.length > 0 && response.allergies[0] !== null) {
 				setAllergyExist(true)
 				setAllergies(response.allergies)
+				let responseToString = response.allergies.toString();
+				props.addAllergy(responseToString)
 			}
 		}
 		loadAllergies()
 	}, [])
 
-	if (allergyExist == true) {
-		var allergiesRender = newAllergies.map((allergy, i) => {
+
+	if (allergyExist) {
+		var allergiesRender = allergies.map((allergy, i) => {
 			return (
 				<Card
 					key={i}
@@ -73,7 +75,6 @@ function Allergies(props) {
 
 	async function handleAllergyDeletion(allergy) {
 		var allergyFilter = allergies.filter(e => e !== allergy)
-		setAllergies(allergyFilter)
 		props.removeAllergy(allergy)
 		var rawResponse = await fetch(
 			`https://vitejaifaim.herokuapp.com/users/delallergies/${token}/${allergy}`,
@@ -82,13 +83,25 @@ function Allergies(props) {
 				method: 'DELETE',
 			}
 		)
+		setAllergies(allergyFilter)
+		if (allergyFilter.length == 0) {
+			setAllergyExist(false)
+
+		}
 	}
 
-	async function handleAllergies(boolean) {
-		setOverlay(boolean)
+	async function handleAllergies() {
+		setOverlay(false)
+		setAllergies(props.allergies)
+		setAllergyExist(true)
+		console.log('handelalergies ' + allergies)
+
 		const dataToUpdate = {
 			allergies: props.allergies,
 		}
+
+		console.log('handleprops ' + props.allergies)
+
 		const requestOptions = {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
@@ -98,18 +111,19 @@ function Allergies(props) {
 			`https://vitejaifaim.herokuapp.com/users/update-me/${token}`,
 			requestOptions
 		)
-		const result = await data.json()
-		setAllergies(result.doc.allergies)
 	}
 
 	return (
 		<View style={styles.container}>
 			<TopBar navigation={props.navigation} />
-			<Text h3 style={{ color: '#F2A902', textAlign: 'center', marginTop: "4%" }}>Allergies</Text>
+			<Text
+				h3
+				style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}
+			>
+				Allergies
+			</Text>
 			<ScrollView>
-				<ScrollView>
-					{allergiesRender}
-				</ScrollView>
+				<ScrollView>{allergiesRender}</ScrollView>
 				<Overlay
 					isVisible={overlay}
 					onBackdropPress={() => setOverlay(false)}
@@ -136,17 +150,20 @@ function Allergies(props) {
 						<MyCheckbox title="Lupin" isAllergy={true} />
 						<MyCheckbox title="Sulfites" isAllergy={true} />
 
-						<NextButton title="VALIDER" onPress={() => handleAllergies(false)} />
+						<NextButton
+							title="VALIDER"
+							onPress={() => handleAllergies()}
+						/>
 					</ScrollView>
 				</Overlay>
-				<TouchableOpacity onPress={() => handleAllergies(true)}>
+				<TouchableOpacity onPress={() => setOverlay(true)}>
 					<Image
 						style={{ width: 50, height: 50, alignSelf: 'center' }}
 						source={require('../assets/plusIcon.png')}
 					/>
 				</TouchableOpacity>
 			</ScrollView>
-		</View >
+		</View>
 	)
 }
 
@@ -167,7 +184,7 @@ const styles = StyleSheet.create({
 		marginBottom: 10,
 		marginTop: 10,
 		textAlign: 'center',
-	}
+	},
 })
 
 function mapDispatchToProps(dispatch) {
@@ -189,3 +206,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Allergies)
+
