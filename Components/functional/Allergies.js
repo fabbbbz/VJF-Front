@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Text, Button } from 'react-native-elements'
 
-
 const Allergies = props => {
-	const [allergies, setAllergies] = useState([])
+
 	const handleAllergies = () => {
 		props.setOverlay(true)
 	}

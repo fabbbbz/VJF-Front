@@ -3,7 +3,6 @@ import { StyleSheet, View, Image, ScrollView } from 'react-native'
 import { Text } from 'react-native-elements'
 import NextButton from '../Components/visual/NextButton'
 import Notification from '../Components/functional/Notification'
-import Livraison from './Livraison'
 
 function FinalPage(props) {
 	return (

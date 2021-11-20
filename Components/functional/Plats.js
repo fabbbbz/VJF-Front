@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { Text } from 'react-native-elements'
 import { connect } from 'react-redux'
+import { Card } from 'react-native-elements'
 import HeartFav from './HeartFav'
+
 function Plats(props) {
 	const token = props.token
 	const [ordersHistory, setOrdersHistory] = useState([])
-	const [mealId, setMealId] = useState([])
 
 	useEffect(() => {
 		async function loadOrders() {
@@ -15,36 +15,60 @@ function Plats(props) {
 			)
 			var response = await rawResponse.json()
 			setOrdersHistory(response.meals)
-			setMealId(response.meals[1].mealId)
 		}
 
 		loadOrders()
 	}, [])
 
 	return (
-		<View style={styles.container}>
-			{ordersHistory.map((order, j) => (
-				< View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={j} >
-					<Text>{new Date(order.date).toLocaleDateString()}</Text>
-					<Text>{order.mealName}</Text>
-					<HeartFav mealId={order.mealId} />
-				</View >
-			))
-			}
-		</View >
+		ordersHistory.map((order, k) => (
+			<Card
+				key={k}
+				containerStyle={{
+					borderRadius: 10,
+					elevation: 4,
+					shadowOffset: { width: 2, height: 2 },
+					shadowColor: 'rgba(0,0,0, 0.2)',
+					shadowOpacity: 0.5,
+					shadowRadius: 2,
+				}}
+				wrapperStyle={{
+					display: 'flex',
+					flexDirection: 'row',
+					justifyContent: 'space-between',
+					flexWrap: 'nowrap',
+					alignItems: 'center',
+				}}
+			>
+				<Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
+					{order.mealName}
+				</Card.Title>
+				<HeartFav mealId={order.mealId} />
+			</Card>
+		))
 	)
 }
 
 const styles = StyleSheet.create({
 	container: {
+		flex: 1,
+		backgroundColor: '#F4F4F4',
+	},
+	userAllergies: {
 		backgroundColor: '#FFFFFF',
 		paddingVertical: 10,
-		paddingHorizontal: 12,
+		paddingHorizontal: 15,
 		borderRadius: 10,
 		margin: 15,
 		borderColor: '#F2A902',
 	},
+	sectionTitle: {
+		marginBottom: 10,
+		marginTop: 10,
+		textAlign: 'center',
+	},
 })
+
 function mapStateToProps(state) {
 	return {
 		token: state.token,

@@ -27,17 +27,20 @@ function Geoloc(props) {
 					}
 				}
 			}
+
 			addressComplete = props.address
-			await fetch(`https://vitejaifaim.herokuapp.com/users/update-useraddress/${token}`, {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `address=${props.address}`,
-			})
+			await fetch(
+				`https://vitejaifaim.herokuapp.com/users/update-useraddress/${token}`,
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+					body: `address=${props.address}`,
+				}
+			)
 		}
 		askPermissions()
-
-
 	}, [])
+
 	return <Text>{displayCurrentAddress}</Text>
 }
 
@@ -56,7 +59,7 @@ function mapStateToProps(state) {
 	return {
 		coords: state.coords,
 		address: state.address,
-		token: state.token
+		token: state.token,
 	}
 }
 

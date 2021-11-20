@@ -11,7 +11,7 @@ function History(props) {
         <View style={styles.container}>
             <TopBar navigation={props.navigation} />
             <View >
-                <Text h2 style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}>Derniers Plats</Text>
+                <Text h3 style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}>Derniers Plats</Text>
                 <ScrollView>
                     <Plats />
                 </ScrollView>

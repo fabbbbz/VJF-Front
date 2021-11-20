@@ -6,7 +6,6 @@ import { connect } from 'react-redux'
 import TopBar from '../Components/visual/TopBar'
 import DietRadios from '../Components/visual/MyRadio'
 import NextButton from '../Components/visual/NextButton'
-import { overlay } from 'react-native-paper'
 
 function UserPage(props) {
 	const [user, setUser] = useState('')
@@ -27,7 +26,7 @@ function UserPage(props) {
 		async function loadUser() {
 			try {
 				var rawResponse = await fetch(
-					`http://192.168.1.14:3000/users/me/${token}`
+					`https://vitejaifaim.herokuapp.com/users/me/${token}`
 				)
 				var response = await rawResponse.json()
 				setUser(response.userInfo)
@@ -43,56 +42,19 @@ function UserPage(props) {
 		loadUser()
 	}, [])
 
-	const updateLastname = async () => {
-		console.log(lastName)
+	const updateData = async () => {
 		await fetch(
-			`http://192.168.1.14:3000/users/update-me/${token}`,
+			`https://vitejaifaim.herokuapp.com/users/update-me/${token}`,
 			{
 				method: 'PUT',
 				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `firstName=${firstName}`,
+				body: `firstName=${firstName}&lastName=${lastName}&phone=${phone}&email=${email}`
 			}
 		)
 		setOverlayLastName(false)
-	}
-
-	const updateFirstName = async () => {
-		console.log(firstName)
-		await fetch(
-			`http://192.168.1.14:3000/users/update-me/${token}`,
-			{
-				method: 'PUT',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `lastName=${lastName}`,
-			}
-		)
-		setOverlayFirstname(false)
-	}
-
-	const updatePhone = async () => {
-		console.log(phone)
-		await fetch(
-			`http://192.168.1.14:3000/users/update-me/${token}`,
-			{
-				method: 'PUT',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `phone=${phone}`,
-			}
-		)
 		setOverlayPhone(false)
-	}
-
-	const updateEmail = async () => {
-		console.log(email)
-		await fetch(
-			`http://192.168.1.14:3000/users/me/${token}`,
-			{
-				method: 'PUT',
-				headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-				body: `email=${email}`,
-			}
-		)
 		setOverlayEmail(false)
+		setOverlayFirstname(false)
 	}
 
 	const showRegime = () => {
@@ -156,7 +118,7 @@ function UserPage(props) {
 					onChangeText={fname => setFirstName(fname)}
 				/>
 
-				<NextButton title="VALIDER" onPress={() => updateFirstName()} />
+				<NextButton title="VALIDER" onPress={() => updateData()} />
 			</Overlay>
 
 			<Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
@@ -187,7 +149,7 @@ function UserPage(props) {
 						onChangeText={lname => setLastName(lname)}
 					/>
 				</ScrollView>
-				<NextButton title="VALIDER" onPress={() => updateLastname()} />
+				<NextButton title="VALIDER" onPress={() => updateData()} />
 			</Overlay>
 
 			<Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
@@ -216,7 +178,7 @@ function UserPage(props) {
 					placeholder="Change your Email"
 					onChangeText={email => setEmail(email)}
 				/>
-				<NextButton title="VALIDER" onPress={() => updateEmail()} />
+				<NextButton title="VALIDER" onPress={() => updateData()} />
 			</Overlay>
 
 			<Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
@@ -246,7 +208,7 @@ function UserPage(props) {
 					placeholder="Change your Phone"
 					onChangeText={phone => setPhone(phone)}
 				/>
-				<NextButton title="VALIDER" onPress={() => updatePhone()} />
+				<NextButton title="VALIDER" onPress={() => updateData()} />
 			</Overlay>
 
 

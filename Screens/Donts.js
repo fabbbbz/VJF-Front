@@ -5,7 +5,7 @@ import {
     ScrollView,
     KeyboardAvoidingView,
 } from 'react-native'
-import { Text, Input, Button } from 'react-native-elements'
+import { Text, Input, Button, Card } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { AntDesign, Ionicons } from '@expo/vector-icons'
 import TopBar from '../Components/visual/TopBar'
@@ -34,23 +34,42 @@ function Donts(props) {
     if (dontExists) {
         var showUserDonts = userDonts.map((dont, k) => {
             return (
-                < View style={{ flexDirection: 'row', justifyContent: 'space-between', marginTop: 25, marginBottom: 25 }} key={k}>
-                    <Text style={{ alignSelf: 'center' }}>{dont}</Text>
+                <Card
+                    key={k}
+                    containerStyle={{
+                        borderRadius: 10,
+                        elevation: 4,
+                        shadowOffset: { width: 2, height: 2 },
+                        shadowColor: 'rgba(0,0,0, 0.2)',
+                        shadowOpacity: 0.5,
+                        shadowRadius: 2,
+                    }}
+                    wrapperStyle={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'space-between',
+                        flexWrap: 'nowrap',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
+                        {dont}
+                    </Card.Title>
                     <Button
                         title=""
                         type="clear"
                         onPress={() => {
                             handleDontDelete(dont)
                         }}
-                        icon={<Ionicons size={25} name="trash-outline" color="#000000" />}
+                        icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
                     />
-                </View >
+                </Card>
             )
         })
     } else {
         var showUserDonts =
             < View style={{ flexDirection: 'row', justifyContent: 'center', marginTop: 25, marginBottom: 25 }}>
-                <Text>vous n'avez pas de dont renseignés</Text>
+                <Text>Vous n'avez pas de dont renseignés</Text>
             </View>
     }
 
@@ -93,11 +112,11 @@ function Donts(props) {
     }
 
     return (
-        <View style={styles.container}>
+        <View >
             <TopBar navigation={props.navigation} />
             <ScrollView >
-                <Text h2 style={{ color: '#F2A902', textAlign: 'center', marginTop: "4%" }}>Donts</Text>
-                <ScrollView style={styles.userDonts}>
+                <Text h4 style={{ color: '#F2A902', textAlign: 'center', marginTop: "4%" }}>Donts</Text>
+                <ScrollView >
                     {showUserDonts}
                 </ScrollView>
                 <View style={styles.container}>
@@ -136,7 +155,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#F4F4F4',
     },
-    userDonts: {
+    userAllergies: {
         backgroundColor: '#FFFFFF',
         paddingVertical: 10,
         paddingHorizontal: 15,
@@ -148,7 +167,7 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         marginTop: 10,
         textAlign: 'center',
-    }
+    },
 })
 
 function mapDispatchToProps(dispatch) {

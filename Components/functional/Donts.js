@@ -8,8 +8,9 @@ import {
 	SafeAreaView,
 } from 'react-native'
 import { Text, Input } from 'react-native-elements'
-import SmallButton from '../visual/SmallButton'
 import { AntDesign } from '@expo/vector-icons'
+import SmallButton from '../visual/SmallButton'
+
 
 const Donts = props => {
 	const [manualDonts, setManualDonts] = useState([])

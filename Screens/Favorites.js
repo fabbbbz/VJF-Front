@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { ScrollView, StyleSheet, View } from 'react-native'
-import { Button, Text } from 'react-native-elements'
+import { Button, Text, Card } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
 import TopBar from '../Components/visual/TopBar'
@@ -28,27 +28,36 @@ function Favorites(props) {
 	if (FavExists) {
 		var favList = favData.map((fav, i) => {
 			return (
-				<View
-					style={{
+				<Card
+					key={i}
+					containerStyle={{
+						borderRadius: 10,
+						elevation: 4,
+						shadowOffset: { width: 2, height: 2 },
+						shadowColor: 'rgba(0,0,0, 0.2)',
+						shadowOpacity: 0.5,
+						shadowRadius: 2,
+					}}
+					wrapperStyle={{
+						display: 'flex',
 						flexDirection: 'row',
 						justifyContent: 'space-between',
-						marginTop: 25,
-						marginBottom: 25,
+						flexWrap: 'nowrap',
+						alignItems: 'center',
 					}}
-					key={i}
 				>
-					<Text style={{ alignSelf: 'center' }}>
+					<Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
 						{fav.name} {fav.price} €
-					</Text>
+					</Card.Title>
 					<Button
 						title=""
 						type="clear"
 						onPress={() => {
 							handleFavDeletion(fav._id)
 						}}
-						icon={<Ionicons size={25} name="trash-outline" color="#000000" />}
+						icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
 					/>
-				</View>
+				</Card>
 			)
 		})
 	} else {
@@ -76,8 +85,7 @@ function Favorites(props) {
 			}
 		)
 		var response = await rawResponse.json()
-
-		if (response.favorites.favorites.length == 0) {
+		if (response.favorites.length == 0) {
 			setFavExists(false)
 		}
 	}
@@ -86,13 +94,12 @@ function Favorites(props) {
 		<View style={styles.container}>
 			<TopBar navigation={props.navigation} />
 			<ScrollView>
-				<Text
-					h2
-					style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}
-				>
+				<Text h3 style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}>
 					Favoris
 				</Text>
-				<ScrollView style={styles.userDonts}>{favList}</ScrollView>
+				<ScrollView style={styles.userDonts}>
+					{favList}
+				</ScrollView>
 			</ScrollView>
 		</View>
 	)
@@ -103,7 +110,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#F4F4F4',
 	},
-	userDonts: {
+	userAllergies: {
 		backgroundColor: '#FFFFFF',
 		paddingVertical: 10,
 		paddingHorizontal: 15,
@@ -117,7 +124,6 @@ const styles = StyleSheet.create({
 		textAlign: 'center',
 	},
 })
-
 function mapStateToProps(state) {
 	return {
 		token: state.token,

@@ -23,8 +23,9 @@ function Allergies(props) {
 			if (response.allergies.length > 0 && response.allergies[0] !== null) {
 				setAllergyExist(true)
 				setAllergies(response.allergies)
-				let responseToString = response.allergies.toString();
-				props.addAllergy(responseToString)
+				response.allergies.map((allergies) => {
+					props.addAllergy(allergies)
+				})
 			}
 		}
 		loadAllergies()
@@ -32,10 +33,10 @@ function Allergies(props) {
 
 
 	if (allergyExist) {
-		var allergiesRender = allergies.map((allergy, i) => {
+		var allergiesRender = allergies.map((allergy, j) => {
 			return (
 				<Card
-					key={i}
+					key={j}
 					containerStyle={{
 						borderRadius: 10,
 						elevation: 4,
@@ -86,7 +87,6 @@ function Allergies(props) {
 		setAllergies(allergyFilter)
 		if (allergyFilter.length == 0) {
 			setAllergyExist(false)
-
 		}
 	}
 
@@ -94,14 +94,9 @@ function Allergies(props) {
 		setOverlay(false)
 		setAllergies(props.allergies)
 		setAllergyExist(true)
-		console.log('handelalergies ' + allergies)
-
 		const dataToUpdate = {
 			allergies: props.allergies,
 		}
-
-		console.log('handleprops ' + props.allergies)
-
 		const requestOptions = {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
@@ -117,7 +112,7 @@ function Allergies(props) {
 		<View style={styles.container}>
 			<TopBar navigation={props.navigation} />
 			<Text
-				h3
+				h4
 				style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}
 			>
 				Allergies

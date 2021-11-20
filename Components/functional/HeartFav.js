@@ -1,9 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { View } from 'react-native'
 import { MaterialCommunityIcons } from '@expo/vector-icons'
 import { connect } from 'react-redux'
+import { useIsFocused } from '@react-navigation/core'
+
 
 function HeartFav(props) {
+	const isFocused = useIsFocused()
+
+	useEffect(() => {
+		setIsFaved(false)
+	}, [isFocused])
 
 	const [isFaved, setIsFaved] = useState(false)
 	const addToFavorite = async () => {
