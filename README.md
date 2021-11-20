@@ -10,7 +10,7 @@
 <h3 id="about-the-project"> :pencil: About The Project</h3>
 
 <p align="justify"> 
-🍔 Mystery Dish Delivery Appliction 🍕
+🍔 Mystery Dish Delivery Appliction 🍕  
 ReacNative FrontEnd
 </p>
 
