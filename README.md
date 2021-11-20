@@ -10,7 +10,10 @@
 <h3 id="about-the-project"> :pencil: About The Project</h3>
 
 <p align="justify"> 
-🍔 Mystery Dish Delivery Appliction 🍕  
-  ReacNative FrontEnd
+🍔 Mystery Dish Delivery Appliction 🍕     
+
+<p align="center"> 
+ <img src="https://user-images.githubusercontent.com/89973033/142729696-670146da-7178-4cc7-865d-4f31c5a29fa5.png" align="center"  width=10% height=10%>
 </p>
+
 
