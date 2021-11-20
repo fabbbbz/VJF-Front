@@ -31,7 +31,6 @@ function Allergies(props) {
 		loadAllergies()
 	}, [])
 
-
 	if (allergyExist) {
 		var allergiesRender = allergies.map((allergy, j) => {
 			return (
@@ -78,7 +77,7 @@ function Allergies(props) {
 		var allergyFilter = allergies.filter(e => e !== allergy)
 		props.removeAllergy(allergy)
 		var rawResponse = await fetch(
-			`https://vitejaifaim.herokuapp.com/users/delallergies/${token}/${allergy}`,
+			`http://192.168.1.14:3000/users/delallergies/${token}/${allergy}`,
 
 			{
 				method: 'DELETE',

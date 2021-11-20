@@ -7,12 +7,13 @@ import { useIsFocused } from '@react-navigation/core'
 
 function HeartFav(props) {
 	const isFocused = useIsFocused()
+	const [isFaved, setIsFaved] = useState(false)
 
 	useEffect(() => {
 		setIsFaved(false)
 	}, [isFocused])
 
-	const [isFaved, setIsFaved] = useState(false)
+
 	const addToFavorite = async () => {
 		setIsFaved(true)
 		updateUser()
@@ -42,7 +43,7 @@ function HeartFav(props) {
 
 	return (
 		<View >
-			<MaterialCommunityIcons style={heartPlusColor} name="heart-plus" size={24} onPress={() => addToFavorite('ajout fav')} />
+			<MaterialCommunityIcons style={heartPlusColor} name="heart-plus" size={24} onPress={() => addToFavorite()} />
 		</View >
 	)
 }

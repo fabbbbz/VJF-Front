@@ -23,7 +23,6 @@ function Mood(props) {
 	const [portions, setPortions] = useState(1)
 	const [check, setCheck] = useState(false)
 
-
 	const handleSetSelected = moodId => {
 		moodsItems.forEach(mood => (mood.isSelected = false))
 		const mood = moodsItems.find(mood => mood.id === moodId)
@@ -50,6 +49,7 @@ function Mood(props) {
 		setOverlay(false)
 		setAddressIsChanged(true)
 	}
+
 	const getFromFavorites = async () => {
 
 		try {
@@ -132,6 +132,7 @@ function Mood(props) {
 	} else {
 		address = <Geoloc />
 	}
+
 	return (
 		<View>
 			<ScrollView>
@@ -392,7 +393,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		alignSelf: 'center',
-		// backgroundColor: '#FFFFFF',
 		borderRadius: 5,
 	},
 })

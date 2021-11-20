@@ -1,9 +1,14 @@
-// Modules Import
+//Lib 
 import React from 'react'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
-import diet from './reducers/diet' /*importe la fonction exportée par notre reduceur*/
-import token from './reducers/token' /*import token from reducer*/
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from 'redux'
+import { createDrawerNavigator } from '@react-navigation/drawer'
+
+// Reducers
+import diet from './reducers/diet'
+import token from './reducers/token'
 import donts from './reducers/donts'
 import allergies from './reducers/allergies'
 import budget from './reducers/budget'
@@ -11,9 +16,6 @@ import mood from './reducers/mood'
 import order from './reducers/order'
 import coords from './reducers/coords'
 import address from './reducers/address'
-import { Provider } from 'react-redux'
-import { createStore, combineReducers } from 'redux'
-import { createDrawerNavigator } from '@react-navigation/drawer'
 
 // Screens Import
 import FirstScreen from './Screens/FirstScreen'
@@ -31,11 +33,10 @@ import Livraison from './Screens/Livraison'
 import FinalPage from './Screens/FinalPage'
 import Allergies from './Screens/Allergies'
 
-//Components
+//Component
 import CustomDrawer from './Components/visual/CustomDrawer'
 
-const Stack = createStackNavigator()
-const Drawer = createDrawerNavigator()
+// Redux Store
 const store = createStore(
 	combineReducers({
 		diet,
@@ -49,6 +50,9 @@ const store = createStore(
 		address,
 	})
 );
+
+const Stack = createStackNavigator()
+const Drawer = createDrawerNavigator()
 
 const DrawerNav = props => {
 	return (

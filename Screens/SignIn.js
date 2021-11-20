@@ -19,7 +19,6 @@ function SignIn(props) {
 	const [token, setToken] = useState('')
 
 	var handleSubmitSignin = async () => {
-		// send user's infos to back
 		const data = await fetch(
 			`https://vitejaifaim.herokuapp.com/users/sign-in`,
 			{
@@ -28,9 +27,8 @@ function SignIn(props) {
 				body: `emailFromFront=${signUpEmail}&passwordFromFront=${signUpPassword}`,
 			}
 		)
-
-		//get answer from back
 		const body = await data.json()
+
 		if (body.result == 'success') {
 			//set token
 			setToken(body.token)
@@ -38,6 +36,7 @@ function SignIn(props) {
 			AsyncStorage.setItem('token', body.token)
 			// store token in redux
 			props.addToken(body.token)
+			// navigate to mood
 			props.navigation.navigate('Mood', { screen: 'Mood' })
 		} else {
 			setErrorsSignin(body.error)
