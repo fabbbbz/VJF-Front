@@ -5,6 +5,7 @@ import { Button, Text, Card } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
 import { useIsFocused } from '@react-navigation/native'
 import TopBar from '../Components/visual/TopBar'
+
 function Favorites(props) {
 	const [favData, setFavData] = useState([])
 	const token = props.token

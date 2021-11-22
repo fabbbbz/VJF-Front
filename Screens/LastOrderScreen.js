@@ -57,7 +57,7 @@ const LastOrderScreen = props => {
 	return (
 		<View style={styles.container}>
 			<TopBar navigation={props.navigation} />
-			<Text h3 style={styles.text}>
+			<Text h3 style={{ color: '#F2A902', textAlign: 'center', marginTop: '10%' }}>
 				Votre dernière commande
 			</Text>
 			<LastOrder
@@ -107,20 +107,33 @@ const LastOrderScreen = props => {
 			}
 			<Overlay
 				isVisible={overlay}
-				onBackdropPress={() => setOverlay(false)} // REMOVE FOR PRODUCTION
+				onBackdropPress={() => setOverlay(false)}
 				overlayStyle={{
 					width: '90%',
 					marginTop: 60,
 					marginBottom: 50,
 					paddingVertical: 20,
 					textAlign: 'center',
+					backgroundColor: 'rgba(0,0,0,0.6)'
 				}}
 			>
-				<Text h4>Merci</Text>
+				<Text h4
+					style={{
+						color: '#FF9800',
+					}}
+				>Merci</Text>
 				{choice === 'good' ? (
-					<Text>Nous avons ajouté le plat à vos favoris</Text>
+					<Text
+						style={{
+							color: '#FF9800',
+						}}
+					>Nous avons ajouté le plat à vos favoris</Text>
 				) : (
-					<Text>Vous ne recevrez plus ce plat</Text>
+					<Text
+						style={{
+							color: '#FF9800',
+						}}
+					>Vous ne recevrez plus ce plat</Text>
 				)}
 			</Overlay>
 		</View >

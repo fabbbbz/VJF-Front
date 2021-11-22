@@ -5,7 +5,7 @@ import {
 	TouchableOpacity,
 	Image,
 } from 'react-native'
-import { Text, Input, Button } from 'react-native-elements'
+import { Text, Input, Button, Overlay } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -16,6 +16,7 @@ function SignIn(props) {
 	const [signUpEmail, setSignUpEmail] = useState('')
 	const [signUpPassword, setSignUpPassword] = useState('')
 	const [ErrorsSignin, setErrorsSignin] = useState('')
+	const [overlay, setOverlay] = useState(false)
 	const [token, setToken] = useState('')
 
 	var handleSubmitSignin = async () => {
@@ -39,6 +40,7 @@ function SignIn(props) {
 			// navigate to mood
 			props.navigation.navigate('Mood', { screen: 'Mood' })
 		} else {
+			setOverlay(true)
 			setErrorsSignin(body.error)
 		}
 	}
@@ -119,7 +121,19 @@ function SignIn(props) {
 				</TouchableOpacity>
 			</View>
 			<View>
-				<Text style={styles.errormesssage}>{ErrorsSignin}</Text>
+				<Overlay
+					isVisible={overlay}
+					onBackdropPress={() => setOverlay(false)}
+					overlayStyle={{
+						width: '70%',
+						marginBottom: 50,
+						paddingVertical: 20,
+						textAlign: 'center',
+						backgroundColor: 'rgba(0,0,0,0.9)'
+					}}
+				>
+					<Text style={styles.errormesssage}>{ErrorsSignin}</Text>
+				</Overlay>
 			</View>
 		</View>
 	)
@@ -132,9 +146,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 	},
 	errormesssage: {
-		marginTop: 50,
 		textAlign: 'center',
-		color: '#FF9800',
+		color: '#F2A902',
 		fontSize: 20,
 	},
 	text: {

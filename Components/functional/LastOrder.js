@@ -53,14 +53,15 @@ const LastOrder = props => {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#FFC901',
+		backgroundColor: 'rgba(0,0,0,0.8)',
 		paddingVertical: 30,
 		paddingHorizontal: 15,
 		borderRadius: 10,
 		margin: 15,
-		borderColor: '#F2A902',
+
 	},
 	text: {
+		color: '#FFC901',
 		textAlign: 'center',
 		marginVertical: 3,
 	},

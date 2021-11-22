@@ -7,35 +7,81 @@ import { Overlay } from 'react-native-elements'
 import MyCheckbox from '../Components/functional/Checkbox'
 import NextButton from '../Components/visual/NextButton'
 import TopBar from '../Components/visual/TopBar'
+import { useIsFocused } from '@react-navigation/native'
 
 function Allergies(props) {
 	const [allergies, setAllergies] = useState([])
 	const [allergyExist, setAllergyExist] = useState(false)
 	const [overlay, setOverlay] = useState(false)
+	const isFocused = useIsFocused()
+	const [newAllergies, setnewAllergies] = useState([])
 	const token = props.token
+	var allergiesRender
 
 	useEffect(() => {
 		async function loadAllergies() {
 			var rawResponse = await fetch(
-				`https://vitejaifaim.herokuapp.com/users/allergies/${token}`
+				`https://vite-jai-faim.herokuapp.com/users/allergies/${token}`
 			)
 			var response = await rawResponse.json()
+
+			/*verifie l'existance d'une allergie dans le document user et verifie que l'allergie soit != null 
+si ces conditions sont remplies allergyExist passe a true*/
+
 			if (response.allergies.length > 0 && response.allergies[0] !== null) {
 				setAllergyExist(true)
 				setAllergies(response.allergies)
-				response.allergies.map((allergies) => {
-					props.addAllergy(allergies)
-				})
 			}
 		}
-		loadAllergies()
-	}, [])
 
-	if (allergyExist) {
-		var allergiesRender = allergies.map((allergy, j) => {
+		loadAllergies()
+	}, [isFocused])
+
+	useEffect(() => {
+		allergiesRender = newAllergies.map((allergy, i) => {
 			return (
 				<Card
-					key={j}
+					key={i}
+					containerStyle={{
+						borderRadius: 10,
+						elevation: 4,
+						shadowOffset: { width: 2, height: 2 },
+						shadowColor: 'rgba(0,0,0, 0.2)',
+						shadowOpacity: 0.5,
+						shadowRadius: 2,
+					}}
+					wrapperStyle={{
+						display: 'flex',
+						flexDirection: 'row',
+						justifyContent: 'space-between',
+						flexWrap: 'nowrap',
+						alignItems: 'center',
+					}}
+				>
+					<Card.Title style={{ marginBottom: 0, alignItems: 'center' }}>
+						{allergy}
+					</Card.Title>
+					<Button
+						type="clear"
+						onPress={() => {
+							handleAllergyDeletion(allergy)
+						}}
+						icon={<Ionicons size={25} name="trash-outline" color="#FFC901" />}
+					/>
+				</Card>
+			)
+		})
+		var array = mergeArrays(allergies, props.allergies)
+		if (array) {
+			setnewAllergies(array)
+		}
+	}, [allergies])
+
+	if (allergyExist == true) {
+		allergiesRender = newAllergies.map((allergy, i) => {
+			return (
+				<Card
+					key={i}
 					containerStyle={{
 						borderRadius: 10,
 						elevation: 4,
@@ -66,7 +112,7 @@ function Allergies(props) {
 			)
 		})
 	} else {
-		var allergiesRender = (
+		allergiesRender = (
 			<Text style={{ alignSelf: 'center', marginTop: 25, fontWeight: 'bold' }}>
 				vous n'avez pas d'allergies renseignées
 			</Text>
@@ -75,24 +121,20 @@ function Allergies(props) {
 
 	async function handleAllergyDeletion(allergy) {
 		var allergyFilter = allergies.filter(e => e !== allergy)
+		setAllergies(allergyFilter)
 		props.removeAllergy(allergy)
 		var rawResponse = await fetch(
-			`http://192.168.1.14:3000/users/delallergies/${token}/${allergy}`,
+			`https://vite-jai-faim.herokuapp.com/users/delallergies/${token}/${allergy}`,
 
 			{
 				method: 'DELETE',
 			}
 		)
-		setAllergies(allergyFilter)
-		if (allergyFilter.length == 0) {
-			setAllergyExist(false)
-		}
 	}
 
-	async function handleAllergies() {
-		setOverlay(false)
-		setAllergies(props.allergies)
-		setAllergyExist(true)
+	async function handleAllergies(boolean) {
+		setOverlay(boolean)
+
 		const dataToUpdate = {
 			allergies: props.allergies,
 		}
@@ -102,16 +144,31 @@ function Allergies(props) {
 			body: JSON.stringify(dataToUpdate),
 		}
 		const data = await fetch(
-			`https://vitejaifaim.herokuapp.com/users/update-me/${token}`,
+			`https://vite-jai-faim.herokuapp.com/users/update-me/${token}`,
 			requestOptions
 		)
+		const result = await data.json()
+
+		setAllergies(result.doc.allergies)
+	}
+
+	// testing
+	function mergeArrays(...arrays) {
+		let jointArray = []
+		arrays.forEach(array => {
+			jointArray = [...jointArray, ...array]
+		})
+		const uniqueArray = jointArray.filter(
+			(item, index) => jointArray.indexOf(item) === index
+		)
+		return uniqueArray
 	}
 
 	return (
 		<View style={styles.container}>
 			<TopBar navigation={props.navigation} />
 			<Text
-				h4
+				h3
 				style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}
 			>
 				Allergies
@@ -146,11 +203,11 @@ function Allergies(props) {
 
 						<NextButton
 							title="VALIDER"
-							onPress={() => handleAllergies()}
+							onPress={() => handleAllergies(false)}
 						/>
 					</ScrollView>
 				</Overlay>
-				<TouchableOpacity onPress={() => setOverlay(true)}>
+				<TouchableOpacity onPress={() => handleAllergies(true)}>
 					<Image
 						style={{ width: 50, height: 50, alignSelf: 'center' }}
 						source={require('../assets/plusIcon.png')}
@@ -200,4 +257,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Allergies)
-

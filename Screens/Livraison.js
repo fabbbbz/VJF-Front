@@ -25,9 +25,10 @@ function Livraison(props) {
 				display: 'flex',
 				alignItems: 'center',
 				marginLeft: 15,
+				fontWeight: 'bold',
 			}}
 		>
-			<Text style={{ textAlign: 'left', color: '#000000', marginTop: 50 }}>
+			<Text style={{ fontWeight: 'bold', textAlign: 'left', color: '#000000', marginTop: 50 }}>
 				Envoi de la commande au restaurant !
 			</Text>
 			<LottieView
@@ -46,9 +47,10 @@ function Livraison(props) {
 					flexDirection: 'row',
 					alignItems: 'center',
 					marginLeft: 15,
+					fontWeight: 'bold',
 				}}
 			>
-				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
+				<Text style={{ fontWeight: 'bold', textAlign: 'left', color: '#000000', marginTop: 15 }}>
 					Commande validée{' '}
 				</Text>
 				<LottieView
@@ -64,7 +66,7 @@ function Livraison(props) {
 					alignItems: 'center',
 				}}
 			>
-				<Text style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}>
+				<Text style={{ fontWeight: 'bold', textAlign: 'center', color: '#000000', marginTop: 15 }}>
 					Votre commande est en préparation !{' '}
 				</Text>
 				<LottieView
@@ -84,9 +86,10 @@ function Livraison(props) {
 					flexDirection: 'row',
 					alignItems: 'center',
 					marginLeft: 15,
+					fontWeight: 'bold',
 				}}
 			>
-				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
+				<Text style={{ fontWeight: 'bold', textAlign: 'left', color: '#000000', marginTop: 15 }}>
 					Commande validée{' '}
 				</Text>
 				<LottieView
@@ -101,9 +104,10 @@ function Livraison(props) {
 					flexDirection: 'row',
 					alignItems: 'center',
 					marginLeft: 15,
+					fontWeight: 'bold',
 				}}
 			>
-				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
+				<Text style={{ fontWeight: 'bold', textAlign: 'left', color: '#000000', marginTop: 15 }}>
 					Commande preparée
 				</Text>
 				<LottieView
@@ -118,6 +122,7 @@ function Livraison(props) {
 					color: '#000000',
 					marginTop: 15,
 					marginBottom: 15,
+					fontWeight: 'bold',
 				}}
 			>
 				Votre commande sera livrée dans:
@@ -141,7 +146,7 @@ function Livraison(props) {
 					marginLeft: 15,
 				}}
 			>
-				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
+				<Text style={{ fontWeight: 'bold', textAlign: 'left', color: '#000000', marginTop: 15 }}>
 					Commande preparée
 				</Text>
 				<LottieView
@@ -158,7 +163,7 @@ function Livraison(props) {
 					marginLeft: 15,
 				}}
 			>
-				<Text style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}>
+				<Text style={{ fontWeight: 'bold', textAlign: 'left', color: '#000000', marginTop: 15 }}>
 					Commande livrée
 				</Text>
 				<LottieView
@@ -168,7 +173,7 @@ function Livraison(props) {
 				/>
 			</View>
 			<View>
-				<Text style={{ textAlign: 'center', color: '#000000', marginTop: 40 }}>
+				<Text style={{ fontWeight: 'bold', textAlign: 'center', color: '#000000', marginTop: 40 }}>
 					Toc-Toc c'est la !
 				</Text>
 				<LottieView
@@ -209,7 +214,7 @@ function Livraison(props) {
 				<View style={{ marginLeft: 15, marginTop: 15 }}>
 					<Text
 						h3
-						style={{ textAlign: 'left', color: '#000000', marginTop: 15 }}
+						style={{ textAlign: 'left', color: '#F2A902', marginTop: 15 }}
 					>
 						Etapes:
 					</Text>

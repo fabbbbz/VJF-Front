@@ -5,9 +5,9 @@ import NumericInput from 'react-native-numeric-input'
 import { connect } from 'react-redux'
 import { CheckBox } from 'react-native-elements'
 import { Ionicons } from '@expo/vector-icons'
+import moodsItems from '../data/moods'
 import Geoloc from '../Components/functional/Geoloc'
 import MoodIcon from '../Components/visual/MoodIcon'
-import moodsItems from '../data/moods'
 import TopBar from '../Components/visual/TopBar'
 import NextButton from '../Components/visual/NextButton'
 import NextButtonFullSize from '../Components/visual/NextButtonFullSize'
@@ -76,6 +76,12 @@ function Mood(props) {
 
 	const getTheSupriseMeal = async () => {
 		try {
+			if (props.mood === '')
+				setErrorMsg('Veuillez sélectionner un Mood')
+
+			if (props.budget.length === 0)
+				setErrorMsg('Veuillez sélectionner une fourchette de prix')
+
 			const token = props.token
 			if (!token)
 				setErrorMsg('Connectez-vous pour commandez votre repas surprise !')
@@ -140,7 +146,7 @@ function Mood(props) {
 				<View style={{ alignItems: 'center' }}>
 					<Text
 						h3
-						style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
+						style={{ textAlign: 'center', color: '#F2A902', marginTop: 15 }}
 					>
 						On y est presque !
 					</Text>
@@ -154,6 +160,7 @@ function Mood(props) {
 						marginTop: 20,
 					}}
 				>
+
 					Quel est votre mood ?
 				</Text>
 
@@ -352,14 +359,8 @@ function Mood(props) {
 						</ScrollView>
 						<NextButton title="VALIDER" onPress={() => updateAdress()} />
 					</Overlay>
-					<Overlay
-						isVisible={errorMsg ? true : false}
-						onBackdropPress={() => setErrorMsg('')}
-					>
-						<Text>{errorMsg}</Text>
-					</Overlay>
 					<CheckBox
-						title="Choisir un plat uniquement dans les favoris"
+						title="Choisir un plat uniquement dans mes favoris"
 						checkedColor="#FFC901"
 						checked={check}
 						onPress={() => setCheck(!check)}
@@ -373,6 +374,19 @@ function Mood(props) {
 						}}
 					>
 						<NextButtonFullSize title="VITE J'AI FAIM" onPress={checkOrNot} />
+						<Overlay
+							overlayStyle={{
+								width: '70%',
+								marginBottom: 50,
+								paddingVertical: 20,
+								textAlign: 'center',
+								backgroundColor: 'rgba(0,0,0,0.9)'
+							}}
+							isVisible={errorMsg ? true : false}
+							onBackdropPress={() => setErrorMsg('')}
+						>
+							<Text style={styles.errormesssage} >{errorMsg}</Text>
+						</Overlay>
 					</View>
 				</View>
 			</ScrollView>
@@ -395,6 +409,11 @@ const styles = StyleSheet.create({
 		alignSelf: 'center',
 		borderRadius: 5,
 	},
+	errormesssage: {
+		textAlign: 'center',
+		color: '#F2A902',
+		fontSize: 20,
+	}
 })
 
 function mapDispatchToProps(dispatch) {

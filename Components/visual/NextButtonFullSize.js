@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, TouchableOpacity, Text } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient'
-import { AntDesign } from '@expo/vector-icons'
+
 
 const NextButtonFullSize = ({ title, onPress }) => {
 	return (
@@ -22,7 +22,7 @@ const NextButtonFullSize = ({ title, onPress }) => {
 				<Text style={title == "VITE J'AI FAIM" ? styles.big : styles.text}>
 					{title}
 				</Text>
-				<AntDesign name="arrowright" size={24} color="white" />
+
 			</TouchableOpacity>
 		</LinearGradient>
 	)
@@ -33,12 +33,11 @@ const styles = StyleSheet.create({
 		backgroundColor: '#F2A902',
 		borderRadius: 5,
 		width: 400,
-		// margin: 5,
 		paddingHorizontal: 10,
 		paddingVertical: 10,
 		textAlign: 'center',
 		alignSelf: 'flex-end',
-		marginRight: 10,
+		marginRight: 5,
 	},
 	text: {
 		color: '#fff',
@@ -50,7 +49,7 @@ const styles = StyleSheet.create({
 	big: {
 		color: '#fff',
 		fontSize: 24,
-		fontWeight: '500',
+		fontWeight: 'bold',
 		flex: 1,
 		textAlign: 'center',
 	},

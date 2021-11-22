@@ -31,12 +31,12 @@ const OrderRecap = props => {
 			<Text h4 style={styles.textBold}>
 				{quantity} x PLAT MYSTERE
 			</Text>
-			<Text h5 style={{ textAlign: 'center', marginVertical: 10 }}>
+			<Text h5 style={{ color: '#F2A902', textAlign: 'center', marginVertical: 10 }}>
 				Prix unitaire : {price} €
 			</Text>
 			<Text
 				h4
-				style={{ textAlign: 'center', marginVertical: 10, fontWeight: '700' }}
+				style={{ color: '#FFFFFF', textAlign: 'center', marginVertical: 10, fontWeight: '700' }}
 			>
 				Prix total : {price * quantity} €
 			</Text>
@@ -46,7 +46,7 @@ const OrderRecap = props => {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#FFFFFF',
+		backgroundColor: 'rgba(0,0,0,0.8)',
 		paddingVertical: 10,
 		paddingHorizontal: 15,
 		borderRadius: 10,
@@ -54,10 +54,12 @@ const styles = StyleSheet.create({
 		borderColor: '#F2A902',
 	},
 	text: {
+		color: '#F2A902',
 		textAlign: 'center',
 		marginVertical: 5,
 	},
 	textBold: {
+		color: '#F2A902',
 		textAlign: 'center',
 		marginVertical: 3,
 		fontWeight: '700',

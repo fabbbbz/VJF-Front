@@ -40,7 +40,7 @@ const TopBar = props => {
 
 const styles = StyleSheet.create({
 	topbar: {
-		backgroundColor: '#27292D',
+		backgroundColor: 'rgba(0,0,0,0.9)',
 		paddingTop: 60,
 		paddingBottom: 20,
 		paddingHorizontal: 10,

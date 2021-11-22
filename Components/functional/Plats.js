@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, View } from 'react-native'
 import { connect } from 'react-redux'
 import { Card } from 'react-native-elements'
 import HeartFav from './HeartFav'
+import { useIsFocused } from '@react-navigation/native'
 
 function Plats(props) {
 	const token = props.token
 	const [ordersHistory, setOrdersHistory] = useState([])
+	const isFocused = useIsFocused()
 
 	useEffect(() => {
 		async function loadOrders() {
@@ -18,7 +19,7 @@ function Plats(props) {
 		}
 
 		loadOrders()
-	}, [])
+	}, [isFocused])
 
 	return (
 		ordersHistory.map((order, k) => (
@@ -49,25 +50,6 @@ function Plats(props) {
 	)
 }
 
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#F4F4F4',
-	},
-	userAllergies: {
-		backgroundColor: '#FFFFFF',
-		paddingVertical: 10,
-		paddingHorizontal: 15,
-		borderRadius: 10,
-		margin: 15,
-		borderColor: '#F2A902',
-	},
-	sectionTitle: {
-		marginBottom: 10,
-		marginTop: 10,
-		textAlign: 'center',
-	},
-})
 
 function mapStateToProps(state) {
 	return {

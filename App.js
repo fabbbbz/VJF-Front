@@ -36,6 +36,11 @@ import Allergies from './Screens/Allergies'
 //Component
 import CustomDrawer from './Components/visual/CustomDrawer'
 
+//Desactive errors for demo
+import { LogBox } from 'react-native';
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs(); //Ignore all log notifications
+
 // Redux Store
 const store = createStore(
 	combineReducers({
@@ -60,7 +65,7 @@ const DrawerNav = props => {
 			screenOptions={{
 				headerShown: false,
 				drawerStyle: { backgroundColor: '#FFC901' },
-				drawerLabelStyle: { color: '#000000', fontSize: 16 },
+				drawerLabelStyle: { color: '#000000', fontSize: 16, fontWeight: 'bold' },
 				drawerPosition: 'right',
 			}}
 			drawerContent={props => <CustomDrawer {...props} />}

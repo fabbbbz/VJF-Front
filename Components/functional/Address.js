@@ -20,7 +20,7 @@ const Address = props => {
 
 	return (
 		<View style={styles.container}>
-			<Text h4 style={styles.text}>
+			<Text h4 style={styles.title}>
 				Adresse de livraison :
 			</Text>
 			<Text style={styles.text}>{props.address}</Text>
@@ -30,14 +30,20 @@ const Address = props => {
 
 const styles = StyleSheet.create({
 	container: {
-		backgroundColor: '#FFFFFF',
+		backgroundColor: 'rgba(0,0,0,0.8)',
 		paddingVertical: 10,
 		paddingHorizontal: 15,
 		borderRadius: 10,
 		margin: 15,
 		borderColor: '#F2A902',
 	},
+	title: {
+		color: '#F2A902',
+		textAlign: 'center',
+		marginVertical: 3,
+	},
 	text: {
+		color: '#FFFFFF',
 		textAlign: 'center',
 		marginVertical: 3,
 	},

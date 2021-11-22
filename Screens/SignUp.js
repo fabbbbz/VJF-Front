@@ -1,11 +1,17 @@
 import React from 'react'
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native'
-import { Text, Input } from 'react-native-elements'
+import {
+	StyleSheet,
+	View,
+	Image,
+	ScrollView
+} from 'react-native'
+import { Text, Input, Overlay } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { useState } from 'react'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import NextButton from '../Components/visual/NextButton'
+import SkipButton from '../Components/visual/SkipButton'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 function SignUp(props) {
 	const [signUpFirstname, setignUpFirstname] = useState('')
@@ -14,6 +20,8 @@ function SignUp(props) {
 	const [signUpPassword, setSignUpPassword] = useState('')
 	const [signUpPhone, setSignUpPhone] = useState('')
 	const [ErrorsSignup, setErrorsSignup] = useState('')
+	const [overlay, setOverlay] = useState(false)
+
 	const [token, setToken] = useState('')
 
 	var handleSubmitSignup = async () => {
@@ -38,24 +46,28 @@ function SignUp(props) {
 			props.navigation.navigate('Home', { screen: 'Home' })
 		} else {
 			setErrorsSignup(body.error)
+			setOverlay(true)
 		}
 	}
 	var skipAction = () => {
 		props.navigation.navigate('Home', { screen: 'Home' })
 	}
+
 	return (
 		<KeyboardAwareScrollView>
 			<ScrollView>
-				<View>
-					<View style={{ height: 80, backgroundColor: '#27292D' }} />
-					<View style={{ alignItems: 'center' }}>
-						<Text
-							h3
-							style={{ textAlign: 'center', color: '#000000', marginTop: 15 }}
-						>
-							Dites-nous en plus sur vous
-						</Text>
-
+				<View
+					style={{
+						flex: 1,
+						alignItems: 'center',
+						marginTop: 60,
+						justifyContent: 'center',
+						backgroundColor: '#27292D',
+					}}
+				>
+					<Image style={styles.logo} source={require('./../assets/VJF-logo.png')} />
+					<View style={styles.content}>
+						<Text style={styles.title}>Dites-nous en plus sur vous</Text>
 						<Input
 							containerStyle={{ marginTop: 25, marginBottom: 15, width: '70%' }}
 							inputStyle={{ marginLeft: 10 }}
@@ -88,29 +100,48 @@ function SignUp(props) {
 							placeholder="Password"
 							onChangeText={text => setSignUpPassword(text)}
 						/>
-					</View>
-
-					<View
-						style={{ flexDirection: 'row', justifyContent: 'space-between' }}
-					>
-						<Text
+						<View
 							style={{
-								color: '#C4C4C4',
 								alignSelf: 'center',
-								marginLeft: 15,
-								fontSize: 20,
+								display: 'flex',
+								flexDirection: 'column',
+								justifyContent: 'center',
+								alignItems: 'center',
+								marginBottom: 50,
 							}}
 						>
-							<View style={styles.container}>
-								<TouchableOpacity onPress={skipAction}>
-									<Text style={styles.text}>Skip</Text>
-								</TouchableOpacity>
+							<View
+								style={{ marginLeft: 10, flexDirection: 'row', justifyContent: 'space-between' }}
+							>
+								<Text
+									style={{
+										color: '#C4C4C4',
+										alignSelf: 'center',
+										marginLeft: 15,
+										fontSize: 20,
+									}}
+								>
+								</Text>
+								<SkipButton title="SKIP" onPress={() => skipAction()} />
+								<NextButton title="NEXT" onPress={() => handleSubmitSignup()} />
 							</View>
-						</Text>
-						<NextButton title="NEXT" onPress={() => handleSubmitSignup()} />
-					</View>
-					<View>
-						<Text style={styles.errormesssage}>{ErrorsSignup}</Text>
+
+							<View>
+								<Overlay
+									isVisible={overlay}
+									onBackdropPress={() => setOverlay(false)}
+									overlayStyle={{
+										width: '75%',
+										marginBottom: 50,
+										paddingVertical: 20,
+										textAlign: 'center',
+										backgroundColor: 'rgba(0,0,0,0.9)'
+									}}
+								>
+									<Text style={styles.errormesssage}>{ErrorsSignup}</Text>
+								</Overlay>
+							</View>
+						</View>
 					</View>
 				</View>
 			</ScrollView>
@@ -120,18 +151,47 @@ function SignUp(props) {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: '#F4F4F4',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'space-between',
 	},
 	errormesssage: {
-		marginTop: 50,
 		textAlign: 'center',
-		color: '#FF9800',
+		color: '#F2A902',
 		fontSize: 20,
 	},
 	text: {
 		fontSize: 20,
-		color: '#70726e',
+		color: '#F2A902',
+		fontWeight: '700',
+		textAlign: 'center',
+	},
+	title: {
+		color: '#F2A902',
+		textTransform: 'uppercase',
+		fontWeight: '300',
+		fontSize: 19,
+		marginBottom: 20,
+	},
+	content: {
+		alignItems: 'center',
+		backgroundColor: '#ffffff',
+		width: '85%',
+		paddingTop: 20,
+		paddingLeft: 20,
+		paddingRight: 20,
+		borderRadius: 10,
+		alignSelf: 'center',
+		marginVertical: 30,
+	},
+	logo: {
+		marginTop: 15,
+		height: 70,
+		width: 70,
+	},
+	skip: {
+		fontSize: 20,
+		color: '#70726e'
 	},
 })
 
