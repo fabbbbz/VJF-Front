@@ -92,7 +92,7 @@ function UserPage(props) {
 			<Text h4 style={{ color: '#F2A902', textAlign: 'center', marginTop: '4%' }}>Informations Personnelles</Text>
 
 			<Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
-				<Card.Title style={{ marginBottom: 0 }}> Nom:</Card.Title>
+				<Card.Title style={{ marginBottom: 0 }}> Prenom:</Card.Title>
 				<Text>{firstName} </Text>
 				<Button
 					type="clear"
@@ -122,7 +122,7 @@ function UserPage(props) {
 			</Overlay>
 
 			<Card containerStyle={styles.container} wrapperStyle={styles.wrapper}>
-				<Card.Title style={{ marginBottom: 0 }}> Prenom:</Card.Title>
+				<Card.Title style={{ marginBottom: 0 }}> Nom:</Card.Title>
 				<Text>{lastName} </Text>
 				<Button
 					type="clear"

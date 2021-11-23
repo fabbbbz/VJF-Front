@@ -72,7 +72,7 @@ function SignIn(props) {
 				<Input
 					containerStyle={{ marginBottom: 15, width: '70%' }}
 					inputStyle={{ marginLeft: 10 }}
-					secureTextEntry
+					secureTextEntry // Hide text
 					placeholder="Password"
 					onChangeText={text => setSignUpPassword(text)}
 				/>
