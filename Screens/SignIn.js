@@ -19,7 +19,7 @@ function SignIn(props) {
 	const [overlay, setOverlay] = useState(false)
 	const [token, setToken] = useState('')
 
-	var handleSubmitSignin = async () => {
+	handleSubmitSignin = async () => {
 		const data = await fetch(
 			`https://vitejaifaim.herokuapp.com/users/sign-in`,
 			{
@@ -45,7 +45,7 @@ function SignIn(props) {
 		}
 	}
 
-	var goSignup = () => {
+	goSignup = () => {
 		props.navigation.navigate('SignUp', { screen: 'SignUp' })
 	}
 
@@ -112,7 +112,7 @@ function SignIn(props) {
 				</View>
 			</View>
 
-			<View style={styles.bottom}>
+			<View>
 				<Text style={{ textAlign: 'center', color: '#ffffff' }}>
 					Pas encore de compte ?
 				</Text>
@@ -124,13 +124,7 @@ function SignIn(props) {
 				<Overlay
 					isVisible={overlay}
 					onBackdropPress={() => setOverlay(false)}
-					overlayStyle={{
-						width: '70%',
-						marginBottom: 50,
-						paddingVertical: 20,
-						textAlign: 'center',
-						backgroundColor: 'rgba(0,0,0,0.9)'
-					}}
+					overlayStyle={styles.overlay}
 				>
 					<Text style={styles.errormesssage}>{ErrorsSignin}</Text>
 				</Overlay>
@@ -178,6 +172,13 @@ const styles = StyleSheet.create({
 		height: 70,
 		width: 70,
 	},
+	overlay: {
+		width: '70%',
+		marginBottom: 50,
+		paddingVertical: 20,
+		textAlign: 'center',
+		backgroundColor: 'rgba(0,0,0,0.9)'
+	}
 })
 
 function mapDispatchToProps(dispatch) {
