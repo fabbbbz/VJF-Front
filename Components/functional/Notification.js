@@ -13,7 +13,7 @@ const triggerLocalNotificationHandler = () => {
     Notifications.scheduleNotificationAsync({
         content: {
             title: "Vite j'ai faim !",
-            body: "N'oubliez pas la petite note ;)",
+            body: "N'oubliez de donner votre avis sur la commande ;)",
         },
         trigger: { seconds: 5 },
     })

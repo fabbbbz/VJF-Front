@@ -11,9 +11,7 @@ import NextButtonFullSize from '../Components/visual/NextButtonFullSize'
 import OrderRecap from '../Components/functional/OrderRecap'
 import Address from '../Components/functional/Address'
 import TopBar from '../Components/visual/TopBar'
-
 const P_Key = " pk_test_51JY5XQEKfhZc95pkU6vYakETH10f2c8OdiCJQzfdLEmkK4UYiNCeZ0ChXPhvS9TOoYusjwQnwiF5zFm3dODMOeKG00If0rpWLk"
-
 
 const TimeToPay = props => {
 	const [overlay, setOverlay] = useState(false)
@@ -53,13 +51,9 @@ const TimeToPay = props => {
 				});
 			}
 
-			console.log(initPayment)
-
 			paiementStripe = await stripe.presentPaymentSheet({
 				clientSecret: clientSecret,
 			});
-
-			console.log(paiementStripe)
 
 			setOverlay(true)
 			setTimeout(() => setOverlay(false), 1900);

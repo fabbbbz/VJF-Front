@@ -5,13 +5,14 @@ import {
 	Image,
 	ScrollView
 } from 'react-native'
-import { Text, Input, Overlay } from 'react-native-elements'
 import { connect } from 'react-redux'
 import { useState } from 'react'
+import { Text, Input, Overlay } from 'react-native-elements'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import NextButton from '../Components/visual/NextButton'
 import SkipButton from '../Components/visual/SkipButton'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
 
 function SignUp(props) {
 	const [signUpFirstname, setignUpFirstname] = useState('')
@@ -24,7 +25,7 @@ function SignUp(props) {
 
 	const [token, setToken] = useState('')
 
-	var handleSubmitSignup = async () => {
+	const handleSubmitSignup = async () => {
 		// send user's infos to back
 		const data = await fetch(
 			`https://vitejaifaim.herokuapp.com/users/sign-up`,
@@ -49,7 +50,7 @@ function SignUp(props) {
 			setOverlay(true)
 		}
 	}
-	var skipAction = () => {
+	const skipAction = () => {
 		props.navigation.navigate('Home', { screen: 'Home' })
 	}
 

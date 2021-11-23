@@ -1,4 +1,6 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { useState } from 'react'
 import {
 	StyleSheet,
 	View,
@@ -6,10 +8,8 @@ import {
 	Image,
 } from 'react-native'
 import { Text, Input, Button, Overlay } from 'react-native-elements'
-import { connect } from 'react-redux'
-import { useState } from 'react'
-import AsyncStorage from '@react-native-async-storage/async-storage'
 import { AntDesign } from '@expo/vector-icons'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import NextButton from '../Components/visual/NextButton'
 
 function SignIn(props) {
@@ -19,7 +19,7 @@ function SignIn(props) {
 	const [overlay, setOverlay] = useState(false)
 	const [token, setToken] = useState('')
 
-	handleSubmitSignin = async () => {
+	const handleSubmitSignin = async () => {
 		const data = await fetch(
 			`https://vitejaifaim.herokuapp.com/users/sign-in`,
 			{
@@ -45,7 +45,7 @@ function SignIn(props) {
 		}
 	}
 
-	goSignup = () => {
+	const goSignup = () => {
 		props.navigation.navigate('SignUp', { screen: 'SignUp' })
 	}
 
